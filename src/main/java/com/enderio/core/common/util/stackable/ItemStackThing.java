@@ -1,8 +1,5 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -10,17 +7,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class ItemStackThing implements IThing {
 
-    private final @Nonnull ItemStack thing;
+    private final @NotNull ItemStack thing;
 
-    ItemStackThing(@Nonnull ItemStack itemStack) {
+    ItemStackThing(@NotNull ItemStack itemStack) {
         this.thing = itemStack;
     }
 
     @Override
-    public @Nonnull NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         return thing.isEmpty() ? NNList.emptyList() : new NNList<>(this);
     }
 
@@ -43,17 +42,17 @@ class ItemStackThing implements IThing {
     }
 
     @Override
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         return new NNList<Item>(thing.getItem());
     }
 
     @Override
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         return new NNList<ItemStack>(thing);
     }
 
     @Override
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         Block block = Block.getBlockFromItem(thing.getItem());
         return block != Blocks.AIR ? new NNList<Block>(block) : NNList.<Block>emptyList();
     }

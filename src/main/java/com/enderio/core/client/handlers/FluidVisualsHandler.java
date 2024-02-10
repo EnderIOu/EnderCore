@@ -2,8 +2,6 @@ package com.enderio.core.client.handlers;
 
 import java.lang.reflect.Field;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
@@ -33,6 +31,7 @@ import com.enderio.core.common.Handlers.Handler;
 import com.enderio.core.common.Handlers.Handler.HandlerSide;
 import com.enderio.core.common.fluid.BlockFluidEnder;
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
 
 @Handler(side = HandlerSide.CLIENT)
 @SideOnly(Side.CLIENT)
@@ -50,17 +49,17 @@ public class FluidVisualsHandler {
             "field_78500_U");
 
     @SubscribeEvent
-    public static void onFOVModifier(@Nonnull EntityViewRenderEvent.FOVModifier event) {
+    public static void onFOVModifier(@NotNull EntityViewRenderEvent.FOVModifier event) {
         if (event.getState() instanceof BlockFluidEnder) {
             event.setFOV(event.getFOV() * 60.0F / 70.0F);
         }
     }
 
-    private static final @Nonnull ResourceLocation RES_UNDERFLUID_OVERLAY = new ResourceLocation(EnderCore.DOMAIN,
+    private static final @NotNull ResourceLocation RES_UNDERFLUID_OVERLAY = new ResourceLocation(EnderCore.DOMAIN,
             "textures/misc/underfluid.png");
 
     // net.minecraft.client.renderer.EntityRenderer.getNightVisionBrightness(EntityLivingBase, float) is private :-(
-    private static float getNightVisionBrightness(@Nonnull EntityLivingBase entitylivingbaseIn, float partialTicks) {
+    private static float getNightVisionBrightness(@NotNull EntityLivingBase entitylivingbaseIn, float partialTicks) {
         int i = NullHelper.notnull(entitylivingbaseIn.getActivePotionEffect(MobEffects.NIGHT_VISION), "LOC9003476")
                 .getDuration();
         return i > 200 ? 1.0F : 0.7F + MathHelper.sin((i - partialTicks) * (float) Math.PI * 0.2F) * 0.3F;
@@ -107,7 +106,7 @@ public class FluidVisualsHandler {
     }
 
     @SubscribeEvent
-    public static void onFogDensity(@Nonnull EntityViewRenderEvent.FogDensity event) throws IllegalArgumentException,
+    public static void onFogDensity(@NotNull EntityViewRenderEvent.FogDensity event) throws IllegalArgumentException,
                                                                                      IllegalAccessException {
         if (event.getState().getBlock() instanceof BlockFluidEnder) {
             final EntityRenderer renderer = event.getRenderer();

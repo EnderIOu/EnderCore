@@ -1,11 +1,10 @@
 package com.enderio.core.api.client.gui;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 
 import com.enderio.core.api.client.render.IWidgetIcon;
+import org.jetbrains.annotations.NotNull;
 
 public interface ITabPanel {
 
@@ -13,12 +12,12 @@ public interface ITabPanel {
 
     void deactivate();
 
-    @Nonnull
+    @NotNull
     IWidgetIcon getIcon();
 
     void render(float par1, int par2, int par3);
 
-    void actionPerformed(@Nonnull GuiButton guiButton);
+    void actionPerformed(@NotNull GuiButton guiButton);
 
     void mouseClicked(int x, int y, int par3);
 
@@ -29,6 +28,6 @@ public interface ITabPanel {
     /**
      * @return The location of the texture used for slot backgrounds, etc.
      */
-    @Nonnull
+    @NotNull
     ResourceLocation getTexture();
 }

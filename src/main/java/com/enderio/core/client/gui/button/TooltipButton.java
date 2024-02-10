@@ -2,24 +2,23 @@ package com.enderio.core.client.gui.button;
 
 import java.awt.Rectangle;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.client.gui.widget.GuiToolTip;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TooltipButton extends GuiButtonHideable {
 
     protected int xOrigin;
     protected int yOrigin;
-    protected @Nonnull IGuiScreen gui;
+    protected @NotNull IGuiScreen gui;
     protected @Nullable String[] toolTipText;
     protected @Nullable GuiToolTip toolTip;
 
-    public TooltipButton(@Nonnull IGuiScreen gui, int id, int x, int y, int widthIn, int heightIn,
-                         @Nonnull String buttonText) {
+    public TooltipButton(@NotNull IGuiScreen gui, int id, int x, int y, int widthIn, int heightIn,
+                         @NotNull String buttonText) {
         super(id, x, y, widthIn, heightIn, buttonText);
         this.gui = gui;
         this.xOrigin = x;
@@ -48,7 +47,7 @@ public class TooltipButton extends GuiButtonHideable {
         updateTooltipBounds();
     }
 
-    public final @Nonnull Rectangle getBounds() {
+    public final @NotNull Rectangle getBounds() {
         return new Rectangle(xOrigin, yOrigin, getWidth(), getHeight());
     }
 
@@ -107,13 +106,13 @@ public class TooltipButton extends GuiButtonHideable {
         }
     }
 
-    protected void updateTooltip(@Nonnull Minecraft mc, int mouseX, int mouseY) {
+    protected void updateTooltip(@NotNull Minecraft mc, int mouseX, int mouseY) {
         if (toolTip != null) {
             toolTip.setIsVisible(visible && enabled);
         }
     }
 
-    protected final void doDrawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+    protected final void doDrawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         super.drawButton(mc, mouseX, mouseY, partialTicks);
     }
 
@@ -121,7 +120,7 @@ public class TooltipButton extends GuiButtonHideable {
      * Draws this button to the screen.
      */
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+    public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         updateTooltip(mc, mouseX, mouseY);
         doDrawButton(mc, mouseX, mouseY, partialTicks);
     }

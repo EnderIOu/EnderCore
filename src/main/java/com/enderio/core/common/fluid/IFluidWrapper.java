@@ -2,12 +2,12 @@ package com.enderio.core.common.fluid;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface IFluidWrapper {
 
@@ -21,7 +21,7 @@ public interface IFluidWrapper {
     @Nullable
     FluidStack getAvailableFluid();
 
-    @Nonnull
+    @NotNull
     List<ITankInfoWrapper> getTankInfoWrappers();
 
     public static interface ITankInfoWrapper {

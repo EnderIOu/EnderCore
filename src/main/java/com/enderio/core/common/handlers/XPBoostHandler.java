@@ -3,8 +3,6 @@ package com.enderio.core.common.handlers;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -30,6 +28,7 @@ import com.enderio.core.common.enchant.EnchantXPBoost;
 import com.enderio.core.common.util.NullHelper;
 import com.enderio.core.common.util.Scheduler;
 import com.google.common.base.Throwables;
+import org.jetbrains.annotations.NotNull;
 
 @Handler
 public class XPBoostHandler {
@@ -38,7 +37,7 @@ public class XPBoostHandler {
             "getExperiencePoints", "func_70693_a",
             EntityPlayer.class);
 
-    private static final @Nonnull String NBT_KEY = "endercore:xpboost";
+    private static final @NotNull String NBT_KEY = "endercore:xpboost";
 
     @SubscribeEvent
     public static void handleEntityKill(LivingDeathEvent event) {
@@ -72,9 +71,9 @@ public class XPBoostHandler {
         int level = getXPBoostLevel(event.getPlayer());
 
         if (level >= 0) {
-            final @Nonnull IBlockState state = NullHelper.notnullF(event.getState(), "BreakEvent.getState()");
-            final @Nonnull World world = NullHelper.notnullF(event.getWorld(), "BreakEvent.getWorld()");
-            final @Nonnull BlockPos pos = NullHelper.notnullF(event.getPos(), "BreakEvent.getPos()");
+            final IBlockState state = NullHelper.notnullF(event.getState(), "BreakEvent.getState()");
+            final World world = NullHelper.notnullF(event.getWorld(), "BreakEvent.getWorld()");
+            final BlockPos pos = NullHelper.notnullF(event.getPos(), "BreakEvent.getPos()");
             final int fortune = EnchantmentHelper.getEnchantmentLevel(Enchantments.FORTUNE,
                     event.getPlayer().getHeldItemMainhand());
             final int xp = state.getBlock().getExpDrop(state, world, pos, fortune);

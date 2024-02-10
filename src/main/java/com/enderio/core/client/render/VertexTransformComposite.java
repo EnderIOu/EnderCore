@@ -2,22 +2,21 @@ package com.enderio.core.client.render;
 
 import java.util.Collection;
 
-import javax.annotation.Nonnull;
-
 import com.enderio.core.api.client.render.VertexTransform;
 import com.enderio.core.common.vecmath.Vector3d;
 import com.enderio.core.common.vecmath.Vector3f;
 import com.enderio.core.common.vecmath.Vertex;
+import org.jetbrains.annotations.NotNull;
 
 public class VertexTransformComposite implements VertexTransform {
 
-    public final @Nonnull VertexTransform[] xforms;
+    public final @NotNull VertexTransform[] xforms;
 
-    public VertexTransformComposite(@Nonnull VertexTransform... xforms) {
+    public VertexTransformComposite(@NotNull VertexTransform... xforms) {
         this.xforms = xforms;
     }
 
-    VertexTransformComposite(@Nonnull Collection<VertexTransform> xformsIn) {
+    VertexTransformComposite(@NotNull Collection<VertexTransform> xformsIn) {
         xforms = new VertexTransform[xformsIn.size()];
         int i = 0;
         for (VertexTransform xform : xformsIn) {
@@ -27,21 +26,21 @@ public class VertexTransformComposite implements VertexTransform {
     }
 
     @Override
-    public void apply(@Nonnull Vertex vertex) {
+    public void apply(@NotNull Vertex vertex) {
         for (VertexTransform xform : xforms) {
             xform.apply(vertex);
         }
     }
 
     @Override
-    public void apply(@Nonnull Vector3d vec) {
+    public void apply(@NotNull Vector3d vec) {
         for (VertexTransform xform : xforms) {
             xform.apply(vec);
         }
     }
 
     @Override
-    public void applyToNormal(@Nonnull Vector3f vec) {
+    public void applyToNormal(@NotNull Vector3f vec) {
         for (VertexTransform xform : xforms) {
             xform.applyToNormal(vec);
         }

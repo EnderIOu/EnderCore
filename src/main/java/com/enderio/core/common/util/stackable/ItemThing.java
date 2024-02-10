@@ -1,8 +1,5 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -10,17 +7,19 @@ import net.minecraft.item.ItemBlockSpecial;
 import net.minecraft.item.ItemStack;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class ItemThing implements IThing {
 
-    private final @Nonnull Item thing;
+    private final @NotNull Item thing;
 
-    ItemThing(@Nonnull Item item) {
+    ItemThing(@NotNull Item item) {
         this.thing = item;
     }
 
     @Override
-    public @Nonnull NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         return new NNList<>(this);
     }
 
@@ -41,17 +40,17 @@ class ItemThing implements IThing {
     }
 
     @Override
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         return new NNList<Item>(thing);
     }
 
     @Override
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         return new NNList<ItemStack>(new ItemStack(thing));
     }
 
     @Override
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         Block block = Block.getBlockFromItem(thing);
         if (block == Blocks.AIR && thing instanceof ItemBlockSpecial) {
             block = ((ItemBlockSpecial) thing).getBlock();

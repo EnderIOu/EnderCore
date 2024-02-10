@@ -2,11 +2,11 @@ package com.enderio.core.api.common.util;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface ITankAccess {
 
@@ -28,7 +28,7 @@ public interface ITankAccess {
      * @return Tank that can be drained. Tanks are returned in order or priority. If there's no tank, an empty array is
      *         returned.
      */
-    @Nonnull
+    @NotNull
     FluidTank[] getOutputTanks();
 
     /**
@@ -44,7 +44,7 @@ public interface ITankAccess {
             OUTPUT;
         }
 
-        @Nonnull
+        @NotNull
         EnumTankType getTankType();
 
         @Nullable
@@ -62,7 +62,7 @@ public interface ITankAccess {
          *
          * @return A list of ITankData objects.
          */
-        @Nonnull
+        @NotNull
         List<ITankData> getTankDisplayData();
     }
 }

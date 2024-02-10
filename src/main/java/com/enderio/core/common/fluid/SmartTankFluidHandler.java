@@ -3,14 +3,14 @@ package com.enderio.core.common.fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Handles IFluidHandler, FluidTank and SmartTank
@@ -18,9 +18,9 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
  */
 public abstract class SmartTankFluidHandler {
 
-    protected final @Nonnull IFluidHandler[] tanks;
-    private final @Nonnull SideHandler[] sides = new SideHandler[EnumFacing.values().length];
-    private final @Nonnull InformationHandler nullSide = new InformationHandler();
+    protected final @NotNull IFluidHandler[] tanks;
+    private final @NotNull SideHandler[] sides = new SideHandler[EnumFacing.values().length];
+    private final @NotNull InformationHandler nullSide = new InformationHandler();
 
     public SmartTankFluidHandler(IFluidHandler... tanks) {
         this.tanks = tanks != null ? tanks : new IFluidHandler[0];
@@ -43,11 +43,11 @@ public abstract class SmartTankFluidHandler {
         }
     }
 
-    protected abstract boolean canFill(@Nonnull EnumFacing from);
+    protected abstract boolean canFill(@NotNull EnumFacing from);
 
-    protected abstract boolean canDrain(@Nonnull EnumFacing from);
+    protected abstract boolean canDrain(@NotNull EnumFacing from);
 
-    protected abstract boolean canAccess(@Nonnull EnumFacing from);
+    protected abstract boolean canAccess(@NotNull EnumFacing from);
 
     private class InformationHandler implements IFluidHandler {
 
@@ -90,9 +90,9 @@ public abstract class SmartTankFluidHandler {
 
     private class SideHandler extends InformationHandler {
 
-        private final @Nonnull EnumFacing facing;
+        private final @NotNull EnumFacing facing;
 
-        public SideHandler(@Nonnull EnumFacing facing) {
+        public SideHandler(@NotNull EnumFacing facing) {
             this.facing = facing;
         }
 

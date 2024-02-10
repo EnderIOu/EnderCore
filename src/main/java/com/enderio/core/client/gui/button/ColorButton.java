@@ -1,8 +1,5 @@
 package com.enderio.core.client.gui.button;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -11,6 +8,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.item.ItemDye;
 import net.minecraft.util.math.MathHelper;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.api.client.gui.IGuiScreen;
@@ -22,14 +21,14 @@ public class ColorButton extends IconButton {
 
     private int colorIndex = 0;
 
-    private @Nonnull String tooltipPrefix = "";
+    private @NotNull String tooltipPrefix = "";
 
-    public ColorButton(@Nonnull IGuiScreen gui, int id, int x, int y) {
+    public ColorButton(@NotNull IGuiScreen gui, int id, int x, int y) {
         super(gui, id, x, y, null);
     }
 
     @Override
-    public boolean mousePressedButton(@Nonnull Minecraft mc, int mouseX, int mouseY, int button) {
+    public boolean mousePressedButton(@NotNull Minecraft mc, int mouseX, int mouseY, int button) {
         if (super.checkMousePress(mc, mouseX, mouseY)) {
             if (button == 0) {
                 nextColor();
@@ -42,7 +41,7 @@ public class ColorButton extends IconButton {
         return false;
     }
 
-    public @Nonnull String getTooltipPrefix() {
+    public @NotNull String getTooltipPrefix() {
         return tooltipPrefix;
     }
 
@@ -85,7 +84,7 @@ public class ColorButton extends IconButton {
     }
 
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+    public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         super.drawButton(mc, mouseX, mouseY, partialTicks);
         if (visible) {
             BufferBuilder tes = Tessellator.getInstance().getBuffer();

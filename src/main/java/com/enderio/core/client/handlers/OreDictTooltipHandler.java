@@ -3,8 +3,6 @@ package com.enderio.core.client.handlers;
 import static com.enderio.core.common.config.ConfigHandler.showOredictTooltips;
 import static com.enderio.core.common.config.ConfigHandler.showRegistryNameTooltips;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +10,7 @@ import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.input.Keyboard;
 
 import com.enderio.core.EnderCore;
@@ -21,7 +20,7 @@ import com.enderio.core.common.Handlers.Handler;
 public class OreDictTooltipHandler {
 
     @SubscribeEvent
-    public static void onItemTooltip(@Nonnull ItemTooltipEvent event) {
+    public static void onItemTooltip(@NotNull ItemTooltipEvent event) {
         boolean shiftDown = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
         boolean debugMode = Minecraft.getMinecraft().gameSettings.advancedItemTooltips;
         boolean doRegistry = showRegistryNameTooltips == 3 ? debugMode :

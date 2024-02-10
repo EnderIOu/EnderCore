@@ -1,8 +1,5 @@
 package com.enderio.core.common.enchant;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.init.Enchantments;
@@ -24,6 +21,8 @@ import com.enderio.core.api.common.enchant.IAdvancedEnchant;
 import com.enderio.core.common.config.ConfigHandler;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.base.Predicate;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @EventBusSubscriber(modid = EnderCore.MODID)
 public class EnchantAutoSmelt extends Enchantment implements IAdvancedEnchant {
@@ -80,7 +79,7 @@ public class EnchantAutoSmelt extends Enchantment implements IAdvancedEnchant {
     }
 
     @Override
-    public @Nonnull String getName() {
+    public @NotNull String getName() {
         return "enchantment.autosmelt";
     }
 
@@ -90,22 +89,22 @@ public class EnchantAutoSmelt extends Enchantment implements IAdvancedEnchant {
     }
 
     @Override
-    public boolean canApply(@Nonnull ItemStack stack) {
+    public boolean canApply(@NotNull ItemStack stack) {
         return ConfigHandler.allowAutoSmelt && super.canApply(stack);
     }
 
     @Override
-    public boolean canApplyAtEnchantingTable(@Nonnull ItemStack stack) {
+    public boolean canApplyAtEnchantingTable(@NotNull ItemStack stack) {
         return ConfigHandler.allowAutoSmelt && super.canApplyAtEnchantingTable(stack);
     }
 
     @Override
-    public @Nonnull String[] getTooltipDetails(@Nonnull ItemStack stack) {
+    public @NotNull String[] getTooltipDetails(@NotNull ItemStack stack) {
         return new String[] { EnderCore.lang.localize("enchantment.autosmelt.tooltip", false) };
     }
 
     @SubscribeEvent
-    public static void register(@Nonnull RegistryEvent.Register<Enchantment> event) {
+    public static void register(@NotNull RegistryEvent.Register<Enchantment> event) {
         if (ConfigHandler.allowAutoSmelt) {
             INSTANCE = new EnchantAutoSmelt();
             event.getRegistry().register(INSTANCE);
@@ -118,7 +117,7 @@ public class EnchantAutoSmelt extends Enchantment implements IAdvancedEnchant {
     }
 
     @Override
-    public boolean canApplyTogether(@Nonnull Enchantment ench) {
+    public boolean canApplyTogether(@NotNull Enchantment ench) {
         return super.canApplyTogether(ench) && ench != Enchantments.SILK_TOUCH;
     }
 }

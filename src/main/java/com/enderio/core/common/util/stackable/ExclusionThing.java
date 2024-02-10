@@ -1,8 +1,5 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -12,19 +9,20 @@ import net.minecraftforge.oredict.OreDictionary;
 import com.enderio.core.common.util.NNList;
 import com.enderio.core.common.util.NNList.NNIterator;
 import com.enderio.core.common.util.stackable.IThing.Zwieback;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ExclusionThing implements Zwieback {
 
-    private final @Nonnull NNList<IThing> positive, negative;
+    private final @NotNull NNList<IThing> positive, negative;
 
-    ExclusionThing(@Nonnull NNList<IThing> positive, @Nonnull NNList<IThing> negative) {
+    ExclusionThing(@NotNull NNList<IThing> positive, @NotNull NNList<IThing> negative) {
         this.positive = positive;
         this.negative = negative;
     }
 
     @Override
-    @Nullable
-    public IThing rebake() {
+    public @Nullable IThing rebake() {
         for (IThing thing : positive) {
             if (thing instanceof Zwieback) {
                 ((Zwieback) thing).rebake();
@@ -39,8 +37,7 @@ public class ExclusionThing implements Zwieback {
     }
 
     @Override
-    @Nonnull
-    public NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         return new NNList<>(this);
     }
 
@@ -90,8 +87,7 @@ public class ExclusionThing implements Zwieback {
     }
 
     @Override
-    @Nonnull
-    public NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         NNList<Item> result = new NNList<>();
         for (IThing thing : positive) {
             result.addAll(thing.getItems());
@@ -108,8 +104,7 @@ public class ExclusionThing implements Zwieback {
     }
 
     @Override
-    @Nonnull
-    public NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         NNList<ItemStack> result = new NNList<>();
         for (IThing thing : positive) {
             for (ItemStack stack : thing.getItemStacks()) {
@@ -132,8 +127,7 @@ public class ExclusionThing implements Zwieback {
     }
 
     @Override
-    @Nonnull
-    public NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         NNList<Block> result = new NNList<>();
         for (IThing thing : positive) {
             result.addAll(thing.getBlocks());

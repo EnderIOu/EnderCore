@@ -6,9 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -37,6 +34,8 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.common.reflect.TypeToken;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class can be used to automatically process {@link Config} annotations on fields, and sync the data in those
@@ -49,7 +48,7 @@ public class ConfigProcessor {
 
     public interface IReloadCallback {
 
-        void callback(@Nonnull ConfigProcessor inst);
+        void callback(@NotNull ConfigProcessor inst);
     }
 
     /**
@@ -89,32 +88,32 @@ public class ConfigProcessor {
 
         ACTUAL createActualType(BASE base);
 
-        @Nonnull
-        BASE createBaseType(@Nonnull ACTUAL actual);
+        @NotNull
+        BASE createBaseType(@NotNull ACTUAL actual);
     }
 
-    static final @Nonnull Map<String, ConfigProcessor> processorMap = Maps.newHashMap();
+    static final @NotNull Map<String, ConfigProcessor> processorMap = Maps.newHashMap();
 
-    protected final @Nonnull List<ITypeAdapter<?, ?>> adapters = Lists.newArrayList();
+    protected final @NotNull List<ITypeAdapter<?, ?>> adapters = Lists.newArrayList();
 
-    protected final @Nonnull String modid;
+    protected final @NotNull String modid;
 
-    protected final @Nonnull Class<?> configs;
-    protected final @Nonnull Configuration configFile;
+    protected final @NotNull Class<?> configs;
+    protected final @NotNull Configuration configFile;
     protected final @Nullable IReloadCallback callback;
 
-    protected @Nonnull Map<String, Object> configValues = Maps.newHashMap();
-    protected final @Nonnull Map<String, Object> defaultValues = Maps.newHashMap();
-    protected final @Nonnull Map<String, Object> originalValues = Maps.newHashMap();
+    protected @NotNull Map<String, Object> configValues = Maps.newHashMap();
+    protected final @NotNull Map<String, Object> defaultValues = Maps.newHashMap();
+    protected final @NotNull Map<String, Object> originalValues = Maps.newHashMap();
 
-    protected final @Nonnull Set<String> sections = Sets.newHashSet();
+    protected final @NotNull Set<String> sections = Sets.newHashSet();
 
     /**
      * This constructor omits the callback arg.
      *
      * @see #ConfigProcessor(Class, File, String, IReloadCallback)
      */
-    public ConfigProcessor(@Nonnull Class<?> configs, @Nonnull File configFile, @Nonnull String modid) {
+    public ConfigProcessor(@NotNull Class<?> configs, @NotNull File configFile, @NotNull String modid) {
         this(configs, configFile, modid, null);
     }
 
@@ -130,7 +129,7 @@ public class ConfigProcessor {
      * @param callback
      *                   an {@link IReloadCallback} object which will be called whenever config values are edited.
      */
-    public ConfigProcessor(@Nonnull Class<?> configs, @Nonnull File configFile, @Nonnull String modid,
+    public ConfigProcessor(@NotNull Class<?> configs, @NotNull File configFile, @NotNull String modid,
                            @Nullable IReloadCallback callback) {
         this(configs, new Configuration(configFile), modid, callback);
     }
@@ -146,7 +145,7 @@ public class ConfigProcessor {
      * @param handler
      *                Your {@link AbstractConfigHandler}
      */
-    public ConfigProcessor(@Nonnull Class<?> configs, @Nonnull AbstractConfigHandler handler) {
+    public ConfigProcessor(@NotNull Class<?> configs, @NotNull AbstractConfigHandler handler) {
         this(configs, handler, null);
     }
 
@@ -163,12 +162,12 @@ public class ConfigProcessor {
      * @param callback
      *                 an {@link IReloadCallback} object which will be called whenever config values are edited.
      */
-    public ConfigProcessor(@Nonnull Class<?> configs, @Nonnull AbstractConfigHandler handler,
+    public ConfigProcessor(@NotNull Class<?> configs, @NotNull AbstractConfigHandler handler,
                            @Nullable IReloadCallback callback) {
         this(configs, handler.getConfig(), handler.modid, callback);
     }
 
-    protected ConfigProcessor(@Nonnull Class<?> configs, @Nonnull Configuration configFile, @Nonnull String modid,
+    protected ConfigProcessor(@NotNull Class<?> configs, @NotNull Configuration configFile, @NotNull String modid,
                               @Nullable IReloadCallback callback) {
         this.configs = configs;
         this.configFile = configFile;
@@ -243,8 +242,8 @@ public class ConfigProcessor {
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
-    protected Object getConfigValue(@Nonnull String section, @Nonnull String[] commentLines, @Nonnull Field f,
-                                    @Nonnull Object defaultValue) {
+    protected Object getConfigValue(@NotNull String section, @NotNull String[] commentLines, @NotNull Field f,
+                                    @NotNull Object defaultValue) {
         Property prop = null;
         Object res = null;
         Bound<Double> bound = getBound(f);
@@ -307,7 +306,7 @@ public class ConfigProcessor {
                 String.format("No adapter for type %s in class %s, field %s", f.getGenericType(), configs, f));
     }
 
-    protected ITypeAdapter<?, ?> getAdapterFor(@Nonnull Field f) {
+    protected ITypeAdapter<?, ?> getAdapterFor(@NotNull Field f) {
         TypeToken<?> t = TypeToken.of(f.getGenericType());
         Class<?> c = f.getType();
         for (ITypeAdapter<?, ?> adapter : adapters) {
@@ -326,7 +325,7 @@ public class ConfigProcessor {
         return configFile.getCategory(category);
     }
 
-    public void syncTo(@Nonnull Map<String, Object> values) {
+    public void syncTo(@NotNull Map<String, Object> values) {
         this.configValues = values;
         for (String s : configValues.keySet()) {
             try {
@@ -355,7 +354,7 @@ public class ConfigProcessor {
         }
     }
 
-    protected @Nonnull String[] getComment(Field f) {
+    protected @NotNull String[] getComment(Field f) {
         Comment c = f.getAnnotation(Comment.class);
         return NullHelper.first(c == null ? null : c.value(), new String[0]);
     }

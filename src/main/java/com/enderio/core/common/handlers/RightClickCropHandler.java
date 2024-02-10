@@ -2,8 +2,6 @@ package com.enderio.core.common.handlers;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBeetroot;
 import net.minecraft.block.BlockCrops;
@@ -25,22 +23,23 @@ import com.enderio.core.common.config.ConfigHandler;
 import com.enderio.core.common.util.NullHelper;
 import com.enderio.core.common.util.stackable.Things;
 import com.google.common.collect.Lists;
+import org.jetbrains.annotations.NotNull;
 
 @Handler
 public class RightClickCropHandler {
 
     public static interface IPlantInfo {
 
-        @Nonnull
+        @NotNull
         ItemStack getSeed();
 
-        @Nonnull
+        @NotNull
         IBlockState getGrownState();
 
-        @Nonnull
+        @NotNull
         IBlockState getResetState();
 
-        boolean init(@Nonnull String source);
+        boolean init(@NotNull String source);
     }
 
     public static class LegacyPlantInfo implements IPlantInfo {
@@ -51,9 +50,9 @@ public class RightClickCropHandler {
         public int resetMeta = 0;
         public boolean optional;
 
-        private transient @Nonnull Things seedStack = new Things();
-        private transient @Nonnull IBlockState grownState = Blocks.AIR.getDefaultState();
-        private transient @Nonnull IBlockState resetState = Blocks.AIR.getDefaultState();
+        private transient @NotNull Things seedStack = new Things();
+        private transient @NotNull IBlockState grownState = Blocks.AIR.getDefaultState();
+        private transient @NotNull IBlockState resetState = Blocks.AIR.getDefaultState();
 
         public LegacyPlantInfo() { // for json de-serialization
         }
@@ -66,7 +65,7 @@ public class RightClickCropHandler {
         }
 
         @Override
-        public boolean init(@Nonnull String source) {
+        public boolean init(@NotNull String source) {
             seedStack.add(seed);
             if (!seedStack.isValid()) {
                 // some blocks and items share the same id but you cannot make an itemstack from the block.
@@ -119,19 +118,19 @@ public class RightClickCropHandler {
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public ItemStack getSeed() {
             return seedStack.getItemStack();
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public IBlockState getGrownState() {
             return grownState;
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public IBlockState getResetState() {
             return resetState;
         }

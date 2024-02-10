@@ -1,8 +1,5 @@
 package com.enderio.core.common.inventory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -11,14 +8,16 @@ import net.minecraftforge.items.IItemHandler;
 
 import com.enderio.core.common.util.ItemUtil;
 import com.google.common.base.Predicate;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class InventorySlot implements IItemHandler {
 
-    private static final @Nonnull ItemStack LIE = new ItemStack(Blocks.CAKE, 0);
+    private static final @NotNull ItemStack LIE = new ItemStack(Blocks.CAKE, 0);
 
-    private @Nonnull ItemStack itemStack;
-    private final @Nonnull Predicate<ItemStack> filterIn, filterOut;
-    private final @Nonnull Callback<ItemStack> callback;
+    private @NotNull ItemStack itemStack;
+    private final @NotNull Predicate<ItemStack> filterIn, filterOut;
+    private final @NotNull Callback<ItemStack> callback;
     private final int limit;
     private @Nullable TileEntity owner;
 
@@ -30,11 +29,11 @@ public class InventorySlot implements IItemHandler {
         this(LIE, null, null, callback, -1);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack) {
+    public InventorySlot(@NotNull ItemStack itemStack) {
         this(itemStack, null, null, null, -1);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, @Nullable Callback<ItemStack> callback) {
+    public InventorySlot(@NotNull ItemStack itemStack, @Nullable Callback<ItemStack> callback) {
         this(itemStack, null, null, callback, -1);
     }
 
@@ -55,11 +54,11 @@ public class InventorySlot implements IItemHandler {
         this(LIE, null, null, callback, limit);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, int limit) {
+    public InventorySlot(@NotNull ItemStack itemStack, int limit) {
         this(itemStack, null, null, null, limit);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, @Nullable Callback<ItemStack> callback, int limit) {
+    public InventorySlot(@NotNull ItemStack itemStack, @Nullable Callback<ItemStack> callback, int limit) {
         this(itemStack, null, null, callback, limit);
     }
 
@@ -76,23 +75,23 @@ public class InventorySlot implements IItemHandler {
         this(LIE, filterIn, filterOut, callback, limit);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
+    public InventorySlot(@NotNull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
                          @Nullable Predicate<ItemStack> filterOut) {
         this(itemStack, filterIn, filterOut, null, -1);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
+    public InventorySlot(@NotNull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
                          @Nullable Predicate<ItemStack> filterOut,
                          @Nullable Callback<ItemStack> callback) {
         this(itemStack, filterIn, filterOut, callback, -1);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
+    public InventorySlot(@NotNull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
                          @Nullable Predicate<ItemStack> filterOut, int limit) {
         this(itemStack, filterIn, filterOut, null, limit);
     }
 
-    public InventorySlot(@Nonnull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
+    public InventorySlot(@NotNull ItemStack itemStack, @Nullable Predicate<ItemStack> filterIn,
                          @Nullable Predicate<ItemStack> filterOut,
                          @Nullable Callback<ItemStack> callback, int limit) {
         this.itemStack = itemStack;
@@ -108,16 +107,16 @@ public class InventorySlot implements IItemHandler {
     }
 
     @Override
-    public @Nonnull ItemStack getStackInSlot(int slot) {
+    public @NotNull ItemStack getStackInSlot(int slot) {
         return slot == 0 ? itemStack : LIE;
     }
 
-    public boolean isItemValidForSlot(@Nonnull ItemStack stack) {
+    public boolean isItemValidForSlot(@NotNull ItemStack stack) {
         return !stack.isEmpty() && filterIn.apply(stack);
     }
 
     @Override
-    public @Nonnull ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+    public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
         if (stack.isEmpty()) {
             return LIE;
         }
@@ -169,7 +168,7 @@ public class InventorySlot implements IItemHandler {
     }
 
     @Override
-    public @Nonnull ItemStack extractItem(int slot, int amount, boolean simulate) {
+    public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
         if (slot == 0 && !itemStack.isEmpty() && filterOut.apply(itemStack)) {
             if (amount >= itemStack.getCount()) {
                 if (!simulate) {
@@ -197,20 +196,20 @@ public class InventorySlot implements IItemHandler {
         return LIE;
     }
 
-    private void onChange(@Nonnull ItemStack oldStack, @Nonnull ItemStack newStack) {
+    private void onChange(@NotNull ItemStack oldStack, @NotNull ItemStack newStack) {
         callback.onChange(oldStack, newStack);
         if (owner != null) {
             owner.markDirty();
         }
     }
 
-    public void writeToNBT(@Nonnull NBTTagCompound tag) {
+    public void writeToNBT(@NotNull NBTTagCompound tag) {
         if (!itemStack.isEmpty()) {
             itemStack.writeToNBT(tag);
         }
     }
 
-    public void readFromNBT(@Nonnull NBTTagCompound tag) {
+    public void readFromNBT(@NotNull NBTTagCompound tag) {
         itemStack = new ItemStack(tag);
     }
 
@@ -218,17 +217,17 @@ public class InventorySlot implements IItemHandler {
         itemStack = LIE;
     }
 
-    public void set(@Nonnull ItemStack stack) {
+    public void set(@NotNull ItemStack stack) {
         ItemStack oldStack = itemStack;
         itemStack = stack;
         onChange(oldStack, itemStack);
     }
 
-    public @Nonnull ItemStack get() {
+    public @NotNull ItemStack get() {
         return itemStack;
     }
 
-    public @Nonnull ItemStack getCopy() {
+    public @NotNull ItemStack getCopy() {
         return itemStack.copy();
     }
 

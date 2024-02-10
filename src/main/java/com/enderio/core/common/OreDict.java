@@ -2,15 +2,15 @@ package com.enderio.core.common;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class OreDict {
 
@@ -41,20 +41,20 @@ public final class OreDict {
         safeRegister("slabQuartz", new ItemStack(Blocks.STONE_SLAB, 1, 7));
     }
 
-    public static void safeRegister(@Nonnull String name, @Nonnull Block block) {
+    public static void safeRegister(@NotNull String name, @NotNull Block block) {
         safeRegister(name, Item.getItemFromBlock(block));
     }
 
-    public static void safeRegister(@Nonnull String name, @Nonnull Item item) {
+    public static void safeRegister(@NotNull String name, @NotNull Item item) {
         safeRegister(name, new ItemStack(item));
     }
 
-    public static void safeRegister(@Nonnull String name, @Nonnull ItemStack stack) {
+    public static void safeRegister(@NotNull String name, @NotNull ItemStack stack) {
         if (!isRegistered(stack, OreDictionary.getOres(name)))
             OreDictionary.registerOre(name, stack);
     }
 
-    private static boolean isRegistered(@Nonnull ItemStack stack, @Nullable List<ItemStack> toCheck) {
+    private static boolean isRegistered(@NotNull ItemStack stack, @Nullable List<ItemStack> toCheck) {
         if (toCheck != null) {
             for (ItemStack check : toCheck) {
                 if (!stack.isEmpty() && stack.getItem() == check.getItem() &&

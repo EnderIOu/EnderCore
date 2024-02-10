@@ -1,8 +1,5 @@
 package com.enderio.core.api.common.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -10,6 +7,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.enderio.core.common.network.EnderPacketHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface IProgressTile {
 
@@ -24,10 +23,10 @@ public interface IProgressTile {
     @SideOnly(Side.CLIENT)
     void setProgress(float progress);
 
-    @Nonnull
+    @NotNull
     TileEntity getTileEntity();
 
-    @Nonnull
+    @NotNull
     IMessage getProgressPacket();
 
     public static @Nullable Packet<?> getProgressPacket(Object o) {

@@ -1,8 +1,8 @@
 package com.enderio.core.common.util;
 
-import java.util.EnumMap;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import java.util.EnumMap;
 
 /**
  * An EnumMap that defaults to a specified value instead of <code>null</code>.
@@ -19,20 +19,20 @@ public class NNEnumMap<K extends Enum<K>, V> extends EnumMap<K, V> {
 
     private static final long serialVersionUID = 5242971202252653482L;
 
-    private final @Nonnull V defaultValue;
+    private final @NotNull V defaultValue;
 
-    public NNEnumMap(@Nonnull Class<K> keyType, @Nonnull V defaultValue) {
+    public NNEnumMap(@NotNull Class<K> keyType, @NotNull V defaultValue) {
         super(keyType);
         this.defaultValue = defaultValue;
     }
 
     @Override
-    public @Nonnull V get(Object key) {
+    public @NotNull V get(Object key) {
         return NullHelper.first(super.get(key), defaultValue);
     }
 
     @Override
-    public @Nonnull V getOrDefault(Object key, V defaultValueParam) {
+    public @NotNull V getOrDefault(Object key, V defaultValueParam) {
         return NullHelper.first(super.get(key), defaultValueParam, defaultValue);
     }
 }

@@ -1,7 +1,5 @@
 package com.enderio.core.common.tweaks;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
@@ -9,6 +7,7 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
 
 public class SlabRecipes extends Tweak {
 
@@ -31,7 +30,7 @@ public class SlabRecipes extends Tweak {
         registerSlabToBlock();
     }
 
-    private static void addSlabRecipe(@Nonnull ItemStack stack, @Nonnull String slab) {
+    private static void addSlabRecipe(@NotNull ItemStack stack, @NotNull String slab) {
         ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(null, stack, slab, slab)
                 .setRegistryName(slab + "_to_" +
                         NullHelper.notnullM(stack.getItem().getRegistryName(), "found unregistered item").getPath()));

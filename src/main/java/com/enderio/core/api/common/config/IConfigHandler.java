@@ -3,25 +3,24 @@ package com.enderio.core.api.common.config;
 import java.io.File;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
 import com.enderio.core.common.config.AbstractConfigHandler.Section;
+import org.jetbrains.annotations.NotNull;
 
 public interface IConfigHandler {
 
-    void initialize(@Nonnull File cfg);
+    void initialize(@NotNull File cfg);
 
-    @Nonnull
+    @NotNull
     List<Section> getSections();
 
-    @Nonnull
+    @NotNull
     ConfigCategory getCategory(String name);
 
-    @Nonnull
+    @NotNull
     String getModID();
 
     /**

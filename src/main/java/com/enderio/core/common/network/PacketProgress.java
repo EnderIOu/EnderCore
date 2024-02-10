@@ -1,7 +1,5 @@
 package com.enderio.core.common.network;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
@@ -11,6 +9,7 @@ import com.enderio.core.EnderCore;
 import com.enderio.core.api.common.util.IProgressTile;
 
 import io.netty.buffer.ByteBuf;
+import org.jetbrains.annotations.NotNull;
 
 public class PacketProgress extends MessageTileEntity<TileEntity> {
 
@@ -18,7 +17,7 @@ public class PacketProgress extends MessageTileEntity<TileEntity> {
 
     public PacketProgress() {}
 
-    public PacketProgress(@Nonnull IProgressTile tile) {
+    public PacketProgress(@NotNull IProgressTile tile) {
         super(tile.getTileEntity());
         progress = tile.getProgress();
     }

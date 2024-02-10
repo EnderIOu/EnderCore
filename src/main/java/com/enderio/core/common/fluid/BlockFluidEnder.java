@@ -2,9 +2,6 @@ package com.enderio.core.common.fluid;
 
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.block.state.IBlockState;
@@ -21,15 +18,17 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BlockFluidEnder extends BlockFluidClassic {
 
     private float fogColorRed = 1f;
     private float fogColorGreen = 1f;
     private float fogColorBlue = 1f;
-    private final @Nonnull Material material;
+    private final @NotNull Material material;
 
-    protected BlockFluidEnder(@Nonnull Fluid fluid, @Nonnull Material material, int fogColor) {
+    protected BlockFluidEnder(@NotNull Fluid fluid, @NotNull Material material, int fogColor) {
         super(fluid, new MaterialLiquid(material.getMaterialMapColor()) {
 
             // new Material for each liquid so neighboring different liquids render correctly and don't bleed into each
@@ -83,9 +82,9 @@ public abstract class BlockFluidEnder extends BlockFluidClassic {
     }
 
     @Override
-    public Boolean isEntityInsideMaterial(@Nonnull IBlockAccess world, @Nonnull BlockPos blockpos,
-                                          @Nonnull IBlockState iblockstate, @Nonnull Entity entity,
-                                          double yToTest, @Nonnull Material materialIn, boolean testingHead) {
+    public Boolean isEntityInsideMaterial(@NotNull IBlockAccess world, @NotNull BlockPos blockpos,
+                                          @NotNull IBlockState iblockstate, @NotNull Entity entity,
+                                          double yToTest, @NotNull Material materialIn, boolean testingHead) {
         if (materialIn == material || materialIn == this.material) {
             return Boolean.TRUE;
         }
@@ -114,7 +113,7 @@ public abstract class BlockFluidEnder extends BlockFluidClassic {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(@Nullable CreativeTabs tab, @Nonnull NonNullList<ItemStack> list) {
+    public void getSubBlocks(@Nullable CreativeTabs tab, @NotNull NonNullList<ItemStack> list) {
         if (tab != null) {
             super.getSubBlocks(tab, list);
         }

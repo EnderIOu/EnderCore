@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.util.RecipeItemHelper;
 import net.minecraft.creativetab.CreativeTabs;
@@ -32,6 +29,8 @@ import com.enderio.core.common.util.stackable.IThing.Zwieback;
 
 import it.unimi.dsi.fastutil.ints.IntArrayList;
 import it.unimi.dsi.fastutil.ints.IntList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This class is a way to hold lists of configurable items and blocks.
@@ -47,9 +46,9 @@ import it.unimi.dsi.fastutil.ints.IntList;
  */
 public class Things extends Ingredient {
 
-    static final @Nonnull Map<String, IThing> aliases = new HashMap<String, IThing>();
+    static final @NotNull Map<String, IThing> aliases = new HashMap<String, IThing>();
 
-    private static final @Nonnull List<Things> values = new ArrayList<Things>();
+    private static final @NotNull List<Things> values = new ArrayList<Things>();
 
     public Things(String... names) {
         init(names);
@@ -87,7 +86,7 @@ public class Things extends Ingredient {
         values.clear();
     }
 
-    private final @Nonnull List<IThing> things = new ArrayList<IThing>();
+    private final @NotNull List<IThing> things = new ArrayList<IThing>();
     private NBTTagCompound nbt = null;
     private int size = 1;
 
@@ -99,7 +98,7 @@ public class Things extends Ingredient {
         this.size = size;
     }
 
-    public @Nonnull Things add(@Nullable Item item) {
+    public @NotNull Things add(@Nullable Item item) {
         if (item != null) {
             nameList.add("item:" + item.getRegistryName());
             add(new ItemThing(item));
@@ -132,7 +131,7 @@ public class Things extends Ingredient {
         return this;
     }
 
-    public @Nonnull Things add(@Nullable ItemStack itemStack) { // sic!
+    public @NotNull Things add(@Nullable ItemStack itemStack) { // sic!
         if (itemStack != null && !itemStack.isEmpty()) {
             nameList.add("item:" + itemStack.getItem().getRegistryName());
             add(new ItemStackThing(itemStack));
@@ -140,7 +139,7 @@ public class Things extends Ingredient {
         return this;
     }
 
-    public @Nonnull Things add(@Nullable Block block) {
+    public @NotNull Things add(@Nullable Block block) {
         if (block != null) {
             nameList.add("block:" + block.getRegistryName());
             add(new BlockThing(block));
@@ -148,7 +147,7 @@ public class Things extends Ingredient {
         return this;
     }
 
-    public @Nonnull Things add(@Nullable String name) {
+    public @NotNull Things add(@Nullable String name) {
         if (name != null) {
             nameList.add(name);
             add(new StringThing(name));
@@ -156,7 +155,7 @@ public class Things extends Ingredient {
         return this;
     }
 
-    public @Nonnull Things add(@Nullable IProducer producer) {
+    public @NotNull Things add(@Nullable IProducer producer) {
         if (producer != null) {
             // TODO: Better way to serialize this?
             Block block = producer.getBlock();
@@ -178,7 +177,7 @@ public class Things extends Ingredient {
         }
     }
 
-    public @Nonnull Things add(@Nullable ResourceLocation resourceLocation) {
+    public @NotNull Things add(@Nullable ResourceLocation resourceLocation) {
         if (resourceLocation != null) {
             if (net.minecraft.block.Block.REGISTRY.containsKey(resourceLocation)) {
                 Block block = net.minecraft.block.Block.REGISTRY.getObject(resourceLocation);
@@ -194,7 +193,7 @@ public class Things extends Ingredient {
         return this;
     }
 
-    public @Nonnull Things addOredict(@Nullable String name) {
+    public @NotNull Things addOredict(@Nullable String name) {
         if (name != null) {
             nameList.add("oredict:" + name);
             add(new OreThing(name));
@@ -202,7 +201,7 @@ public class Things extends Ingredient {
         return this;
     }
 
-    public @Nonnull Things add(@Nullable Things otherThings) {
+    public @NotNull Things add(@Nullable Things otherThings) {
         if (otherThings != null) {
             nameList.addAll(otherThings.nameList);
             for (IThing thing : otherThings.things) {
@@ -325,7 +324,7 @@ public class Things extends Ingredient {
 
     private @Nullable NNList<Item> itemList = null;
 
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         NNList<Item> list = itemList;
         if (list == null || list.isEmpty() || beforeLoadComplete) {
             list = new NNList<>();
@@ -342,7 +341,7 @@ public class Things extends Ingredient {
      * Returns a list of item stacks for this Thing. Items in this list may have the wildcard meta. List may contain
      * empty stacks.
      */
-    public @Nonnull NNList<ItemStack> getItemStacksRaw() {
+    public @NotNull NNList<ItemStack> getItemStacksRaw() {
         NNList<ItemStack> list = itemStackListRaw;
         if (list == null || list.isEmpty() || beforeLoadComplete) {
             list = new NNList<>();
@@ -378,7 +377,7 @@ public class Things extends Ingredient {
      * Please note that items that are defined using the wildcard value for the item damage may not return the complete
      * list on dedicated servers
      */
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         NNList<ItemStack> list = itemStackList;
         if (list == null || list.isEmpty() || beforeLoadComplete) {
             list = new NNList<>();
@@ -396,14 +395,14 @@ public class Things extends Ingredient {
         return itemStackList = list;
     }
 
-    public @Nonnull ItemStack getItemStack() {
+    public @NotNull ItemStack getItemStack() {
         NNList<ItemStack> itemStacks = getItemStacks();
         return itemStacks.isEmpty() ? ItemStack.EMPTY : itemStacks.get(0);
     }
 
     private @Nullable NNList<Block> blockList = null;
 
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         NNList<Block> list = blockList;
         if (list == null || list.isEmpty() || beforeLoadComplete) {
             list = new NNList<>();
@@ -414,16 +413,16 @@ public class Things extends Ingredient {
         return blockList = list;
     }
 
-    private final @Nonnull NNList<String> nameList = new NNList<>();
+    private final @NotNull NNList<String> nameList = new NNList<>();
 
-    public @Nonnull NNList<String> getNameList() {
+    public @NotNull NNList<String> getNameList() {
         return nameList;
     }
 
     // Ingredient
 
     @Override
-    public @Nonnull ItemStack[] getMatchingStacks() {
+    public ItemStack @NotNull [] getMatchingStacks() {
         return getItemStacks().toArray(new ItemStack[0]);
     }
 
@@ -435,7 +434,7 @@ public class Things extends Ingredient {
     private @Nullable IntList itemIds = null;
 
     @Override
-    public @Nonnull IntList getValidItemStacksPacked() {
+    public @NotNull IntList getValidItemStacksPacked() {
         IntList list = itemIds;
         if (list == null || list.isEmpty() || beforeLoadComplete) {
             list = new IntArrayList();
@@ -460,7 +459,7 @@ public class Things extends Ingredient {
     }
 
     @SuppressWarnings("null")
-    public @Nonnull Ingredient asIngredient() {
+    public @NotNull Ingredient asIngredient() {
         NNList<Ingredient> ings = new NNList<>();
         for (IThing thing : things) {
             if (thing instanceof OreThing) {
@@ -526,9 +525,9 @@ public class Things extends Ingredient {
 
     private static class OreIngredientNBT extends OreIngredient {
 
-        private final @Nonnull NBTTagCompound nbt;
+        private final @NotNull NBTTagCompound nbt;
 
-        public OreIngredientNBT(@Nonnull String ore, @Nonnull NBTTagCompound nbt) {
+        public OreIngredientNBT(@NotNull String ore, @NotNull NBTTagCompound nbt) {
             super(ore);
             this.nbt = nbt;
         }
@@ -539,8 +538,7 @@ public class Things extends Ingredient {
         }
 
         @Override
-        @Nonnull
-        public ItemStack[] getMatchingStacks() {
+        public ItemStack @NotNull [] getMatchingStacks() {
             final ItemStack[] matchingStacks = super.getMatchingStacks();
             for (ItemStack itemStack : matchingStacks) {
                 itemStack.setTagCompound(nbt.copy());

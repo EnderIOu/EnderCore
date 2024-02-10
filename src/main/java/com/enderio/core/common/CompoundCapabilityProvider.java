@@ -3,12 +3,12 @@ package com.enderio.core.common;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CompoundCapabilityProvider implements ICapabilityProvider {
 
@@ -25,7 +25,7 @@ public class CompoundCapabilityProvider implements ICapabilityProvider {
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
         for (ICapabilityProvider prov : providers) {
             if (prov.hasCapability(capability, facing)) {
                 return true;
@@ -35,7 +35,7 @@ public class CompoundCapabilityProvider implements ICapabilityProvider {
     }
 
     @Override
-    public @Nullable <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+    public @Nullable <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         for (ICapabilityProvider prov : providers) {
             T res = prov.getCapability(capability, facing);
             if (res != null) {

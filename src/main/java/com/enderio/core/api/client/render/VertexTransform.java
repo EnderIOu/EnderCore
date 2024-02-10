@@ -1,16 +1,15 @@
 package com.enderio.core.api.client.render;
 
-import javax.annotation.Nonnull;
-
 import com.enderio.core.common.vecmath.Vector3d;
 import com.enderio.core.common.vecmath.Vector3f;
 import com.enderio.core.common.vecmath.Vertex;
+import org.jetbrains.annotations.NotNull;
 
 public interface VertexTransform {
 
-    void apply(@Nonnull Vertex vertex);
+    void apply(@NotNull Vertex vertex);
 
-    void apply(@Nonnull Vector3d vec);
+    void apply(@NotNull Vector3d vec);
 
-    void applyToNormal(@Nonnull Vector3f vec);
+    void applyToNormal(@NotNull Vector3f vec);
 }

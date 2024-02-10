@@ -1,11 +1,10 @@
 package com.enderio.core.common;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 import com.enderio.core.common.util.Scheduler;
+import org.jetbrains.annotations.NotNull;
 
 public class CommonProxy {
 
@@ -16,7 +15,7 @@ public class CommonProxy {
      * <p>
      * For internal use only, please call {@link Scheduler#instance()} to obtain an {@link Scheduler} instance.
      */
-    public @Nonnull Scheduler getScheduler() {
+    public @NotNull Scheduler getScheduler() {
         if (scheduler != null) {
             return scheduler;
         }
@@ -27,7 +26,7 @@ public class CommonProxy {
         return null;
     }
 
-    public void throwModCompatibilityError(@Nonnull String... msgs) {
+    public void throwModCompatibilityError(@NotNull String... msgs) {
         StringBuilder sb = new StringBuilder();
         for (String msg : msgs) {
             if (sb.length() > 0) {
@@ -38,5 +37,5 @@ public class CommonProxy {
         throw new RuntimeException(sb.toString());
     }
 
-    public void onPreInit(@Nonnull FMLPreInitializationEvent event) {}
+    public void onPreInit(@NotNull FMLPreInitializationEvent event) {}
 }

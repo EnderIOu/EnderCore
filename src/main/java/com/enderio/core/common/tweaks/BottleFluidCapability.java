@@ -1,8 +1,5 @@
 package com.enderio.core.common.tweaks;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.init.Items;
 import net.minecraft.init.PotionTypes;
 import net.minecraft.item.ItemStack;
@@ -23,14 +20,16 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.config.AbstractConfigHandler.RestartReqs;
 import com.enderio.core.common.config.ConfigHandler;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class BottleFluidCapability implements IFluidHandlerItem, ICapabilityProvider {
 
     private static final ResourceLocation KEY = new ResourceLocation(EnderCore.DOMAIN, "bottle");
 
-    private @Nonnull ItemStack container;
+    private @NotNull ItemStack container;
 
-    private BottleFluidCapability(@Nonnull ItemStack container) {
+    private BottleFluidCapability(@NotNull ItemStack container) {
         this.container = container;
     }
 
@@ -55,8 +54,7 @@ public class BottleFluidCapability implements IFluidHandlerItem, ICapabilityProv
         return new IFluidTankProperties[] { new IFluidTankProperties() {
 
             @Override
-            @Nullable
-            public FluidStack getContents() {
+            public @Nullable FluidStack getContents() {
                 return isFull() ? new FluidStack(FluidRegistry.WATER, ConfigHandler.waterBottleAmount) : null;
             }
 
@@ -128,19 +126,18 @@ public class BottleFluidCapability implements IFluidHandlerItem, ICapabilityProv
     }
 
     @Override
-    @Nonnull
-    public ItemStack getContainer() {
+    public @NotNull ItemStack getContainer() {
         return container;
     }
 
     @Override
-    public boolean hasCapability(@Nonnull Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY && (isEmpty() || isFull());
     }
 
     @Override
     @Nullable
-    public <T> T getCapability(@Nonnull Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         return hasCapability(capability, facing) ? CapabilityFluidHandler.FLUID_HANDLER_ITEM_CAPABILITY.cast(this) :
                 null;
     }
@@ -164,7 +161,7 @@ public class BottleFluidCapability implements IFluidHandlerItem, ICapabilityProv
         }
 
         @SubscribeEvent
-        public void attachCapabilities(@Nonnull AttachCapabilitiesEvent<ItemStack> evt) {
+        public void attachCapabilities(@NotNull AttachCapabilitiesEvent<ItemStack> evt) {
             if (evt.getCapabilities().containsKey(KEY)) {
                 return;
             }

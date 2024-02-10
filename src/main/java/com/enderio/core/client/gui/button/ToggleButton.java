@@ -4,26 +4,25 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.api.client.render.IWidgetIcon;
 import com.enderio.core.client.gui.widget.GuiToolTip;
 import com.enderio.core.client.render.EnderWidget;
+import org.jetbrains.annotations.NotNull;
 
 public class ToggleButton extends IconButton {
 
     private boolean selected;
-    private final @Nonnull IWidgetIcon unselectedIcon;
-    private final @Nonnull IWidgetIcon selectedIcon;
+    private final @NotNull IWidgetIcon unselectedIcon;
+    private final @NotNull IWidgetIcon selectedIcon;
 
     private GuiToolTip selectedTooltip, unselectedTooltip;
     private boolean paintSelectionBorder;
 
-    public ToggleButton(@Nonnull IGuiScreen gui, int id, int x, int y, @Nonnull IWidgetIcon unselectedIcon,
-                        @Nonnull IWidgetIcon selectedIcon) {
+    public ToggleButton(@NotNull IGuiScreen gui, int id, int x, int y, @NotNull IWidgetIcon unselectedIcon,
+                        @NotNull IWidgetIcon selectedIcon) {
         super(gui, id, x, y, unselectedIcon);
         this.unselectedIcon = unselectedIcon;
         this.selectedIcon = selectedIcon;
@@ -47,7 +46,7 @@ public class ToggleButton extends IconButton {
     }
 
     @Override
-    protected @Nonnull IWidgetIcon getIconForHoverState(int hoverState) {
+    protected @NotNull IWidgetIcon getIconForHoverState(int hoverState) {
         if (!selected || !paintSelectionBorder) {
             return super.getIconForHoverState(hoverState);
         }
@@ -61,7 +60,7 @@ public class ToggleButton extends IconButton {
     }
 
     @Override
-    public boolean mousePressedButton(@Nonnull Minecraft mc, int mouseX, int mouseY, int button) {
+    public boolean mousePressedButton(@NotNull Minecraft mc, int mouseX, int mouseY, int button) {
         if (super.checkMousePress(mc, mouseX, mouseY)) {
             if (button == 0) {
                 toggleSelected();
@@ -81,8 +80,8 @@ public class ToggleButton extends IconButton {
         setSelected(selected);
     }
 
-    private @Nonnull List<String> makeCombinedTooltipList(String... tt) {
-        final @Nonnull List<String> list = new ArrayList<String>();
+    private @NotNull List<String> makeCombinedTooltipList(String... tt) {
+        final @NotNull List<String> list = new ArrayList<String>();
         if (toolTipText != null) {
             Collections.addAll(list, toolTipText);
         }

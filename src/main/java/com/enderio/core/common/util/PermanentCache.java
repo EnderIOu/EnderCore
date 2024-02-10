@@ -4,12 +4,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
+import org.jetbrains.annotations.NotNull;
 
 public class PermanentCache<I> extends WorldCache<I> {
 
@@ -25,7 +24,7 @@ public class PermanentCache<I> extends WorldCache<I> {
     }
 
     @Override
-    protected @Nonnull File getSaveFile() {
+    protected @NotNull File getSaveFile() {
         if (FMLCommonHandler.instance().getSide().isServer()) {
             return new File(ident + ".dat");
         }

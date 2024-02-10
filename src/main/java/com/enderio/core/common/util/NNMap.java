@@ -1,10 +1,10 @@
 package com.enderio.core.common.util;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public abstract class NNMap<K, V> extends HashMap<K, V> {
 
@@ -27,14 +27,14 @@ public abstract class NNMap<K, V> extends HashMap<K, V> {
     private static final long serialVersionUID = -2844252319683263440L;
 
     @Override
-    public abstract @Nonnull V get(Object key);
+    public abstract @NotNull V get(Object key);
 
     protected @Nullable V superGet(Object key) {
         return super.get(key);
     }
 
     @Override
-    public V put(K key, @SuppressWarnings("null") @Nonnull V value) {
+    public V put(K key, @SuppressWarnings("null") @NotNull V value) {
         return super.put(key, value);
     }
 
@@ -42,30 +42,30 @@ public abstract class NNMap<K, V> extends HashMap<K, V> {
 
         private static final long serialVersionUID = -4833754907686663472L;
 
-        private final @Nonnull V defaultValue;
+        private final @NotNull V defaultValue;
 
-        public Default(@Nonnull V defaultValue) {
+        public Default(@NotNull V defaultValue) {
             super();
             this.defaultValue = defaultValue;
         }
 
-        public Default(@Nonnull V defaultValue, int initialCapacity, float loadFactor) {
+        public Default(@NotNull V defaultValue, int initialCapacity, float loadFactor) {
             super(initialCapacity, loadFactor);
             this.defaultValue = defaultValue;
         }
 
-        public Default(@Nonnull V defaultValue, int initialCapacity) {
+        public Default(@NotNull V defaultValue, int initialCapacity) {
             super(initialCapacity);
             this.defaultValue = defaultValue;
         }
 
-        public Default(@Nonnull V defaultValue, Map<? extends K, ? extends V> m) {
+        public Default(@NotNull V defaultValue, Map<? extends K, ? extends V> m) {
             super(m);
             this.defaultValue = defaultValue;
         }
 
         @Override
-        public @Nonnull V get(Object key) {
+        public @NotNull V get(Object key) {
             final V v = super.superGet(key);
             return v != null ? v : defaultValue;
         }
@@ -92,7 +92,7 @@ public abstract class NNMap<K, V> extends HashMap<K, V> {
         }
 
         @Override
-        public @Nonnull V get(Object key) {
+        public @NotNull V get(Object key) {
             final V v = super.superGet(key);
             if (v == null) {
                 throw new NullPointerException();

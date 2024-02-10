@@ -1,7 +1,5 @@
 configurations {
     implementation {
-        // exclude GNU trove, FastUtil is superior and still updated
-        exclude group: "net.sf.trove4j", module: "trove4j"
         // exclude javax.annotation from findbugs, jetbrains annotations are superior
         exclude group: "com.google.code.findbugs", module: "jsr305"
         // exclude scala as we don't use it for anything and causes import confusion

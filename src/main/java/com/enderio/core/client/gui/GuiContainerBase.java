@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -21,6 +18,8 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.input.Mouse;
 
 import com.enderio.core.api.client.gui.IGuiOverlay;
@@ -37,16 +36,16 @@ import com.enderio.core.common.util.NNList;
 
 public abstract class GuiContainerBase extends GuiContainer implements ToolTipRenderer, IGuiScreen {
 
-    protected @Nonnull ToolTipManager ttMan = new ToolTipManager();
-    protected @Nonnull NNList<IGuiOverlay> overlays = new NNList<IGuiOverlay>();
-    protected @Nonnull NNList<TextFieldEnder> textFields = new NNList<TextFieldEnder>();
-    protected @Nonnull NNList<VScrollbar> scrollbars = new NNList<VScrollbar>();
-    protected @Nonnull NNList<IDrawingElement> drawingElements = new NNList<IDrawingElement>();
-    protected @Nonnull GhostSlotHandler ghostSlotHandler = new GhostSlotHandler();
+    protected @NotNull ToolTipManager ttMan = new ToolTipManager();
+    protected @NotNull NNList<IGuiOverlay> overlays = new NNList<IGuiOverlay>();
+    protected @NotNull NNList<TextFieldEnder> textFields = new NNList<TextFieldEnder>();
+    protected @NotNull NNList<VScrollbar> scrollbars = new NNList<VScrollbar>();
+    protected @NotNull NNList<IDrawingElement> drawingElements = new NNList<IDrawingElement>();
+    protected @NotNull GhostSlotHandler ghostSlotHandler = new GhostSlotHandler();
 
     protected @Nullable VScrollbar draggingScrollbar;
 
-    protected GuiContainerBase(@Nonnull Container par1Container) {
+    protected GuiContainerBase(@NotNull Container par1Container) {
         super(par1Container);
     }
 
@@ -125,13 +124,13 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
         super.keyTyped(c, key);
     }
 
-    protected final void setText(@Nonnull TextFieldEnder tf, @Nonnull String newText) {
+    protected final void setText(@NotNull TextFieldEnder tf, @NotNull String newText) {
         String old = tf.getText();
         tf.setText(newText);
         onTextFieldChanged(tf, old);
     }
 
-    protected void onTextFieldChanged(@Nonnull TextFieldEnder tf, @Nonnull String old) {}
+    protected void onTextFieldChanged(@NotNull TextFieldEnder tf, @NotNull String old) {}
 
     public boolean hideOverlays() {
         for (IGuiOverlay overlay : overlays) {
@@ -144,7 +143,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public void addToolTip(@Nonnull GuiToolTip toolTip) {
+    public void addToolTip(@NotNull GuiToolTip toolTip) {
         ttMan.addToolTip(toolTip);
     }
 
@@ -188,7 +187,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public @Nonnull GhostSlotHandler getGhostSlotHandler() {
+    public @NotNull GhostSlotHandler getGhostSlotHandler() {
         return ghostSlotHandler;
     }
 
@@ -299,31 +298,31 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
         }
     }
 
-    protected void actionPerformedButton(@Nonnull IconButton btn, int mouseButton) throws IOException {
+    protected void actionPerformedButton(@NotNull IconButton btn, int mouseButton) throws IOException {
         actionPerformed(btn);
     }
 
-    public void addOverlay(@Nonnull IGuiOverlay overlay) {
+    public void addOverlay(@NotNull IGuiOverlay overlay) {
         overlays.add(overlay);
     }
 
-    public void removeOverlay(@Nonnull IGuiOverlay overlay) {
+    public void removeOverlay(@NotNull IGuiOverlay overlay) {
         overlays.remove(overlay);
     }
 
-    public void addScrollbar(@Nonnull VScrollbar vs) {
+    public void addScrollbar(@NotNull VScrollbar vs) {
         scrollbars.add(vs);
         vs.adjustPosition();
     }
 
-    public void removeScrollbar(@Nonnull VScrollbar vs) {
+    public void removeScrollbar(@NotNull VScrollbar vs) {
         scrollbars.remove(vs);
         if (draggingScrollbar == vs) {
             draggingScrollbar = null;
         }
     }
 
-    public void addDrawingElement(@Nonnull IDrawingElement element) {
+    public void addDrawingElement(@NotNull IDrawingElement element) {
         drawingElements.add(element);
         GuiToolTip tooltip = element.getTooltip();
         if (tooltip != null) {
@@ -331,7 +330,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
         }
     }
 
-    public void removeDrawingElement(@Nonnull IDrawingElement element) {
+    public void removeDrawingElement(@NotNull IDrawingElement element) {
         drawingElements.remove(element);
         GuiToolTip tooltip = element.getTooltip();
         if (tooltip != null) {
@@ -412,7 +411,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     // copied from super with hate
-    protected void drawItemStack(@Nonnull ItemStack stack, int mouseX, int mouseY, String str) {
+    protected void drawItemStack(@NotNull ItemStack stack, int mouseX, int mouseY, String str) {
         if (stack.isEmpty()) {
             return;
         }
@@ -441,12 +440,12 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
         RenderHelper.enableGUIStandardItemLighting();
     }
 
-    public void drawFakeItemStack(int x, int y, @Nonnull ItemStack stack) {
+    public void drawFakeItemStack(int x, int y, @NotNull ItemStack stack) {
         itemRender.renderItemAndEffectIntoGUI(stack, x, y);
         GlStateManager.enableAlpha();
     }
 
-    public void drawFakeItemStackStdOverlay(int x, int y, @Nonnull ItemStack stack) {
+    public void drawFakeItemStackStdOverlay(int x, int y, @NotNull ItemStack stack) {
         itemRender.renderItemOverlayIntoGUI(fontRenderer, stack, x, y, null);
     }
 
@@ -467,17 +466,17 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public void renderToolTip(@Nonnull ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_) {
+    public void renderToolTip(@NotNull ItemStack p_146285_1_, int p_146285_2_, int p_146285_3_) {
         super.renderToolTip(p_146285_1_, p_146285_2_, p_146285_3_);
     }
 
     /**
      * Return the current texture to allow GhostSlots to gray out by over-painting the slot background.
      */
-    protected abstract @Nonnull ResourceLocation getGuiTexture();
+    protected abstract @NotNull ResourceLocation getGuiTexture();
 
     @Override
-    public boolean removeToolTip(@Nonnull GuiToolTip toolTip) {
+    public boolean removeToolTip(@NotNull GuiToolTip toolTip) {
         return ttMan.removeToolTip(toolTip);
     }
 
@@ -486,8 +485,8 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public void drawHoveringToolTipText(@Nonnull List<String> par1List, int par2, int par3,
-                                        @Nonnull FontRenderer font) {
+    public void drawHoveringToolTipText(@NotNull List<String> par1List, int par2, int par3,
+                                        @NotNull FontRenderer font) {
         super.drawHoveringText(par1List, par2, par3, font);
     }
 
@@ -532,12 +531,12 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public @Nonnull FontRenderer getFontRenderer() {
+    public @NotNull FontRenderer getFontRenderer() {
         return Minecraft.getMinecraft().fontRenderer;
     }
 
     @Override
-    public @Nonnull <T extends GuiButton> T addButton(@Nonnull T button) {
+    public @NotNull <T extends GuiButton> T addButton(@NotNull T button) {
         if (!buttonList.contains(button)) {
             buttonList.add(button);
         }
@@ -545,7 +544,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public void removeButton(@Nonnull GuiButton button) {
+    public void removeButton(@NotNull GuiButton button) {
         buttonList.remove(button);
     }
 
@@ -560,7 +559,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    public void doActionPerformed(@Nonnull GuiButton guiButton) throws IOException {
+    public void doActionPerformed(@NotNull GuiButton guiButton) throws IOException {
         actionPerformed(guiButton);
     }
 
@@ -596,8 +595,7 @@ public abstract class GuiContainerBase extends GuiContainer implements ToolTipRe
     }
 
     @Override
-    @Nonnull
-    public final <T extends GuiButton> T addGuiButton(@Nonnull T button) {
+    public final <T extends GuiButton> @NotNull T addGuiButton(@NotNull T button) {
         return addButton(button);
     }
 }

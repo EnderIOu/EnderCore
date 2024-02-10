@@ -7,8 +7,6 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
@@ -25,6 +23,7 @@ import com.enderio.core.common.handlers.RightClickCropHandler;
 import com.enderio.core.common.handlers.RightClickCropHandler.LegacyPlantInfo;
 import com.enderio.core.common.tweaks.Tweak;
 import com.enderio.core.common.tweaks.Tweaks;
+import org.jetbrains.annotations.NotNull;
 
 public class ConfigHandler extends AbstractConfigHandler implements ITweakConfigHandler, IReloadCallback {
 
@@ -140,8 +139,8 @@ public class ConfigHandler extends AbstractConfigHandler implements ITweakConfig
         processor = new ConfigProcessor(getClass(), this, this) {
 
             @Override
-            protected Object getConfigValue(@Nonnull String section, @Nonnull String[] commentLines, @Nonnull Field f,
-                                            @Nonnull Object defVal) {
+            protected Object getConfigValue(@NotNull String section, @NotNull String[] commentLines, @NotNull Field f,
+                                            @NotNull Object defVal) {
                 Object res = super.getConfigValue(section, commentLines, f, defVal);
                 if (f.getName() == "invisibleMode") {
                     if (res.equals(0)) {
@@ -171,7 +170,7 @@ public class ConfigHandler extends AbstractConfigHandler implements ITweakConfig
     }
 
     @Override
-    public void callback(@Nonnull ConfigProcessor inst) {
+    public void callback(@NotNull ConfigProcessor inst) {
         reloadAllConfigs();
     }
 

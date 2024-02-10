@@ -1,8 +1,8 @@
 package com.enderio.core.common.vecmath;
 
-import java.awt.Rectangle;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import java.awt.Rectangle;
 
 public class VecmathUtil {
 
@@ -25,7 +25,7 @@ public class VecmathUtil {
                 result);
     }
 
-    public static @Nonnull Vector3d clamp(Vector3d v, double min, double max) {
+    public static @NotNull Vector3d clamp(Vector3d v, double min, double max) {
         v.x = clamp(v.x, min, max);
         v.y = clamp(v.y, min, max);
         v.z = clamp(v.z, min, max);

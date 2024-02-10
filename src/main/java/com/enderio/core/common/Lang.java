@@ -2,29 +2,28 @@ package com.enderio.core.common;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.text.translation.I18n;
 
 import com.google.common.collect.Lists;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
 public class Lang {
 
-    private static final @Nonnull String REGEX = "\\" + '|';
+    private static final @NotNull String REGEX = "\\" + '|';
     public static final char CHAR = '|';
 
-    private final @Nonnull String prefix;
+    private final @NotNull String prefix;
 
-    public Lang(@Nonnull String locKey) {
+    public Lang(@NotNull String locKey) {
         this.prefix = locKey.concat(".");
     }
 
     /**
      * @return The prefix assigned to this Lang object.
      */
-    public @Nonnull String getPrefix() {
+    public @NotNull String getPrefix() {
         return this.prefix;
     }
 
@@ -37,7 +36,7 @@ public class Lang {
      *               The suffix string
      * @return The full string
      */
-    public @Nonnull String addPrefix(@Nonnull String suffix) {
+    public @NotNull String addPrefix(@NotNull String suffix) {
         return prefix.concat(suffix);
     }
 
@@ -51,7 +50,7 @@ public class Lang {
      *
      * @return A localized string.
      */
-    public @Nonnull String localize(@Nonnull String unloc, @Nonnull Object... args) {
+    public @NotNull String localize(@NotNull String unloc, @NotNull Object... args) {
         return localizeExact(addPrefix(unloc), args);
     }
 
@@ -63,7 +62,7 @@ public class Lang {
      *
      * @return A localized string.
      */
-    public @Nonnull String localize(@Nonnull String unloc) {
+    public @NotNull String localize(@NotNull String unloc) {
         return localizeExact(addPrefix(unloc));
     }
 
@@ -77,7 +76,7 @@ public class Lang {
      *
      * @return A localized string.
      */
-    public @Nonnull String localizeExact(@Nonnull String unloc, @Nonnull Object... args) {
+    public @NotNull String localizeExact(@NotNull String unloc, @NotNull Object... args) {
         return I18n.translateToLocalFormatted(unloc, args);
     }
 
@@ -89,7 +88,7 @@ public class Lang {
      *
      * @return A localized string.
      */
-    public @Nonnull String localizeExact(@Nonnull String unloc) {
+    public @NotNull String localizeExact(@NotNull String unloc) {
         return I18n.translateToLocal(unloc);
     }
 
@@ -102,7 +101,7 @@ public class Lang {
      *              The args to format the localized text with.
      * @return A localized list of strings.
      */
-    public @Nonnull String[] localizeList(@Nonnull String unloc, @Nonnull String... args) {
+    public @NotNull String[] localizeList(@NotNull String unloc, @NotNull String... args) {
         return splitList(localize(unloc, (Object[]) args));
     }
 
@@ -113,7 +112,7 @@ public class Lang {
      *              The unlocalized string.
      * @return A localized list of strings.
      */
-    public @Nonnull String[] localizeList(@Nonnull String unloc) {
+    public @NotNull String[] localizeList(@NotNull String unloc) {
         return splitList(localize(unloc));
     }
 
@@ -124,7 +123,7 @@ public class Lang {
      *              The unlocalized string.
      * @return A localized list of strings.
      */
-    public @Nonnull String[] localizeListExact(@Nonnull String unloc) {
+    public @NotNull String[] localizeListExact(@NotNull String unloc) {
         return splitList(localizeExact(unloc));
     }
 
@@ -135,7 +134,7 @@ public class Lang {
      *              The list of unlocalized strings.
      * @return A list of localized versions of the passed strings.
      */
-    public @Nonnull List<String> localizeAll(@Nonnull List<String> unloc) {
+    public @NotNull List<String> localizeAll(@NotNull List<String> unloc) {
         List<String> ret = Lists.newArrayList();
         for (String s : unloc) {
             final @Nullable String notnulliswear = s;
@@ -151,7 +150,7 @@ public class Lang {
      *              The array of unlocalized strings.
      * @return An array of localized versions of the passed strings.
      */
-    public @Nonnull String[] localizeAll(@Nonnull Lang lang, @Nonnull String... unloc) {
+    public @NotNull String[] localizeAll(@NotNull Lang lang, @NotNull String... unloc) {
         String[] ret = new String[unloc.length];
         for (int i = 0; i < ret.length; i++) {
             final @Nullable String notnulliswear = unloc[i];
@@ -167,7 +166,7 @@ public class Lang {
      *             The list of strings to split
      * @return An array of strings split on {@value #CHAR}
      */
-    public @Nonnull String[] splitList(@Nonnull String list) {
+    public @NotNull String[] splitList(@NotNull String list) {
         return list.split(REGEX);
     }
 
@@ -178,7 +177,7 @@ public class Lang {
      *              The unlocalized suffix
      * @return True if there is a localization mapped, false otherwise.
      */
-    public boolean canLocalize(@Nonnull String unloc) {
+    public boolean canLocalize(@NotNull String unloc) {
         return canLocalizeExact(addPrefix(unloc));
     }
 
@@ -189,7 +188,7 @@ public class Lang {
      *              The unlocalized string
      * @return True if there is a localization mapped, false otherwise.
      */
-    public boolean canLocalizeExact(@Nonnull String unloc) {
+    public boolean canLocalizeExact(@NotNull String unloc) {
         return I18n.canTranslate(unloc);
     }
 }

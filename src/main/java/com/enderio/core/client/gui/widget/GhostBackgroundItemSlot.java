@@ -3,9 +3,6 @@ package com.enderio.core.client.gui.widget;
 import java.util.Collections;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.Slot;
@@ -14,16 +11,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class GhostBackgroundItemSlot extends GhostSlot {
 
-    private @Nonnull ItemStack stack;
-    private @Nullable final NNList<ItemStack> stacks;
+    private @NotNull ItemStack stack;
+    private @Nullable
+    final NNList<ItemStack> stacks;
     private int idx = 999;
     private final @Nullable Slot parent;
     private long lastSwitch = 0;
 
-    private GhostBackgroundItemSlot(@Nonnull ItemStack stack, @Nullable List<ItemStack> stacks, @Nullable Slot parent,
+    private GhostBackgroundItemSlot(@NotNull ItemStack stack, @Nullable List<ItemStack> stacks, @Nullable Slot parent,
                                     int x, int y) {
         this.stack = stack;
         if (stack.isEmpty() && stacks != null && !stacks.isEmpty()) {
@@ -40,35 +40,35 @@ public class GhostBackgroundItemSlot extends GhostSlot {
         this.setdrawFakeHover(false);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull ItemStack stack, int x, int y) {
+    public GhostBackgroundItemSlot(@NotNull ItemStack stack, int x, int y) {
         this(stack, null, null, x, y);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull List<ItemStack> stacks, int x, int y) {
+    public GhostBackgroundItemSlot(@NotNull List<ItemStack> stacks, int x, int y) {
         this(ItemStack.EMPTY, stacks, null, x, y);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull ItemStack stack, @Nonnull Slot parent) {
+    public GhostBackgroundItemSlot(@NotNull ItemStack stack, @NotNull Slot parent) {
         this(stack, null, parent, parent.xPos, parent.yPos);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull List<ItemStack> stacks, @Nonnull Slot parent) {
+    public GhostBackgroundItemSlot(@NotNull List<ItemStack> stacks, @NotNull Slot parent) {
         this(ItemStack.EMPTY, stacks, parent, parent.xPos, parent.yPos);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull Item item, int x, int y) {
+    public GhostBackgroundItemSlot(@NotNull Item item, int x, int y) {
         this(new ItemStack(item), x, y);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull Block block, int x, int y) {
+    public GhostBackgroundItemSlot(@NotNull Block block, int x, int y) {
         this(new ItemStack(block), x, y);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull Item item, @Nonnull Slot parent) {
+    public GhostBackgroundItemSlot(@NotNull Item item, @NotNull Slot parent) {
         this(new ItemStack(item), parent);
     }
 
-    public GhostBackgroundItemSlot(@Nonnull Block block, @Nonnull Slot parent) {
+    public GhostBackgroundItemSlot(@NotNull Block block, @NotNull Slot parent) {
         this(new ItemStack(block), parent);
     }
 
@@ -78,7 +78,7 @@ public class GhostBackgroundItemSlot extends GhostSlot {
     }
 
     @Override
-    public @Nonnull ItemStack getStack() {
+    public @NotNull ItemStack getStack() {
         final NonNullList<ItemStack> stacks2 = stacks;
         if (stacks2 != null && Minecraft.getSystemTime() - lastSwitch > 1000L) {
             lastSwitch = Minecraft.getSystemTime();
@@ -92,7 +92,7 @@ public class GhostBackgroundItemSlot extends GhostSlot {
     }
 
     @Override
-    public void putStack(@Nonnull ItemStack stackIn, int realsize) {}
+    public void putStack(@NotNull ItemStack stackIn, int realsize) {}
 
     @Override
     public boolean isVisible() {

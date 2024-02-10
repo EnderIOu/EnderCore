@@ -1,10 +1,10 @@
 package com.enderio.core.common.interfaces;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
 
 public interface IOverlayRenderAware {
 
-    public void renderItemOverlayIntoGUI(@Nonnull ItemStack stack, int xPosition, int yPosition);
+    public void renderItemOverlayIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition);
 }

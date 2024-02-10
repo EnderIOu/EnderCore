@@ -11,8 +11,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.command.CommandHandler;
 import net.minecraft.crash.CrashReportCategory;
 import net.minecraftforge.client.ClientCommandHandler;
@@ -59,6 +57,7 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+import org.jetbrains.annotations.NotNull;
 
 @Mod(modid = EnderCore.MODID,
      name = EnderCore.NAME,
@@ -66,15 +65,15 @@ import com.google.common.collect.Sets;
      guiFactory = "com.enderio.core.common.config.BaseConfigFactory")
 public class EnderCore implements IEnderMod {
 
-    public static final @Nonnull String MODID = "endercore";
-    public static final @Nonnull String DOMAIN = MODID.toLowerCase(Locale.US);
-    public static final @Nonnull String NAME = "EnderCore";
-    public static final @Nonnull String BASE_PACKAGE = "com.enderio";
-    public static final @Nonnull String VERSION = "@VERSION@";
+    public static final @NotNull String MODID = "endercore";
+    public static final @NotNull String DOMAIN = MODID.toLowerCase(Locale.US);
+    public static final @NotNull String NAME = "EnderCore";
+    public static final @NotNull String BASE_PACKAGE = "com.enderio";
+    public static final @NotNull String VERSION = "@VERSION@";
 
-    public static final @Nonnull Logger logger = NullHelper.notnull(LogManager.getLogger(NAME),
+    public static final @NotNull Logger logger = NullHelper.notnull(LogManager.getLogger(NAME),
             "failed to aquire logger");
-    public static final @Nonnull Lang lang = new Lang(MODID);
+    public static final @NotNull Lang lang = new Lang(MODID);
 
     @Instance(MODID)
     public static EnderCore instance;
@@ -82,9 +81,9 @@ public class EnderCore implements IEnderMod {
     @SidedProxy(serverSide = "com.enderio.core.common.CommonProxy", clientSide = "com.enderio.core.client.ClientProxy")
     public static CommonProxy proxy;
 
-    public final @Nonnull List<IConfigHandler> configs = Lists.newArrayList();
+    public final @NotNull List<IConfigHandler> configs = Lists.newArrayList();
 
-    private final @Nonnull Set<String> invisibleRequesters = Sets.newHashSet();
+    private final @NotNull Set<String> invisibleRequesters = Sets.newHashSet();
 
     public EnderCore() {
         SimpleMixinLoader.loadMixinSources(this);
@@ -108,12 +107,12 @@ public class EnderCore implements IEnderMod {
         return !invisibleRequesters.isEmpty();
     }
 
-    public @Nonnull Set<String> getInvisibleRequsters() {
+    public @NotNull Set<String> getInvisibleRequsters() {
         return ImmutableSet.copyOf(invisibleRequesters);
     }
 
     @EventHandler
-    public void preInit(@Nonnull FMLPreInitializationEvent event) {
+    public void preInit(@NotNull FMLPreInitializationEvent event) {
         ConfigHandler.configFolder = event.getModConfigurationDirectory();
         ConfigHandler.enderConfigFolder = new File(ConfigHandler.configFolder.getPath() + "/" + MODID);
         ConfigHandler.configFile = new File(
@@ -138,7 +137,7 @@ public class EnderCore implements IEnderMod {
     }
 
     @EventHandler
-    public void init(@Nonnull FMLInitializationEvent event) {
+    public void init(@NotNull FMLInitializationEvent event) {
         OreDict.registerVanilla();
         Things.init(event);
         EnderPacketHandler.init();
@@ -160,7 +159,7 @@ public class EnderCore implements IEnderMod {
     }
 
     @EventHandler
-    public void postInit(@Nonnull FMLPostInitializationEvent event) {
+    public void postInit(@NotNull FMLPostInitializationEvent event) {
         Tweaks.loadLateTweaks();
         for (IConfigHandler c : configs) {
             c.postInitHook();
@@ -171,7 +170,7 @@ public class EnderCore implements IEnderMod {
     }
 
     @EventHandler
-    public void loadComplete(@Nonnull FMLLoadCompleteEvent event) {
+    public void loadComplete(@NotNull FMLLoadCompleteEvent event) {
         Things.init(event);
 
         ThreadPoolExecutor fixedChunkExecutor = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
@@ -216,28 +215,28 @@ public class EnderCore implements IEnderMod {
     }
 
     @EventHandler
-    public void onServerStarting(@Nonnull FMLServerStartingEvent event) {
+    public void onServerStarting(@NotNull FMLServerStartingEvent event) {
         event.registerServerCommand(new CommandScoreboardInfo());
         PermanentCache.saveCaches();
     }
 
     @EventHandler
-    public void onIMCEvent(@Nonnull IMCEvent event) {
+    public void onIMCEvent(@NotNull IMCEvent event) {
         IMCRegistry.INSTANCE.handleEvent(event);
     }
 
     @Override
-    public @Nonnull String modid() {
+    public @NotNull String modid() {
         return MODID;
     }
 
     @Override
-    public @Nonnull String name() {
+    public @NotNull String name() {
         return NAME;
     }
 
     @Override
-    public @Nonnull String version() {
+    public @NotNull String version() {
         return VERSION;
     }
 }

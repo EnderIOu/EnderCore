@@ -1,7 +1,5 @@
 package com.enderio.core.common.handlers;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,26 +21,23 @@ public class AutoSmeltHandler {
 
     @SubscribeEvent
     public void handleBlockBreak(BlockEvent.HarvestDropsEvent event) {
-        final @Nonnull World world = NullHelper.notnullF(event.getWorld(), "BlockEvent.HarvestDropsEvent.getWorld()");
+        final World world = NullHelper.notnullF(event.getWorld(), "BlockEvent.HarvestDropsEvent.getWorld()");
         final EntityPlayer harvester = event.getHarvester();
         final EnchantAutoSmelt enchantment = EnchantAutoSmelt.instance();
         if (!world.isRemote && harvester != null && !event.isSilkTouching() && enchantment != null) {
 
-            @Nonnull
             ItemStack held = harvester.getHeldItemMainhand();
             if (!held.isEmpty()) {
                 int level = EnchantmentHelper.getEnchantmentLevel(enchantment, held);
 
                 if (level > 0) {
                     for (int i = 0; i < event.getDrops().size(); i++) {
-                        @Nonnull
                         ItemStack stack = NullHelper.notnullF(event.getDrops().get(i),
                                 "BlockEvent.HarvestDropsEvent.getDrops()");
                         if (!stack.isEmpty()) {
-                            final @Nonnull ItemStack smeltingResult = FurnaceRecipes.instance()
+                            final ItemStack smeltingResult = FurnaceRecipes.instance()
                                     .getSmeltingResult(stack);
                             if (!smeltingResult.isEmpty()) {
-                                @Nonnull
                                 ItemStack furnaceStack = smeltingResult.copy();
 
                                 event.getDrops().set(i, furnaceStack);

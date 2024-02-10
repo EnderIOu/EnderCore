@@ -1,21 +1,21 @@
 package com.enderio.core.client.gui.widget;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
 
     private static final long DELAY = 0;
 
-    protected @Nonnull Rectangle bounds;
+    protected @NotNull Rectangle bounds;
 
     private long mouseOverStart;
 
-    protected final @Nonnull List<String> text;
+    protected final @NotNull List<String> text;
 
     private int lastMouseX = -1;
 
@@ -23,7 +23,7 @@ public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
 
     private boolean visible = true;
 
-    public GuiToolTip(@Nonnull Rectangle bounds, String... lines) {
+    public GuiToolTip(@NotNull Rectangle bounds, String... lines) {
         this.bounds = bounds;
         if (lines != null) {
             text = new ArrayList<String>(lines.length);
@@ -35,7 +35,7 @@ public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
         }
     }
 
-    public GuiToolTip(@Nonnull Rectangle bounds, @Nullable List<String> lines) {
+    public GuiToolTip(@NotNull Rectangle bounds, @Nullable List<String> lines) {
         this.bounds = bounds;
         if (lines == null) {
             text = new ArrayList<String>();
@@ -54,11 +54,11 @@ public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
         this.visible = visible;
     }
 
-    public @Nonnull Rectangle getBounds() {
+    public @NotNull Rectangle getBounds() {
         return bounds;
     }
 
-    public void setBounds(@Nonnull Rectangle bounds) {
+    public void setBounds(@NotNull Rectangle bounds) {
         this.bounds = bounds;
     }
 
@@ -118,7 +118,7 @@ public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
         }
     }
 
-    public @Nonnull List<String> getToolTipText() {
+    public @NotNull List<String> getToolTipText() {
         return text;
     }
 }

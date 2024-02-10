@@ -7,9 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -27,11 +24,13 @@ import net.minecraftforge.items.SlotItemHandler;
 import com.enderio.core.client.gui.widget.GhostSlot;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Maps;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEntity> extends Container
                                        implements GhostSlot.IGhostSlotAware {
 
-    protected final @Nonnull Map<Slot, Point> slotLocations = Maps.newLinkedHashMap();
+    protected final @NotNull Map<Slot, Point> slotLocations = Maps.newLinkedHashMap();
 
     public Map<Slot, Point> getSlotLocations() {
         return slotLocations;
@@ -42,21 +41,20 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
     protected int startHotBarSlot;
     protected int endHotBarSlot;
 
-    private final @Nonnull T inv;
-    private final @Nonnull InventoryPlayer playerInv;
+    private final @NotNull T inv;
+    private final @NotNull InventoryPlayer playerInv;
     private final @Nullable S te;
 
     private boolean initRan = false;
 
-    @Nonnull
-    private static <T> T checkNotNull(T reference) {
+    private static @NotNull <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }
         return reference;
     }
 
-    public ContainerEnderCap(@Nonnull InventoryPlayer playerInv, @Nonnull T itemHandler, @Nullable S te) {
+    public ContainerEnderCap(@NotNull InventoryPlayer playerInv, @NotNull T itemHandler, @Nullable S te) {
         inv = checkNotNull(itemHandler);
         this.playerInv = checkNotNull(playerInv);
         this.te = te;
@@ -64,7 +62,7 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
         init(); // TODO: Drop this line and add the init() call whenever a Container is constructed
     }
 
-    public ContainerEnderCap(@Nonnull InventoryPlayer playerInv, @Nonnull T itemHandler, @Nullable S te,
+    public ContainerEnderCap(@NotNull InventoryPlayer playerInv, @NotNull T itemHandler, @Nullable S te,
                              boolean unused) {
         inv = checkNotNull(itemHandler);
         this.playerInv = checkNotNull(playerInv);
@@ -73,8 +71,7 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
 
     // use this if you need to chain it to the new call and care about the exact class
     @SuppressWarnings("unchecked")
-    @Nonnull
-    public final <X> X init() {
+    public final @NotNull <X> X init() {
         if (initRan) {
             throw new RuntimeException("Ender IO Internal Error 10T (report this to the Ender IO devs)");
         }
@@ -105,21 +102,21 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
     }
 
     @Override
-    protected @Nonnull Slot addSlotToContainer(@Nonnull Slot slotIn) {
+    protected @NotNull Slot addSlotToContainer(@NotNull Slot slotIn) {
         slotLocations.put(slotIn, new Point(slotIn.xPos, slotIn.yPos));
         return super.addSlotToContainer(slotIn);
     }
 
     @SuppressWarnings("null")
-    public @Nonnull List<net.minecraft.inventory.Slot> getPlayerSlots() {
+    public @NotNull List<net.minecraft.inventory.Slot> getPlayerSlots() {
         return inventorySlots.stream().filter(x -> x.inventory == playerInv).collect(Collectors.toList());
     }
 
-    public @Nonnull Point getPlayerInventoryOffset() {
+    public @NotNull Point getPlayerInventoryOffset() {
         return new Point(0, 54);
     }
 
-    public @Nonnull T getItemHandler() {
+    public @NotNull T getItemHandler() {
         return inv;
     }
 
@@ -127,12 +124,12 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
         return te;
     }
 
-    public @Nonnull S getTileEntityNN() {
+    public @NotNull S getTileEntityNN() {
         return NullHelper.notnull(te, "Internal logic error, TE-less GUI accessing TE");
     }
 
     @Override
-    public boolean canInteractWith(@Nonnull EntityPlayer player) {
+    public boolean canInteractWith(@NotNull EntityPlayer player) {
         if (!initRan) {
             throw new RuntimeException("Ender IO Internal Error 10T (report this to the Ender IO devs)");
         }
@@ -154,14 +151,14 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
     protected abstract void addSlots();
 
     @Override
-    public void setGhostSlotContents(int slot, @Nonnull ItemStack stack, int realsize) {
+    public void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {
         if (te instanceof TileEntityBase) {
             ((TileEntityBase) te).setGhostSlotContents(slot, stack, realsize);
         }
     }
 
     @Override
-    public @Nonnull ItemStack transferStackInSlot(@Nonnull EntityPlayer player, int fromSlotId) {
+    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer player, int fromSlotId) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = inventorySlots.get(fromSlotId);
 
@@ -199,7 +196,7 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
      *                   The slot that was clicked
      * @return slots the item can go in order of preference
      */
-    protected @Nonnull Collection<Slot> mapSlotToTargets(int fromSlotId) {
+    protected @NotNull Collection<Slot> mapSlotToTargets(int fromSlotId) {
         List<Slot> result = new ArrayList<>();
         if (fromSlotId < startPlayerSlot) {
             for (int i = startPlayerSlot; i < inventorySlots.size(); i++) {
@@ -218,7 +215,7 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
      */
     @Override
     @Deprecated
-    protected final boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int fromIndex, int toIndex,
+    protected final boolean mergeItemStack(@NotNull ItemStack par1ItemStack, int fromIndex, int toIndex,
                                            boolean reversOrder) {
         return false;
     }
@@ -292,7 +289,7 @@ public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEn
 
     public static abstract class BaseSlotItemHandler extends SlotItemHandler {
 
-        public BaseSlotItemHandler(@Nonnull IItemHandler itemHandler, int index, int xPosition, int yPosition) {
+        public BaseSlotItemHandler(@NotNull IItemHandler itemHandler, int index, int xPosition, int yPosition) {
             super(itemHandler, index, xPosition, yPosition);
         }
 

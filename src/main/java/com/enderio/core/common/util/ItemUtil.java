@@ -1,7 +1,5 @@
 package com.enderio.core.common.util;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -12,11 +10,12 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.vecmath.Vector3f;
+import org.jetbrains.annotations.NotNull;
 
 public class ItemUtil {
 
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull World world, @Nonnull ItemStack item,
-                                                        @Nonnull BlockPos pos) {
+    public static void spawnItemInWorldWithRandomMotion(@NotNull World world, @NotNull ItemStack item,
+                                                        @NotNull BlockPos pos) {
         spawnItemInWorldWithRandomMotion(world, item, pos.getX(), pos.getY(), pos.getZ());
     }
 
@@ -34,7 +33,7 @@ public class ItemUtil {
      * @param z
      *              Z coordinate of the block in which to spawn the entity.
      */
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull World world, @Nonnull ItemStack item, int x, int y,
+    public static void spawnItemInWorldWithRandomMotion(@NotNull World world, @NotNull ItemStack item, int x, int y,
                                                         int z) {
         if (!item.isEmpty()) {
             spawnItemInWorldWithRandomMotion(new EntityItem(world, x + 0.5, y + 0.5, z + 0.5, item));
@@ -59,8 +58,8 @@ public class ItemUtil {
      * @param scale
      *              The factor with which to push the spawn location out.
      */
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull World world, @Nonnull ItemStack item,
-                                                        @Nonnull BlockPos pos, float hitX, float hitY, float hitZ,
+    public static void spawnItemInWorldWithRandomMotion(@NotNull World world, @NotNull ItemStack item,
+                                                        @NotNull BlockPos pos, float hitX, float hitY, float hitZ,
                                                         float scale) {
         Vector3f v = new Vector3f((hitX - .5f), (hitY - .5f), (hitZ - .5f));
         v.normalize();
@@ -77,7 +76,7 @@ public class ItemUtil {
      * @param entity
      *               The entity to spawn.
      */
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull EntityItem entity) {
+    public static void spawnItemInWorldWithRandomMotion(@NotNull EntityItem entity) {
         entity.setDefaultPickupDelay();
         entity.world.spawnEntity(entity);
     }
@@ -91,7 +90,7 @@ public class ItemUtil {
      *                The oredict name.
      * @return True if the ItemStack matches the name passed.
      */
-    public static boolean itemStackMatchesOredict(@Nonnull ItemStack stack, String oredict) {
+    public static boolean itemStackMatchesOredict(@NotNull ItemStack stack, String oredict) {
         int[] ids = OreDictionary.getOreIDs(stack);
         for (int i : ids) {
             String name = OreDictionary.getOreName(i);
@@ -102,7 +101,7 @@ public class ItemUtil {
         return false;
     }
 
-    public static String getDurabilityString(@Nonnull ItemStack item) {
+    public static String getDurabilityString(@NotNull ItemStack item) {
         if (item.isEmpty()) {
             return null;
         }
@@ -125,7 +124,7 @@ public class ItemUtil {
         return stack.getTagCompound();
     }
 
-    public static boolean isStackFull(@Nonnull ItemStack contents) {
+    public static boolean isStackFull(@NotNull ItemStack contents) {
         return contents.getCount() >= contents.getMaxStackSize();
     }
 
@@ -136,7 +135,7 @@ public class ItemUtil {
      * @param s2
      * @return True if the two stacks are mergeable, false otherwise.
      */
-    public static boolean areStackMergable(@Nonnull ItemStack s1, @Nonnull ItemStack s2) {
+    public static boolean areStackMergable(@NotNull ItemStack s1, @NotNull ItemStack s2) {
         if (s1.isEmpty() || s2.isEmpty() || !s1.isStackable() || !s2.isStackable()) {
             return false;
         }
@@ -153,7 +152,7 @@ public class ItemUtil {
      * @param s2
      * @return True if the two stacks are equal, false otherwise.
      */
-    public static boolean areStacksEqual(@Nonnull ItemStack s1, @Nonnull ItemStack s2) {
+    public static boolean areStacksEqual(@NotNull ItemStack s1, @NotNull ItemStack s2) {
         if (s1.isEmpty() || s2.isEmpty()) {
             return false;
         }
@@ -170,7 +169,7 @@ public class ItemUtil {
      * @param s2
      * @return True if the two stacks are equal, false otherwise.
      */
-    public static boolean areStacksEqualIgnoringDamage(@Nonnull ItemStack s1, @Nonnull ItemStack s2) {
+    public static boolean areStacksEqualIgnoringDamage(@NotNull ItemStack s1, @NotNull ItemStack s2) {
         if (s1.isEmpty() || s2.isEmpty()) {
             return false;
         }
@@ -191,7 +190,7 @@ public class ItemUtil {
      *                  The item to pick up
      * @return The remaining stack. Empty when all was picked up.
      */
-    public static @Nonnull ItemStack fakeItemPickup(@Nonnull EntityPlayer player, @Nonnull ItemStack itemstack) {
+    public static @NotNull ItemStack fakeItemPickup(@NotNull EntityPlayer player, @NotNull ItemStack itemstack) {
         if (!player.world.isRemote) {
             EntityItem entityItem = new EntityItem(player.world, player.posX, player.posY, player.posZ, itemstack);
             entityItem.onCollideWithPlayer(player);

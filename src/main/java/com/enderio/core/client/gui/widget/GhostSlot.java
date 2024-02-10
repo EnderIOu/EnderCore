@@ -1,14 +1,13 @@
 package com.enderio.core.client.gui.widget;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 
 import com.enderio.core.client.gui.GuiContainerBase;
 import com.enderio.core.common.TileEntityBase;
 import com.enderio.core.common.network.EnderPacketHandler;
 import com.enderio.core.common.network.PacketGhostSlot;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class GhostSlot {
 
@@ -25,7 +24,7 @@ public abstract class GhostSlot {
          * @param realsize
          *                 The real size of the stack if the stack has a size that cannot be stored in an itemstack.
          */
-        void setGhostSlotContents(int slot, @Nonnull ItemStack stack, int realsize);
+        void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize);
     }
 
     @Nullable
@@ -47,9 +46,9 @@ public abstract class GhostSlot {
         return mx >= getX() && mx < (getX() + 16) && my >= getY() && my < (getY() + 16);
     }
 
-    public abstract @Nonnull ItemStack getStack();
+    public abstract @NotNull ItemStack getStack();
 
-    public void putStack(@Nonnull ItemStack stack, int realsize) {
+    public void putStack(@NotNull ItemStack stack, int realsize) {
         if (shouldUpdateServer()) {
             EnderPacketHandler.sendToServer(PacketGhostSlot.setGhostSlotContents(getSlot(), stack, realsize));
         }
@@ -163,7 +162,7 @@ public abstract class GhostSlot {
         this.y = y;
     }
 
-    public boolean drawGhostSlotToolTip(@Nonnull GuiContainerBase gui, int mouseX, int mouseY) {
+    public boolean drawGhostSlotToolTip(@NotNull GuiContainerBase gui, int mouseX, int mouseY) {
         if (drawStdTooltip && gui.mc.player.inventory.getItemStack().isEmpty()) {
             ItemStack stack = getStack();
             if (!stack.isEmpty()) {

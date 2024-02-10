@@ -1,10 +1,9 @@
 package com.enderio.core.client.gui.button;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.api.client.gui.IGuiScreen;
@@ -21,7 +20,7 @@ public class IconButton extends TooltipButton implements IButtonAwareButton {
     private int marginY = 0;
     private int marginX = 0;
 
-    public IconButton(@Nonnull IGuiScreen gui, int id, int x, int y, @Nullable IWidgetIcon icon) {
+    public IconButton(@NotNull IGuiScreen gui, int id, int x, int y, @Nullable IWidgetIcon icon) {
         super(gui, id, x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, "");
         this.icon = icon;
     }
@@ -51,17 +50,17 @@ public class IconButton extends TooltipButton implements IButtonAwareButton {
      */
     @Deprecated
     @Override
-    public boolean mousePressed(@Nonnull Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(@NotNull Minecraft mc, int mouseX, int mouseY) {
         return mousePressedButton(mc, mouseX, mouseY, 0);
     }
 
     @Override
-    public boolean mousePressedButton(@Nonnull Minecraft mc, int mouseX, int mouseY, int button) {
+    public boolean mousePressedButton(@NotNull Minecraft mc, int mouseX, int mouseY, int button) {
         return button == 0 && checkMousePress(mc, mouseX, mouseY);
     }
 
     @Override
-    public boolean checkMousePress(@Nonnull Minecraft mc, int mouseX, int mouseY) {
+    public boolean checkMousePress(@NotNull Minecraft mc, int mouseX, int mouseY) {
         // call super here so that we only get the area check
         return super.mousePressed(mc, mouseX, mouseY);
     }
@@ -70,7 +69,7 @@ public class IconButton extends TooltipButton implements IButtonAwareButton {
      * Draws this button to the screen.
      */
     @Override
-    public void drawButton(@Nonnull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
+    public void drawButton(@NotNull Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         updateTooltip(mc, mouseX, mouseY);
         if (isVisible()) {
 
@@ -98,7 +97,7 @@ public class IconButton extends TooltipButton implements IButtonAwareButton {
         }
     }
 
-    protected @Nonnull IWidgetIcon getIconForHoverState(int hoverState) {
+    protected @NotNull IWidgetIcon getIconForHoverState(int hoverState) {
         if (hoverState == 0) {
             return EnderWidget.BUTTON_DISABLED;
         }

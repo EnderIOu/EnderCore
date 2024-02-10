@@ -1,13 +1,12 @@
 package com.enderio.core.client.gui;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.client.render.IconUtil;
@@ -25,22 +24,22 @@ public class GuiIconRenderer extends Gui {
     protected int width = DEFAULT_WIDTH;
     protected int height = DEFAULT_HEIGHT;
 
-    protected @Nonnull TextureAtlasSprite icon;
-    protected @Nonnull ResourceLocation texture;
+    protected @NotNull TextureAtlasSprite icon;
+    protected @NotNull ResourceLocation texture;
 
     private int yPosition;
     private int xPosition;
 
     private float alpha = 1.0f;
 
-    public GuiIconRenderer(int x, int y, @Nonnull Item item, int itemMeta) {
+    public GuiIconRenderer(int x, int y, @NotNull Item item, int itemMeta) {
         xPosition = x;
         yPosition = y;
         icon = IconUtil.getIconForItem(item, itemMeta);
         texture = RenderUtil.BLOCK_TEX;
     }
 
-    public GuiIconRenderer(int x, int y, @Nonnull TextureAtlasSprite icon, @Nonnull ResourceLocation texture) {
+    public GuiIconRenderer(int x, int y, @NotNull TextureAtlasSprite icon, @NotNull ResourceLocation texture) {
         xPosition = x;
         yPosition = y;
         this.icon = icon;
@@ -62,7 +61,7 @@ public class GuiIconRenderer extends Gui {
         return height;
     }
 
-    public @Nonnull TextureAtlasSprite getIcon() {
+    public @NotNull TextureAtlasSprite getIcon() {
         return icon;
     }
 
@@ -74,15 +73,15 @@ public class GuiIconRenderer extends Gui {
         this.alpha = alpha;
     }
 
-    public void setIcon(@Nonnull TextureAtlasSprite icon) {
+    public void setIcon(@NotNull TextureAtlasSprite icon) {
         this.icon = icon;
     }
 
-    public @Nonnull ResourceLocation getTexture() {
+    public @NotNull ResourceLocation getTexture() {
         return texture;
     }
 
-    public void setTexture(@Nonnull ResourceLocation textureName) {
+    public void setTexture(@NotNull ResourceLocation textureName) {
         this.texture = textureName;
     }
 

@@ -3,9 +3,9 @@ package com.enderio.core.common.util;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.annotation.Nullable;
-
 import net.minecraftforge.common.UsernameCache;
+
+import org.jetbrains.annotations.Nullable;
 
 public class PlayerUtil {
 

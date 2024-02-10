@@ -1,11 +1,10 @@
 package com.enderio.core.common.util;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
 
 public final class OreDictionaryHelper {
 
@@ -39,7 +38,7 @@ public final class OreDictionaryHelper {
         return isRegistered(INGOT_ENDERIUM);
     }
 
-    public static String[] getOreNames(@Nonnull ItemStack stack) {
+    public static String[] getOreNames(@NotNull ItemStack stack) {
         int[] ids = OreDictionary.getOreIDs(stack);
         String[] ret = new String[ids.length];
         for (int i = 0; i < ids.length; i++) {
@@ -48,7 +47,7 @@ public final class OreDictionaryHelper {
         return ret;
     }
 
-    public static boolean hasName(@Nonnull ItemStack stack, String oreName) {
+    public static boolean hasName(@NotNull ItemStack stack, String oreName) {
         return ArrayUtils.contains(getOreNames(stack), oreName);
     }
 }

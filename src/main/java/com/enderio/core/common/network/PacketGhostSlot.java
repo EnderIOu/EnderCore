@@ -1,7 +1,5 @@
 package com.enderio.core.common.network;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -13,18 +11,19 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import com.enderio.core.client.gui.widget.GhostSlot;
 
 import io.netty.buffer.ByteBuf;
+import org.jetbrains.annotations.NotNull;
 
 public class PacketGhostSlot implements IMessage {
 
     int windowId;
     int slot;
-    @Nonnull
+    @NotNull
     ItemStack stack = ItemStack.EMPTY;
     int realsize;
 
     public PacketGhostSlot() {}
 
-    public static PacketGhostSlot setGhostSlotContents(int slot, @Nonnull ItemStack stack, int realsize) {
+    public static PacketGhostSlot setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {
         PacketGhostSlot msg = new PacketGhostSlot();
         msg.slot = slot;
         msg.stack = stack;

@@ -1,7 +1,5 @@
 package com.enderio.core.common;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -22,6 +20,7 @@ import com.enderio.core.common.config.ConfigHandler;
 import com.enderio.core.common.network.EnderPacketHandler;
 import com.enderio.core.common.network.PacketProgress;
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class TileEntityBase extends TileEntity implements ITickable {
 
@@ -51,7 +50,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
         }
     }
 
-    public static int getProgressScaled(int scale, @Nonnull IProgressTile tile) {
+    public static int getProgressScaled(int scale, @NotNull IProgressTile tile) {
         return (int) (tile.getProgress() * scale);
     }
 
@@ -78,7 +77,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
 
     protected void doUpdate() {}
 
-    public @Nonnull IMessage getProgressPacket() {
+    public @NotNull IMessage getProgressPacket() {
         return new PacketProgress((IProgressTile) this);
     }
 
@@ -86,7 +85,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * SERVER: Called when being written to the save file.
      */
     @Override
-    public final @Nonnull NBTTagCompound writeToNBT(@Nonnull NBTTagCompound root) {
+    public final @NotNull NBTTagCompound writeToNBT(@NotNull NBTTagCompound root) {
         super.writeToNBT(root);
         writeCustomNBT(NBTAction.SAVE, root);
         return root;
@@ -96,7 +95,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * SERVER: Called when being read from the save file.
      */
     @Override
-    public final void readFromNBT(@Nonnull NBTTagCompound tag) {
+    public final void readFromNBT(@NotNull NBTTagCompound tag) {
         super.readFromNBT(tag);
         readCustomNBT(NBTAction.SAVE, tag);
     }
@@ -105,7 +104,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * Called when the chunk data is sent (client receiving chunks from server). Must have x/y/z tags.
      */
     @Override
-    public final @Nonnull NBTTagCompound getUpdateTag() {
+    public final @NotNull NBTTagCompound getUpdateTag() {
         NBTTagCompound tag = super.getUpdateTag();
         writeCustomNBT(NBTAction.CLIENT, tag);
         if (isProgressTile) {
@@ -119,7 +118,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * CLIENT: Called when chunk data is received (client receiving chunks from server).
      */
     @Override
-    public final void handleUpdateTag(@Nonnull NBTTagCompound tag) {
+    public final void handleUpdateTag(@NotNull NBTTagCompound tag) {
         super.handleUpdateTag(tag);
         readCustomNBT(NBTAction.CLIENT, tag);
         if (isProgressTile) {
@@ -147,7 +146,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * CLIENT: Called when block data is received (client receiving blocks from server, via notifyBlockUpdate).
      */
     @Override
-    public final void onDataPacket(@Nonnull NetworkManager net, @Nonnull SPacketUpdateTileEntity pkt) {
+    public final void onDataPacket(@NotNull NetworkManager net, @NotNull SPacketUpdateTileEntity pkt) {
         readCustomNBT(NBTAction.CLIENT, pkt.getNbtCompound());
         if (isProgressTile) {
             // TODO: nicer way to do this? This is needed so players who enter a chunk get a correct progress.
@@ -155,7 +154,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
         }
     }
 
-    protected void writeCustomNBT(@Nonnull ItemStack stack) {
+    protected void writeCustomNBT(@NotNull ItemStack stack) {
         final NBTTagCompound tag = new NBTTagCompound();
         writeCustomNBT(NBTAction.ITEM, tag);
         if (!tag.isEmpty()) {
@@ -164,16 +163,16 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
     }
 
     @Deprecated
-    protected abstract void writeCustomNBT(@Nonnull NBTAction action, @Nonnull NBTTagCompound root);
+    protected abstract void writeCustomNBT(@NotNull NBTAction action, @NotNull NBTTagCompound root);
 
-    protected void readCustomNBT(@Nonnull ItemStack stack) {
+    protected void readCustomNBT(@NotNull ItemStack stack) {
         if (stack.hasTagCompound()) {
             readCustomNBT(NBTAction.ITEM, NullHelper.notnullM(stack.getTagCompound(), "tag compound vanished"));
         }
     }
 
     @Deprecated
-    protected abstract void readCustomNBT(@Nonnull NBTAction action, @Nonnull NBTTagCompound root);
+    protected abstract void readCustomNBT(@NotNull NBTAction action, @NotNull NBTTagCompound root);
 
     public boolean canPlayerAccess(EntityPlayer player) {
         return hasWorld() && !isInvalid() && player.getDistanceSqToCenter(getPos()) <= 64D;
@@ -220,8 +219,8 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
     }
 
     @Override
-    public boolean shouldRefresh(@Nonnull World worldIn, @Nonnull BlockPos posIn, @Nonnull IBlockState oldState,
-                                 @Nonnull IBlockState newState) {
+    public boolean shouldRefresh(@NotNull World worldIn, @NotNull BlockPos posIn, @NotNull IBlockState oldState,
+                                 @NotNull IBlockState newState) {
         return oldState.getBlock() != newState.getBlock();
     }
 
@@ -235,7 +234,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      *                 The stack that should be placed, null to clear
      * @param realsize
      */
-    public void setGhostSlotContents(int slot, @Nonnull ItemStack stack, int realsize) {}
+    public void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {}
 
     @Override
     public void markDirty() {
@@ -286,7 +285,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
     }
 
     @Override
-    protected void setWorldCreate(@Nonnull World worldIn) {
+    protected void setWorldCreate(@NotNull World worldIn) {
         // Forge gives us our World earlier than vanilla. No idea why it doesn't get put into #world but is ignored by
         // default.
         // Anyway, this is helpful while reading our nbt, so let's use it.

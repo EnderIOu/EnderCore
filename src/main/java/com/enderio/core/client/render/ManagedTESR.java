@@ -1,14 +1,13 @@
 package com.enderio.core.client.render;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraftforge.client.MinecraftForgeClient;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.common.TileEntityBase;
@@ -24,7 +23,7 @@ public abstract class ManagedTESR<T extends TileEntityBase> extends TileEntitySp
 
     @SuppressWarnings({ "null", "unused" })
     @Override
-    public final void render(@Nonnull T te, double x, double y, double z, float partialTicks, int destroyStage,
+    public final void render(@NotNull T te, double x, double y, double z, float partialTicks, int destroyStage,
                              float alpha) {
         if (te != null && te.hasWorld() && !te.isInvalid()) {
             final IBlockState blockState = te.getWorld().getBlockState(te.getPos());
@@ -51,10 +50,10 @@ public abstract class ManagedTESR<T extends TileEntityBase> extends TileEntitySp
         }
     }
 
-    protected abstract void renderTileEntity(@Nonnull T te, @Nonnull IBlockState blockState, float partialTicks,
+    protected abstract void renderTileEntity(@NotNull T te, @NotNull IBlockState blockState, float partialTicks,
                                              int destroyStage);
 
-    protected boolean shouldRender(@Nonnull T te, @Nonnull IBlockState blockState, int renderPass) {
+    protected boolean shouldRender(@NotNull T te, @NotNull IBlockState blockState, int renderPass) {
         return true;
     }
 

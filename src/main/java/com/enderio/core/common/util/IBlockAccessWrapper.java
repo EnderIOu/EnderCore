@@ -1,8 +1,5 @@
 package com.enderio.core.common.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -13,21 +10,24 @@ import net.minecraft.world.biome.Biome;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class IBlockAccessWrapper implements IBlockAccess {
 
-    protected @Nonnull IBlockAccess wrapped;
+    protected @NotNull IBlockAccess wrapped;
 
-    public IBlockAccessWrapper(@Nonnull IBlockAccess ba) {
+    public IBlockAccessWrapper(@NotNull IBlockAccess ba) {
         wrapped = ba;
     }
 
     @Override
-    public boolean isSideSolid(@Nonnull BlockPos pos, @Nonnull EnumFacing side, boolean _default) {
+    public boolean isSideSolid(@NotNull BlockPos pos, @NotNull EnumFacing side, boolean _default) {
         return wrapped.isSideSolid(pos, side, _default);
     }
 
     @Override
-    public @Nullable TileEntity getTileEntity(@Nonnull BlockPos pos) {
+    public @Nullable TileEntity getTileEntity(@NotNull BlockPos pos) {
         if (pos.getY() >= 0 && pos.getY() < 256) {
             return wrapped.getTileEntity(pos);
         } else {
@@ -36,33 +36,33 @@ public class IBlockAccessWrapper implements IBlockAccess {
     }
 
     @Override
-    public @Nonnull IBlockState getBlockState(@Nonnull BlockPos pos) {
+    public @NotNull IBlockState getBlockState(@NotNull BlockPos pos) {
         return wrapped.getBlockState(pos);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public int getCombinedLight(@Nonnull BlockPos pos, int lightValue) {
+    public int getCombinedLight(@NotNull BlockPos pos, int lightValue) {
         return 15 << 20 | 15 << 4;
     }
 
     @Override
-    public boolean isAirBlock(@Nonnull BlockPos pos) {
+    public boolean isAirBlock(@NotNull BlockPos pos) {
         return wrapped.isAirBlock(pos);
     }
 
     @Override
-    public @Nonnull Biome getBiome(@Nonnull BlockPos pos) {
+    public @NotNull Biome getBiome(@NotNull BlockPos pos) {
         return wrapped.getBiome(pos);
     }
 
     @Override
-    public int getStrongPower(@Nonnull BlockPos pos, @Nonnull EnumFacing direction) {
+    public int getStrongPower(@NotNull BlockPos pos, @NotNull EnumFacing direction) {
         return wrapped.getStrongPower(pos, direction);
     }
 
     @Override
-    public @Nonnull WorldType getWorldType() {
+    public @NotNull WorldType getWorldType() {
         return wrapped.getWorldType();
     }
 }

@@ -1,8 +1,5 @@
 package com.enderio.core.common;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.EnumPushReaction;
@@ -28,6 +25,8 @@ import net.minecraft.world.chunk.Chunk.EnumCreateEntityType;
 
 import com.enderio.core.api.common.util.ITankAccess;
 import com.enderio.core.common.util.FluidUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class BlockEnder<T extends TileEntityBase> extends Block {
 
@@ -37,11 +36,11 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
         this(teClass, new Material(MapColor.IRON), MapColor.IRON);
     }
 
-    protected BlockEnder(@Nullable Class<? extends T> teClass, @Nonnull Material mat) {
+    protected BlockEnder(@Nullable Class<? extends T> teClass, @NotNull Material mat) {
         this(teClass, mat, mat.getMaterialMapColor());
     }
 
-    protected BlockEnder(@Nullable Class<? extends T> teClass, @Nonnull Material mat, MapColor mapColor) {
+    protected BlockEnder(@Nullable Class<? extends T> teClass, @NotNull Material mat, MapColor mapColor) {
         super(mat);
         this.teClass = teClass;
 
@@ -51,19 +50,19 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
     }
 
     @Override
-    public boolean hasTileEntity(@Nonnull IBlockState state) {
+    public boolean hasTileEntity(@NotNull IBlockState state) {
         return teClass != null;
     }
 
     @Override
-    public @Nonnull EnumPushReaction getPushReaction(@Nonnull IBlockState state) {
+    public @NotNull EnumPushReaction getPushReaction(@NotNull IBlockState state) {
         // Some mods coremod vanilla to ignore this condition, so let's try to enforce it.
         // If this doesn't work, we need code to blow up the block when it detects it was moved...
         return teClass != null ? EnumPushReaction.BLOCK : super.getPushReaction(state);
     }
 
     @Override
-    public @Nonnull TileEntity createTileEntity(@Nonnull World world, @Nonnull IBlockState state) {
+    public @NotNull TileEntity createTileEntity(@NotNull World world, @NotNull IBlockState state) {
         if (teClass != null) {
             try {
                 T te = teClass.newInstance();
@@ -82,9 +81,9 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
     /* Subclass Helpers */
 
     @Override
-    public boolean onBlockActivated(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state,
-                                    @Nonnull EntityPlayer playerIn,
-                                    @Nonnull EnumHand hand, @Nonnull EnumFacing side, float hitX, float hitY,
+    public boolean onBlockActivated(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state,
+                                    @NotNull EntityPlayer playerIn,
+                                    @NotNull EnumHand hand, @NotNull EnumFacing side, float hitX, float hitY,
                                     float hitZ) {
         if (playerIn.isSneaking()) {
             return false;
@@ -103,14 +102,14 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
         return openGui(worldIn, pos, playerIn, side);
     }
 
-    protected boolean openGui(@Nonnull World world, @Nonnull BlockPos pos, @Nonnull EntityPlayer entityPlayer,
-                              @Nonnull EnumFacing side) {
+    protected boolean openGui(@NotNull World world, @NotNull BlockPos pos, @NotNull EntityPlayer entityPlayer,
+                              @NotNull EnumFacing side) {
         return false;
     }
 
     @Override
-    public boolean removedByPlayer(@Nonnull IBlockState state, @Nonnull World world, @Nonnull BlockPos pos,
-                                   @Nonnull EntityPlayer player, boolean willHarvest) {
+    public boolean removedByPlayer(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos,
+                                   @NotNull EntityPlayer player, boolean willHarvest) {
         if (willHarvest) {
             return true;
         }
@@ -118,16 +117,16 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
     }
 
     @Override
-    public void harvestBlock(@Nonnull World worldIn, @Nonnull EntityPlayer player, @Nonnull BlockPos pos,
-                             @Nonnull IBlockState state, @Nullable TileEntity te,
-                             @Nonnull ItemStack stack) {
+    public void harvestBlock(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull BlockPos pos,
+                             @NotNull IBlockState state, @Nullable TileEntity te,
+                             @NotNull ItemStack stack) {
         super.harvestBlock(worldIn, player, pos, state, te, stack);
         worldIn.setBlockToAir(pos);
     }
 
     @Override
-    public final void getDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world,
-                               @Nonnull BlockPos pos, @Nonnull IBlockState state,
+    public final void getDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world,
+                               @NotNull BlockPos pos, @NotNull IBlockState state,
                                int fortune) {
         final T te = getTileEntity(world, pos);
         final ItemStack drop = getNBTDrop(world, pos, state, fortune, te);
@@ -146,9 +145,9 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
      * server...
      */
     @Override
-    public final @Nonnull ItemStack getPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target,
-                                                 @Nonnull World world, @Nonnull BlockPos pos,
-                                                 @Nonnull EntityPlayer player) {
+    public final @NotNull ItemStack getPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target,
+                                                 @NotNull World world, @NotNull BlockPos pos,
+                                                 @NotNull EntityPlayer player) {
         if (player.world.isRemote && player.capabilities.isCreativeMode && GuiScreen.isCtrlKeyDown()) {
             ItemStack nbtDrop = getNBTDrop(world, pos, state, 0, getTileEntity(world, pos));
             if (nbtDrop != null) {
@@ -159,34 +158,34 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
                 super.getPickBlock(state, target, world, pos, player));
     }
 
-    protected @Nonnull ItemStack processPickBlock(@Nonnull IBlockState state, @Nonnull RayTraceResult target,
-                                                  @Nonnull World world, @Nonnull BlockPos pos,
-                                                  @Nonnull EntityPlayer player, @Nonnull ItemStack pickBlock) {
+    protected @NotNull ItemStack processPickBlock(@NotNull IBlockState state, @NotNull RayTraceResult target,
+                                                  @NotNull World world, @NotNull BlockPos pos,
+                                                  @NotNull EntityPlayer player, @NotNull ItemStack pickBlock) {
         return pickBlock;
     }
 
-    public @Nullable ItemStack getNBTDrop(@Nonnull IBlockAccess world, @Nonnull BlockPos pos,
-                                          @Nonnull IBlockState state, int fortune, @Nullable T te) {
+    public @Nullable ItemStack getNBTDrop(@NotNull IBlockAccess world, @NotNull BlockPos pos,
+                                          @NotNull IBlockState state, int fortune, @Nullable T te) {
         ItemStack itemStack = new ItemStack(this, 1, damageDropped(state));
         processDrop(world, pos, te, itemStack);
         return itemStack;
     }
 
-    protected final void processDrop(@Nonnull IBlockAccess world, @Nonnull BlockPos pos, @Nullable T te,
-                                     @Nonnull ItemStack drop) {
+    protected final void processDrop(@NotNull IBlockAccess world, @NotNull BlockPos pos, @Nullable T te,
+                                     @NotNull ItemStack drop) {
         if (te != null) {
             te.writeCustomNBT(drop);
         }
     }
 
-    public void getExtraDrops(@Nonnull NonNullList<ItemStack> drops, @Nonnull IBlockAccess world, @Nonnull BlockPos pos,
-                              @Nonnull IBlockState state, int fortune,
+    public void getExtraDrops(@NotNull NonNullList<ItemStack> drops, @NotNull IBlockAccess world, @NotNull BlockPos pos,
+                              @NotNull IBlockState state, int fortune,
                               @Nullable T te) {}
 
     @Override
-    public final void onBlockPlacedBy(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state,
-                                      @Nonnull EntityLivingBase placer,
-                                      @Nonnull ItemStack stack) {
+    public final void onBlockPlacedBy(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state,
+                                      @NotNull EntityLivingBase placer,
+                                      @NotNull ItemStack stack) {
         onBlockPlaced(worldIn, pos, state, placer, stack);
         T te = getTileEntity(worldIn, pos);
         if (te != null) {
@@ -195,12 +194,12 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
         }
     }
 
-    public void onBlockPlaced(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state,
-                              @Nonnull EntityLivingBase placer,
-                              @Nonnull ItemStack stack) {}
+    public void onBlockPlaced(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state,
+                              @NotNull EntityLivingBase placer,
+                              @NotNull ItemStack stack) {}
 
-    public void onBlockPlaced(@Nonnull World worldIn, @Nonnull BlockPos pos, @Nonnull IBlockState state,
-                              @Nonnull EntityLivingBase placer, @Nonnull T te) {}
+    public void onBlockPlaced(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull IBlockState state,
+                              @NotNull EntityLivingBase placer, @NotNull T te) {}
 
     /**
      * Tries to load this block's TileEntity if it exists. Will create the TileEntity if it doesn't yet exist.
@@ -208,7 +207,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
      * <strong>This will crash if used in any other thread than the main (client or server) thread!</strong>
      *
      */
-    protected @Nullable T getTileEntity(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    protected @Nullable T getTileEntity(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
         final Class<? extends T> teClass2 = teClass;
         if (teClass2 != null) {
             TileEntity te = world.getTileEntity(pos);
@@ -224,7 +223,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
      * with the correct IBlockAccess.
      *
      */
-    protected @Nullable T getTileEntitySafe(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    protected @Nullable T getTileEntitySafe(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
         if (world instanceof ChunkCache) {
             final Class<? extends T> teClass2 = teClass;
             if (teClass2 != null) {
@@ -245,7 +244,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
      * cause chunk loads.
      *
      */
-    public static @Nullable TileEntity getAnyTileEntitySafe(@Nonnull IBlockAccess world, @Nonnull BlockPos pos) {
+    public static @Nullable TileEntity getAnyTileEntitySafe(@NotNull IBlockAccess world, @NotNull BlockPos pos) {
         return getAnyTileEntitySafe(world, pos, TileEntity.class);
     }
 
@@ -256,7 +255,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
      *
      */
     @SuppressWarnings("unchecked")
-    public static @Nullable <Q> Q getAnyTileEntitySafe(@Nonnull IBlockAccess world, @Nonnull BlockPos pos,
+    public static @Nullable <Q> Q getAnyTileEntitySafe(@NotNull IBlockAccess world, @NotNull BlockPos pos,
                                                        Class<Q> teClass) {
         TileEntity te = null;
         if (world instanceof ChunkCache) {
@@ -283,7 +282,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
      *
      */
     @SuppressWarnings("unchecked")
-    public static @Nullable <Q> Q getAnyTileEntity(@Nonnull IBlockAccess world, @Nonnull BlockPos pos,
+    public static @Nullable <Q> Q getAnyTileEntity(@NotNull IBlockAccess world, @NotNull BlockPos pos,
                                                    Class<Q> teClass) {
         TileEntity te = world.getTileEntity(pos);
         if (teClass == null) {
@@ -295,7 +294,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
         return null;
     }
 
-    protected boolean shouldDoWorkThisTick(@Nonnull World world, @Nonnull BlockPos pos, int interval) {
+    protected boolean shouldDoWorkThisTick(@NotNull World world, @NotNull BlockPos pos, int interval) {
         T te = getTileEntity(world, pos);
         if (te == null) {
             return world.getTotalWorldTime() % interval == 0;
@@ -304,7 +303,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
         }
     }
 
-    protected boolean shouldDoWorkThisTick(@Nonnull World world, @Nonnull BlockPos pos, int interval, int offset) {
+    protected boolean shouldDoWorkThisTick(@NotNull World world, @NotNull BlockPos pos, int interval, int offset) {
         T te = getTileEntity(world, pos);
         if (te == null) {
             return (world.getTotalWorldTime() + offset) % interval == 0;
@@ -320,7 +319,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
     // wrapper because vanilla null-annotations are wrong
     @SuppressWarnings("null")
     @Override
-    public @Nonnull Block setCreativeTab(@Nullable CreativeTabs tab) {
+    public @NotNull Block setCreativeTab(@Nullable CreativeTabs tab) {
         return super.setCreativeTab(tab);
     }
 
@@ -329,9 +328,9 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
     }
 
     @Override
-    public final @Nonnull BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                                           @Nonnull BlockPos pos,
-                                                           @Nonnull EnumFacing face) {
+    public final @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                                           @NotNull BlockPos pos,
+                                                           @NotNull EnumFacing face) {
         if (shape != null) {
             T te = getTileEntitySafe(worldIn, pos);
             if (te != null) {
@@ -347,62 +346,62 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
 
     public static interface IShape<T> {
 
-        @Nonnull
-        BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                         @Nonnull BlockPos pos, @Nonnull EnumFacing face);
+        @NotNull
+        BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                         @NotNull BlockPos pos, @NotNull EnumFacing face);
 
-        default @Nonnull BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                                          @Nonnull BlockPos pos,
-                                                          @Nonnull EnumFacing face, @Nonnull T te) {
+        default @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                                          @NotNull BlockPos pos,
+                                                          @NotNull EnumFacing face, @NotNull T te) {
             return getBlockFaceShape(worldIn, state, pos, face);
         }
     }
 
-    protected @Nonnull IShape<T> mkShape(@Nonnull BlockFaceShape allFaces) {
+    protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape allFaces) {
         return new IShape<T>() {
 
             @Override
-            @Nonnull
-            public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                                    @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+            @NotNull
+            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
                 return allFaces;
             }
         };
     }
 
-    protected @Nonnull IShape<T> mkShape(@Nonnull BlockFaceShape upDown, @Nonnull BlockFaceShape allSides) {
+    protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape upDown, @NotNull BlockFaceShape allSides) {
         return new IShape<T>() {
 
             @Override
-            @Nonnull
-            public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                                    @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+            @NotNull
+            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
                 return face == EnumFacing.UP || face == EnumFacing.DOWN ? upDown : allSides;
             }
         };
     }
 
-    protected @Nonnull IShape<T> mkShape(@Nonnull BlockFaceShape down, @Nonnull BlockFaceShape up,
-                                         @Nonnull BlockFaceShape allSides) {
+    protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape down, @NotNull BlockFaceShape up,
+                                         @NotNull BlockFaceShape allSides) {
         return new IShape<T>() {
 
             @Override
-            @Nonnull
-            public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                                    @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+            @NotNull
+            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
                 return face == EnumFacing.UP ? up : face == EnumFacing.DOWN ? down : allSides;
             }
         };
     }
 
-    protected @Nonnull IShape<T> mkShape(@Nonnull BlockFaceShape... faces) {
+    protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape... faces) {
         return new IShape<T>() {
 
             @SuppressWarnings("null")
             @Override
-            @Nonnull
-            public BlockFaceShape getBlockFaceShape(@Nonnull IBlockAccess worldIn, @Nonnull IBlockState state,
-                                                    @Nonnull BlockPos pos, @Nonnull EnumFacing face) {
+            @NotNull
+            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
+                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
                 return faces[face.ordinal()];
             }
         };

@@ -4,8 +4,6 @@ import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.config.Property.Type;
 
@@ -15,6 +13,7 @@ import com.enderio.core.common.config.ConfigProcessor.ITypeAdapter;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
+import org.jetbrains.annotations.NotNull;
 
 @SuppressWarnings({ "serial", "unchecked" })
 public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTUAL, BASE> {
@@ -64,7 +63,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
         }
 
         @Override
-        public @Nonnull TYPE createBaseType(@Nonnull TYPE actual) {
+        public @NotNull TYPE createBaseType(@NotNull TYPE actual) {
             return actual;
         }
     }
@@ -95,7 +94,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull Double createBaseType(@Nonnull Float actual)
+                public @NotNull Double createBaseType(@NotNull Float actual)
                 {
                     return Double.parseDouble(Floatfmt.format(actual));
                 }
@@ -117,7 +116,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull double[] createBaseType(@Nonnull float[] actual)
+                public double @NotNull [] createBaseType(float @NotNull [] actual)
                 {
                     double[] ret = new double[actual.length];
                     for (int i = 0; i < ret.length; i++)
@@ -138,7 +137,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull int[] createBaseType(@Nonnull List<Integer> actual)
+                public int @NotNull [] createBaseType(@NotNull List<Integer> actual)
                 {
                     return NullHelper.notnullJ(ArrayUtils.toPrimitive(actual.toArray(new Integer[actual.size()])), "ArrayUtils.toPrimitive()");
                 }
@@ -154,7 +153,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull double[] createBaseType(@Nonnull List<Double> actual)
+                public double @NotNull [] createBaseType(@NotNull List<Double> actual)
                 {
                     return NullHelper.notnullJ(ArrayUtils.toPrimitive(actual.toArray(new Double[actual.size()])), "ArrayUtils.toPrimitive()");
                 }
@@ -170,9 +169,9 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull double[] createBaseType(@Nonnull List<Float> actual)
+                public double @NotNull [] createBaseType(@NotNull List<Float> actual)
                 {
-                    final @Nonnull float[] temp = NullHelper.notnullJ(ArrayUtils.toPrimitive(actual.toArray(new Float[actual.size()])), "ArrayUtils.toPrimitive()");
+                    final float[] temp = NullHelper.notnullJ(ArrayUtils.toPrimitive(actual.toArray(new Float[actual.size()])), "ArrayUtils.toPrimitive()");
                     return FLOAT_ARR.createBaseType(temp);
                 }
             };
@@ -187,7 +186,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull boolean[] createBaseType(@Nonnull List<Boolean> actual)
+                public boolean @NotNull [] createBaseType(@NotNull List<Boolean> actual)
                 {
                     return NullHelper.notnullJ(ArrayUtils.toPrimitive(actual.toArray(new Boolean[actual.size()])), "ArrayUtils.toPrimitive()");
                 }
@@ -203,7 +202,7 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
                 }
 
                 @Override
-                public @Nonnull String[] createBaseType(@Nonnull List<String> actual)
+                public String @NotNull [] createBaseType(@NotNull List<String> actual)
                 {
                     return NullHelper.notnullJ(actual.toArray(new String[actual.size()]), "List.toArray()");
                 }

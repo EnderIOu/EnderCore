@@ -1,7 +1,5 @@
 package com.enderio.core.common.transform;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -23,11 +21,12 @@ import net.minecraftforge.common.MinecraftForge;
 
 import com.enderio.core.common.event.ItemGUIRenderEvent;
 import com.enderio.core.common.interfaces.INotDestroyedInItemFrames;
+import org.jetbrains.annotations.NotNull;
 
 public class EnderCoreMethods {
 
     // copied from ContainerFurnace, changes marked
-    public static @Nonnull ItemStack transferStackInSlot(@Nonnull ContainerFurnace inv, @Nonnull EntityPlayer playerIn,
+    public static @NotNull ItemStack transferStackInSlot(@NotNull ContainerFurnace inv, @NotNull EntityPlayer playerIn,
                                                          int index) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = inv.inventorySlots.get(index);
@@ -85,7 +84,7 @@ public class EnderCoreMethods {
     }
 
     // copied from Container, unchanged
-    private static boolean mergeItemStack(@Nonnull Container inv, @Nonnull ItemStack stack, int startIndex,
+    private static boolean mergeItemStack(@NotNull Container inv, @NotNull ItemStack stack, int startIndex,
                                           int endIndex, boolean reverseDirection) {
         boolean flag = false;
         int i = startIndex;
@@ -176,7 +175,7 @@ public class EnderCoreMethods {
         return flag;
     }
 
-    public static void renderItemOverlayIntoGUI(@Nonnull ItemStack stack, int xPosition, int yPosition) {
+    public static void renderItemOverlayIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition) {
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof com.enderio.core.common.interfaces.IOverlayRenderAware) {
                 ((com.enderio.core.common.interfaces.IOverlayRenderAware) stack.getItem())
@@ -186,7 +185,7 @@ public class EnderCoreMethods {
         }
     }
 
-    public static void renderItemAndEffectIntoGUI(@Nonnull ItemStack stack, int xPosition, int yPosition) {
+    public static void renderItemAndEffectIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition) {
         if (!stack.isEmpty()) {
             if (stack.getItem() instanceof com.enderio.core.common.interfaces.IUnderlayRenderAware) {
                 ((com.enderio.core.common.interfaces.IUnderlayRenderAware) stack.getItem())
@@ -197,7 +196,7 @@ public class EnderCoreMethods {
     }
 
     // Note: isRiding() and isInWater() are cheap getters, isInLava() is an expensive volumetric search
-    public static boolean isElytraFlying(@Nonnull EntityLivingBase entity) {
+    public static boolean isElytraFlying(@NotNull EntityLivingBase entity) {
         ItemStack itemstack = entity.getItemStackFromSlot(EntityEquipmentSlot.CHEST);
         if (itemstack.getItem() instanceof com.enderio.core.common.interfaces.IElytraFlyingProvider) {
             return ((com.enderio.core.common.interfaces.IElytraFlyingProvider) itemstack.getItem()).isElytraFlying(
@@ -210,7 +209,7 @@ public class EnderCoreMethods {
     }
 
     // non-chunkloading copy of Entity.isInLava()
-    public static boolean isInLavaSafe(@Nonnull Entity entity) {
+    public static boolean isInLavaSafe(@NotNull Entity entity) {
         return isMaterialInBBSafe(entity.world,
                 entity.getEntityBoundingBox().expand(-0.10000000149011612D, -0.4000000059604645D,
                         -0.10000000149011612D),
@@ -218,8 +217,8 @@ public class EnderCoreMethods {
     }
 
     // non-chunkloading copy of World.isMaterialInBB()
-    public static boolean isMaterialInBBSafe(@Nonnull World world, @Nonnull AxisAlignedBB bb,
-                                             @Nonnull Material materialIn) {
+    public static boolean isMaterialInBBSafe(@NotNull World world, @NotNull AxisAlignedBB bb,
+                                             @NotNull Material materialIn) {
         int i = MathHelper.floor(bb.minX);
         int j = MathHelper.ceil(bb.maxX);
         int k = MathHelper.floor(bb.minY);
@@ -245,8 +244,8 @@ public class EnderCoreMethods {
         return false;
     }
 
-    public static boolean isCreeperTarget(@Nonnull EntityCreeper swellingCreeper,
-                                          @Nonnull EntityLivingBase entitylivingbase) {
+    public static boolean isCreeperTarget(@NotNull EntityCreeper swellingCreeper,
+                                          @NotNull EntityLivingBase entitylivingbase) {
         if (entitylivingbase instanceof com.enderio.core.common.interfaces.ICreeperTarget) {
             return ((com.enderio.core.common.interfaces.ICreeperTarget) entitylivingbase)
                     .isCreeperTarget(swellingCreeper);

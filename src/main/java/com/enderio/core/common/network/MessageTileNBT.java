@@ -1,8 +1,5 @@
 package com.enderio.core.common.network;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +13,8 @@ import com.enderio.core.common.util.Log;
 import com.enderio.core.common.util.NullHelper;
 
 import io.netty.buffer.ByteBuf;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Created by CrazyPants on 27/02/14.
@@ -49,7 +48,7 @@ public class MessageTileNBT implements IMessage, IMessageHandler<MessageTileNBT,
         tags = NetworkUtil.readNBTTagCompound(dis);
     }
 
-    public @Nonnull BlockPos getPos() {
+    public @NotNull BlockPos getPos() {
         return BlockPos.fromLong(pos);
     }
 

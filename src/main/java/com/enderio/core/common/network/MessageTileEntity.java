@@ -2,9 +2,6 @@ package com.enderio.core.common.network;
 
 import java.lang.reflect.TypeVariable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -17,6 +14,8 @@ import com.enderio.core.EnderCore;
 import com.google.common.reflect.TypeToken;
 
 import io.netty.buffer.ByteBuf;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class MessageTileEntity<T extends TileEntity> implements IMessage {
 
@@ -24,7 +23,7 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
 
     protected MessageTileEntity() {}
 
-    protected MessageTileEntity(@Nonnull T tile) {
+    protected MessageTileEntity(@NotNull T tile) {
         pos = tile.getPos().toLong();
     }
 
@@ -46,7 +45,7 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
 
     public void read(ByteBuf buf) {}
 
-    public @Nonnull BlockPos getPos() {
+    public @NotNull BlockPos getPos() {
         return BlockPos.fromLong(pos);
     }
 
@@ -78,7 +77,7 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
         return null;
     }
 
-    protected @Nonnull World getWorld(MessageContext ctx) {
+    protected @NotNull World getWorld(MessageContext ctx) {
         if (ctx.side == Side.SERVER) {
             return ctx.getServerHandler().player.world;
         } else {
@@ -94,8 +93,7 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
                                                      extends IMessageHandler<MessageTileEntity<T>, I> {
 
         @Override
-        @Nullable
-        default I onMessage(MessageTileEntity<T> message, MessageContext ctx) {
+        default @Nullable I onMessage(MessageTileEntity<T> message, MessageContext ctx) {
             if (message != null && ctx != null) {
                 T te = message.getTileEntity(message.getWorld(ctx));
                 if (te != null) {
@@ -105,6 +103,6 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
             return null;
         }
 
-        I onMessage(@Nonnull T te, @Nonnull MessageTileEntity<T> message, @Nonnull MessageContext ctx);
+        I onMessage(@NotNull T te, @NotNull MessageTileEntity<T> message, @NotNull MessageContext ctx);
     }
 }

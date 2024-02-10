@@ -3,9 +3,6 @@ package com.enderio.core.common.fluid;
 import java.util.EnumMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -19,6 +16,8 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
 import com.enderio.core.api.common.util.ITankAccess;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FluidWrapper {
 
@@ -63,7 +62,7 @@ public class FluidWrapper {
         return wrapper;
     }
 
-    public static @Nullable IFluidWrapper wrap(@Nonnull ItemStack itemStack) {
+    public static @Nullable IFluidWrapper wrap(@NotNull ItemStack itemStack) {
         return wrap(FluidUtil.getFluidHandler(itemStack));
     }
 

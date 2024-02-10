@@ -3,8 +3,6 @@ package com.enderio.core.common;
 import java.awt.Point;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -19,29 +17,29 @@ import com.enderio.core.client.gui.widget.GhostSlot;
 import com.enderio.core.common.ContainerEnderCap.BaseSlotItemHandler;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Maps;
+import org.jetbrains.annotations.NotNull;
 
 @Deprecated
 public class ContainerEnder<T extends IInventory> extends Container implements GhostSlot.IGhostSlotAware {
 
-    protected final @Nonnull Map<Slot, Point> playerSlotLocations = Maps.newLinkedHashMap();
+    protected final @NotNull Map<Slot, Point> playerSlotLocations = Maps.newLinkedHashMap();
 
     protected final int startPlayerSlot;
     protected final int endPlayerSlot;
     protected final int startHotBarSlot;
     protected final int endHotBarSlot;
 
-    private final @Nonnull T inv;
-    private final @Nonnull InventoryPlayer playerInv;
+    private final @NotNull T inv;
+    private final @NotNull InventoryPlayer playerInv;
 
-    @Nonnull
-    private static <T> T checkNotNull(T reference) {
+    private static @NotNull <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }
         return reference;
     }
 
-    public ContainerEnder(@Nonnull InventoryPlayer playerInv, @Nonnull T inv) {
+    public ContainerEnder(@NotNull InventoryPlayer playerInv, @NotNull T inv) {
         this.inv = checkNotNull(inv);
         this.playerInv = checkNotNull(playerInv);
 
@@ -72,38 +70,36 @@ public class ContainerEnder<T extends IInventory> extends Container implements G
         endHotBarSlot = inventorySlots.size();
     }
 
-    protected void addSlots(@Nonnull InventoryPlayer playerInventory) {}
+    protected void addSlots(@NotNull InventoryPlayer playerInventory) {}
 
-    public @Nonnull Point getPlayerInventoryOffset() {
+    public @NotNull Point getPlayerInventoryOffset() {
         return new Point(8, 84);
     }
 
-    public @Nonnull Point getUpgradeOffset() {
+    public @NotNull Point getUpgradeOffset() {
         return new Point(12, 60);
     }
 
-    public @Nonnull T getInv() {
+    public @NotNull T getInv() {
         return inv;
     }
 
     @Override
-    @Nonnull
-    public Slot getSlotFromInventory(@Nonnull IInventory invIn, int slotIn) {
+    public @NotNull Slot getSlotFromInventory(@NotNull IInventory invIn, int slotIn) {
         return NullHelper.notnull(super.getSlotFromInventory(invIn, slotIn), "Logic error, missing slot " + slotIn);
     }
 
-    @Nonnull
-    public Slot getSlotFromInventory(int slotIn) {
+    public @NotNull Slot getSlotFromInventory(int slotIn) {
         return getSlotFromInventory(getInv(), slotIn);
     }
 
     @Override
-    public boolean canInteractWith(@Nonnull EntityPlayer player) {
+    public boolean canInteractWith(@NotNull EntityPlayer player) {
         return getInv().isUsableByPlayer(player);
     }
 
     @Override
-    public @Nonnull ItemStack transferStackInSlot(@Nonnull EntityPlayer p_82846_1_, int p_82846_2_) {
+    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer p_82846_1_, int p_82846_2_) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(p_82846_2_);
 
@@ -134,7 +130,7 @@ public class ContainerEnder<T extends IInventory> extends Container implements G
      * Added validation of slot input
      */
     @Override
-    protected boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int fromIndex, int toIndex,
+    protected boolean mergeItemStack(@NotNull ItemStack par1ItemStack, int fromIndex, int toIndex,
                                      boolean reversOrder) {
         boolean result = false;
         int checkIndex = fromIndex;
@@ -218,7 +214,7 @@ public class ContainerEnder<T extends IInventory> extends Container implements G
     }
 
     @Override
-    public void setGhostSlotContents(int slot, @Nonnull ItemStack stack, int realsize) {
+    public void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {
         if (inv instanceof TileEntityBase) {
             ((TileEntityBase) inv).setGhostSlotContents(slot, stack, realsize);
         }
@@ -248,7 +244,7 @@ public class ContainerEnder<T extends IInventory> extends Container implements G
 
     public static abstract class BaseSlot extends Slot {
 
-        public BaseSlot(@Nonnull IInventory inventoryIn, int index, int xPosition, int yPosition) {
+        public BaseSlot(@NotNull IInventory inventoryIn, int index, int xPosition, int yPosition) {
             super(inventoryIn, index, xPosition, yPosition);
         }
 

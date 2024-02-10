@@ -6,8 +6,6 @@ import static java.util.Calendar.MONTH;
 
 import java.util.Calendar;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.DisplayInfo;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +29,7 @@ public class FireworkHandler {
 
     @SubscribeEvent
     public void onAchievement(AdvancementEvent event) {
-        final @Nonnull Advancement advancement = NullHelper.notnullF(event.getAdvancement(),
+        final Advancement advancement = NullHelper.notnullF(event.getAdvancement(),
                 "AdvancementEvent.getAdvancement()");
         DisplayInfo display = advancement.getDisplay();
         if (ConfigHandler.betterAchievements && !event.getEntity().world.isRemote && display != null &&

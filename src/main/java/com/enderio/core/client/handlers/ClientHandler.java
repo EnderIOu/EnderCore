@@ -1,12 +1,11 @@
 package com.enderio.core.client.handlers;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
 import com.enderio.core.common.Handlers.Handler;
+import org.jetbrains.annotations.NotNull;
 
 @Handler
 public class ClientHandler {
@@ -18,7 +17,7 @@ public class ClientHandler {
     }
 
     @SubscribeEvent
-    public static void onClientTick(@Nonnull ClientTickEvent event) {
+    public static void onClientTick(@NotNull ClientTickEvent event) {
         if (event.phase == Phase.END) {
             ticksElapsed++;
         }

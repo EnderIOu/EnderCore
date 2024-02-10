@@ -1,61 +1,60 @@
 package com.enderio.core.common.inventory;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.ItemStack;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Filters {
 
-    public static final @Nonnull Callback<ItemStack> NO_CALLBACK = new Callback<ItemStack>() {
+    public static final @NotNull Callback<ItemStack> NO_CALLBACK = new Callback<ItemStack>() {
 
         @Override
-        public final void onChange(@Nonnull ItemStack oldStack, @Nonnull ItemStack newStack) {}
+        public final void onChange(@NotNull ItemStack oldStack, @NotNull ItemStack newStack) {}
     };
 
-    public static final @Nonnull Predicate<ItemStack> ALWAYS_TRUE = Predicates.<ItemStack>alwaysTrue();
+    public static final @NotNull Predicate<ItemStack> ALWAYS_TRUE = Predicates.<ItemStack>alwaysTrue();
 
-    public static final @Nonnull Predicate<ItemStack> ALWAYS_FALSE = Predicates.<ItemStack>alwaysFalse();
+    public static final @NotNull Predicate<ItemStack> ALWAYS_FALSE = Predicates.<ItemStack>alwaysFalse();
 
-    public static final @Nonnull Predicate<ItemStack> ONLY_STACKABLE = new PredicateItemStack() {
+    public static final @NotNull Predicate<ItemStack> ONLY_STACKABLE = new PredicateItemStack() {
 
         @Override
-        public boolean doApply(@Nonnull ItemStack input) {
+        public boolean doApply(@NotNull ItemStack input) {
             return input.isStackable();
         }
     };
 
-    public static @Nonnull Predicate<ItemStack> and(final @Nonnull Predicate<ItemStack> a,
-                                                    final @Nonnull Predicate<ItemStack> b) {
+    public static @NotNull Predicate<ItemStack> and(final @NotNull Predicate<ItemStack> a,
+                                                    final @NotNull Predicate<ItemStack> b) {
         return new PredicateItemStack() {
 
             @Override
-            public boolean doApply(@Nonnull ItemStack input) {
+            public boolean doApply(@NotNull ItemStack input) {
                 return a.apply(input) && b.apply(input);
             }
         };
     }
 
-    public static @Nonnull Predicate<ItemStack> or(final @Nonnull Predicate<ItemStack> a,
-                                                   final @Nonnull Predicate<ItemStack> b) {
+    public static @NotNull Predicate<ItemStack> or(final @NotNull Predicate<ItemStack> a,
+                                                   final @NotNull Predicate<ItemStack> b) {
         return new PredicateItemStack() {
 
             @Override
-            public boolean doApply(@Nonnull ItemStack input) {
+            public boolean doApply(@NotNull ItemStack input) {
                 return a.apply(input) || b.apply(input);
             }
         };
     }
 
-    public static @Nonnull Predicate<ItemStack> not(final @Nonnull Predicate<ItemStack> a) {
+    public static @NotNull Predicate<ItemStack> not(final @NotNull Predicate<ItemStack> a) {
         return new PredicateItemStack() {
 
             @Override
-            public boolean doApply(@Nonnull ItemStack input) {
+            public boolean doApply(@NotNull ItemStack input) {
                 return !a.apply(input);
             }
         };
@@ -83,6 +82,6 @@ public class Filters {
             return !input.isEmpty() && doApply(input);
         }
 
-        public abstract boolean doApply(@Nonnull ItemStack input);
+        public abstract boolean doApply(@NotNull ItemStack input);
     }
 }

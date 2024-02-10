@@ -5,9 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -35,10 +32,12 @@ import com.enderio.core.common.vecmath.Vector3d;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class Util {
 
-    public static @Nullable Block getBlockFromItemId(@Nonnull ItemStack itemId) {
+    public static @Nullable Block getBlockFromItemId(@NotNull ItemStack itemId) {
         Item item = itemId.getItem();
         if (item instanceof ItemBlock) {
             return ((ItemBlock) item).getBlock();
@@ -46,7 +45,7 @@ public class Util {
         return null;
     }
 
-    public static @Nonnull ItemStack consumeItem(@Nonnull ItemStack stack) {
+    public static @NotNull ItemStack consumeItem(@NotNull ItemStack stack) {
         if (stack.getItem() instanceof ItemPotion) {
             if (stack.getCount() == 1) {
                 return new ItemStack(Items.GLASS_BOTTLE);
@@ -67,7 +66,7 @@ public class Util {
         }
     }
 
-    public static void giveExperience(@Nonnull EntityPlayer thePlayer, float experience) {
+    public static void giveExperience(@NotNull EntityPlayer thePlayer, float experience) {
         int intExp = (int) experience;
         float fractional = experience - intExp;
         if (fractional > 0.0F) {
@@ -83,7 +82,7 @@ public class Util {
         }
     }
 
-    public static EntityItem createDrop(@Nonnull World world, @Nonnull ItemStack stack, double x, double y, double z,
+    public static EntityItem createDrop(@NotNull World world, @NotNull ItemStack stack, double x, double y, double z,
                                         boolean doRandomSpread) {
         if (stack.isEmpty()) {
             return null;
@@ -106,12 +105,12 @@ public class Util {
         }
     }
 
-    public static void dropItems(@Nonnull World world, @Nonnull ItemStack stack, @Nonnull BlockPos pos,
+    public static void dropItems(@NotNull World world, @NotNull ItemStack stack, @NotNull BlockPos pos,
                                  boolean doRandomSpread) {
         dropItems(world, stack, pos.getX(), pos.getY(), pos.getZ(), doRandomSpread);
     }
 
-    public static void dropItems(@Nonnull World world, @Nonnull ItemStack stack, double x, double y, double z,
+    public static void dropItems(@NotNull World world, @NotNull ItemStack stack, double x, double y, double z,
                                  boolean doRandomSpread) {
         if (stack.isEmpty()) {
             return;
@@ -121,12 +120,12 @@ public class Util {
         world.spawnEntity(entityitem);
     }
 
-    public static EntityItem createEntityItem(@Nonnull World world, @Nonnull ItemStack stack, double x, double y,
+    public static EntityItem createEntityItem(@NotNull World world, @NotNull ItemStack stack, double x, double y,
                                               double z) {
         return createEntityItem(world, stack, x, y, z, true);
     }
 
-    public static @Nonnull EntityItem createEntityItem(@Nonnull World world, @Nonnull ItemStack stack, double x,
+    public static @NotNull EntityItem createEntityItem(@NotNull World world, @NotNull ItemStack stack, double x,
                                                        double y, double z, boolean doRandomSpread) {
         EntityItem entityitem;
         if (doRandomSpread) {
@@ -146,7 +145,7 @@ public class Util {
         return entityitem;
     }
 
-    public static void dropItems(@Nonnull World world, @Nonnull ItemStack stack, int x, int y, int z,
+    public static void dropItems(@NotNull World world, @NotNull ItemStack stack, int x, int y, int z,
                                  boolean doRandomSpread) {
         if (stack.isEmpty()) {
             return;
@@ -170,7 +169,7 @@ public class Util {
         }
     }
 
-    public static void dropItems(@Nonnull World world, ItemStack[] inventory, int x, int y, int z,
+    public static void dropItems(@NotNull World world, ItemStack[] inventory, int x, int y, int z,
                                  boolean doRandomSpread) {
         if (inventory == null) {
             return;
@@ -182,7 +181,7 @@ public class Util {
         }
     }
 
-    public static void dropItems(@Nonnull World world, @Nonnull IInventory inventory, int x, int y, int z,
+    public static void dropItems(@NotNull World world, @NotNull IInventory inventory, int x, int y, int z,
                                  boolean doRandomSpread) {
         for (int l = 0; l < inventory.getSizeInventory(); ++l) {
             ItemStack items = inventory.getStackInSlot(l);
@@ -193,7 +192,7 @@ public class Util {
         }
     }
 
-    public static boolean dumpModObjects(@Nonnull File file) {
+    public static boolean dumpModObjects(@NotNull File file) {
         StringBuilder sb = new StringBuilder();
         for (Object key : Block.REGISTRY.getKeys()) {
             if (key != null) {
@@ -218,7 +217,7 @@ public class Util {
         }
     }
 
-    public static boolean dumpOreNames(@Nonnull File file) {
+    public static boolean dumpOreNames(@NotNull File file) {
         try {
             String[] oreNames = OreDictionary.getOreNames();
             Files.write(Joiner.on("\n").join(oreNames), file, Charsets.UTF_8);
@@ -230,7 +229,7 @@ public class Util {
         }
     }
 
-    public static @Nonnull ItemStack decrStackSize(@Nonnull IInventory inventory, int slot, int size) {
+    public static @NotNull ItemStack decrStackSize(@NotNull IInventory inventory, int slot, int size) {
         ItemStack item = inventory.getStackInSlot(slot);
         if (!item.isEmpty()) {
             if (item.getCount() <= size) {
@@ -246,27 +245,27 @@ public class Util {
         return ItemStack.EMPTY;
     }
 
-    public static @Nonnull Vec3d getEyePosition(@Nonnull EntityPlayer player) {
+    public static @NotNull Vec3d getEyePosition(@NotNull EntityPlayer player) {
         double y = player.posY;
         y += player.getEyeHeight();
         return new Vec3d(player.posX, y, player.posZ);
     }
 
-    public static @Nonnull Vector3d getEyePositionEio(@Nonnull EntityPlayer player) {
+    public static @NotNull Vector3d getEyePositionEio(@NotNull EntityPlayer player) {
         Vector3d res = new Vector3d(player.posX, player.posY, player.posZ);
         res.y += player.getEyeHeight();
         return res;
     }
 
-    public static @Nonnull Vector3d getLookVecEio(@Nonnull EntityPlayer player) {
+    public static @NotNull Vector3d getLookVecEio(@NotNull EntityPlayer player) {
         Vec3d lv = player.getLookVec();
         return new Vector3d(lv.x, lv.y, lv.z);
     }
 
     // Code adapted from World.rayTraceBlocks to return all
     // collided blocks
-    public static @Nonnull List<RayTraceResult> raytraceAll(@Nonnull World world, @Nonnull Vec3d startVector,
-                                                            @Nonnull Vec3d endVec, boolean includeLiquids) {
+    public static @NotNull List<RayTraceResult> raytraceAll(@NotNull World world, @NotNull Vec3d startVector,
+                                                            @NotNull Vec3d endVec, boolean includeLiquids) {
         boolean ignoreBlockWithoutBoundingBox = true;
         Vec3d startVec = startVector;
 
@@ -287,7 +286,6 @@ public class Util {
                 if ((!ignoreBlockWithoutBoundingBox ||
                         iblockstate.getCollisionBoundingBox(world, blockpos) != Block.NULL_AABB) &&
                         block.canCollideCheck(iblockstate, includeLiquids)) {
-                    @Nonnull
                     RayTraceResult raytraceresult = iblockstate.collisionRayTrace(world, blockpos, startVec, endVec);
                     result.add(raytraceresult);
                 }
@@ -388,7 +386,6 @@ public class Util {
                     if (!ignoreBlockWithoutBoundingBox || iblockstate1.getMaterial() == Material.PORTAL ||
                             iblockstate1.getCollisionBoundingBox(world, blockpos) != Block.NULL_AABB) {
                         if (block1.canCollideCheck(iblockstate1, includeLiquids)) {
-                            @Nonnull
                             RayTraceResult raytraceresult1 = iblockstate1.collisionRayTrace(world, blockpos, startVec,
                                     endVec);
                             result.add(raytraceresult1);
@@ -418,7 +415,7 @@ public class Util {
         return null;
     }
 
-    public static @Nonnull EnumFacing getFacingFromEntity(@Nonnull EntityLivingBase entity) {
+    public static @NotNull EnumFacing getFacingFromEntity(@NotNull EntityLivingBase entity) {
         int heading = MathHelper.floor(entity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         switch (heading) {
             case 0:
@@ -433,18 +430,18 @@ public class Util {
         }
     }
 
-    public static int getProgressScaled(int scale, @Nonnull IProgressTile tile) {
+    public static int getProgressScaled(int scale, @NotNull IProgressTile tile) {
         return (int) (tile.getProgress() * scale);
     }
 
-    public static void writeFacingToNBT(@Nonnull NBTTagCompound nbtRoot, @Nonnull String name,
-                                        @Nonnull EnumFacing dir) {
+    public static void writeFacingToNBT(@NotNull NBTTagCompound nbtRoot, @NotNull String name,
+                                        @NotNull EnumFacing dir) {
         short val = -1;
         val = (short) dir.ordinal();
         nbtRoot.setShort(name, val);
     }
 
-    public static @Nullable EnumFacing readFacingFromNBT(@Nonnull NBTTagCompound nbtRoot, @Nonnull String name) {
+    public static @Nullable EnumFacing readFacingFromNBT(@NotNull NBTTagCompound nbtRoot, @NotNull String name) {
         short val = -1;
         if (nbtRoot.hasKey(name)) {
             val = nbtRoot.getShort(name);

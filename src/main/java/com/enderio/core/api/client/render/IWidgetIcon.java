@@ -1,11 +1,11 @@
 package com.enderio.core.api.client.render;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface IWidgetIcon {
 
@@ -20,10 +20,10 @@ public interface IWidgetIcon {
     @Nullable
     IWidgetIcon getOverlay();
 
-    @Nonnull
+    @NotNull
     IWidgetMap getMap();
 
-    @Nonnull
+    @NotNull
     @SideOnly(Side.CLIENT)
     default TextureAtlasSprite getAsTextureAtlasSprite() {
         return new TAS(this);

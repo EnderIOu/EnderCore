@@ -1,8 +1,5 @@
 package com.enderio.core.api.common.enchant;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.item.Item;
@@ -11,6 +8,8 @@ import net.minecraftforge.common.util.EnumHelper;
 
 import com.enderio.core.EnderCore;
 import com.google.common.base.Predicate;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Allows your enchants to have some flavor or description text underneath them
@@ -41,7 +40,7 @@ public interface IAdvancedEnchant {
      * @param stack
      * @return a list of <code>String</code>s to be bulleted under the enchantment
      */
-    default @Nonnull String[] getTooltipDetails(@Nonnull ItemStack stack) {
+    default @NotNull String[] getTooltipDetails(@NotNull ItemStack stack) {
         final String unloc = "description." + ((Enchantment) this).getName();
         final String loc = EnderCore.lang.localizeExact(unloc);
         return unloc.equals(loc) ? new String[0] : EnderCore.lang.splitList(loc);

@@ -6,8 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -26,6 +24,7 @@ import com.enderio.core.common.event.ConfigFileChangedEvent;
 import com.enderio.core.common.util.Bound;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.ImmutableList;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractConfigHandler implements IConfigHandler {
 
@@ -80,29 +79,29 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
         }
     }
 
-    @Nonnull
+    @NotNull
     String modid;
     private Configuration config;
 
-    @Nonnull
+    @NotNull
     List<Section> sections = new ArrayList<Section>();
     private Section activeSection = null;
 
-    protected AbstractConfigHandler(@Nonnull String modid) {
+    protected AbstractConfigHandler(@NotNull String modid) {
         this.modid = modid;
         MinecraftForge.EVENT_BUS.register(this);
         EnderCore.instance.configs.add(this);
     }
 
     @Override
-    public final void initialize(@Nonnull File cfg) {
+    public final void initialize(@NotNull File cfg) {
         config = new Configuration(cfg);
         init();
         reloadAllConfigs();
         saveConfigFile();
     }
 
-    @Nonnull
+    @NotNull
     Configuration getConfig() {
         return NullHelper.notnull(config, "Configuration getConfig()");
     }
@@ -451,7 +450,7 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     protected <T> T getValue(Property prop, T defaultVal, Bound<? extends Number> bound) {
         checkInitialized();
 
-        final @Nonnull Bound<? extends Number> realbound;
+        final @NotNull Bound<? extends Number> realbound;
         if (bound != null) {
             realbound = bound;
             setBounds(prop, realbound);
@@ -671,12 +670,12 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     // no need to override these, they are merely utilities, and reference private fields anyways
 
     @Override
-    public final @Nonnull List<Section> getSections() {
+    public final @NotNull List<Section> getSections() {
         return ImmutableList.copyOf(sections);
     }
 
     @Override
-    public final @Nonnull ConfigCategory getCategory(String name) {
+    public final @NotNull ConfigCategory getCategory(String name) {
         final ConfigCategory category = getConfig().getCategory(name);
         if (category == null) {
             throw new NullPointerException("Forge is rejecting to create a config category '" + name + "'");
@@ -685,7 +684,7 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     }
 
     @Override
-    public final @Nonnull String getModID() {
+    public final @NotNull String getModID() {
         return modid;
     }
 }

@@ -2,14 +2,13 @@ package com.enderio.core.client.gui.widget;
 
 import java.awt.Rectangle;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.api.client.gui.IGuiScreen;
@@ -19,7 +18,7 @@ import com.enderio.core.client.render.EnderWidget;
 
 public class VScrollbar implements IHideable {
 
-    protected final @Nonnull IGuiScreen gui;
+    protected final @NotNull IGuiScreen gui;
 
     protected int xOrigin;
     protected int yOrigin;
@@ -29,10 +28,10 @@ public class VScrollbar implements IHideable {
 
     protected int y;
 
-    protected @Nonnull Rectangle wholeArea;
-    protected @Nonnull Rectangle btnUp;
-    protected @Nonnull Rectangle btnDown;
-    protected @Nonnull Rectangle thumbArea;
+    protected @NotNull Rectangle wholeArea;
+    protected @NotNull Rectangle btnUp;
+    protected @NotNull Rectangle btnDown;
+    protected @NotNull Rectangle thumbArea;
 
     protected int scrollPos;
     protected int scrollMax;
@@ -45,7 +44,7 @@ public class VScrollbar implements IHideable {
 
     protected boolean visible = true;
 
-    public VScrollbar(@Nonnull IGuiScreen gui, int xOrigin, int yOrigin, int height) {
+    public VScrollbar(@NotNull IGuiScreen gui, int xOrigin, int yOrigin, int height) {
         this.gui = gui;
         this.xOrigin = xOrigin;
         this.yOrigin = yOrigin;

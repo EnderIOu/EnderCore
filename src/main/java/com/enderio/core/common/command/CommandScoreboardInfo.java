@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -19,15 +16,18 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.TextComponentString;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class CommandScoreboardInfo extends CommandBase {
 
     @Override
-    public @Nonnull String getName() {
+    public @NotNull String getName() {
         return "scoreboardinfo";
     }
 
     @Override
-    public @Nonnull String getUsage(@Nonnull ICommandSender p_71518_1_) {
+    public @NotNull String getUsage(@NotNull ICommandSender p_71518_1_) {
         return "/scoreboardinfo <board> <name>";
     }
 
@@ -37,13 +37,13 @@ public class CommandScoreboardInfo extends CommandBase {
     }
 
     @Override
-    public boolean checkPermission(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender) {
+    public boolean checkPermission(@NotNull MinecraftServer server, @NotNull ICommandSender sender) {
         return true;
     }
 
     @Override
-    public void execute(@Nonnull MinecraftServer server, @Nonnull ICommandSender player,
-                        @Nonnull String[] args) throws CommandException {
+    public void execute(@NotNull MinecraftServer server, @NotNull ICommandSender player,
+                        @NotNull String[] args) throws CommandException {
         if (args.length < 2) {
             throw new WrongUsageException("This command requires 2 args: <board> <name>");
         }
@@ -77,8 +77,8 @@ public class CommandScoreboardInfo extends CommandBase {
     }
 
     @Override
-    public @Nonnull List<String> getTabCompletions(@Nonnull MinecraftServer server, @Nonnull ICommandSender sender,
-                                                   @Nonnull String[] args,
+    public @NotNull List<String> getTabCompletions(@NotNull MinecraftServer server, @NotNull ICommandSender sender,
+                                                   @NotNull String[] args,
                                                    @Nullable BlockPos pos) {
         if (args.length == 1) {
             List<String> boards = new ArrayList<String>();

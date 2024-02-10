@@ -2,16 +2,15 @@ package com.enderio.core.common.util;
 
 import java.util.Iterator;
 
-import javax.annotation.Nonnull;
-
 import com.enderio.core.common.util.NNList.NNIterator;
+import org.jetbrains.annotations.NotNull;
 
 public class EndlessNNIterator<T> implements Iterable<T>, NNIterator<T> {
 
     private int index = -1;
-    private final @Nonnull NNList<T> itOver;
+    private final @NotNull NNList<T> itOver;
 
-    public EndlessNNIterator(@Nonnull NNList<T> itOver) {
+    public EndlessNNIterator(@NotNull NNList<T> itOver) {
         this.itOver = itOver;
         if (itOver.isEmpty()) {
             throw new RuntimeException("Cannot iterate over empty list");
@@ -19,7 +18,7 @@ public class EndlessNNIterator<T> implements Iterable<T>, NNIterator<T> {
     }
 
     @Override
-    public @Nonnull Iterator<T> iterator() {
+    public @NotNull Iterator<T> iterator() {
         return this;
     }
 
@@ -29,7 +28,7 @@ public class EndlessNNIterator<T> implements Iterable<T>, NNIterator<T> {
     }
 
     @Override
-    public @Nonnull T next() {
+    public @NotNull T next() {
         if (++index >= itOver.size()) {
             index = 0;
         }

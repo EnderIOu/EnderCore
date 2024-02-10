@@ -1,12 +1,11 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public interface IProducer {
 
@@ -18,14 +17,14 @@ public interface IProducer {
         return null;
     };
 
-    default @Nonnull Block getBlockNN() {
+    default @NotNull Block getBlockNN() {
         return NullHelper.notnull(
                 NullHelper.notnull(getBlock(), "Block ", this, " is unexpectedly missing").delegate.get(), "Block ",
                 this,
                 " is unexpectedly missing");
     }
 
-    default @Nonnull Item getItemNN() {
+    default @NotNull Item getItemNN() {
         return NullHelper.notnull(
                 NullHelper.notnull(getItem(), "Item ", this, " is unexpectedly missing").delegate.get(), "Item ", this,
                 " is unexpectedly missing");

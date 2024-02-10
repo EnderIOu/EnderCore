@@ -1,8 +1,5 @@
 package com.enderio.core.common.fluid;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidEvent;
@@ -14,6 +11,8 @@ import com.enderio.core.api.common.util.ITankAccess;
 import com.enderio.core.common.util.FluidUtil;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.base.Strings;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class SmartTank extends FluidTank {
 
@@ -168,7 +167,7 @@ public class SmartTank extends FluidTank {
         }
     }
 
-    public @Nonnull FluidStack getFluidNN() {
+    public @NotNull FluidStack getFluidNN() {
         return NullHelper.notnull(getFluid(), "Internal Logic Error. Non-Empty tank has no fluid.");
     }
 
@@ -209,7 +208,7 @@ public class SmartTank extends FluidTank {
         }
     }
 
-    public void writeCommon(@Nonnull String name, @Nonnull NBTTagCompound nbtRoot) {
+    public void writeCommon(@NotNull String name, @NotNull NBTTagCompound nbtRoot) {
         NBTTagCompound tankRoot = new NBTTagCompound();
         writeToNBT(tankRoot);
         if (restriction != null) {
@@ -220,7 +219,7 @@ public class SmartTank extends FluidTank {
         nbtRoot.setTag(name, tankRoot);
     }
 
-    public void readCommon(@Nonnull String name, @Nonnull NBTTagCompound nbtRoot) {
+    public void readCommon(@NotNull String name, @NotNull NBTTagCompound nbtRoot) {
         if (nbtRoot.hasKey(name)) {
             NBTTagCompound tankRoot = (NBTTagCompound) nbtRoot.getTag(name);
             readFromNBT(tankRoot);
@@ -239,7 +238,7 @@ public class SmartTank extends FluidTank {
         }
     }
 
-    public static SmartTank createFromNBT(@Nonnull String name, @Nonnull NBTTagCompound nbtRoot) {
+    public static SmartTank createFromNBT(@NotNull String name, @NotNull NBTTagCompound nbtRoot) {
         SmartTank result = new SmartTank(0);
         result.readCommon(name, nbtRoot);
         if (result.getFluidAmount() > result.getCapacity()) {

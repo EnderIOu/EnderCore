@@ -1,17 +1,16 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 interface IThing {
 
-    @Nonnull
+    @NotNull
     NNList<IThing> bake();
 
     boolean is(@Nullable Item item);
@@ -20,13 +19,13 @@ interface IThing {
 
     boolean is(@Nullable Block block);
 
-    @Nonnull
+    @NotNull
     NNList<Item> getItems();
 
-    @Nonnull
+    @NotNull
     NNList<ItemStack> getItemStacks();
 
-    @Nonnull
+    @NotNull
     NNList<Block> getBlocks();
 
     public static interface Zwieback extends IThing {

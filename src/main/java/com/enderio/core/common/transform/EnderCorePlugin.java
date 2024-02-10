@@ -10,8 +10,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.ModAPIManager;
 import net.minecraftforge.fml.common.discovery.ASMDataTable;
@@ -22,6 +20,7 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin.MCVersion;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import org.objectweb.asm.Type;
 
 import com.google.common.base.MoreObjects;
@@ -87,7 +86,7 @@ public class EnderCorePlugin implements IFMLLoadingPlugin {
         instance = this;
     }
 
-    @Nonnull
+    @NotNull
     public static EnderCorePlugin instance() {
         EnderCorePlugin inst = instance;
         if (inst == null) {

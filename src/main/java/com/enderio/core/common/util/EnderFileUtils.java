@@ -26,13 +26,12 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
-import javax.annotation.Nonnull;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
 
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.config.ConfigHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class EnderFileUtils {
 
@@ -70,10 +69,9 @@ public class EnderFileUtils {
      *
      * @return The folder extracted to
      */
-    @Nonnull
-    public static File extractZip(File zip) {
+    public static @NotNull File extractZip(File zip) {
         String zipPath = zip.getParent() + "/extracted";
-        final @Nonnull File temp = new File(zipPath);
+        final File temp = new File(zipPath);
         temp.mkdir();
 
         ZipFile zipFile = null;
@@ -192,8 +190,7 @@ public class EnderFileUtils {
         }
     }
 
-    @Nonnull
-    public static File writeToFile(String filepath, String json) {
+    public static @NotNull File writeToFile(String filepath, String json) {
         File file = new File(filepath);
 
         try {

@@ -1,10 +1,10 @@
 package com.enderio.core.common.vecmath;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class Vertex {
 
-    public @Nonnull Vector3d xyz = new Vector3d();
+    public @NotNull Vector3d xyz = new Vector3d();
     public Vector2f uv = null;
     public Vector3f normal = null;
     public Vector4f color = null;

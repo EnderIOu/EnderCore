@@ -2,29 +2,28 @@ package com.enderio.core.client.render;
 
 import java.awt.Color;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.renderer.GlStateManager;
 
 import com.enderio.core.common.vecmath.Vector3f;
 import com.enderio.core.common.vecmath.Vector4f;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public final class ColorUtil {
 
-    public static @Nonnull Vector4f toFloat(@Nonnull Color color) {
+    public static @NotNull Vector4f toFloat(@NotNull Color color) {
         float[] rgba = color.getComponents(null);
         return new Vector4f(rgba[0], rgba[1], rgba[2], rgba[3]);
     }
 
-    public static @Nonnull Vector3f toFloat(int rgb) {
+    public static @NotNull Vector3f toFloat(int rgb) {
         int r = rgb >> 16 & 255;
         int g = rgb >> 8 & 255;
         int b = rgb & 255;
         return new Vector3f(r / 255F, g / 255F, b / 255F);
     }
 
-    public static @Nonnull Vector4f toFloat4(int rgb) {
+    public static @NotNull Vector4f toFloat4(int rgb) {
         int r = rgb >> 16 & 255;
         int g = rgb >> 8 & 255;
         int b = rgb & 255;
@@ -44,7 +43,7 @@ public final class ColorUtil {
         return color == null ? 0 : getRGBA(color.getAlpha(), color.getRed(), color.getGreen(), color.getBlue());
     }
 
-    public static int getRGB(@Nonnull Vector3f rgb) {
+    public static int getRGB(@NotNull Vector3f rgb) {
         return getRGB(rgb.x, rgb.y, rgb.z);
     }
 
@@ -52,7 +51,7 @@ public final class ColorUtil {
         return getRGB((int) (r * 255), (int) (g * 255), (int) (b * 255));
     }
 
-    public static int getRGBA(@Nonnull Vector4f col) {
+    public static int getRGBA(@NotNull Vector4f col) {
         return getRGBA(col.x, col.y, col.z, col.w);
     }
 

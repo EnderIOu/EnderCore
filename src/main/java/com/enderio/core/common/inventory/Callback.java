@@ -1,8 +1,8 @@
 package com.enderio.core.common.inventory;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public interface Callback<T> {
 
-    void onChange(@Nonnull T oldStack, @Nonnull T newStack);
+    void onChange(@NotNull T oldStack, @NotNull T newStack);
 }

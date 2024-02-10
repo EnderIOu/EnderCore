@@ -3,8 +3,6 @@ package com.enderio.core.client.gui;
 import java.io.IOException;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -15,10 +13,11 @@ import net.minecraft.client.renderer.RenderHelper;
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.client.gui.ToolTipManager.ToolTipRenderer;
 import com.enderio.core.client.gui.widget.GuiToolTip;
+import org.jetbrains.annotations.NotNull;
 
 public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer, IGuiScreen {
 
-    protected @Nonnull ToolTipManager ttMan = new ToolTipManager();
+    protected @NotNull ToolTipManager ttMan = new ToolTipManager();
 
     /** The X size of the inventory window in pixels. */
     protected int xSize = 176;
@@ -46,12 +45,12 @@ public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer
     }
 
     @Override
-    public void addToolTip(@Nonnull GuiToolTip toolTip) {
+    public void addToolTip(@NotNull GuiToolTip toolTip) {
         ttMan.addToolTip(toolTip);
     }
 
     @Override
-    public boolean removeToolTip(@Nonnull GuiToolTip toolTip) {
+    public boolean removeToolTip(@NotNull GuiToolTip toolTip) {
         return ttMan.removeToolTip(toolTip);
     }
 
@@ -102,8 +101,8 @@ public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer
     protected void drawForegroundImpl(int mouseX, int mouseY) {}
 
     @Override
-    public void drawHoveringToolTipText(@Nonnull List<String> par1List, int par2, int par3,
-                                        @Nonnull FontRenderer font) {
+    public void drawHoveringToolTipText(@NotNull List<String> par1List, int par2, int par3,
+                                        @NotNull FontRenderer font) {
         super.drawHoveringText(par1List, par2, par3, font);
     }
 
@@ -128,12 +127,12 @@ public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer
     }
 
     @Override
-    public @Nonnull FontRenderer getFontRenderer() {
+    public @NotNull FontRenderer getFontRenderer() {
         return Minecraft.getMinecraft().fontRenderer;
     }
 
     @Override
-    public @Nonnull <T extends GuiButton> T addButton(@Nonnull T button) {
+    public @NotNull <T extends GuiButton> T addButton(@NotNull T button) {
         if (!buttonList.contains(button)) {
             buttonList.add(button);
         }
@@ -141,12 +140,12 @@ public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer
     }
 
     @Override
-    public void removeButton(@Nonnull GuiButton button) {
+    public void removeButton(@NotNull GuiButton button) {
         buttonList.remove(button);
     }
 
     @Override
-    public void doActionPerformed(@Nonnull GuiButton guiButton) throws IOException {
+    public void doActionPerformed(@NotNull GuiButton guiButton) throws IOException {
         actionPerformed(guiButton);
     }
 
@@ -161,8 +160,7 @@ public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer
     }
 
     @Override
-    @Nonnull
-    public final <T extends GuiButton> T addGuiButton(@Nonnull T button) {
+    public final @NotNull <T extends GuiButton> T addGuiButton(@NotNull T button) {
         return addButton(button);
     }
 }

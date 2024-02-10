@@ -7,8 +7,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -27,6 +25,7 @@ import com.google.common.collect.Sets;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Untested way to save arbitrary to a game save. The name to ID map will be hot-swapped when a new save is loaded.
@@ -114,7 +113,7 @@ public class WorldCache<I> {
         generateIDs();
     }
 
-    protected void saveData(@Nonnull File file) throws IOException {
+    protected void saveData(@NotNull File file) throws IOException {
         NBTTagCompound data = new NBTTagCompound();
 
         // name <-> id mappings
@@ -188,7 +187,7 @@ public class WorldCache<I> {
         usedIDs.set(id, true);
     }
 
-    protected @Nonnull File getSaveFile() {
+    protected @NotNull File getSaveFile() {
         return new File(DimensionManager.getCurrentSaveRootDirectory(), ident + ".json");
     }
 

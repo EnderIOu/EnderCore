@@ -2,9 +2,6 @@ package com.enderio.core.common.util;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
@@ -15,6 +12,8 @@ import com.enderio.core.EnderCore;
 import com.enderio.core.api.client.render.IWidgetIcon;
 import com.enderio.core.client.gui.button.CycleButton.ICycleEnum;
 import com.enderio.core.client.render.EnderWidget;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public enum DyeColor implements ICycleEnum {
 
@@ -61,7 +60,7 @@ public enum DyeColor implements ICycleEnum {
 
     };
 
-    public static @Nonnull DyeColor getNext(@Nonnull DyeColor col) {
+    public static @NotNull DyeColor getNext(@NotNull DyeColor col) {
         int ord = col.ordinal() + 1;
         if (ord >= DyeColor.values().length) {
             ord = 0;
@@ -69,7 +68,7 @@ public enum DyeColor implements ICycleEnum {
         return NullHelper.first(DyeColor.values()[ord], DyeColor.BLACK);
     }
 
-    public static @Nullable DyeColor getColorFromDye(@Nonnull ItemStack dye) {
+    public static @Nullable DyeColor getColorFromDye(@NotNull ItemStack dye) {
         if (dye.isEmpty()) {
             return null;
         }
@@ -85,7 +84,7 @@ public enum DyeColor implements ICycleEnum {
         return null;
     }
 
-    public static @Nonnull DyeColor fromIndex(int index) {
+    public static @NotNull DyeColor fromIndex(int index) {
         return NullHelper.first(DyeColor.values()[MathHelper.clamp(index, 0, DyeColor.values().length - 1)],
                 DyeColor.BLACK);
     }
@@ -96,11 +95,11 @@ public enum DyeColor implements ICycleEnum {
         return ItemDye.DYE_COLORS[ordinal()];
     }
 
-    public @Nonnull String getName() {
+    public @NotNull String getName() {
         return EnumDyeColor.values()[ordinal()].getName();
     }
 
-    public @Nonnull String getLocalisedName() {
+    public @NotNull String getLocalisedName() {
         return EnderCore.lang.localizeExact(NullHelper.notnull(DYE_ORE_UNLOCAL_NAMES[ordinal()], "Data corruption"),
                 false);
     }
@@ -111,14 +110,12 @@ public enum DyeColor implements ICycleEnum {
     }
 
     @Override
-    @Nonnull
-    public IWidgetIcon getIcon() {
+    public @NotNull IWidgetIcon getIcon() {
         return NullHelper.first(DYE_ICONS[ordinal()], EnderWidget.COLOR_BLACK);
     }
 
     @Override
-    @Nonnull
-    public List<String> getTooltipLines() {
+    public @NotNull List<String> getTooltipLines() {
         return new NNList<>(getLocalisedName());
     }
 }

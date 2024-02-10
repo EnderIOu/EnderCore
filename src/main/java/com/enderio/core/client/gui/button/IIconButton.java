@@ -1,8 +1,5 @@
 package com.enderio.core.client.gui.button;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
@@ -10,6 +7,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.util.ResourceLocation;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.client.render.RenderUtil;
@@ -27,7 +26,7 @@ public class IIconButton extends GuiButton {
     protected @Nullable TextureAtlasSprite icon;
     protected @Nullable ResourceLocation texture;
 
-    public IIconButton(@Nonnull FontRenderer fr, int id, int x, int y, @Nullable TextureAtlasSprite icon,
+    public IIconButton(@NotNull FontRenderer fr, int id, int x, int y, @Nullable TextureAtlasSprite icon,
                        @Nullable ResourceLocation texture) {
         super(id, x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, "");
         hwidth = HWIDTH;
@@ -63,7 +62,7 @@ public class IIconButton extends GuiButton {
      * Draws this button to the screen.
      */
     @Override
-    public void drawButton(@Nonnull Minecraft par1Minecraft, int mouseX, int mouseY, float partialTicks) {
+    public void drawButton(@NotNull Minecraft par1Minecraft, int mouseX, int mouseY, float partialTicks) {
         if (visible) {
 
             RenderUtil.bindTexture("textures/gui/widgets.png");

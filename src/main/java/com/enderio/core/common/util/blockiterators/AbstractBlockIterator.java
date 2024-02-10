@@ -2,15 +2,15 @@ package com.enderio.core.common.util.blockiterators;
 
 import java.util.Iterator;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.math.BlockPos;
+
+import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractBlockIterator implements Iterable<BlockPos>, Iterator<BlockPos> {
 
-    protected final @Nonnull BlockPos base;
+    protected final @NotNull BlockPos base;
 
-    protected AbstractBlockIterator(@Nonnull BlockPos base) {
+    protected AbstractBlockIterator(@NotNull BlockPos base) {
         this.base = base;
     }
 
@@ -20,7 +20,7 @@ public abstract class AbstractBlockIterator implements Iterable<BlockPos>, Itera
     }
 
     @Override
-    public @Nonnull Iterator<BlockPos> iterator() {
+    public @NotNull Iterator<BlockPos> iterator() {
         return this;
     }
 }

@@ -6,11 +6,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import javax.annotation.Nonnull;
-
 import net.minecraftforge.common.config.Configuration;
 
 import com.enderio.core.common.config.ConfigProcessor;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Used to mark a {@code static} field as a config option. Has no effect if the class is not processed with a
@@ -28,6 +27,6 @@ public @interface Config {
      *
      * @return A string section name.
      */
-    @Nonnull
+    @NotNull
     String value() default Configuration.CATEGORY_GENERAL;
 }

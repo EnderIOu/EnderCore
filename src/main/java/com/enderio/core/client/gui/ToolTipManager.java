@@ -3,13 +3,12 @@ package com.enderio.core.client.gui;
 import java.util.List;
 import java.util.Set;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.gui.FontRenderer;
 
 import com.enderio.core.client.gui.widget.GuiToolTip;
 import com.enderio.core.common.util.NNList;
 import com.google.common.collect.Sets;
+import org.jetbrains.annotations.NotNull;
 
 public class ToolTipManager {
 
@@ -21,19 +20,19 @@ public class ToolTipManager {
 
         int getGuiXSize();
 
-        @Nonnull
+        @NotNull
         FontRenderer getFontRenderer();
 
-        void drawHoveringToolTipText(@Nonnull List<String> par1List, int par2, int par3, @Nonnull FontRenderer font);
+        void drawHoveringToolTipText(@NotNull List<String> par1List, int par2, int par3, @NotNull FontRenderer font);
     }
 
-    private final @Nonnull Set<GuiToolTip> toolTips = Sets.newHashSet();
+    private final @NotNull Set<GuiToolTip> toolTips = Sets.newHashSet();
 
-    public void addToolTip(@Nonnull GuiToolTip toolTip) {
+    public void addToolTip(@NotNull GuiToolTip toolTip) {
         toolTips.add(toolTip);
     }
 
-    public boolean removeToolTip(@Nonnull GuiToolTip toolTip) {
+    public boolean removeToolTip(@NotNull GuiToolTip toolTip) {
         return toolTips.remove(toolTip);
     }
 
@@ -41,7 +40,7 @@ public class ToolTipManager {
         toolTips.clear();
     }
 
-    protected final void drawTooltips(@Nonnull ToolTipRenderer renderer, int mouseX, int mouseY) {
+    protected final void drawTooltips(@NotNull ToolTipRenderer renderer, int mouseX, int mouseY) {
         for (GuiToolTip toolTip : toolTips) {
             toolTip.onTick(mouseX - renderer.getGuiRootLeft(), mouseY - renderer.getGuiRootTop());
             if (toolTip.shouldDraw()) {
@@ -50,7 +49,7 @@ public class ToolTipManager {
         }
     }
 
-    protected void drawTooltip(@Nonnull GuiToolTip toolTip, int mouseX, int mouseY, @Nonnull ToolTipRenderer renderer) {
+    protected void drawTooltip(@NotNull GuiToolTip toolTip, int mouseX, int mouseY, @NotNull ToolTipRenderer renderer) {
         List<String> list = toolTip.getToolTipText();
         if (list.isEmpty()) {
             return;

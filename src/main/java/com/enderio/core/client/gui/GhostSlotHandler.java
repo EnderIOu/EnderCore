@@ -1,8 +1,5 @@
 package com.enderio.core.client.gui;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.item.ItemStack;
@@ -11,18 +8,19 @@ import com.enderio.core.client.gui.widget.GhostSlot;
 import com.enderio.core.client.render.RenderUtil;
 import com.enderio.core.common.util.ItemUtil;
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class GhostSlotHandler {
 
-    protected final @Nonnull NNList<GhostSlot> ghostSlots = new NNList<GhostSlot>();
+    protected final @NotNull NNList<GhostSlot> ghostSlots = new NNList<GhostSlot>();
     protected @Nullable GhostSlot hoverGhostSlot;
 
     public GhostSlotHandler() {}
 
     // GhostSlot managing
 
-    @Nonnull
-    public NNList<GhostSlot> getGhostSlots() {
+    public @NotNull NNList<GhostSlot> getGhostSlots() {
         return ghostSlots;
     }
 
@@ -30,7 +28,7 @@ public class GhostSlotHandler {
         ghostSlots.add(slot);
     }
 
-    public GhostSlot getGhostSlotAt(@Nonnull GuiContainerBase guiContainerBase, int mouseX, int mouseY) {
+    public GhostSlot getGhostSlotAt(@NotNull GuiContainerBase guiContainerBase, int mouseX, int mouseY) {
         int mX = mouseX - guiContainerBase.getGuiLeft();
         int mY = mouseY - guiContainerBase.getGuiTop();
         for (GhostSlot slot : ghostSlots) {
@@ -57,7 +55,7 @@ public class GhostSlotHandler {
      * @param button
      *               The button used (0=left, 1=right). The mouse wheel is mapped to -1=down and -2=up.
      */
-    protected void ghostSlotClicked(@Nonnull GuiContainerBase gui, @Nonnull GhostSlot slot, int x, int y, int button) {
+    protected void ghostSlotClicked(@NotNull GuiContainerBase gui, @NotNull GhostSlot slot, int x, int y, int button) {
         ItemStack handStack = Minecraft.getMinecraft().player.inventory.getItemStack();
         ItemStack existingStack = slot.getStack();
         if (button == 0) { // left
@@ -71,8 +69,8 @@ public class GhostSlotHandler {
         }
     }
 
-    protected void ghostSlotClickedPrimaryMouseButton(@Nonnull GhostSlot slot, @Nonnull ItemStack handStack,
-                                                      @Nonnull ItemStack existingStack) {
+    protected void ghostSlotClickedPrimaryMouseButton(@NotNull GhostSlot slot, @NotNull ItemStack handStack,
+                                                      @NotNull ItemStack existingStack) {
         if (handStack.isEmpty()) { // empty hand
             slot.putStack(ItemStack.EMPTY, 0);
         } else { // item in hand
@@ -93,8 +91,8 @@ public class GhostSlotHandler {
         }
     }
 
-    protected void ghostSlotClickedSecondaryMouseButton(@Nonnull GhostSlot slot, @Nonnull ItemStack handStack,
-                                                        @Nonnull ItemStack existingStack) {
+    protected void ghostSlotClickedSecondaryMouseButton(@NotNull GhostSlot slot, @NotNull ItemStack handStack,
+                                                        @NotNull ItemStack existingStack) {
         if (handStack.isEmpty()) { // empty hand
             slot.putStack(ItemStack.EMPTY, 0);
         } else { // item in hand
@@ -110,16 +108,16 @@ public class GhostSlotHandler {
         }
     }
 
-    protected void ghostSlotClickedMouseWheelUp(@Nonnull GhostSlot slot, @Nonnull ItemStack handStack,
-                                                @Nonnull ItemStack existingStack) {
+    protected void ghostSlotClickedMouseWheelUp(@NotNull GhostSlot slot, @NotNull ItemStack handStack,
+                                                @NotNull ItemStack existingStack) {
         if (!existingStack.isEmpty() && existingStack.getCount() < existingStack.getMaxStackSize() &&
                 existingStack.getCount() < slot.getStackSizeLimit()) {
             increaseSlot(slot, existingStack);
         }
     }
 
-    protected void ghostSlotClickedMouseWheelDown(@Nonnull GhostSlot slot, @Nonnull ItemStack handStack,
-                                                  @Nonnull ItemStack existingStack) {
+    protected void ghostSlotClickedMouseWheelDown(@NotNull GhostSlot slot, @NotNull ItemStack handStack,
+                                                  @NotNull ItemStack existingStack) {
         if (!existingStack.isEmpty()) {
             descreaseSlot(slot, existingStack);
         }
@@ -127,23 +125,23 @@ public class GhostSlotHandler {
 
     // Slot interaction tools
 
-    protected void descreaseSlot(@Nonnull GhostSlot slot, @Nonnull ItemStack existingStack) {
+    protected void descreaseSlot(@NotNull GhostSlot slot, @NotNull ItemStack existingStack) {
         existingStack.shrink(1);
         slot.putStack(existingStack, existingStack.getCount());
     }
 
-    protected void increaseSlot(@Nonnull GhostSlot slot, @Nonnull ItemStack existingStack) {
+    protected void increaseSlot(@NotNull GhostSlot slot, @NotNull ItemStack existingStack) {
         existingStack.grow(1);
         slot.putStack(existingStack, existingStack.getCount());
     }
 
-    protected void replaceSlot1Item(@Nonnull GhostSlot slot, @Nonnull ItemStack handStack) {
+    protected void replaceSlot1Item(@NotNull GhostSlot slot, @NotNull ItemStack handStack) {
         ItemStack oneItem = handStack.copy();
         oneItem.setCount(1);
         slot.putStack(oneItem, oneItem.getCount());
     }
 
-    protected void replaceSlot(@Nonnull GhostSlot slot, @Nonnull ItemStack handStack) {
+    protected void replaceSlot(@NotNull GhostSlot slot, @NotNull ItemStack handStack) {
         if (handStack.getCount() <= slot.getStackSizeLimit()) {
             slot.putStack(handStack, handStack.getCount());
         } else {
@@ -155,11 +153,11 @@ public class GhostSlotHandler {
 
     // Rendering
 
-    protected void startDrawing(@Nonnull GuiContainerBase gui) {
+    protected void startDrawing(@NotNull GuiContainerBase gui) {
         hoverGhostSlot = null;
     }
 
-    protected void drawGhostSlots(@Nonnull GuiContainerBase gui, int mouseX, int mouseY) {
+    protected void drawGhostSlots(@NotNull GuiContainerBase gui, int mouseX, int mouseY) {
         int sx = gui.getGuiLeft();
         int sy = gui.getGuiTop();
         gui.drawFakeItemsStart();
@@ -197,7 +195,7 @@ public class GhostSlotHandler {
      * This gives the illusion that the item was
      * painted with 50% transparency. (100%*a ° 100%*b ° 50%*a == 100%*a ° 50%*b)
      */
-    protected void drawGhostSlotGrayout(@Nonnull GuiContainerBase gui, @Nonnull GhostSlot slot) {
+    protected void drawGhostSlotGrayout(@NotNull GuiContainerBase gui, @NotNull GhostSlot slot) {
         GlStateManager.disableDepth();
         GlStateManager.enableBlend();
         GlStateManager.disableLighting();
@@ -209,7 +207,7 @@ public class GhostSlotHandler {
         GlStateManager.enableDepth();
     }
 
-    protected boolean drawGhostSlotToolTip(@Nonnull GuiContainerBase gui, int mouseX, int mouseY) {
+    protected boolean drawGhostSlotToolTip(@NotNull GuiContainerBase gui, int mouseX, int mouseY) {
         final GhostSlot hoverGhostSlot2 = hoverGhostSlot;
         if (hoverGhostSlot2 != null) {
             return hoverGhostSlot2.drawGhostSlotToolTip(gui, mouseX, mouseY);

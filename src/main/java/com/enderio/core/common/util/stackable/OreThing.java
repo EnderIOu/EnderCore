@@ -1,8 +1,5 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
@@ -11,19 +8,21 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class OreThing implements IThing.Zwieback {
 
-    private final @Nonnull String name;
-    private @Nonnull NonNullList<ItemStack> ores = new NNList<ItemStack>();
+    private final @NotNull String name;
+    private @NotNull NonNullList<ItemStack> ores = new NNList<ItemStack>();
 
-    OreThing(@Nonnull String name) {
+    OreThing(@NotNull String name) {
         this.name = name;
     }
 
     @SuppressWarnings("null")
     @Override
-    public @Nonnull NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         ores = OreDictionary.getOres(name);
         return new NNList<>(this);
     }
@@ -67,7 +66,7 @@ class OreThing implements IThing.Zwieback {
     }
 
     @Override
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         NNList<Item> result = new NNList<Item>();
         for (ItemStack oreStack : ores) {
             if (!oreStack.isEmpty() && !result.contains(oreStack.getItem())) {
@@ -78,12 +77,12 @@ class OreThing implements IThing.Zwieback {
     }
 
     @Override
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         return NNList.wrap(ores);
     }
 
     @Override
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         NNList<Block> result = new NNList<Block>();
         for (ItemStack oreStack : ores) {
             if (!oreStack.isEmpty()) {
@@ -96,7 +95,7 @@ class OreThing implements IThing.Zwieback {
         return result;
     }
 
-    public @Nonnull String getName() {
+    public @NotNull String getName() {
         return name;
     }
 

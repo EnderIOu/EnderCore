@@ -2,14 +2,13 @@ package com.enderio.core.common.fluid;
 
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
 import com.enderio.core.api.common.util.ITankAccess;
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TankAccessFluidWrapper implements IFluidWrapper {
 
@@ -39,8 +38,7 @@ public class TankAccessFluidWrapper implements IFluidWrapper {
     }
 
     @Override
-    @Nullable
-    public FluidStack drain(FluidStack resource) {
+    public @Nullable FluidStack drain(FluidStack resource) {
         FluidTank[] outputTanks = tankAccess.getOutputTanks();
         if (outputTanks.length >= 1 && outputTanks[0] != null) {
             tankAccess.setTanksDirty();
@@ -50,8 +48,7 @@ public class TankAccessFluidWrapper implements IFluidWrapper {
     }
 
     @Override
-    @Nullable
-    public FluidStack getAvailableFluid() {
+    public @Nullable FluidStack getAvailableFluid() {
         FluidTank[] outputTanks = tankAccess.getOutputTanks();
         if (outputTanks.length >= 1 && outputTanks[0] != null) {
             return outputTanks[0].getFluid();
@@ -60,8 +57,7 @@ public class TankAccessFluidWrapper implements IFluidWrapper {
     }
 
     @Override
-    @Nonnull
-    public List<ITankInfoWrapper> getTankInfoWrappers() {
+    public @NotNull List<ITankInfoWrapper> getTankInfoWrappers() {
         return NNList.emptyList();
     }
 }

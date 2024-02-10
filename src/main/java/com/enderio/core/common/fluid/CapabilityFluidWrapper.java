@@ -3,13 +3,13 @@ package com.enderio.core.common.fluid;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CapabilityFluidWrapper implements IFluidWrapper {
 
@@ -30,20 +30,17 @@ public class CapabilityFluidWrapper implements IFluidWrapper {
     }
 
     @Override
-    @Nullable
-    public FluidStack drain(FluidStack resource) {
+    public @Nullable FluidStack drain(FluidStack resource) {
         return fluidHandler.drain(resource, true);
     }
 
     @Override
-    @Nullable
-    public FluidStack getAvailableFluid() {
+    public @Nullable FluidStack getAvailableFluid() {
         return fluidHandler.drain(Integer.MAX_VALUE, false);
     }
 
     @Override
-    @Nonnull
-    public List<ITankInfoWrapper> getTankInfoWrappers() {
+    public @NotNull List<ITankInfoWrapper> getTankInfoWrappers() {
         List<ITankInfoWrapper> result = new ArrayList<ITankInfoWrapper>();
         IFluidTankProperties[] tankProperties = fluidHandler.getTankProperties();
         if (tankProperties != null) {

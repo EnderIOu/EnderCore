@@ -4,20 +4,19 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
 import io.netty.buffer.ByteBuf;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Created by CrazyPants on 27/02/14.
  */
 public class NetworkUtil {
 
-    public static @Nonnull NBTTagCompound readNBTTagCompound(ByteBuf dataIn) {
+    public static @NotNull NBTTagCompound readNBTTagCompound(ByteBuf dataIn) {
         try {
             short size = dataIn.readShort();
             if (size < 0) {

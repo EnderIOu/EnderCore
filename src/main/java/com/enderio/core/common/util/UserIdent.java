@@ -2,23 +2,22 @@ package com.enderio.core.common.util;
 
 import java.util.UUID;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.UsernameCache;
 
 import com.google.common.base.Charsets;
 import com.mojang.authlib.GameProfile;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class UserIdent {
 
-    private static final @Nonnull String NONE_MARKER = "none";
+    private static final @NotNull String NONE_MARKER = "none";
     private final @Nullable UUID uuid;
-    private final @Nonnull UUID uuid_offline;
-    private final @Nonnull String playerName;
+    private final @NotNull UUID uuid_offline;
+    private final @NotNull String playerName;
 
-    public @Nonnull String getPlayerName() {
+    public @NotNull String getPlayerName() {
         if (uuid != null) {
             String lastKnownName = UsernameCache.getLastKnownUsername(uuid);
             if (lastKnownName != null) {
@@ -28,15 +27,15 @@ public class UserIdent {
         return playerName;
     }
 
-    public @Nonnull UUID getUUID() {
+    public @NotNull UUID getUUID() {
         return uuid != null ? uuid : uuid_offline;
     }
 
-    public @Nonnull String getUUIDString() {
+    public @NotNull String getUUIDString() {
         return uuid != null ? uuid + "" : NONE_MARKER;
     }
 
-    public @Nonnull GameProfile getAsGameProfile() {
+    public @NotNull GameProfile getAsGameProfile() {
         return new GameProfile(getUUID(), getPlayerName());
     }
 
@@ -45,7 +44,7 @@ public class UserIdent {
      * changes, implement them and write a log
      * message.
      */
-    public static @Nonnull UserIdent create(@Nullable UUID uuid, @Nullable String playerName) {
+    public static @NotNull UserIdent create(@Nullable UUID uuid, @Nullable String playerName) {
         if (uuid != null) {
             if (NOBODY.equals(uuid)) {
                 return NOBODY;
@@ -71,7 +70,7 @@ public class UserIdent {
      * changes, implement them and write a log
      * message.
      */
-    public static @Nonnull UserIdent create(@Nonnull String suuid, @Nullable String playerName) {
+    public static @NotNull UserIdent create(@NotNull String suuid, @Nullable String playerName) {
         if (NONE_MARKER.equals(suuid)) {
             return new UserIdent(null, playerName);
         }
@@ -90,7 +89,7 @@ public class UserIdent {
      * Create a UserIdent from a legacy string. The string can either be a UUID or a player name. Use this when reading
      * legacy data or user configured values.
      */
-    public static @Nonnull UserIdent create(@Nullable String legacyData) {
+    public static @NotNull UserIdent create(@Nullable String legacyData) {
         UUID uuid = PlayerUtil.getPlayerUIDUnstable(legacyData);
         if (uuid != null) {
             return new UserIdent(uuid, legacyData);
@@ -104,7 +103,7 @@ public class UserIdent {
     /**
      * Create a UserIdent from a GameProfile. Use this when creating a UserIdent for a currently active player.
      */
-    public static @Nonnull UserIdent create(@Nullable GameProfile gameProfile) {
+    public static @NotNull UserIdent create(@Nullable GameProfile gameProfile) {
         if (gameProfile != null && (gameProfile.getId() != null || gameProfile.getName() != null)) {
             if (gameProfile.getId() != null && gameProfile.getName() != null &&
                     gameProfile.getId().equals(offlineUUID(gameProfile.getName()))) {
@@ -117,7 +116,7 @@ public class UserIdent {
         }
     }
 
-    private static @Nonnull UUID offlineUUID(@Nullable String playerName) {
+    private static @NotNull UUID offlineUUID(@Nullable String playerName) {
         return NullHelper.notnullJ(UUID.nameUUIDFromBytes(("OfflinePlayer:" + playerName).getBytes(Charsets.UTF_8)),
                 "UUID.nameUUIDFromBytes()");
     }
@@ -176,21 +175,19 @@ public class UserIdent {
         return uuid_offline_other.equals(this.uuid) || this.uuid_offline.equals(uuid_offline_other);
     }
 
-    public void saveToNbt(@Nonnull NBTTagCompound nbt, @Nonnull String prefix) {
+    public void saveToNbt(@NotNull NBTTagCompound nbt, @NotNull String prefix) {
         if (uuid != null) {
             nbt.setString(prefix + ".uuid", "" + uuid.toString());
         }
         nbt.setString(prefix + ".login", playerName);
     }
 
-    public static boolean existsInNbt(@Nonnull NBTTagCompound nbt, @Nonnull String prefix) {
+    public static boolean existsInNbt(@NotNull NBTTagCompound nbt, @NotNull String prefix) {
         return nbt.hasKey(prefix + ".uuid") || nbt.hasKey(prefix + ".login");
     }
 
-    public static @Nonnull UserIdent readfromNbt(@Nonnull NBTTagCompound nbt, @Nonnull String prefix) {
-        @Nonnull
+    public static @NotNull UserIdent readfromNbt(@NotNull NBTTagCompound nbt, @NotNull String prefix) {
         String suuid = nbt.getString(prefix + ".uuid");
-        @Nonnull
         String login = NullHelper.untrusted(nbt.getString(prefix + ".login"), "NBTTagCompound.getString()");
         if (Nobody.NOBODY_MARKER.equals(suuid)) {
             return NOBODY;
@@ -212,11 +209,11 @@ public class UserIdent {
         return "User [uuid=" + (uuid != null ? uuid : "(unknown)") + ", name=" + playerName + "]";
     }
 
-    public static final @Nonnull Nobody NOBODY = new Nobody();
+    public static final @NotNull Nobody NOBODY = new Nobody();
 
     private static class Nobody extends UserIdent {
 
-        private static final @Nonnull String NOBODY_MARKER = "nobody";
+        private static final @NotNull String NOBODY_MARKER = "nobody";
 
         Nobody() {
             super(null, "[unknown player]");
@@ -228,7 +225,7 @@ public class UserIdent {
         }
 
         @Override
-        public void saveToNbt(@Nonnull NBTTagCompound nbt, @Nonnull String prefix) {
+        public void saveToNbt(@NotNull NBTTagCompound nbt, @NotNull String prefix) {
             nbt.setString(prefix + ".uuid", NOBODY_MARKER);
         }
     }

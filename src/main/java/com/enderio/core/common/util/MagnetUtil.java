@@ -1,18 +1,18 @@
 package com.enderio.core.common.util;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IProjectile;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.math.BlockPos;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class MagnetUtil {
 
-    private static final @Nonnull String PREVENT_REMOTE_MOVEMENT = "PreventRemoteMovement";
-    private static final @Nonnull String ALLOW_MACHINE_MOVEMENT = "AllowMachineRemoteMovement";
-    public static final @Nonnull String EC_PULLER_TAG = "ECpuller";
+    private static final @NotNull String PREVENT_REMOTE_MOVEMENT = "PreventRemoteMovement";
+    private static final @NotNull String ALLOW_MACHINE_MOVEMENT = "AllowMachineRemoteMovement";
+    public static final @NotNull String EC_PULLER_TAG = "ECpuller";
 
     @Deprecated
     public static boolean shouldAttract(@Nullable BlockPos pullerPos, @Nullable Entity entity) {
@@ -27,7 +27,6 @@ public class MagnetUtil {
             return false;
         }
 
-        @Nonnull
         NBTTagCompound data = entity.getEntityData();
 
         if (isReservedByOthers(data, isMachine)) {
@@ -69,7 +68,7 @@ public class MagnetUtil {
         }
     }
 
-    public static void reserve(@Nonnull NBTTagCompound data, @Nullable BlockPos pullerPos) {
+    public static void reserve(@NotNull NBTTagCompound data, @Nullable BlockPos pullerPos) {
         if (pullerPos != null) {
             data.setLong(EC_PULLER_TAG, pullerPos.toLong());
         }
@@ -82,29 +81,29 @@ public class MagnetUtil {
         }
     }
 
-    public static void release(@Nonnull NBTTagCompound data) {
+    public static void release(@NotNull NBTTagCompound data) {
         data.removeTag(EC_PULLER_TAG);
     }
 
     @Deprecated
-    public static boolean isReserved(@Nonnull Entity entity) {
+    public static boolean isReserved(@NotNull Entity entity) {
         return isReserved(entity, false);
     }
 
-    public static boolean isReserved(@Nonnull Entity entity, boolean isMachine) {
+    public static boolean isReserved(@NotNull Entity entity, boolean isMachine) {
         return isReservedByUs(entity.getEntityData()) || isReservedByOthers(entity.getEntityData(), isMachine);
     }
 
-    public static boolean isReservedByUs(@Nonnull NBTTagCompound data) {
+    public static boolean isReservedByUs(@NotNull NBTTagCompound data) {
         return data.hasKey(EC_PULLER_TAG);
     }
 
     @Deprecated
-    public static boolean isReservedByOthers(@Nonnull NBTTagCompound data) {
+    public static boolean isReservedByOthers(@NotNull NBTTagCompound data) {
         return isReservedByOthers(data, false);
     }
 
-    public static boolean isReservedByOthers(@Nonnull NBTTagCompound data, boolean isMachine) {
+    public static boolean isReservedByOthers(@NotNull NBTTagCompound data, boolean isMachine) {
         return data.hasKey(PREVENT_REMOTE_MOVEMENT) && (!isMachine || !data.hasKey(ALLOW_MACHINE_MOVEMENT));
     }
 }

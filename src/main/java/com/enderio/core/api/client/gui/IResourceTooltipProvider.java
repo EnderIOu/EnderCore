@@ -1,11 +1,11 @@
 package com.enderio.core.api.client.gui;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.item.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
 
 public interface IResourceTooltipProvider {
 
-    @Nonnull
-    String getUnlocalizedNameForTooltip(@Nonnull ItemStack itemStack);
+    @NotNull
+    String getUnlocalizedNameForTooltip(@NotNull ItemStack itemStack);
 }

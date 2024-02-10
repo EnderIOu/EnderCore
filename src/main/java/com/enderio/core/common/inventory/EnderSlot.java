@@ -3,51 +3,51 @@ package com.enderio.core.common.inventory;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class EnderSlot extends SlotItemHandler {
 
-    protected final @Nonnull EnderInventory.Type type;
+    protected final @NotNull EnderInventory.Type type;
 
-    public EnderSlot(@Nonnull EnderInventory.Type type, @Nonnull InventorySlot itemHandler, int xPosition,
+    public EnderSlot(@NotNull EnderInventory.Type type, @NotNull InventorySlot itemHandler, int xPosition,
                      int yPosition) {
         super(itemHandler, 0, xPosition, yPosition);
         this.type = type;
     }
 
-    public EnderSlot(@Nonnull EnderInventory.Type type, @Nonnull EnderInventory enderInventory, @Nonnull String ident,
+    public EnderSlot(@NotNull EnderInventory.Type type, @NotNull EnderInventory enderInventory, @NotNull String ident,
                      int xPosition, int yPosition) {
         super(enderInventory.getSlot(ident), 0, xPosition, yPosition);
         this.type = type;
     }
 
-    public EnderSlot(@Nonnull EnderInventory.View enderInventory, @Nonnull String ident, int xPosition, int yPosition) {
+    public EnderSlot(@NotNull EnderInventory.View enderInventory, @NotNull String ident, int xPosition, int yPosition) {
         this(enderInventory.getType(), enderInventory.getParent(), ident, xPosition, yPosition);
     }
 
-    public EnderSlot(@Nonnull EnderInventory.Type type, @Nonnull EnderInventory enderInventory, @Nonnull Enum<?> ident,
+    public EnderSlot(@NotNull EnderInventory.Type type, @NotNull EnderInventory enderInventory, @NotNull Enum<?> ident,
                      int xPosition, int yPosition) {
         super(enderInventory.getSlot(ident), 0, xPosition, yPosition);
         this.type = type;
     }
 
-    public EnderSlot(@Nonnull EnderInventory.View enderInventory, @Nonnull Enum<?> ident, int xPosition,
+    public EnderSlot(@NotNull EnderInventory.View enderInventory, @NotNull Enum<?> ident, int xPosition,
                      int yPosition) {
         this(enderInventory.getType(), enderInventory.getParent(), ident, xPosition, yPosition);
     }
 
-    public static List<EnderSlot> create(@Nonnull EnderInventory enderInventory, @Nonnull EnderInventory.Type type,
+    public static List<EnderSlot> create(@NotNull EnderInventory enderInventory, @NotNull EnderInventory.Type type,
                                          int xPosition, int yPosition, int cols,
                                          int rows) {
         return create(enderInventory, type, xPosition, yPosition, 18, 18, cols, rows);
     }
 
-    public static List<EnderSlot> create(@Nonnull EnderInventory enderInventory, @Nonnull EnderInventory.Type type,
+    public static List<EnderSlot> create(@NotNull EnderInventory enderInventory, @NotNull EnderInventory.Type type,
                                          int xPosition, int yPosition, int xOffset,
                                          int yOffset, int cols, int rows) {
         List<EnderSlot> result = new ArrayList<EnderSlot>();
@@ -72,18 +72,18 @@ public class EnderSlot extends SlotItemHandler {
     }
 
     @Override
-    public void putStack(@Nonnull ItemStack stack) {
+    public void putStack(@NotNull ItemStack stack) {
         ((InventorySlot) getItemHandler()).set(stack);
         this.onSlotChanged();
     }
 
     @Override
-    public boolean isItemValid(@Nonnull ItemStack stack) {
+    public boolean isItemValid(@NotNull ItemStack stack) {
         return ((InventorySlot) getItemHandler()).isItemValidForSlot(stack);
     }
 
     @Override
-    public int getItemStackLimit(@Nonnull ItemStack stack) {
+    public int getItemStackLimit(@NotNull ItemStack stack) {
         return getSlotStackLimit();
     }
 
@@ -98,15 +98,15 @@ public class EnderSlot extends SlotItemHandler {
                 ((InventorySlot) getItemHandler()).getOwner();
     }
 
-    public @Nonnull EnderInventory.Type getType() {
+    public @NotNull EnderInventory.Type getType() {
         return type;
     }
 
-    public boolean is(@Nonnull EnderInventory.Type typeIn) {
+    public boolean is(@NotNull EnderInventory.Type typeIn) {
         return this.type == typeIn;
     }
 
-    public static boolean is(@Nullable Slot slot, @Nonnull EnderInventory.Type typeIn) {
+    public static boolean is(@Nullable Slot slot, @NotNull EnderInventory.Type typeIn) {
         return slot != null && slot instanceof EnderSlot && ((EnderSlot) slot).is(typeIn);
     }
 }

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityList;
@@ -26,6 +24,7 @@ import net.minecraftforge.common.DimensionManager;
 
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.vecmath.Vector3d;
+import org.jetbrains.annotations.NotNull;
 
 public class EntityUtil {
 
@@ -37,11 +36,11 @@ public class EntityUtil {
         entity.motionZ = velZ;
     }
 
-    public static @Nonnull EntityFireworkRocket getRandomFirework(@Nonnull World world) {
+    public static @NotNull EntityFireworkRocket getRandomFirework(@NotNull World world) {
         return getRandomFirework(world, new BlockPos(0, 0, 0));
     }
 
-    public static @Nonnull EntityFireworkRocket getRandomFirework(@Nonnull World world, @Nonnull BlockPos pos) {
+    public static @NotNull EntityFireworkRocket getRandomFirework(@NotNull World world, @NotNull BlockPos pos) {
         ItemStack firework = new ItemStack(Items.FIREWORKS);
         firework.setTagCompound(new NBTTagCompound());
         NBTTagCompound expl = new NBTTagCompound();
@@ -70,11 +69,11 @@ public class EntityUtil {
         return e;
     }
 
-    public static void spawnFirework(@Nonnull BlockPos block, int dimID) {
+    public static void spawnFirework(@NotNull BlockPos block, int dimID) {
         spawnFirework(block, dimID, 0);
     }
 
-    public static void spawnFirework(@Nonnull BlockPos pos, int dimID, int range) {
+    public static void spawnFirework(@NotNull BlockPos pos, int dimID, int range) {
         World world = DimensionManager.getWorld(dimID);
         BlockPos spawnPos = pos;
 
@@ -100,11 +99,11 @@ public class EntityUtil {
         return base + 0.5 + rand.nextDouble() * range - (range / 2);
     }
 
-    public static @Nonnull String getDisplayNameForEntity(@Nonnull String mobName) {
+    public static @NotNull String getDisplayNameForEntity(@NotNull String mobName) {
         return EnderCore.lang.localizeExact("entity." + mobName + ".name");
     }
 
-    public static @Nonnull NNList<ResourceLocation> getAllRegisteredMobNames() {
+    public static @NotNull NNList<ResourceLocation> getAllRegisteredMobNames() {
         NNList<ResourceLocation> result = new NNList<ResourceLocation>();
         for (ResourceLocation entityName : EntityList.getEntityNameList()) {
             final Class<? extends Entity> clazz = EntityList
@@ -126,11 +125,11 @@ public class EntityUtil {
 
     private EntityUtil() {}
 
-    public static Vector3d getEntityPosition(@Nonnull Entity ent) {
+    public static Vector3d getEntityPosition(@NotNull Entity ent) {
         return new Vector3d(ent.posX, ent.posY, ent.posZ);
     }
 
-    public static List<AxisAlignedBB> getCollidingBlockGeometry(@Nonnull World world, @Nonnull Entity entity) {
+    public static List<AxisAlignedBB> getCollidingBlockGeometry(@NotNull World world, @NotNull Entity entity) {
         AxisAlignedBB entityBounds = entity.getEntityBoundingBox();
         ArrayList<AxisAlignedBB> collidingBoundingBoxes = new ArrayList<AxisAlignedBB>();
         int minX = MathHelper.floor(entityBounds.minX);
@@ -151,21 +150,21 @@ public class EntityUtil {
         return collidingBoundingBoxes;
     }
 
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull World world, @Nonnull ItemStack item, int x, int y,
+    public static void spawnItemInWorldWithRandomMotion(@NotNull World world, @NotNull ItemStack item, int x, int y,
                                                         int z) {
         if (!item.isEmpty()) {
             spawnItemInWorldWithRandomMotion(world, item, x + 0.5, y + 0.5, z + 0.5);
         }
     }
 
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull World world, @Nonnull ItemStack item, double x,
+    public static void spawnItemInWorldWithRandomMotion(@NotNull World world, @NotNull ItemStack item, double x,
                                                         double y, double z) {
         if (!item.isEmpty()) {
             spawnItemInWorldWithRandomMotion(new EntityItem(world, x, y, z, item));
         }
     }
 
-    public static void spawnItemInWorldWithRandomMotion(@Nonnull EntityItem entity) {
+    public static void spawnItemInWorldWithRandomMotion(@NotNull EntityItem entity) {
         entity.setDefaultPickupDelay();
 
         float f = (entity.world.rand.nextFloat() * 0.1f) - 0.05f;

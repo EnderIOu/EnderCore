@@ -2,9 +2,6 @@ package com.enderio.core.client.gui.widget;
 
 import java.lang.reflect.Field;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
@@ -12,18 +9,20 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.api.client.gui.IHideable;
 import com.google.common.base.Strings;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class TextFieldEnder extends GuiTextField implements IHideable {
 
     public interface ICharFilter {
 
-        boolean passesFilter(@Nonnull TextFieldEnder tf, char c);
+        boolean passesFilter(@NotNull TextFieldEnder tf, char c);
     }
 
     public static final ICharFilter FILTER_NUMERIC = new ICharFilter() {
 
         @Override
-        public boolean passesFilter(@Nonnull TextFieldEnder tf, char c) {
+        public boolean passesFilter(@NotNull TextFieldEnder tf, char c) {
             return Character.isDigit(c) || c == '-' && Strings.isNullOrEmpty(tf.getText());
         }
     };
@@ -31,7 +30,7 @@ public class TextFieldEnder extends GuiTextField implements IHideable {
     public static ICharFilter FILTER_ALPHABETICAL = new ICharFilter() {
 
         @Override
-        public boolean passesFilter(@Nonnull TextFieldEnder tf, char c) {
+        public boolean passesFilter(@NotNull TextFieldEnder tf, char c) {
             return Character.isLetter(c);
         }
     };
@@ -39,7 +38,7 @@ public class TextFieldEnder extends GuiTextField implements IHideable {
     public static ICharFilter FILTER_ALPHANUMERIC = new ICharFilter() {
 
         @Override
-        public boolean passesFilter(@Nonnull TextFieldEnder tf, char c) {
+        public boolean passesFilter(@NotNull TextFieldEnder tf, char c) {
             return FILTER_NUMERIC.passesFilter(tf, c) || FILTER_ALPHABETICAL.passesFilter(tf, c);
         }
     };
@@ -59,11 +58,11 @@ public class TextFieldEnder extends GuiTextField implements IHideable {
         }
     }
 
-    public TextFieldEnder(@Nonnull FontRenderer fnt, int x, int y, int width, int height) {
+    public TextFieldEnder(@NotNull FontRenderer fnt, int x, int y, int width, int height) {
         this(fnt, x, y, width, height, null);
     }
 
-    public TextFieldEnder(@Nonnull FontRenderer fnt, int x, int y, int width, int height,
+    public TextFieldEnder(@NotNull FontRenderer fnt, int x, int y, int width, int height,
                           @Nullable ICharFilter charFilter) {
         super(0, fnt, x, y, width, height);
         xOrigin = x;
@@ -71,7 +70,7 @@ public class TextFieldEnder extends GuiTextField implements IHideable {
         filter = charFilter;
     }
 
-    public void init(@Nonnull IGuiScreen gui) {
+    public void init(@NotNull IGuiScreen gui) {
         this.x = xOrigin + gui.getGuiRootLeft();
         this.y = yOrigin + gui.getGuiRootTop();
     }

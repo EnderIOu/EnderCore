@@ -11,25 +11,24 @@ import java.util.function.Supplier;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 
 import org.apache.commons.lang3.Validate;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class NNList<E> extends NonNullList<E> {
 
-    public static final @Nonnull NNList<EnumFacing> FACING = NNList.of(EnumFacing.class);
+    public static final @NotNull NNList<EnumFacing> FACING = NNList.of(EnumFacing.class);
 
-    public static final @Nonnull NNList<EnumFacing> FACING_HORIZONTAL = new NNList<EnumFacing>(EnumFacing.HORIZONTALS);
+    public static final @NotNull NNList<EnumFacing> FACING_HORIZONTAL = new NNList<EnumFacing>(EnumFacing.HORIZONTALS);
 
-    public static final @Nonnull NNList<BlockRenderLayer> RENDER_LAYER = NNList.of(BlockRenderLayer.class);
+    public static final @NotNull NNList<BlockRenderLayer> RENDER_LAYER = NNList.of(BlockRenderLayer.class);
 
-    public static final @Nonnull NNList<BlockPos> SHELL = new NNList<>();
+    public static final @NotNull NNList<BlockPos> SHELL = new NNList<>();
     static {
         for (int y = -1; y <= 1; y++) {
             for (int z = -1; z <= 1; z++) {
@@ -52,14 +51,14 @@ public class NNList<E> extends NonNullList<E> {
         addAll(fillWith);
     }
 
-    public NNList(int size, @Nonnull E fillWith) {
+    public NNList(int size, @NotNull E fillWith) {
         this();
         for (int i = 0; i < size; i++) {
             add(fillWith);
         }
     }
 
-    public NNList(int size, @Nonnull Supplier<E> fillWith) {
+    public NNList(int size, @NotNull Supplier<E> fillWith) {
         this();
         for (int i = 0; i < size; i++) {
             add(fillWith.get());
@@ -78,15 +77,15 @@ public class NNList<E> extends NonNullList<E> {
         this.defaultElement = defaultElement;
     }
 
-    public @Nonnull NNList<E> copy() {
+    public @NotNull NNList<E> copy() {
         return new NNList<E>(this);
     }
 
-    public static @Nonnull <X> NNList<X> wrap(List<X> list) {
+    public static @NotNull <X> NNList<X> wrap(List<X> list) {
         return list instanceof NNList ? (NNList<X>) list : new NNList<X>(list, null);
     }
 
-    public static @Nonnull <X extends Enum<?>> NNList<X> of(Class<X> e) {
+    public static @NotNull <X extends Enum<?>> NNList<X> of(Class<X> e) {
         NNList<X> list = new NNList<X>(e.getEnumConstants());
         return list;
     }
@@ -95,7 +94,7 @@ public class NNList<E> extends NonNullList<E> {
         list.addAll(e.getEnumConstants());
     }
 
-    public static @Nonnull <T> Collector<T, ?, NNList<T>> collector() {
+    public static @NotNull <T> Collector<T, ?, NNList<T>> collector() {
         return NullHelper.notnullJ(Collectors.toCollection(NNList::new), "Collectors.toCollection");
     }
 
@@ -108,7 +107,7 @@ public class NNList<E> extends NonNullList<E> {
      * @throws InvalidParameterException
      *                                   if the given element is not part of the list.
      */
-    public @Nonnull E next(E current) {
+    public @NotNull E next(E current) {
         for (int i = 0; i < delegate.size(); i++) {
             if (get(i) == current) {
                 if (i + 1 < delegate.size()) {
@@ -130,7 +129,7 @@ public class NNList<E> extends NonNullList<E> {
      * @throws InvalidParameterException
      *                                   if the given element is not part of the list.
      */
-    public @Nonnull E prev(E current) {
+    public @NotNull E prev(E current) {
         for (int i = 0; i < delegate.size(); i++) {
             if (get(i) == current) {
                 if (i > 0) {
@@ -143,7 +142,7 @@ public class NNList<E> extends NonNullList<E> {
         throw new InvalidParameterException();
     }
 
-    public NNList<E> apply(@Nonnull Callback<E> callback) {
+    public NNList<E> apply(@NotNull Callback<E> callback) {
         for (E e : delegate) {
             if (e == null) {
                 throw new NullPointerException();
@@ -156,10 +155,10 @@ public class NNList<E> extends NonNullList<E> {
     @FunctionalInterface
     public static interface Callback<E> {
 
-        void apply(@Nonnull E e);
+        void apply(@NotNull E e);
     }
 
-    public boolean apply(@Nonnull ShortCallback<E> callback) {
+    public boolean apply(@NotNull ShortCallback<E> callback) {
         for (E e : delegate) {
             if (e == null) {
                 throw new NullPointerException();
@@ -174,7 +173,7 @@ public class NNList<E> extends NonNullList<E> {
     @FunctionalInterface
     public static interface ShortCallback<E> {
 
-        boolean apply(@Nonnull E e);
+        boolean apply(@NotNull E e);
 
         /**
          * This is called if the callback did not signal <code>true</code> for any element to determine the final result
@@ -186,21 +185,21 @@ public class NNList<E> extends NonNullList<E> {
     }
 
     @Override
-    public @Nonnull NNIterator<E> iterator() {
+    public @NotNull NNIterator<E> iterator() {
         return new ItrImpl<E>(delegate.iterator());
     }
 
     /**
      * Creates a fast iterator for read-only lists. Do not use on lists that may be changed.
      */
-    public @Nonnull NNIterator<E> fastIterator() {
+    public @NotNull NNIterator<E> fastIterator() {
         return new FastItrImpl();
     }
 
     public static interface NNIterator<E> extends Iterator<E> {
 
         @Override
-        @Nonnull
+        @NotNull
         E next();
     }
 
@@ -218,7 +217,7 @@ public class NNList<E> extends NonNullList<E> {
         }
 
         @Override
-        public @Nonnull E next() {
+        public @NotNull E next() {
             final E next = parent.next();
             if (next == null) {
                 throw new NullPointerException();
@@ -242,7 +241,7 @@ public class NNList<E> extends NonNullList<E> {
         }
 
         @Override
-        public @Nonnull E next() {
+        public @NotNull E next() {
             try {
                 return get(cursor++);
             } catch (IndexOutOfBoundsException e) {
@@ -256,10 +255,10 @@ public class NNList<E> extends NonNullList<E> {
         }
     }
 
-    private static final @Nonnull NNList<Object> EMPTY = new NNList<Object>(Collections.emptyList(), null);
+    private static final @NotNull NNList<Object> EMPTY = new NNList<Object>(Collections.emptyList(), null);
 
     @SuppressWarnings("unchecked")
-    public static @Nonnull <X> NNList<X> emptyList() {
+    public static @NotNull <X> NNList<X> emptyList() {
         return (NNList<X>) EMPTY;
     }
 
@@ -271,7 +270,7 @@ public class NNList<E> extends NonNullList<E> {
         return this;
     }
 
-    public static <E, L extends List<E>> L addIf(@Nonnull L list, @Nullable E e) {
+    public static <E, L extends List<E>> L addIf(@NotNull L list, @Nullable E e) {
         if (e != null) {
             list.add(e);
         }
@@ -287,7 +286,7 @@ public class NNList<E> extends NonNullList<E> {
 
     @SuppressWarnings("null")
     @Override
-    public @Nonnull <T> T[] toArray(T[] a) {
+    public <T> @NotNull T[] toArray(T @NotNull [] a) {
         return delegate.toArray(a);
     }
 
@@ -306,24 +305,24 @@ public class NNList<E> extends NonNullList<E> {
     private final E defaultElement;
 
     @Override
-    @Nonnull
+    @NotNull
     public E get(int p_get_1_) {
         return NullHelper.notnull(delegate.get(p_get_1_), "Unexpect 'null' object in NNList");
     }
 
     @Override
-    public @Nonnull E set(int p_set_1_, E p_set_2_) {
+    public @NotNull E set(int p_set_1_, @NotNull E p_set_2_) {
         return NullHelper.notnull(delegate.set(p_set_1_, Validate.notNull(p_set_2_)),
                 "Unexpect 'null' object in NNList");
     }
 
     @Override
-    public void add(int p_add_1_, E p_add_2_) {
+    public void add(int p_add_1_, @NotNull E p_add_2_) {
         delegate.add(p_add_1_, Validate.notNull(p_add_2_));
     }
 
     @Override
-    public @Nonnull E remove(int p_remove_1_) {
+    public @NotNull E remove(int p_remove_1_) {
         return NullHelper.notnull(delegate.remove(p_remove_1_), "Unexpect 'null' object in NNList");
     }
 

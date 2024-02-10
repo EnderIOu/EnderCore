@@ -1,18 +1,18 @@
 package com.enderio.core.common.util;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
+import org.jetbrains.annotations.NotNull;
+
 public class ArrayInventory implements IInventory {
 
-    protected final @Nonnull ItemStack[] items;
+    protected final @NotNull ItemStack[] items;
 
-    public ArrayInventory(@Nonnull ItemStack[] items) {
+    public ArrayInventory(@NotNull ItemStack[] items) {
         this.items = items;
     }
 
@@ -26,18 +26,18 @@ public class ArrayInventory implements IInventory {
     }
 
     @Override
-    public @Nonnull ItemStack getStackInSlot(int slot) {
+    public @NotNull ItemStack getStackInSlot(int slot) {
         final ItemStack itemStack = items[slot];
         return itemStack != null ? itemStack : ItemStack.EMPTY;
     }
 
     @Override
-    public @Nonnull ItemStack decrStackSize(int slot, int amount) {
+    public @NotNull ItemStack decrStackSize(int slot, int amount) {
         return Util.decrStackSize(this, slot, amount);
     }
 
     @Override
-    public void setInventorySlotContents(int slot, @Nonnull ItemStack stack) {
+    public void setInventorySlotContents(int slot, @NotNull ItemStack stack) {
         items[slot] = stack;
         markDirty();
     }
@@ -48,12 +48,12 @@ public class ArrayInventory implements IInventory {
     }
 
     @Override
-    public boolean isUsableByPlayer(@Nonnull EntityPlayer var1) {
+    public boolean isUsableByPlayer(@NotNull EntityPlayer var1) {
         return true;
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, @Nonnull ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, @NotNull ItemStack itemstack) {
         return true;
     }
 
@@ -61,7 +61,7 @@ public class ArrayInventory implements IInventory {
     public void markDirty() {}
 
     @Override
-    public @Nonnull String getName() {
+    public @NotNull String getName() {
         return "ArrayInventory";
     }
 
@@ -71,22 +71,22 @@ public class ArrayInventory implements IInventory {
     }
 
     @Override
-    public @Nonnull ITextComponent getDisplayName() {
+    public @NotNull ITextComponent getDisplayName() {
         return new TextComponentString(getName());
     }
 
     @Override
-    public @Nonnull ItemStack removeStackFromSlot(int index) {
+    public @NotNull ItemStack removeStackFromSlot(int index) {
         ItemStack res = items[index];
         items[index] = ItemStack.EMPTY;
         return res != null ? res : ItemStack.EMPTY;
     }
 
     @Override
-    public void openInventory(@Nonnull EntityPlayer player) {}
+    public void openInventory(@NotNull EntityPlayer player) {}
 
     @Override
-    public void closeInventory(@Nonnull EntityPlayer player) {}
+    public void closeInventory(@NotNull EntityPlayer player) {}
 
     @Override
     public int getField(int id) {

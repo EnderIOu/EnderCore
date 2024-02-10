@@ -1,8 +1,8 @@
 package com.enderio.core.common.interfaces;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.monster.EntityCreeper;
+
+import org.jetbrains.annotations.NotNull;
 
 public interface ICreeperTarget {
 
@@ -15,5 +15,5 @@ public interface ICreeperTarget {
      *                        The creeper that wants to explode
      * @return True if the creeper is allowed to explode, false otherwise.
      */
-    boolean isCreeperTarget(@Nonnull EntityCreeper swellingCreeper);
+    boolean isCreeperTarget(@NotNull EntityCreeper swellingCreeper);
 }

@@ -6,9 +6,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,10 +14,12 @@ import net.minecraftforge.items.IItemHandler;
 
 import com.enderio.core.common.util.NNList;
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class EnderInventory implements IItemHandler {
 
-    static final @Nonnull ItemStack CAKE = new ItemStack(Blocks.LIME_SHULKER_BOX, 0);
+    static final @NotNull ItemStack CAKE = new ItemStack(Blocks.LIME_SHULKER_BOX, 0);
 
     public static enum Type {
         ALL,
@@ -31,12 +30,12 @@ public class EnderInventory implements IItemHandler {
         INTERNAL,
     }
 
-    private final @Nonnull Map<String, InventorySlot> idents = new HashMap<String, InventorySlot>();
-    final @Nonnull EnumMap<EnderInventory.Type, NNList<InventorySlot>> slots = new EnumMap<EnderInventory.Type, NNList<InventorySlot>>(
+    private final @NotNull Map<String, InventorySlot> idents = new HashMap<String, InventorySlot>();
+    final @NotNull EnumMap<EnderInventory.Type, NNList<InventorySlot>> slots = new EnumMap<EnderInventory.Type, NNList<InventorySlot>>(
             EnderInventory.Type.class);
-    private final @Nonnull View allSlots = new View(EnderInventory.Type.ALL);
+    private final @NotNull View allSlots = new View(EnderInventory.Type.ALL);
     private @Nullable TileEntity owner = null;
-    public static final @Nonnull IItemHandler OFF = new IItemHandler() {
+    public static final @NotNull IItemHandler OFF = new IItemHandler() {
 
         @Override
         public int getSlots() {
@@ -44,17 +43,17 @@ public class EnderInventory implements IItemHandler {
         }
 
         @Override
-        public @Nonnull ItemStack getStackInSlot(int slot) {
+        public @NotNull ItemStack getStackInSlot(int slot) {
             return CAKE;
         }
 
         @Override
-        public @Nonnull ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             return stack;
         }
 
         @Override
-        public @Nonnull ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             return CAKE;
         }
 
@@ -70,11 +69,11 @@ public class EnderInventory implements IItemHandler {
         }
     }
 
-    public void add(@Nonnull EnderInventory.Type type, @Nonnull Enum<?> ident, @Nonnull InventorySlot slot) {
+    public void add(@NotNull EnderInventory.Type type, @NotNull Enum<?> ident, @NotNull InventorySlot slot) {
         add(type, ident.name(), slot);
     }
 
-    public void add(@Nonnull EnderInventory.Type type, @Nonnull String ident, @Nonnull InventorySlot slot) {
+    public void add(@NotNull EnderInventory.Type type, @NotNull String ident, @NotNull InventorySlot slot) {
         if (idents.containsKey(ident)) {
             throw new RuntimeException("Duplicate slot '" + ident + "'");
         }
@@ -94,36 +93,36 @@ public class EnderInventory implements IItemHandler {
         slot.setOwner(owner);
     }
 
-    public InventorySlot getSlot(@Nonnull Enum<?> ident) {
+    public InventorySlot getSlot(@NotNull Enum<?> ident) {
         return getSlot(ident.name());
     }
 
-    public @Nonnull InventorySlot getSlot(@Nonnull String ident) {
+    public @NotNull InventorySlot getSlot(@NotNull String ident) {
         if (!idents.containsKey(ident)) {
             throw new RuntimeException("Unknown slot '" + ident + "'");
         }
         return NullHelper.notnullJ(idents.get(ident), "Map.containsKey() lied to us");
     }
 
-    public boolean hasSlot(@Nonnull Enum<?> ident) {
+    public boolean hasSlot(@NotNull Enum<?> ident) {
         return hasSlot(ident.name());
     }
 
-    public boolean hasSlot(@Nonnull String ident) {
+    public boolean hasSlot(@NotNull String ident) {
         return idents.containsKey(ident);
     }
 
-    public @Nonnull View getView(@Nonnull EnderInventory.Type type) {
+    public @NotNull View getView(@NotNull EnderInventory.Type type) {
         return new View(type);
     }
 
-    public @Nonnull NBTTagCompound writeToNBT() {
+    public @NotNull NBTTagCompound writeToNBT() {
         NBTTagCompound tag = new NBTTagCompound();
         writeToNBT(tag);
         return tag;
     }
 
-    public void writeToNBT(@Nonnull NBTTagCompound tag) {
+    public void writeToNBT(@NotNull NBTTagCompound tag) {
         for (Entry<String, InventorySlot> entry : idents.entrySet()) {
             if (entry.getValue() != null) {
                 NBTTagCompound subTag = new NBTTagCompound();
@@ -135,7 +134,7 @@ public class EnderInventory implements IItemHandler {
         }
     }
 
-    public void readFromNBT(@Nonnull NBTTagCompound tag, @Nonnull String name) {
+    public void readFromNBT(@NotNull NBTTagCompound tag, @NotNull String name) {
         readFromNBT(tag.getCompoundTag(name));
     }
 
@@ -166,12 +165,12 @@ public class EnderInventory implements IItemHandler {
     }
 
     @Override
-    public @Nonnull ItemStack getStackInSlot(int slot) {
+    public @NotNull ItemStack getStackInSlot(int slot) {
         return allSlots.getStackInSlot(slot);
     }
 
     @Override
-    public @Nonnull ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+    public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
         if (stack.isEmpty()) {
             return CAKE;
         }
@@ -179,15 +178,15 @@ public class EnderInventory implements IItemHandler {
     }
 
     @Override
-    public @Nonnull ItemStack extractItem(int slot, int amount, boolean simulate) {
+    public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
         return allSlots.extractItem(slot, amount, simulate);
     }
 
     public class View implements IItemHandler, Iterable<InventorySlot> {
 
-        private final @Nonnull EnderInventory.Type type;
+        private final @NotNull EnderInventory.Type type;
 
-        View(@Nonnull Type type) {
+        View(@NotNull Type type) {
             this.type = type;
         }
 
@@ -204,7 +203,7 @@ public class EnderInventory implements IItemHandler {
         }
 
         @Override
-        public @Nonnull ItemStack getStackInSlot(int slot) {
+        public @NotNull ItemStack getStackInSlot(int slot) {
             if (slot >= 0 && slot < getSlots()) {
                 return slots.get(type).get(slot).getStackInSlot(0);
             }
@@ -212,7 +211,7 @@ public class EnderInventory implements IItemHandler {
         }
 
         @Override
-        public @Nonnull ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
+        public @NotNull ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
             if (!stack.isEmpty() && slot >= 0 && slot < getSlots()) {
                 return slots.get(type).get(slot).insertItem(0, stack, simulate);
             }
@@ -220,7 +219,7 @@ public class EnderInventory implements IItemHandler {
         }
 
         @Override
-        public @Nonnull ItemStack extractItem(int slot, int amount, boolean simulate) {
+        public @NotNull ItemStack extractItem(int slot, int amount, boolean simulate) {
             if (amount > 0 && slot >= 0 && slot < getSlots()) {
                 return slots.get(type).get(slot).extractItem(0, amount, simulate);
             }
@@ -258,11 +257,11 @@ public class EnderInventory implements IItemHandler {
             return 0;
         }
 
-        public @Nonnull Type getType() {
+        public @NotNull Type getType() {
             return type;
         }
 
-        public @Nonnull EnderInventory getParent() {
+        public @NotNull EnderInventory getParent() {
             return EnderInventory.this;
         }
     }

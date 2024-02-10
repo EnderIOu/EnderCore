@@ -1,25 +1,24 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class ResourceThing implements IThing {
 
-    private final @Nonnull ResourceLocation resourceLocation;
+    private final @NotNull ResourceLocation resourceLocation;
 
-    ResourceThing(@Nonnull ResourceLocation resourceLocation) {
+    ResourceThing(@NotNull ResourceLocation resourceLocation) {
         this.resourceLocation = resourceLocation;
     }
 
     @Override
-    public @Nonnull NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         // this ugly thing seems to be what Forge wants you to use
         if (net.minecraft.block.Block.REGISTRY.containsKey(resourceLocation)) {
             Block block = net.minecraft.block.Block.REGISTRY.getObject(resourceLocation);
@@ -49,17 +48,17 @@ class ResourceThing implements IThing {
     }
 
     @Override
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         return NNList.<Item>emptyList();
     }
 
     @Override
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         return NNList.<ItemStack>emptyList();
     }
 
     @Override
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         return NNList.<Block>emptyList();
     }
 

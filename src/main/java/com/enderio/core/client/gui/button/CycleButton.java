@@ -4,14 +4,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.input.Mouse;
 
 import com.enderio.core.api.client.gui.IGuiOverlay;
@@ -37,24 +36,24 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
         /**
          * @return The icon to display when the button has selected this mode.
          */
-        @Nonnull
+        @NotNull
         IWidgetIcon getIcon();
 
         /**
          * @return Localized tooltip lines.
          */
-        @Nonnull
+        @NotNull
         List<String> getTooltipLines();
     }
 
-    private final @Nonnull NNList<T> modes;
+    private final @NotNull NNList<T> modes;
 
     private @Nullable T mode;
 
     private boolean isOpened = true;
     private PickerOverlay overlay;
 
-    public CycleButton(@Nonnull IGuiScreen gui, int id, int x, int y, @Nonnull Class<T> enumClass) {
+    public CycleButton(@NotNull IGuiScreen gui, int id, int x, int y, @NotNull Class<T> enumClass) {
         super(gui, id, x, y, (IWidgetIcon) null);
         this.modes = NNList.of(enumClass);
         overlay = new PickerOverlay(this);
@@ -71,7 +70,7 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
     }
 
     @Override
-    public boolean mousePressedButton(@Nonnull Minecraft mc, int mouseX, int mouseY, int button) {
+    public boolean mousePressedButton(@NotNull Minecraft mc, int mouseX, int mouseY, int button) {
         boolean result = super.mousePressedButton(mc, mouseX, mouseY, button);
         if (result) {
             overlay.setIsVisible(!overlay.isVisible());
@@ -79,7 +78,7 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
         return result;
     }
 
-    public void setMode(@Nonnull T newMode) {
+    public void setMode(@NotNull T newMode) {
         if (this.mode != newMode) {
             this.mode = newMode;
             List<String> tooltip = newMode.getTooltipLines();
@@ -88,7 +87,7 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
         }
     }
 
-    public @Nonnull T getMode() {
+    public @NotNull T getMode() {
         return this.mode != null ? this.mode : (T) this.modes.get(0);
     }
 
@@ -142,10 +141,10 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
         }
 
         @Override
-        public void init(@Nonnull IGuiScreen screen) {}
+        public void init(@NotNull IGuiScreen screen) {}
 
         @Override
-        public @Nonnull Rectangle getBounds() {
+        public @NotNull Rectangle getBounds() {
             return bounds;
         }
 

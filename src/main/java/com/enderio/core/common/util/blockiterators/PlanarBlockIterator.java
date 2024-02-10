@@ -1,9 +1,9 @@
 package com.enderio.core.common.util.blockiterators;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+
+import org.jetbrains.annotations.NotNull;
 
 public class PlanarBlockIterator extends CubicBlockIterator {
 
@@ -13,7 +13,7 @@ public class PlanarBlockIterator extends CubicBlockIterator {
         NORTH_SOUTH,
         HORIZONTAL;
 
-        public static @Nonnull Orientation perpendicular(@Nonnull EnumFacing dir) {
+        public static @NotNull Orientation perpendicular(@NotNull EnumFacing dir) {
             switch (dir) {
                 case NORTH:
                 case SOUTH:
@@ -29,9 +29,9 @@ public class PlanarBlockIterator extends CubicBlockIterator {
         }
     }
 
-    private @Nonnull Orientation orientation;
+    private @NotNull Orientation orientation;
 
-    public PlanarBlockIterator(@Nonnull BlockPos base, @Nonnull Orientation orientation, int radius) {
+    public PlanarBlockIterator(@NotNull BlockPos base, @NotNull Orientation orientation, int radius) {
         super(base, radius);
 
         this.orientation = orientation;
@@ -46,7 +46,7 @@ public class PlanarBlockIterator extends CubicBlockIterator {
     }
 
     @Override
-    public @Nonnull BlockPos next() {
+    public @NotNull BlockPos next() {
         BlockPos coord = new BlockPos(curX, curY, curZ);
         switch (orientation) {
             case EAST_WEST:

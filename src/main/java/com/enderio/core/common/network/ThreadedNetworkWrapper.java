@@ -3,8 +3,6 @@ package com.enderio.core.common.network;
 import java.util.IdentityHashMap;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.network.Packet;
@@ -25,14 +23,15 @@ import net.minecraftforge.fml.relauncher.Side;
 
 import com.enderio.core.common.util.Log;
 import com.google.common.base.Throwables;
+import org.jetbrains.annotations.NotNull;
 
 public class ThreadedNetworkWrapper {
 
-    private static final @Nonnull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesClient = new IdentityHashMap<>();
-    private static final @Nonnull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesServer = new IdentityHashMap<>();
+    private static final @NotNull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesClient = new IdentityHashMap<>();
+    private static final @NotNull Map<Class<? extends IMessage>, SimpleNetworkWrapper> typesServer = new IdentityHashMap<>();
 
     static synchronized void registerChannelMapping(Class<? extends IMessage> requestMessageType,
-                                                    @Nonnull SimpleNetworkWrapper parent, Side side) {
+                                                    @NotNull SimpleNetworkWrapper parent, Side side) {
         (side == Side.CLIENT ? typesClient : typesServer).put(requestMessageType, parent);
     }
 
@@ -52,7 +51,7 @@ public class ThreadedNetworkWrapper {
         return parent;
     }
 
-    private final @Nonnull SimpleNetworkWrapper parent;
+    private final @NotNull SimpleNetworkWrapper parent;
 
     public ThreadedNetworkWrapper(String channelName) {
         if (channelName.length() > 20) {

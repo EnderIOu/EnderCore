@@ -1,19 +1,18 @@
 package com.enderio.core.client.gui.button;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
 import com.enderio.core.api.client.gui.IHideable;
+import org.jetbrains.annotations.NotNull;
 
 public class GuiButtonHideable extends GuiButton implements IHideable {
 
-    public GuiButtonHideable(int buttonId, int x, int y, @Nonnull String buttonText) {
+    public GuiButtonHideable(int buttonId, int x, int y, @NotNull String buttonText) {
         super(buttonId, x, y, buttonText);
     }
 
-    public GuiButtonHideable(int buttonId, int x, int y, int widthIn, int heightIn, @Nonnull String buttonText) {
+    public GuiButtonHideable(int buttonId, int x, int y, int widthIn, int heightIn, @NotNull String buttonText) {
         super(buttonId, x, y, widthIn, heightIn, buttonText);
     }
 
@@ -45,7 +44,7 @@ public class GuiButtonHideable extends GuiButton implements IHideable {
     }
 
     @Override
-    public boolean mousePressed(@Nonnull Minecraft mc, int mouseX, int mouseY) {
+    public boolean mousePressed(@NotNull Minecraft mc, int mouseX, int mouseY) {
         return isEnabled() && super.mousePressed(mc, mouseX, mouseY);
     }
 }

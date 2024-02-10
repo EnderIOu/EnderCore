@@ -1,12 +1,11 @@
 package com.enderio.core.client.gui.button;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
 
 import com.enderio.core.client.render.RenderUtil;
@@ -18,12 +17,12 @@ public class ItemButton extends GuiButton {
     public static final int DEFAULT_HEIGHT = 24;
     public static final int HHEIGHT = DEFAULT_HEIGHT / 2;
 
-    private @Nonnull ItemStack item;
+    private @NotNull ItemStack item;
 
     protected int hwidth;
     protected int hheight;
 
-    public ItemButton(int id, int x, int y, @Nonnull Item item) {
+    public ItemButton(int id, int x, int y, @NotNull Item item) {
         super(id, x, y, DEFAULT_WIDTH, DEFAULT_HEIGHT, "");
         this.item = new ItemStack(item, 1, 0);
         hwidth = HWIDTH;
@@ -41,7 +40,7 @@ public class ItemButton extends GuiButton {
      * Draws this button to the screen.
      */
     @Override
-    public void drawButton(@Nonnull Minecraft par1Minecraft, int par2, int par3, float partialTicks) {
+    public void drawButton(@NotNull Minecraft par1Minecraft, int par2, int par3, float partialTicks) {
         if (visible) {
 
             RenderUtil.bindTexture("textures/gui/widgets.png");

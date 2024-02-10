@@ -2,9 +2,6 @@ package com.enderio.core.common.util;
 
 import java.util.EnumMap;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
@@ -26,6 +23,8 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 import com.enderio.core.api.common.util.ITankAccess;
 import com.enderio.core.common.util.NNList.Callback;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class FluidUtil {
 
@@ -50,11 +49,11 @@ public class FluidUtil {
     // }
     // }
 
-    public static @Nonnull Capability<IFluidHandler> getFluidCapability() {
+    public static @NotNull Capability<IFluidHandler> getFluidCapability() {
         return NullHelper.notnullF(FLUID_HANDLER, "IFluidHandler capability is missing");
     }
 
-    public static @Nonnull Capability<IFluidHandlerItem> getFluidItemCapability() {
+    public static @NotNull Capability<IFluidHandlerItem> getFluidItemCapability() {
         return NullHelper.notnullF(FLUID_ITEM_HANDLER, "IFluidHandlerItem capability is missing");
     }
 
@@ -66,20 +65,20 @@ public class FluidUtil {
         return null;
     }
 
-    public static @Nullable IFluidHandlerItem getFluidHandlerCapability(@Nonnull ItemStack stack) {
+    public static @Nullable IFluidHandlerItem getFluidHandlerCapability(@NotNull ItemStack stack) {
         if (stack.hasCapability(getFluidItemCapability(), null)) {
             return stack.getCapability(getFluidItemCapability(), null);
         }
         return null;
     }
 
-    public static EnumMap<EnumFacing, IFluidHandler> getNeighbouringFluidHandlers(@Nonnull final World worldObj,
-                                                                                  @Nonnull final BlockPos location) {
+    public static EnumMap<EnumFacing, IFluidHandler> getNeighbouringFluidHandlers(@NotNull final World worldObj,
+                                                                                  @NotNull final BlockPos location) {
         final EnumMap<EnumFacing, IFluidHandler> res = new EnumMap<EnumFacing, IFluidHandler>(EnumFacing.class);
         NNList.FACING.apply(new Callback<EnumFacing>() {
 
             @Override
-            public void apply(@Nonnull EnumFacing dir) {
+            public void apply(@NotNull EnumFacing dir) {
                 IFluidHandler fh = getFluidHandler(worldObj, location.offset(dir), dir.getOpposite());
                 if (fh != null) {
                     res.put(dir, fh);
@@ -89,12 +88,12 @@ public class FluidUtil {
         return res;
     }
 
-    static @Nullable IFluidHandler getFluidHandler(@Nonnull World worldObj, @Nonnull BlockPos location,
+    static @Nullable IFluidHandler getFluidHandler(@NotNull World worldObj, @NotNull BlockPos location,
                                                    @Nullable EnumFacing side) {
         return getFluidHandlerCapability(worldObj.getTileEntity(location), side);
     }
 
-    public static FluidStack getFluidTypeFromItem(@Nonnull ItemStack stack) {
+    public static FluidStack getFluidTypeFromItem(@NotNull ItemStack stack) {
         if (stack.isEmpty()) {
             return null;
         }
@@ -114,11 +113,11 @@ public class FluidUtil {
         return null;
     }
 
-    public static boolean isFluidContainer(@Nonnull ItemStack stack) {
+    public static boolean isFluidContainer(@NotNull ItemStack stack) {
         return getFluidHandlerCapability(stack) != null;
     }
 
-    public static boolean isFluidContainer(@Nonnull ICapabilityProvider provider, @Nullable EnumFacing side) {
+    public static boolean isFluidContainer(@NotNull ICapabilityProvider provider, @Nullable EnumFacing side) {
         if (provider instanceof ItemStack) {
             Log.warn("isFluidContainer(ICapabilityProvider, EnumFacing) is not for ItemStacks");
             return isFluidContainer((ItemStack) provider);
@@ -126,7 +125,7 @@ public class FluidUtil {
         return getFluidHandlerCapability(provider, side) != null;
     }
 
-    public static boolean hasEmptyCapacity(@Nonnull ItemStack stack) {
+    public static boolean hasEmptyCapacity(@NotNull ItemStack stack) {
         IFluidHandlerItem handler = getFluidHandlerCapability(stack);
         if (handler == null) {
             return false;
@@ -145,7 +144,7 @@ public class FluidUtil {
         return false;
     }
 
-    public static @Nonnull FluidAndStackResult tryFillContainer(@Nonnull ItemStack target,
+    public static @NotNull FluidAndStackResult tryFillContainer(@NotNull ItemStack target,
                                                                 @Nullable FluidStack source) {
         if (target.isEmpty() || source == null || source.getFluid() == null || source.amount <= 0) {
             return new FluidAndStackResult(ItemStack.EMPTY, null, target, source);
@@ -180,7 +179,7 @@ public class FluidUtil {
         return new FluidAndStackResult(filledStack, resultFluid, remainderStack, remainderFluid);
     }
 
-    public static @Nonnull FluidAndStackResult tryDrainContainer(@Nonnull ItemStack source, @Nullable FluidStack target,
+    public static @NotNull FluidAndStackResult tryDrainContainer(@NotNull ItemStack source, @Nullable FluidStack target,
                                                                  int capacity) {
         if (source.isEmpty()) {
             return new FluidAndStackResult(ItemStack.EMPTY, null, source, target);
@@ -218,7 +217,7 @@ public class FluidUtil {
         return new FluidAndStackResult(emptiedStack, drained, remainderStack, remainderFluid);
     }
 
-    public static @Nonnull FluidAndStackResult tryDrainContainer(@Nonnull ItemStack source, @Nonnull ITankAccess tank) {
+    public static @NotNull FluidAndStackResult tryDrainContainer(@NotNull ItemStack source, @NotNull ITankAccess tank) {
         FluidAndStackResult result = new FluidAndStackResult(null, ItemStack.EMPTY, null, source);
 
         if (source.isEmpty()) {
@@ -264,9 +263,9 @@ public class FluidUtil {
      * @param tank
      * @return true if a container was filled, false otherwise
      */
-    public static boolean fillPlayerHandItemFromInternalTank(@Nonnull World world, @Nonnull BlockPos pos,
-                                                             @Nonnull EntityPlayer entityPlayer,
-                                                             @Nonnull EnumHand hand, @Nonnull ITankAccess tank) {
+    public static boolean fillPlayerHandItemFromInternalTank(@NotNull World world, @NotNull BlockPos pos,
+                                                             @NotNull EntityPlayer entityPlayer,
+                                                             @NotNull EnumHand hand, @NotNull ITankAccess tank) {
         ItemStack heldItem = entityPlayer.getHeldItem(hand);
         boolean doFill = !(entityPlayer.capabilities.isCreativeMode && heldItem.getItem() == Items.BUCKET);
 
@@ -309,9 +308,9 @@ public class FluidUtil {
         return false;
     }
 
-    public static boolean fillInternalTankFromPlayerHandItem(@Nonnull World world, @Nonnull BlockPos pos,
-                                                             @Nonnull EntityPlayer entityPlayer,
-                                                             @Nonnull EnumHand hand, @Nonnull ITankAccess tank) {
+    public static boolean fillInternalTankFromPlayerHandItem(@NotNull World world, @NotNull BlockPos pos,
+                                                             @NotNull EntityPlayer entityPlayer,
+                                                             @NotNull EnumHand hand, @NotNull ITankAccess tank) {
         FluidAndStackResult fill = tryDrainContainer(entityPlayer.getHeldItem(hand), tank);
         if (fill.result.fluidStack == null) {
             return false;
@@ -355,14 +354,14 @@ public class FluidUtil {
     public static class FluidAndStack {
 
         public final @Nullable FluidStack fluidStack;
-        public final @Nonnull ItemStack itemStack;
+        public final @NotNull ItemStack itemStack;
 
-        public FluidAndStack(@Nullable FluidStack fluidStack, @Nonnull ItemStack itemStack) {
+        public FluidAndStack(@Nullable FluidStack fluidStack, @NotNull ItemStack itemStack) {
             this.fluidStack = fluidStack;
             this.itemStack = itemStack;
         }
 
-        public FluidAndStack(@Nonnull ItemStack itemStack, @Nullable FluidStack fluidStack) {
+        public FluidAndStack(@NotNull ItemStack itemStack, @Nullable FluidStack fluidStack) {
             this.fluidStack = fluidStack;
             this.itemStack = itemStack;
         }
@@ -370,23 +369,23 @@ public class FluidUtil {
 
     public static class FluidAndStackResult {
 
-        public final @Nonnull FluidAndStack result;
-        public final @Nonnull FluidAndStack remainder;
+        public final @NotNull FluidAndStack result;
+        public final @NotNull FluidAndStack remainder;
 
-        public FluidAndStackResult(@Nonnull FluidAndStack result, @Nonnull FluidAndStack remainder) {
+        public FluidAndStackResult(@NotNull FluidAndStack result, @NotNull FluidAndStack remainder) {
             this.result = result;
             this.remainder = remainder;
         }
 
-        public FluidAndStackResult(FluidStack fluidStackResult, @Nonnull ItemStack itemStackResult,
+        public FluidAndStackResult(FluidStack fluidStackResult, @NotNull ItemStack itemStackResult,
                                    FluidStack fluidStackRemainder,
-                                   @Nonnull ItemStack itemStackRemainder) {
+                                   @NotNull ItemStack itemStackRemainder) {
             this.result = new FluidAndStack(fluidStackResult, itemStackResult);
             this.remainder = new FluidAndStack(fluidStackRemainder, itemStackRemainder);
         }
 
-        public FluidAndStackResult(@Nonnull ItemStack itemStackResult, FluidStack fluidStackResult,
-                                   @Nonnull ItemStack itemStackRemainder,
+        public FluidAndStackResult(@NotNull ItemStack itemStackResult, FluidStack fluidStackResult,
+                                   @NotNull ItemStack itemStackRemainder,
                                    FluidStack fluidStackRemainder) {
             this.result = new FluidAndStack(fluidStackResult, itemStackResult);
             this.remainder = new FluidAndStack(fluidStackRemainder, itemStackRemainder);

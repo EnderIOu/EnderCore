@@ -1,24 +1,23 @@
 package com.enderio.core.client.render;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 
 import com.enderio.core.common.vecmath.Vector3d;
+import org.jetbrains.annotations.NotNull;
 
 public class VertexRotationFacing extends VertexRotation {
 
     private static final double ROTATION_AMOUNT = Math.PI / 2;
 
-    private final @Nonnull EnumFacing defaultDir;
+    private final @NotNull EnumFacing defaultDir;
 
-    public VertexRotationFacing(@Nonnull EnumFacing defaultDir) {
+    public VertexRotationFacing(@NotNull EnumFacing defaultDir) {
         super(0, new Vector3d(0, 0.5, 0), new Vector3d(0, 0, 0));
         this.defaultDir = defaultDir;
     }
 
-    public void setRotation(@Nonnull EnumFacing dir) {
+    public void setRotation(@NotNull EnumFacing dir) {
         if (dir == defaultDir) {
             setAngle(0);
         } else if (dir == defaultDir.getOpposite()) {
@@ -30,7 +29,7 @@ public class VertexRotationFacing extends VertexRotation {
         }
     }
 
-    public EnumFacing rotate(@Nonnull EnumFacing dir) {
+    public EnumFacing rotate(@NotNull EnumFacing dir) {
         if (dir.getYOffset() != 0) {
             return dir;
         }

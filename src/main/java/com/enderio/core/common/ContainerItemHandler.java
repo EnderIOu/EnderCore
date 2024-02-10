@@ -3,9 +3,6 @@ package com.enderio.core.common;
 import java.awt.Point;
 import java.util.Map;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -18,31 +15,32 @@ import net.minecraftforge.items.IItemHandler;
 
 import com.enderio.core.client.gui.widget.GhostSlot;
 import com.google.common.collect.Maps;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 @Deprecated // not used by anyone, so probably should be used without good reason?
 public abstract class ContainerItemHandler<T extends ICapabilityProvider> extends Container
                                           implements GhostSlot.IGhostSlotAware {
 
-    protected final @Nonnull Map<Slot, Point> playerSlotLocations = Maps.newLinkedHashMap();
+    protected final @NotNull Map<Slot, Point> playerSlotLocations = Maps.newLinkedHashMap();
 
     protected final int startPlayerSlot;
     protected final int endPlayerSlot;
     protected final int startHotBarSlot;
     protected final int endHotBarSlot;
 
-    private final @Nonnull T owner;
-    private final @Nonnull IItemHandler inv;
-    private final @Nonnull InventoryPlayer playerInv;
+    private final @NotNull T owner;
+    private final @NotNull IItemHandler inv;
+    private final @NotNull InventoryPlayer playerInv;
 
-    @Nonnull
-    private static <T> T checkNotNull(T reference) {
+    private static @NotNull <T> T checkNotNull(T reference) {
         if (reference == null) {
             throw new NullPointerException();
         }
         return reference;
     }
 
-    public ContainerItemHandler(@Nonnull InventoryPlayer playerInv, @Nonnull T owner, @Nullable EnumFacing facing) {
+    public ContainerItemHandler(@NotNull InventoryPlayer playerInv, @NotNull T owner, @Nullable EnumFacing facing) {
         this.owner = checkNotNull(owner);
         this.inv = checkNotNull(
                 owner.getCapability(checkNotNull(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY), facing));
@@ -75,26 +73,26 @@ public abstract class ContainerItemHandler<T extends ICapabilityProvider> extend
         endHotBarSlot = inventorySlots.size();
     }
 
-    protected void addSlots(@Nonnull InventoryPlayer playerInventory) {}
+    protected void addSlots(@NotNull InventoryPlayer playerInventory) {}
 
-    public @Nonnull Point getPlayerInventoryOffset() {
+    public @NotNull Point getPlayerInventoryOffset() {
         return new Point(8, 84);
     }
 
-    public @Nonnull Point getUpgradeOffset() {
+    public @NotNull Point getUpgradeOffset() {
         return new Point(12, 60);
     }
 
-    public @Nonnull T getOwner() {
+    public @NotNull T getOwner() {
         return owner;
     }
 
-    public @Nonnull IItemHandler getInv() {
+    public @NotNull IItemHandler getInv() {
         return inv;
     }
 
     @Override
-    public @Nonnull ItemStack transferStackInSlot(@Nonnull EntityPlayer p_82846_1_, int p_82846_2_) {
+    public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer p_82846_1_, int p_82846_2_) {
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(p_82846_2_);
 
@@ -125,7 +123,7 @@ public abstract class ContainerItemHandler<T extends ICapabilityProvider> extend
      * Added validation of slot input
      */
     @Override
-    protected boolean mergeItemStack(@Nonnull ItemStack par1ItemStack, int fromIndex, int toIndex,
+    protected boolean mergeItemStack(@NotNull ItemStack par1ItemStack, int fromIndex, int toIndex,
                                      boolean reversOrder) {
         boolean result = false;
         int checkIndex = fromIndex;
@@ -207,7 +205,7 @@ public abstract class ContainerItemHandler<T extends ICapabilityProvider> extend
     }
 
     @Override
-    public void setGhostSlotContents(int slot, @Nonnull ItemStack stack, int realsize) {
+    public void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {
         if (owner instanceof TileEntityBase) {
             ((TileEntityBase) owner).setGhostSlotContents(slot, stack, realsize);
         }

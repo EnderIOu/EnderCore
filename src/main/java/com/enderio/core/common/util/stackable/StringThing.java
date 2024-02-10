@@ -1,8 +1,5 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,17 +8,19 @@ import net.minecraftforge.oredict.OreDictionary;
 
 import com.enderio.core.common.util.NNList;
 import com.enderio.core.common.util.NullHelper;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class StringThing implements IThing {
 
-    private final @Nonnull String name;
+    private final @NotNull String name;
 
     StringThing(@Nullable String name) {
         this.name = name != null ? NullHelper.notnullJ(name.trim(), "String.trim()") : "";
     }
 
     @Override
-    public @Nonnull NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         if (name.isEmpty()) {
             return NNList.emptyList();
         }
@@ -33,7 +32,6 @@ class StringThing implements IThing {
             return compound();
         }
 
-        @Nonnull
         String mod = "minecraft", ident = name;
         boolean allowItem = true, allowBlock = true, allowOreDict = true;
         if (ident.startsWith("item:")) {
@@ -106,7 +104,7 @@ class StringThing implements IThing {
         return NNList.emptyList();
     }
 
-    private @Nonnull NNList<IThing> compound() {
+    private @NotNull NNList<IThing> compound() {
         NNList<IThing> positive = new NNList<>(), negative = new NNList<>();
 
         for (String split : name.split(",\\s*")) {
@@ -144,17 +142,17 @@ class StringThing implements IThing {
     }
 
     @Override
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         return NNList.<Item>emptyList();
     }
 
     @Override
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         return NNList.<ItemStack>emptyList();
     }
 
     @Override
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         return NNList.<Block>emptyList();
     }
 

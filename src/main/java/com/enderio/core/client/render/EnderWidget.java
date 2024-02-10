@@ -1,13 +1,12 @@
 package com.enderio.core.client.render;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.util.ResourceLocation;
 
 import com.enderio.core.EnderCore;
 import com.enderio.core.api.client.render.IWidgetIcon;
 import com.enderio.core.api.client.render.IWidgetMap;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public enum EnderWidget implements IWidgetIcon {
 
@@ -88,10 +87,10 @@ public enum EnderWidget implements IWidgetIcon {
 
     ;
 
-    public static final @Nonnull ResourceLocation TEXTURE = new ResourceLocation(EnderCore.MODID,
+    public static final @NotNull ResourceLocation TEXTURE = new ResourceLocation(EnderCore.MODID,
             "textures/gui/widgets.png");
 
-    public static final @Nonnull IWidgetMap map = new IWidgetMap.WidgetMapImpl(256, TEXTURE);
+    public static final @NotNull IWidgetMap map = new IWidgetMap.WidgetMapImpl(256, TEXTURE);
 
     public final int x;
     public final int y;
@@ -145,7 +144,7 @@ public enum EnderWidget implements IWidgetIcon {
     }
 
     @Override
-    public @Nonnull IWidgetMap getMap() {
+    public @NotNull IWidgetMap getMap() {
         return map;
     }
 }

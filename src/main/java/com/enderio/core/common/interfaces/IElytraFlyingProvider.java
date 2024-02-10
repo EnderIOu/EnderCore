@@ -1,11 +1,11 @@
 package com.enderio.core.common.interfaces;
 
-import javax.annotation.Nonnull;
-
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
+import org.jetbrains.annotations.NotNull;
+
 public interface IElytraFlyingProvider {
 
-    public boolean isElytraFlying(@Nonnull EntityLivingBase entity, @Nonnull ItemStack itemstack, boolean shouldStop);
+    public boolean isElytraFlying(@NotNull EntityLivingBase entity, @NotNull ItemStack itemstack, boolean shouldStop);
 }

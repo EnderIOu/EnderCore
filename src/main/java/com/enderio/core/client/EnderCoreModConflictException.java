@@ -1,22 +1,22 @@
 package com.enderio.core.client;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiErrorScreen;
 import net.minecraftforge.fml.client.CustomModLoadingErrorDisplayException;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 @SideOnly(Side.CLIENT)
 public class EnderCoreModConflictException extends CustomModLoadingErrorDisplayException {
 
     private static final long serialVersionUID = 1L;
 
-    private final @Nonnull String[] msgs;
+    private final @NotNull String[] msgs;
 
-    public EnderCoreModConflictException(@Nonnull String[] msgs) {
+    public EnderCoreModConflictException(@NotNull String[] msgs) {
         super(msgs[0], new RuntimeException());
         this.msgs = msgs;
     }

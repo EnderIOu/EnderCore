@@ -3,9 +3,6 @@ package com.enderio.core.client.gui.widget;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
@@ -14,6 +11,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -25,7 +24,7 @@ import com.enderio.core.common.vecmath.Vector4f;
 
 public abstract class GuiScrollableList<T> {
 
-    private final @Nonnull Minecraft mc = Minecraft.getMinecraft();
+    private final @NotNull Minecraft mc = Minecraft.getMinecraft();
 
     protected int originX;
     protected int originY;
@@ -56,7 +55,7 @@ public abstract class GuiScrollableList<T> {
 
     protected int margin = 2;
 
-    protected @Nonnull List<ListSelectionListener<T>> listeners = new CopyOnWriteArrayList<ListSelectionListener<T>>();
+    protected @NotNull List<ListSelectionListener<T>> listeners = new CopyOnWriteArrayList<ListSelectionListener<T>>();
 
     public GuiScrollableList(int width, int height, int originX, int originY, int slotHeight) {
         this.width = width;
@@ -71,18 +70,18 @@ public abstract class GuiScrollableList<T> {
         maxX = minX + width;
     }
 
-    public void onGuiInit(@Nonnull IGuiScreen gui) {
+    public void onGuiInit(@NotNull IGuiScreen gui) {
         minY = originY + gui.getGuiRootTop();
         maxY = minY + height;
         minX = originX + gui.getGuiRootLeft();
         maxX = minX + width;
     }
 
-    public void addSelectionListener(@Nonnull ListSelectionListener<T> listener) {
+    public void addSelectionListener(@NotNull ListSelectionListener<T> listener) {
         listeners.add(listener);
     }
 
-    public void removeSelectionListener(@Nonnull ListSelectionListener<T> listener) {
+    public void removeSelectionListener(@NotNull ListSelectionListener<T> listener) {
         listeners.remove(listener);
     }
 
@@ -90,7 +89,7 @@ public abstract class GuiScrollableList<T> {
         return selectedIndex < 0 || selectedIndex >= getNumElements() ? null : getElementAt(selectedIndex);
     }
 
-    public void setSelection(@Nonnull T selection) {
+    public void setSelection(@NotNull T selection) {
         setSelection(getIndexOf(selection));
     }
 
@@ -116,11 +115,11 @@ public abstract class GuiScrollableList<T> {
         return -1;
     }
 
-    public abstract @Nonnull T getElementAt(int index);
+    public abstract @NotNull T getElementAt(int index);
 
     public abstract int getNumElements();
 
-    protected abstract void drawElement(int elementIndex, int x, int y, int h, @Nonnull BufferBuilder renderer);
+    protected abstract void drawElement(int elementIndex, int x, int y, int h, @NotNull BufferBuilder renderer);
 
     protected boolean elementClicked(int elementIndex, boolean doubleClick, int elementX, int elementY) {
         return true;
@@ -156,7 +155,7 @@ public abstract class GuiScrollableList<T> {
         return getContentHeight() - (height - margin);
     }
 
-    public void actionPerformed(@Nonnull GuiButton b) {
+    public void actionPerformed(@NotNull GuiButton b) {
         if (b.enabled) {
             if (b.id == scrollUpButtonID) {
                 amountScrolled -= slotHeight * 2 / 3;
@@ -194,7 +193,7 @@ public abstract class GuiScrollableList<T> {
         GlStateManager.disableLighting();
         GlStateManager.disableFog();
 
-        final @Nonnull ScaledResolution sr = new ScaledResolution(mc);
+        final @NotNull ScaledResolution sr = new ScaledResolution(mc);
         final int sx = minX * sr.getScaleFactor();
         final int sw = width * sr.getScaleFactor();
         final int sy = mc.displayHeight - maxY * sr.getScaleFactor();
@@ -202,7 +201,7 @@ public abstract class GuiScrollableList<T> {
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         GL11.glScissor(sx, sy, sw, sh);
 
-        final @Nonnull BufferBuilder renderer = Tessellator.getInstance().getBuffer();
+        final @NotNull BufferBuilder renderer = Tessellator.getInstance().getBuffer();
         drawContainerBackground(renderer);
 
         final int contentYOffset = this.minY + margin - (int) this.amountScrolled;
@@ -287,7 +286,7 @@ public abstract class GuiScrollableList<T> {
         GlStateManager.shadeModel(GL11.GL_FLAT);
     }
 
-    protected void renderScrollBar(@Nonnull BufferBuilder renderer) {
+    protected void renderScrollBar(@NotNull BufferBuilder renderer) {
         final int contentHeightOverBounds = getContentOverhang();
         if (contentHeightOverBounds > 0) {
 
@@ -423,7 +422,7 @@ public abstract class GuiScrollableList<T> {
         return minX + width - 6;
     }
 
-    protected void drawContainerBackground(@Nonnull BufferBuilder renderer) {
+    protected void drawContainerBackground(@NotNull BufferBuilder renderer) {
         Vector3f col = ColorUtil.toFloat(2105376);
         GlStateManager.color(col.x, col.y, col.z, 1.0F);
         GlStateManager.disableTexture2D();

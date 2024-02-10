@@ -1,24 +1,23 @@
 package com.enderio.core.common.util.stackable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.enderio.core.common.util.NNList;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 class ProducerThing implements IThing {
 
-    private final @Nonnull IProducer producer;
+    private final @NotNull IProducer producer;
 
-    ProducerThing(@Nonnull IProducer producer) {
+    ProducerThing(@NotNull IProducer producer) {
         this.producer = producer;
     }
 
     @Override
-    public @Nonnull NNList<IThing> bake() {
+    public @NotNull NNList<IThing> bake() {
         Block block = producer.getBlock();
         if (block != null) {
             return new BlockThing(block).bake();
@@ -46,17 +45,17 @@ class ProducerThing implements IThing {
     }
 
     @Override
-    public @Nonnull NNList<Item> getItems() {
+    public @NotNull NNList<Item> getItems() {
         return NNList.<Item>emptyList();
     }
 
     @Override
-    public @Nonnull NNList<ItemStack> getItemStacks() {
+    public @NotNull NNList<ItemStack> getItemStacks() {
         return NNList.<ItemStack>emptyList();
     }
 
     @Override
-    public @Nonnull NNList<Block> getBlocks() {
+    public @NotNull NNList<Block> getBlocks() {
         return NNList.<Block>emptyList();
     }
 
