@@ -20,7 +20,7 @@ public class BaseConfigGui extends GuiConfig {
 
     public BaseConfigGui(GuiScreen parentScreen) {
         // dummy super so we can call instance methods
-        super(parentScreen, new ArrayList<IConfigElement>(), null, false, false, null);
+        super(parentScreen, new ArrayList<>(), null, false, false, null);
 
         try {
             // pffft final, what a wimpy modifier
@@ -76,8 +76,8 @@ public class BaseConfigGui extends GuiConfig {
 
     private class ConfigSection extends ConfigElement {
 
-        private Section section;
-        private String prefix;
+        private final Section section;
+        private final String prefix;
 
         ConfigSection(Section s, String prefix) {
             super(BaseConfigGui.this.getConfigHandler().getCategory(s.lc()).setLanguageKey(prefix + s.lang));
@@ -120,7 +120,8 @@ public class BaseConfigGui extends GuiConfig {
             try {
                 return (Property) _prop.get(other);
             } catch (Exception e) {
-                throw Throwables.propagate(e);
+                Throwables.throwIfUnchecked(e);
+                throw new RuntimeException(e);
             }
         }
 

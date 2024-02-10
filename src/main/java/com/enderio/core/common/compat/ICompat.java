@@ -6,5 +6,5 @@ package com.enderio.core.common.compat;
  */
 public interface ICompat {
 
-    public static final String METHOD_NAME = "load";
+    String METHOD_NAME = "load";
 }

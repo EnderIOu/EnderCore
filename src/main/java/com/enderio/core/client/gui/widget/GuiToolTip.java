@@ -5,6 +5,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
@@ -26,21 +27,19 @@ public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
     public GuiToolTip(@NotNull Rectangle bounds, String... lines) {
         this.bounds = bounds;
         if (lines != null) {
-            text = new ArrayList<String>(lines.length);
-            for (String line : lines) {
-                text.add(line);
-            }
+            text = new ArrayList<>(lines.length);
+            Collections.addAll(text, lines);
         } else {
-            text = new ArrayList<String>();
+            text = new ArrayList<>();
         }
     }
 
     public GuiToolTip(@NotNull Rectangle bounds, @Nullable List<String> lines) {
         this.bounds = bounds;
         if (lines == null) {
-            text = new ArrayList<String>();
+            text = new ArrayList<>();
         } else {
-            text = new ArrayList<String>(lines);
+            text = new ArrayList<>(lines);
         }
     }
 
@@ -112,9 +111,7 @@ public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
     public void setToolTipText(String... txt) {
         text.clear();
         if (txt != null) {
-            for (String line : txt) {
-                text.add(line);
-            }
+            Collections.addAll(text, txt);
         }
     }
 

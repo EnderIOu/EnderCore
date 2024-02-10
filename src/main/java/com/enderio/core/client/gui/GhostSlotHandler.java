@@ -13,7 +13,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class GhostSlotHandler {
 
-    protected final @NotNull NNList<GhostSlot> ghostSlots = new NNList<GhostSlot>();
+    protected final @NotNull NNList<GhostSlot> ghostSlots = new NNList<>();
     protected @Nullable GhostSlot hoverGhostSlot;
 
     public GhostSlotHandler() {}
@@ -81,8 +81,6 @@ public class GhostSlotHandler {
                     if (existingStack.getCount() < existingStack.getMaxStackSize() &&
                             existingStack.getCount() < slot.getStackSizeLimit()) {
                         increaseSlot(slot, existingStack);
-                    } else {
-                        // NOP
                     }
                 } else { // different item
                     replaceSlot(slot, handStack);

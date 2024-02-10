@@ -383,9 +383,7 @@ public class RenderUtil {
                 return new Vector4d(0, 0, 1, 0);
             case NORTH:
                 return new Vector4d(-1, 0, 0, 1);
-            case SOUTH:
-                return new Vector4d(1, 0, 0, 0);
-            default:
+            default: // South same as default
                 return new Vector4d(1, 0, 0, 0);
         }
     }
@@ -408,9 +406,7 @@ public class RenderUtil {
                 return SOUTH;
             case NORTH:
                 return WEST;
-            case SOUTH:
-                return EnumFacing.EAST;
-            default:
+            default: // south same as default
                 return EnumFacing.EAST;
         }
     }
@@ -619,13 +615,9 @@ public class RenderUtil {
     public static void renderBoundingBox(@NotNull final BoundingBox bb) {
         final BufferBuilder tes = Tessellator.getInstance().getBuffer();
         tes.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION);
-        NNList.FACING.apply(new Callback<EnumFacing>() {
-
-            @Override
-            public void apply(@NotNull EnumFacing e) {
-                for (Vector3f v : bb.getCornersForFace(e)) {
-                    tes.pos(v.x, v.y, v.z).endVertex();
-                }
+        NNList.FACING.apply(e -> {
+            for (Vector3f v : bb.getCornersForFace(e)) {
+                tes.pos(v.x, v.y, v.z).endVertex();
             }
         });
         Tessellator.getInstance().draw();
@@ -643,13 +635,9 @@ public class RenderUtil {
                                          final float minV, final float maxV) {
         final BufferBuilder tes = Tessellator.getInstance().getBuffer();
         tes.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
-        NNList.FACING.apply(new Callback<EnumFacing>() {
-
-            @Override
-            public void apply(@NotNull EnumFacing e) {
-                for (Vertex v : bb.getCornersWithUvForFace(e, minU, maxU, minV, maxV)) {
-                    tes.pos(v.x(), v.y(), v.z()).tex(v.u(), v.v()).endVertex();
-                }
+        NNList.FACING.apply(e -> {
+            for (Vertex v : bb.getCornersWithUvForFace(e, minU, maxU, minV, maxV)) {
+                tes.pos(v.x(), v.y(), v.z()).tex(v.u(), v.v()).endVertex();
             }
         });
         Tessellator.getInstance().draw();
@@ -689,14 +677,10 @@ public class RenderUtil {
         if (translateToOrigin) {
             wr.setTranslation(-pos.getX(), -pos.getY(), -pos.getZ());
         }
-        NNList.RENDER_LAYER.apply(new Callback<BlockRenderLayer>() {
-
-            @Override
-            public void apply(@NotNull BlockRenderLayer layer) {
-                ForgeHooksClient.setRenderLayer(layer);
-                // TODO: Need to setup GL state correctly for each layer
-                blockrendererdispatcher.getBlockModelRenderer().renderModel(world, ibakedmodel, state, pos, wr, false);
-            }
+        NNList.RENDER_LAYER.apply(layer -> {
+            ForgeHooksClient.setRenderLayer(layer);
+            // TODO: Need to setup GL state correctly for each layer
+            blockrendererdispatcher.getBlockModelRenderer().renderModel(world, ibakedmodel, state, pos, wr, false);
         });
         if (translateToOrigin) {
             wr.setTranslation(0, 0, 0);
@@ -734,12 +718,8 @@ public class RenderUtil {
     public static void addBakedQuads(@NotNull final List<BakedQuad> quads, @NotNull final BoundingBox bb,
                                      @NotNull Vector4f uvs, @NotNull final TextureAtlasSprite tex,
                                      final Vector4f color) {
-        NNList.FACING.apply(new Callback<EnumFacing>() {
-
-            @Override
-            public void apply(@NotNull EnumFacing face) {
-                addBakedQuadForFace(quads, bb, tex, face, uvs, null, false, false, true, color);
-            }
+        NNList.FACING.apply(face -> {
+            addBakedQuadForFace(quads, bb, tex, face, uvs, null, false, false, true, color);
         });
     }
 

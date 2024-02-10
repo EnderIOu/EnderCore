@@ -16,7 +16,7 @@ import org.jetbrains.annotations.Nullable;
  */
 public interface IAdvancedEnchant {
 
-    public static final EnumEnchantmentType ALL = EnumHelper.addEnchantmentType("EC_REALLY_ALL", new Predicate<Item>() {
+    EnumEnchantmentType ALL = EnumHelper.addEnchantmentType("EC_REALLY_ALL", new Predicate<Item>() {
 
         @Override
         public boolean apply(@Nullable Item input) {
@@ -37,8 +37,7 @@ public interface IAdvancedEnchant {
     /**
      * Get the detail for this itemstack
      *
-     * @param stack
-     * @return a list of <code>String</code>s to be bulleted under the enchantment
+     * @return an array of strings to be bulleted under the enchantment
      */
     default @NotNull String[] getTooltipDetails(@NotNull ItemStack stack) {
         final String unloc = "description." + ((Enchantment) this).getName();

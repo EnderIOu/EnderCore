@@ -54,7 +54,7 @@ public class ResourcePackAssembler {
 
         private final String path;
 
-        private ModelType(String path) {
+        ModelType(String path) {
             this.path = path;
         }
 
@@ -63,18 +63,18 @@ public class ResourcePackAssembler {
         }
     }
 
-    private List<CustomFile> files = new ArrayList<CustomFile>();
+    private List<CustomFile> files = new ArrayList<>();
 
     private static List<IResourcePack> defaultResourcePacks;
 
     private static final String MC_META_BASE = "{\"pack\":{\"pack_format\":1,\"description\":\"%s\"}}";
 
-    private File dir;
-    private File zip;
-    private String name;
-    private String mcmeta;
-    private String modid;
-    private String assetsPath;
+    private final File dir;
+    private final File zip;
+    private final String name;
+    private final String mcmeta;
+    private final String modid;
+    private final String assetsPath;
     private boolean hasPackPng = false;
     private Class<?> jarClass;
 

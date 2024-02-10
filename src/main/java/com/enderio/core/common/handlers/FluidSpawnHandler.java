@@ -20,7 +20,6 @@ public class FluidSpawnHandler {
                         .getBlock() instanceof BlockFluidEnder) {
             evt.setResult(Result.DENY);
         }
-        return;
     }
 
     private FluidSpawnHandler() {}

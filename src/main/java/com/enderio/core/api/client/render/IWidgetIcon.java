@@ -35,7 +35,7 @@ public interface IWidgetIcon {
      *
      */
     @SideOnly(Side.CLIENT)
-    static class TAS extends TextureAtlasSprite {
+    class TAS extends TextureAtlasSprite {
 
         protected TAS(IWidgetIcon icon) {
             super(icon.getMap().getTexture().toString());

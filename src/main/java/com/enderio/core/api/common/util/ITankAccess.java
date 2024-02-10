@@ -36,9 +36,9 @@ public interface ITankAccess {
      */
     void setTanksDirty();
 
-    public static interface ITankData {
+    interface ITankData {
 
-        public static enum EnumTankType {
+        enum EnumTankType {
             STORAGE,
             INPUT,
             OUTPUT;
@@ -53,7 +53,7 @@ public interface ITankAccess {
         int getCapacity();
     }
 
-    public static interface IExtendedTankAccess extends ITankAccess {
+    interface IExtendedTankAccess extends ITankAccess {
 
         /**
          * Get information on all tanks to be displayed to the user.

@@ -63,7 +63,7 @@ public class ClientUtil {
         }
         try {
             Object val = Y.get(p);
-            return ((Double) val).doubleValue();
+            return (Double) val;
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

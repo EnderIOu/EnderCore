@@ -11,7 +11,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class GhostSlot {
 
-    public static interface IGhostSlotAware {
+    public interface IGhostSlotAware {
 
         /**
          * Called server-side on the container when a GhostSlot is changed. Check that the given slot number really is a
@@ -138,11 +138,11 @@ public abstract class GhostSlot {
         this.updateServer = updateServer;
     }
 
-    public TileEntityBase getTe() {
+    public @Nullable TileEntityBase getTe() {
         return te;
     }
 
-    public void setTe(TileEntityBase te) {
+    public void setTe(@Nullable TileEntityBase te) {
         this.te = te;
     }
 

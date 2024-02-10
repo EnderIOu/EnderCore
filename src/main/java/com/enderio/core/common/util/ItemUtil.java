@@ -131,8 +131,6 @@ public class ItemUtil {
     /**
      * Checks if items, damage and NBT are equal and the items are stackable.
      *
-     * @param s1
-     * @param s2
      * @return True if the two stacks are mergeable, false otherwise.
      */
     public static boolean areStackMergable(@NotNull ItemStack s1, @NotNull ItemStack s2) {
@@ -148,8 +146,6 @@ public class ItemUtil {
     /**
      * Checks if items, damage and NBT are equal.
      *
-     * @param s1
-     * @param s2
      * @return True if the two stacks are equal, false otherwise.
      */
     public static boolean areStacksEqual(@NotNull ItemStack s1, @NotNull ItemStack s2) {
@@ -165,8 +161,6 @@ public class ItemUtil {
     /**
      * Checks if items, meta and NBT are equal.
      *
-     * @param s1
-     * @param s2
      * @return True if the two stacks are equal, false otherwise.
      */
     public static boolean areStacksEqualIgnoringDamage(@NotNull ItemStack s1, @NotNull ItemStack s2) {

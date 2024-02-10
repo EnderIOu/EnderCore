@@ -79,8 +79,8 @@ public final class BoundingBox extends AxisAlignedBB {
     }
 
     public boolean intersects(@NotNull BoundingBox other) {
-        return other.maxX > this.minX && other.minX < this.maxX ? (other.maxY > this.minY && other.minY < this.maxY ?
-                other.maxZ > this.minZ && other.minZ < this.maxZ : false) : false;
+        return other.maxX > this.minX && other.minX < this.maxX && (other.maxY > this.minY && other.minY < this.maxY &&
+                other.maxZ > this.minZ && other.minZ < this.maxZ);
     }
 
     public @NotNull BoundingBox scale(float xyz) {

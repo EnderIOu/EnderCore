@@ -43,7 +43,7 @@ public class CommandScoreboardInfo extends CommandBase {
 
     @Override
     public void execute(@NotNull MinecraftServer server, @NotNull ICommandSender player,
-                        @NotNull String[] args) throws CommandException {
+                        String @NotNull [] args) throws CommandException {
         if (args.length < 2) {
             throw new WrongUsageException("This command requires 2 args: <board> <name>");
         }
@@ -78,10 +78,10 @@ public class CommandScoreboardInfo extends CommandBase {
 
     @Override
     public @NotNull List<String> getTabCompletions(@NotNull MinecraftServer server, @NotNull ICommandSender sender,
-                                                   @NotNull String[] args,
+                                                   String @NotNull [] args,
                                                    @Nullable BlockPos pos) {
         if (args.length == 1) {
-            List<String> boards = new ArrayList<String>();
+            List<String> boards = new ArrayList<>();
             for (ScoreObjective obj : sender.getEntityWorld().getScoreboard().getScoreObjectives()) {
                 boards.add(obj.getName());
             }
@@ -90,7 +90,7 @@ public class CommandScoreboardInfo extends CommandBase {
         }
 
         if (args.length == 2) {
-            List<String> players = new ArrayList<String>();
+            List<String> players = new ArrayList<>();
             for (EntityPlayer p : sender.getEntityWorld().playerEntities) {
                 players.add(p.getDisplayNameString());
             }

@@ -180,7 +180,7 @@ public class SpecialTooltipHandler {
         }
     }
 
-    private static final @NotNull List<String> throwaway = new ArrayList<String>();
+    private static final @NotNull List<String> throwaway = new ArrayList<>();
 
     private static boolean hasDetailedTooltip(@NotNull IResourceTooltipProvider tt, @NotNull ItemStack stack) {
         throwaway.clear();

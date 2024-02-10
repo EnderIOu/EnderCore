@@ -233,7 +233,7 @@ public class Util {
         ItemStack item = inventory.getStackInSlot(slot);
         if (!item.isEmpty()) {
             if (item.getCount() <= size) {
-                ItemStack result = item;
+                ItemStack result = item; // todo copy??
                 inventory.setInventorySlotContents(slot, ItemStack.EMPTY);
                 inventory.markDirty();
                 return result;
@@ -269,7 +269,7 @@ public class Util {
         boolean ignoreBlockWithoutBoundingBox = true;
         Vec3d startVec = startVector;
 
-        List<RayTraceResult> result = new ArrayList<RayTraceResult>();
+        List<RayTraceResult> result = new ArrayList<>();
 
         if (!Double.isNaN(startVec.x) && !Double.isNaN(startVec.y) && !Double.isNaN(startVec.z)) {
             if (!Double.isNaN(endVec.x) && !Double.isNaN(endVec.y) && !Double.isNaN(endVec.z)) {
@@ -294,7 +294,7 @@ public class Util {
 
                 while (k1-- >= 0) {
                     if (Double.isNaN(startVec.x) || Double.isNaN(startVec.y) || Double.isNaN(startVec.z)) {
-                        return new ArrayList<RayTraceResult>();
+                        return new ArrayList<>();
                     }
 
                     if (l == i && i1 == j && j1 == k) {

@@ -19,7 +19,7 @@ public class IMCRegistry {
 
     public static abstract class IMCBase implements IIMC {
 
-        private String key;
+        private final String key;
 
         public IMCBase(String key) {
             this.key = key;
@@ -33,7 +33,7 @@ public class IMCRegistry {
 
     public static final IMCRegistry INSTANCE = new IMCRegistry();
 
-    private List<IIMC> handlers = Lists.newArrayList();
+    private final List<IIMC> handlers = Lists.newArrayList();
 
     private IMCRegistry() {}
 

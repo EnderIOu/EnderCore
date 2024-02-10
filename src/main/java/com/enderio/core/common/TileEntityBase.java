@@ -56,13 +56,11 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
 
     private final void sendProgressIf() {
         // this is only used for players that do not have the GUI open. They do not need a very fine resolution, as they
-        // only see the the machine being on or
-        // off and get the sound restarted on progress==0
+        // only see the machine being on or off and get the sound restarted on progress==0
         if (isProgressTile && !world.isRemote) {
             float progress = ((IProgressTile) this).getProgress();
-            boolean send = //
-                    progress < lastProgressSent // always send progress if it goes down, e.g. machine goes inactive or
-                                                // new task starts
+            boolean send = progress < lastProgressSent // always send progress if it goes down, e.g. machine goes
+                                                       // inactive or new task starts
                             || (lastProgressSent <= 0 && progress > 0) // always send progress if machine goes active
                             || (lastUpdate - lastProgressUpdate) > 60 * 20; // also update every 60 seconds to avoid
                                                                             // stale client status
@@ -186,12 +184,11 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
     }
 
     protected boolean isPoweredRedstone() {
-        return hasWorld() && world.isBlockLoaded(getPos()) ? world.getRedstonePowerFromNeighbors(getPos()) > 0 : false;
+        return hasWorld() && world.isBlockLoaded(getPos()) && world.getRedstonePowerFromNeighbors(getPos()) > 0;
     }
 
     /**
      * Called directly after the TE is constructed. This is the place to call non-final methods.
-     *
      * Note: This will not be called when the TE is loaded from the save. Hook into the nbt methods for that.
      */
     public void init() {}
@@ -211,7 +208,6 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * Call this with an interval (in ticks) to find out if the current tick is the one you want to do some work. This
      * is staggered so the work of different TEs
      * is stretched out over time.
-     *
      * If you have different work items in your TE, use this variant to stagger your work.
      */
     protected boolean shouldDoWorkThisTick(int interval, int offset) {
@@ -232,7 +228,6 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      *                 The slot number that was given to the ghost slot
      * @param stack
      *                 The stack that should be placed, null to clear
-     * @param realsize
      */
     public void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {}
 
@@ -278,7 +273,7 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
                     }
                     try {
                         player.connection.sendPacket(updatePacket);
-                    } catch (Exception e) {}
+                    } catch (Exception ignored) {}
                 }
             }
         }

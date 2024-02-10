@@ -27,7 +27,7 @@ public class CommandReloadConfigs extends CommandBase {
     public static final @NotNull CommandReloadConfigs SERVER = new CommandReloadConfigs(Side.SERVER);
     public static final @NotNull CommandReloadConfigs CLIENT = new CommandReloadConfigs(Side.CLIENT);
 
-    private static List<String> validModIDs = new ArrayList<String>();
+    private static final List<String> validModIDs = new ArrayList<>();
 
     private final Side side;
 
@@ -64,11 +64,11 @@ public class CommandReloadConfigs extends CommandBase {
 
     @Override
     public @NotNull List<String> getTabCompletions(@NotNull MinecraftServer server, @NotNull ICommandSender sender,
-                                                   @NotNull String[] args,
+                                                   String @NotNull [] args,
                                                    @Nullable BlockPos pos) {
         if (args.length >= 1) {
             @NotNull
-            String[] avail = NullHelper.notnullJ(validModIDs.toArray(new String[validModIDs.size()]), "List.toArray()");
+            String[] avail = NullHelper.notnullJ(validModIDs.toArray(new String[0]), "List.toArray()");
 
             for (int i = 0; i < args.length - 1; i++) {
                 avail = ArrayUtils.removeElement(avail, args[i]);
@@ -87,7 +87,7 @@ public class CommandReloadConfigs extends CommandBase {
 
     @Override
     public void execute(@NotNull MinecraftServer server, @NotNull ICommandSender sender,
-                        @NotNull String[] args) throws CommandException {
+                        String @NotNull [] args) {
         if (side == Side.CLIENT == sender.getEntityWorld().isRemote)
             for (String s : args) {
                 boolean validModid = false;

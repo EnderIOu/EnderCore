@@ -94,7 +94,8 @@ public class XPBoostHandler {
                 int xp = (Integer) getExperiencePoints.invoke(killed, player);
                 return getXPBoost(xp, level);
             } catch (Exception e) {
-                Throwables.propagate(e);
+                Throwables.throwIfUnchecked(e);
+                throw new RuntimeException(e);
             }
         }
         return 0;
@@ -105,7 +106,7 @@ public class XPBoostHandler {
     }
 
     private static int getXPBoostLevel(Entity player) {
-        if (player == null || !(player instanceof EntityPlayer) || player instanceof FakePlayer) {
+        if (!(player instanceof EntityPlayer) || player instanceof FakePlayer) {
             return -1;
         }
         ItemStack weapon = ((EntityLivingBase) player).getHeldItemMainhand();
@@ -135,13 +136,7 @@ public class XPBoostHandler {
             return;
         }
 
-        Scheduler.instance().schedule(20, new Runnable() {
-
-            @Override
-            public void run() {
-                world.spawnEntity(new EntityXPOrb(world, x, y, z, boost));
-            }
-        });
+        Scheduler.instance().schedule(20, () -> world.spawnEntity(new EntityXPOrb(world, x, y, z, boost)));
     }
 
     private XPBoostHandler() {}

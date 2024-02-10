@@ -14,10 +14,7 @@ public final class OreDictionaryHelper {
     public static final String INGOT_ENDERIUM = "ingotEnderium";
 
     public static boolean isRegistered(String name) {
-        if (!OreDictionary.getOres(name).isEmpty()) {
-            return true;
-        }
-        return false;
+        return !OreDictionary.getOres(name).isEmpty();
     }
 
     public static boolean hasCopper() {

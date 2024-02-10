@@ -48,7 +48,5 @@ public class BlockSound extends PositionedSound implements ITickableSound {
     }
 
     @Override
-    public void update() {
-        ;
-    }
+    public void update() {}
 }

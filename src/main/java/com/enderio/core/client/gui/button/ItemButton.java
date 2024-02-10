@@ -17,7 +17,7 @@ public class ItemButton extends GuiButton {
     public static final int DEFAULT_HEIGHT = 24;
     public static final int HHEIGHT = DEFAULT_HEIGHT / 2;
 
-    private @NotNull ItemStack item;
+    private final @NotNull ItemStack item;
 
     protected int hwidth;
     protected int hheight;

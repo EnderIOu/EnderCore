@@ -10,7 +10,7 @@ public class CustomWidgetIcon implements IWidgetIcon {
     private final int x, y, width, height;
     private final @NotNull IWidgetMap map;
 
-    private @Nullable IWidgetIcon overlay;
+    private final @Nullable IWidgetIcon overlay;
 
     public CustomWidgetIcon(int x, int y, int width, int height, @NotNull IWidgetMap map,
                             @Nullable IWidgetIcon overlay) {

@@ -38,7 +38,7 @@ public @interface SimpleMixin {
     @Target(ElementType.TYPE)
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
-    public @interface SimpleMixinList {
+    @interface SimpleMixinList {
 
         SimpleMixin[] value();
     }

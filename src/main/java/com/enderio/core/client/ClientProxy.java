@@ -26,9 +26,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void throwModCompatibilityError(@NotNull String... msgs) {
-        EnderCoreModConflictException ex = new EnderCoreModConflictException(msgs);
-        // ReflectionHelper.setPrivateValue(FMLClientHandler.class, FMLClientHandler.instance(), ex, "customError");
-        throw ex;
+        throw new EnderCoreModConflictException(msgs);
     }
 
     @Override

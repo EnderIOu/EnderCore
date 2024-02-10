@@ -68,15 +68,6 @@ public class AutoSmeltHandler {
                                         world.spawnEntity(new EntityXPOrb(world, event.getPos().getX(),
                                                 event.getPos().getY() + 0.5, event.getPos().getZ(), k));
                                     }
-
-                                    // TODO is this no longer necessary?
-                                    // if (furnaceStack.getItem() == Items.IRON_INGOT) {
-                                    // harvester.addStat(AchievementList.ACQUIRE_IRON);
-                                    // }
-                                    //
-                                    // if (furnaceStack.getItem() == Items.COOKED_FISH) {
-                                    // harvester.addStat(AchievementList.COOK_FISH);
-                                    // }
                                 }
 
                                 FMLCommonHandler.instance().firePlayerSmeltedEvent(harvester, furnaceStack);

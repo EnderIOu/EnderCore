@@ -21,9 +21,7 @@ import org.jetbrains.annotations.NotNull;
 public @interface Config {
 
     /**
-     * The section of the config option.
-     *
-     * (AKA Category)
+     * The section of the config option. (AKA Category)
      *
      * @return A string section name.
      */

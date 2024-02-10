@@ -29,7 +29,7 @@ public interface IProgressTile {
     @NotNull
     IMessage getProgressPacket();
 
-    public static @Nullable Packet<?> getProgressPacket(Object o) {
+    static @Nullable Packet<?> getProgressPacket(Object o) {
         if (o instanceof IProgressTile) {
             return EnderPacketHandler.INSTANCE.getPacketFrom(((IProgressTile) o).getProgressPacket());
         }

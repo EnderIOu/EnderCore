@@ -55,12 +55,12 @@ public class ToolTipManager {
             return;
         }
 
-        NNList<String> formatted = new NNList<String>();
+        NNList<String> formatted = new NNList<>();
         for (int i = 0; i < list.size(); i++) {
             if (i == 0) {
-                formatted.add("\u00a7f" + list.get(i));
+                formatted.add("§f" + list.get(i));
             } else {
-                formatted.add("\u00a77" + list.get(i));
+                formatted.add("§7" + list.get(i));
             }
         }
 

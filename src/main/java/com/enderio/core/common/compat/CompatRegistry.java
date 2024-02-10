@@ -113,9 +113,7 @@ public enum CompatRegistry {
     }
 
     public void forceLoad(String clazz) {
-        Iterator<Registration> iter = compatMap.keySet().iterator();
-        while (iter.hasNext()) {
-            Registration r = iter.next();
+        for (Registration r : compatMap.keySet()) {
             String s = compatMap.get(r);
             if (s.equals(clazz)) {
                 doLoad(s);

@@ -42,7 +42,6 @@ public class Handlers {
 
     /**
      * New enum to represent handler types. Possible to use to figure out what type a method is without direct info.
-     *
      * The order of the constants is the order they are tried. This is VERY important!
      */
     public enum HandlerType {
@@ -62,7 +61,7 @@ public class Handlers {
          */
         FORGE("net.minecraftforge", MinecraftForge.EVENT_BUS);
 
-        private HandlerType(String eventIdentifier, EventBus bus) {
+        HandlerType(String eventIdentifier, EventBus bus) {
             this.eventIdentifier = eventIdentifier;
             this.bus = bus;
         }
@@ -86,7 +85,7 @@ public class Handlers {
     @java.lang.annotation.Retention(RetentionPolicy.RUNTIME)
     public @interface Handler {
 
-        public enum Inst {
+        enum Inst {
 
             /**
              * The default, will try all three methods, in the order {@link Inst#CONSTRUCTOR}, {@link Inst#FIELD},
@@ -124,7 +123,7 @@ public class Handlers {
             }
         }
 
-        public enum HandlerSide {
+        enum HandlerSide {
 
             /**
              * Whether to load this handler or not will be determined by the package name. If it contains "client" it
@@ -168,7 +167,7 @@ public class Handlers {
         HandlerSide side() default HandlerSide.AUTO;
     }
 
-    private static final Set<String> packageSet = new HashSet<String>();
+    private static final Set<String> packageSet = new HashSet<>();
 
     private static Set<ASMData> annotations;
 
@@ -176,28 +175,10 @@ public class Handlers {
         annotations = event.getAsmData().getAll(Handler.class.getName());
     }
 
-    // private String getEnclosingPackage(Object obj) {
-    // Class<?> modClass = obj.getClass();
-    //
-    // while (modClass.getComponentType() != null) {
-    // modClass = modClass.getComponentType();
-    // }
-    //
-    // while (modClass.getEnclosingClass() != null) {
-    // modClass = modClass.getEnclosingClass();
-    // }
-    //
-    // String name = modClass.getName();
-    // int lastDot = name.lastIndexOf('.');
-    //
-    // return lastDot == -1 ? name : name.substring(0, lastDot);
-    // }
-
     /**
      * Registers a top level package to be searched for {@link Handler} classes. Not needed if your {@code @Mod} class
      * implements {@link IEnderMod}
      *
-     * @param packageName
      * @deprecated This is not needed, period.
      */
     @Deprecated
@@ -214,8 +195,6 @@ public class Handlers {
 
     /**
      * For internal use only. Do not call. Callers will be sacked.
-     *
-     * @param event
      */
     public static void register(FMLInitializationEvent event) {
         if (registered) {
@@ -228,9 +207,9 @@ public class Handlers {
             if (shouldLoad(data)) {
                 try {
                     Class<?> c = Class.forName(className);
-                    Annotation a = c.getAnnotation(Handler.class);
+                    Handler a = c.getAnnotation(Handler.class);
                     if (a != null) {
-                        registerHandler(c, data, (Handler) a);
+                        registerHandler(c, data, a);
                     }
                 } catch (Throwable t) {
                     EnderCore.logger
@@ -265,13 +244,12 @@ public class Handlers {
                 return side.equals(currentSide);
             }
         } catch (Exception e) {
-            Throwables.propagate(e);
+            Throwables.throwIfUnchecked(e);
+            throw new RuntimeException(e);
         }
-        return false;
     }
 
-    private static void registerHandler(Class<?> c, ASMData data, Handler handler) throws InstantiationException,
-                                                                                   IllegalAccessException {
+    private static void registerHandler(Class<?> c, ASMData data, Handler handler) {
         Object inst = tryInit(handler, c);
 
         Method[] methods = c.getDeclaredMethods();
@@ -312,7 +290,7 @@ public class Handlers {
         if (pref.matches(CONSTRUCTOR)) {
             try {
                 return c.newInstance();
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
 
         if (pref.matches(FIELD)) {
@@ -320,7 +298,7 @@ public class Handlers {
                 Field inst = c.getDeclaredField("INSTANCE");
                 inst.setAccessible(true);
                 return inst.get(null);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
 
         if (pref.matches(METHOD)) {
@@ -328,7 +306,7 @@ public class Handlers {
                 Method inst = c.getDeclaredMethod("instance");
                 inst.setAccessible(true);
                 return inst.invoke(null);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
 
         if (pref.matches(SCALA_OBJECT)) {
@@ -336,7 +314,7 @@ public class Handlers {
                 Field inst = Class.forName(c.getName() + "$").getDeclaredField("MODULE$");
                 inst.setAccessible(true);
                 return inst.get(null);
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
 
         if (pref.matches(CLASS)) {
@@ -346,7 +324,7 @@ public class Handlers {
                         return c;
                     }
                 }
-            } catch (Exception e) {}
+            } catch (Exception ignored) {}
         }
 
         throw new RuntimeException(

@@ -84,7 +84,7 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     private Configuration config;
 
     @NotNull
-    List<Section> sections = new ArrayList<Section>();
+    List<Section> sections = new ArrayList<>();
     private Section activeSection = null;
 
     protected AbstractConfigHandler(@NotNull String modid) {
@@ -119,7 +119,7 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     public void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(modid)) {
             EnderCore.logger.info("Reloading all configs for modid: " + modid);
-            if (NullHelper.untrust(Minecraft.getMinecraft().world) == null) {
+            if (Minecraft.getMinecraft().world == null) {
                 reloadNonIngameConfigs();
             }
             reloadIngameConfigs();
@@ -530,34 +530,33 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     @SuppressWarnings("unchecked")
     static <T extends Number & Comparable<T>> T boundValue(Property prop, Bound<T> bound,
                                                            T defVal) throws IllegalArgumentException {
-        Object b = bound;
         if (defVal instanceof Integer) {
-            return (T) boundInt(prop, (Bound<Integer>) b);
+            return (T) boundInt(prop, (Bound<Integer>) bound);
         }
         if (defVal instanceof Double) {
-            return (T) boundDouble(prop, (Bound<Double>) b);
+            return (T) boundDouble(prop, (Bound<Double>) bound);
         }
         if (defVal instanceof Float) {
-            return (T) boundFloat(prop, (Bound<Float>) b);
+            return (T) boundFloat(prop, (Bound<Float>) bound);
         }
         throw new IllegalArgumentException(bound.min.getClass().getName() + " is not a valid config type.");
     }
 
     private static Integer boundInt(Property prop, Bound<Integer> bound) {
         prop.set(bound.clamp(prop.getInt()));
-        return Integer.valueOf(prop.getInt());
+        return prop.getInt();
     }
 
     private static Double boundDouble(Property prop, Bound<Double> bound) {
         prop.set(bound.clamp(prop.getDouble()));
-        return Double.valueOf(prop.getDouble());
+        return prop.getDouble();
     }
 
     private static Float boundFloat(Property prop, Bound<Float> bound) {
         return boundDouble(prop, Bound.of(bound.min.doubleValue(), bound.max.doubleValue())).floatValue();
     }
 
-    private static Lang fmlLang = new Lang("fml.configgui.tooltip");
+    private static final Lang fmlLang = new Lang("fml.configgui.tooltip");
 
     static void addCommentDetails(Property prop, Bound<?> bound) {
         prop.setComment(prop.getComment() + (prop.getComment().isEmpty() ? "" : "\n"));
@@ -636,8 +635,7 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
         // @formatter:on
 
         if (defaultVal instanceof Float || defaultVal instanceof Double) {
-            double val = defaultVal instanceof Float ? ((Float) defaultVal).doubleValue() :
-                    ((Double) defaultVal).doubleValue();
+            double val = defaultVal instanceof Float ? ((Float) defaultVal).doubleValue() : (Double) defaultVal;
             prop = getConfig().get(section.name, key, val);
         }
 

@@ -67,7 +67,7 @@ public class FluidWrapper {
     }
 
     public static Map<EnumFacing, IFluidWrapper> wrapNeighbours(IBlockAccess world, BlockPos pos) {
-        Map<EnumFacing, IFluidWrapper> res = new EnumMap<EnumFacing, IFluidWrapper>(EnumFacing.class);
+        Map<EnumFacing, IFluidWrapper> res = new EnumMap<>(EnumFacing.class);
         for (EnumFacing dir : EnumFacing.values()) {
             if (dir == null) {
                 throw new NullPointerException("EnumFacing.values() contains null values???");

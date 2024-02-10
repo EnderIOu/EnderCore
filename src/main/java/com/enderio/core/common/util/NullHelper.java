@@ -9,38 +9,33 @@ public final class NullHelper {
 
     private NullHelper() {}
 
-    // bouncers for binary compatibility
-    // TODO 1.13 remove
-
     @NotNull
-    public final static <P> P notnull(@Nullable P o, @NotNull String message) {
+    public static <P> P notnull(@Nullable P o, @NotNull String message) {
         return notnull(o, (Object) message);
     }
 
     @NotNull
-    public final static <P> P notnullJ(@Nullable P o, @NotNull String message) {
+    public static <P> P notnullJ(@Nullable P o, @NotNull String message) {
         return notnullJ(o, (Object) message);
     }
 
     @NotNull
-    public final static <P> P notnullM(@Nullable P o, @NotNull String message) {
+    public static <P> P notnullM(@Nullable P o, @NotNull String message) {
         return notnullM(o, (Object) message);
     }
 
     @NotNull
-    public final static <P> P notnullF(@Nullable P o, @NotNull String message) {
+    public static <P> P notnullF(@Nullable P o, @NotNull String message) {
         return notnullF(o, (Object) message);
     }
 
     @NotNull
-    public final static <P> P untrusted(@NotNull P o, @NotNull String message) {
+    public static <P> P untrusted(@NotNull P o, @NotNull String message) {
         return untrusted(o, (Object) message);
     }
 
-    //
-
     @NotNull
-    public final static <P> P notnull(@Nullable P o, @NotNull Object... message) {
+    public static <P> P notnull(@Nullable P o, @NotNull Object... message) {
         if (o == null) {
             throw new NullPointerException(
                     "Houston we have a problem: '" + join(message) + "'. " +
@@ -50,7 +45,7 @@ public final class NullHelper {
     }
 
     @NotNull
-    public final static <P> P notnullJ(@Nullable P o, @NotNull Object... message) {
+    public static <P> P notnullJ(@Nullable P o, @NotNull Object... message) {
         if (o == null) {
             throw new NullPointerException(
                     "There was a problem with Java: The call '" + join(message) +
@@ -60,7 +55,7 @@ public final class NullHelper {
     }
 
     @NotNull
-    public final static <P> P notnullM(@Nullable P o, @NotNull Object... message) {
+    public static <P> P notnullM(@Nullable P o, @NotNull Object... message) {
         if (o == null) {
             throw new NullPointerException("There was a problem with Minecraft: The call '" + join(message) +
                     "' returned null even though it should not be able to do that. Is your Minecraft broken? Did some other mod break it?");
@@ -69,7 +64,7 @@ public final class NullHelper {
     }
 
     @NotNull
-    public final static <P> P notnullF(@Nullable P o, @NotNull Object... message) {
+    public static <P> P notnullF(@Nullable P o, @NotNull Object... message) {
         if (o == null) {
             throw new NullPointerException("There was a problem with Forge: The call '" + join(message) +
                     "' returned null even though it should not be able to do that. Is your Forge broken? Did some other mod break it?");
@@ -79,7 +74,7 @@ public final class NullHelper {
 
     @SuppressWarnings({ "null", "unused" })
     @NotNull
-    public final static <P> P untrusted(@NotNull P o, @NotNull Object... message) {
+    public static <P> P untrusted(@NotNull P o, @NotNull Object... message) {
         if (o == null) {
             throw new NullPointerException(
                     "There was a problem with Minecraft: The call '" + join(message) +
@@ -94,7 +89,7 @@ public final class NullHelper {
      * that are annotated non-null but are known not
      * to be.
      */
-    public final static @Nullable <P> P untrust(@NotNull P o) {
+    public static @Nullable <P> P untrust(@NotNull P o) {
         return o;
     }
 
@@ -103,7 +98,7 @@ public final class NullHelper {
      * {@link NullPointerException} if there is none.
      */
     @SafeVarargs
-    public final static @NotNull <P> P first(@Nullable P... o) {
+    public static @NotNull <P> P first(@Nullable P... o) {
         for (P on : notnull(o, (Object) "... param is null")) {
             if (on != null) {
                 return on;
@@ -114,7 +109,7 @@ public final class NullHelper {
     }
 
     @SafeVarargs
-    public final static @NotNull <P> P first(@NotNull Supplier<P>... o) {
+    public static @NotNull <P> P first(@NotNull Supplier<P>... o) {
         for (Supplier<P> on : notnull(o, (Object) "... param is null")) {
             P p = notnull(on, (Object) "... param value is null").get();
             if (p != null) {
@@ -126,7 +121,7 @@ public final class NullHelper {
     }
 
     @SafeVarargs
-    public final static @Nullable <P> P firstOrNull(@NotNull Supplier<P>... o) {
+    public static @Nullable <P> P firstOrNull(@NotNull Supplier<P>... o) {
         for (Supplier<P> on : notnull(o, (Object) "... param is null")) {
             P p = notnull(on, (Object) "... param value is null").get();
             if (p != null) {
@@ -136,7 +131,7 @@ public final class NullHelper {
         return null;
     }
 
-    public final static @Nullable <P> P firstWithDefault(@NotNull NNList<Supplier<P>> o, @Nullable P d) {
+    public static @Nullable <P> P firstWithDefault(@NotNull NNList<Supplier<P>> o, @Nullable P d) {
         for (Supplier<P> on : o) {
             P p = notnull(on, (Object) "NNList.get() is null").get();
             if (p != null) {
@@ -147,7 +142,7 @@ public final class NullHelper {
     }
 
     @SafeVarargs
-    public final static @NotNull <P> P first(@Nullable P value, @NotNull Supplier<P>... o) {
+    public static @NotNull <P> P first(@Nullable P value, @NotNull Supplier<P>... o) {
         if (value != null) {
             return value;
         }
@@ -161,7 +156,7 @@ public final class NullHelper {
                 "Houston we have a problem. Please report that on our bugtracker unless you are using some old version. Thank you.");
     }
 
-    public final static @Nullable <P> P firstWithDefault(@Nullable P value, @NotNull Supplier<P> on, @Nullable P d) {
+    public static @Nullable <P> P firstWithDefault(@Nullable P value, @NotNull Supplier<P> on, @Nullable P d) {
         if (value != null) {
             return value;
         }
@@ -173,7 +168,7 @@ public final class NullHelper {
     }
 
     @SafeVarargs
-    public final static @Nullable <P> P firstWithDefault(@Nullable P d, @NotNull Supplier<P>... o) {
+    public static @Nullable <P> P firstWithDefault(@Nullable P d, @NotNull Supplier<P>... o) {
         for (Supplier<P> on : notnull(o, (Object) "... param is null")) {
             P p = notnull(on, (Object) "... param value is null").get();
             if (p != null) {

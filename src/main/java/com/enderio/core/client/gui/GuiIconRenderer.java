@@ -27,8 +27,8 @@ public class GuiIconRenderer extends Gui {
     protected @NotNull TextureAtlasSprite icon;
     protected @NotNull ResourceLocation texture;
 
-    private int yPosition;
-    private int xPosition;
+    private final int yPosition;
+    private final int xPosition;
 
     private float alpha = 1.0f;
 

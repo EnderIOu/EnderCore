@@ -42,7 +42,7 @@ public interface IWidgetMap {
     void render(@NotNull IWidgetIcon widget, double x, double y, double width, double height, double zLevel,
                 boolean doDraw, boolean flipY);
 
-    static class WidgetMapImpl implements IWidgetMap {
+    class WidgetMapImpl implements IWidgetMap {
 
         private final int size;
         private final @NotNull ResourceLocation res;

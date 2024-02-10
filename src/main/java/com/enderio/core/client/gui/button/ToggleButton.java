@@ -81,7 +81,7 @@ public class ToggleButton extends IconButton {
     }
 
     private @NotNull List<String> makeCombinedTooltipList(String... tt) {
-        final @NotNull List<String> list = new ArrayList<String>();
+        final @NotNull List<String> list = new ArrayList<>();
         if (toolTipText != null) {
             Collections.addAll(list, toolTipText);
         }

@@ -13,14 +13,14 @@ import org.jetbrains.annotations.Nullable;
 public interface IAdvancedTooltipProvider {
 
     @SideOnly(Side.CLIENT)
-    default void addCommonEntries(@NotNull ItemStack itemstack, @Nullable EntityPlayer entityplayer,
+    default void addCommonEntries(@NotNull ItemStack stack, @Nullable EntityPlayer player,
                                   @NotNull List<String> list, boolean flag) {}
 
     @SideOnly(Side.CLIENT)
-    default void addBasicEntries(@NotNull ItemStack itemstack, @Nullable EntityPlayer entityplayer,
+    default void addBasicEntries(@NotNull ItemStack stack, @Nullable EntityPlayer player,
                                  @NotNull List<String> list, boolean flag) {}
 
     @SideOnly(Side.CLIENT)
-    default void addDetailedEntries(@NotNull ItemStack itemstack, @Nullable EntityPlayer entityplayer,
+    default void addDetailedEntries(@NotNull ItemStack stack, @Nullable EntityPlayer player,
                                     @NotNull List<String> list, boolean flag) {}
 }

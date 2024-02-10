@@ -173,7 +173,7 @@ public abstract class GuiScrollableList<T> {
         if (mY >= minY && mY <= maxY && mX >= minX && mX <= maxX + 6) {
             int y = mY - minY + (int) amountScrolled - margin;
             int mouseOverElement = y / slotHeight;
-            if (mX >= minX && mX <= maxX && mouseOverElement >= 0 && y >= 0 && mouseOverElement < getNumElements()) {
+            if (mX <= maxX && mouseOverElement >= 0 && y >= 0 && mouseOverElement < getNumElements()) {
                 return getElementAt(mouseOverElement);
             }
         }
@@ -193,7 +193,7 @@ public abstract class GuiScrollableList<T> {
         GlStateManager.disableLighting();
         GlStateManager.disableFog();
 
-        final @NotNull ScaledResolution sr = new ScaledResolution(mc);
+        final ScaledResolution sr = new ScaledResolution(mc);
         final int sx = minX * sr.getScaleFactor();
         final int sw = width * sr.getScaleFactor();
         final int sy = mc.displayHeight - maxY * sr.getScaleFactor();
@@ -201,7 +201,7 @@ public abstract class GuiScrollableList<T> {
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
         GL11.glScissor(sx, sy, sw, sh);
 
-        final @NotNull BufferBuilder renderer = Tessellator.getInstance().getBuffer();
+        final BufferBuilder renderer = Tessellator.getInstance().getBuffer();
         drawContainerBackground(renderer);
 
         final int contentYOffset = this.minY + margin - (int) this.amountScrolled;
@@ -256,28 +256,25 @@ public abstract class GuiScrollableList<T> {
         GlStateManager.shadeModel(GL11.GL_SMOOTH);
         GlStateManager.disableTexture2D();
 
-        boolean renderBorder = true;
-        if (renderBorder) {
-            final Vector4f colBorder = ColorUtil.toFloat4(0xFF000000);
-            renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-            renderer.pos(this.minX, this.minY + margin, 0.0D).color(colBlack.x, colBlack.y, colBlack.z, colBlack.w)
-                    .tex(0.0D, 1.0D).endVertex();
-            renderer.pos(this.maxX, this.minY + margin, 0.0D).color(colBlack.x, colBlack.y, colBlack.z, colBlack.w)
-                    .tex(1.0D, 1.0D).endVertex();
-            renderer.pos(this.maxX, this.minY, 0.0D).tex(1.0D, 0.0D)
-                    .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
-            renderer.pos(this.minX, this.minY, 0.0D).tex(0.0D, 0.0D)
-                    .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
-            renderer.pos(this.minX, this.maxY, 0.0D).tex(0.0D, 1.0D)
-                    .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
-            renderer.pos(this.maxX, this.maxY, 0.0D).tex(1.0D, 1.0D)
-                    .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
-            renderer.pos(this.maxX, this.maxY - margin + 1, 0.0D).tex(1.0D, 0.0D)
-                    .color(colBlack.x, colBlack.y, colBlack.z, colBlack.w).endVertex();
-            renderer.pos(this.minX, this.maxY - margin + 1, 0.0D).tex(0.0D, 0.0D)
-                    .color(colBlack.x, colBlack.y, colBlack.z, colBlack.w).endVertex();
-            Tessellator.getInstance().draw();
-        }
+        final Vector4f colBorder = ColorUtil.toFloat4(0xFF000000);
+        renderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+        renderer.pos(this.minX, this.minY + margin, 0.0D).color(colBlack.x, colBlack.y, colBlack.z, colBlack.w)
+                .tex(0.0D, 1.0D).endVertex();
+        renderer.pos(this.maxX, this.minY + margin, 0.0D).color(colBlack.x, colBlack.y, colBlack.z, colBlack.w)
+                .tex(1.0D, 1.0D).endVertex();
+        renderer.pos(this.maxX, this.minY, 0.0D).tex(1.0D, 0.0D)
+                .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
+        renderer.pos(this.minX, this.minY, 0.0D).tex(0.0D, 0.0D)
+                .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
+        renderer.pos(this.minX, this.maxY, 0.0D).tex(0.0D, 1.0D)
+                .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
+        renderer.pos(this.maxX, this.maxY, 0.0D).tex(1.0D, 1.0D)
+                .color(colBorder.x, colBorder.y, colBorder.z, colBorder.w).endVertex();
+        renderer.pos(this.maxX, this.maxY - margin + 1, 0.0D).tex(1.0D, 0.0D)
+                .color(colBlack.x, colBlack.y, colBlack.z, colBlack.w).endVertex();
+        renderer.pos(this.minX, this.maxY - margin + 1, 0.0D).tex(0.0D, 0.0D)
+                .color(colBlack.x, colBlack.y, colBlack.z, colBlack.w).endVertex();
+        Tessellator.getInstance().draw();
 
         renderScrollBar(renderer);
         GlStateManager.enableTexture2D();
@@ -343,7 +340,7 @@ public abstract class GuiScrollableList<T> {
                 if (mouseWheelDelta != 0) {
                     if (mouseWheelDelta > 0) {
                         mouseWheelDelta = -1;
-                    } else if (mouseWheelDelta < 0) {
+                    } else {
                         mouseWheelDelta = 1;
                     }
                     amountScrolled += mouseWheelDelta * slotHeight / 2;
@@ -364,8 +361,7 @@ public abstract class GuiScrollableList<T> {
                 int y = mY - minY + (int) amountScrolled - margin;
                 int mouseOverElement = y / slotHeight;
 
-                if (mX >= minX && mX <= maxX && mouseOverElement >= 0 && y >= 0 &&
-                        mouseOverElement < getNumElements()) {
+                if (mX <= maxX && mouseOverElement >= 0 && y >= 0 && mouseOverElement < getNumElements()) {
                     boolean doubleClick = mouseOverElement == selectedIndex &&
                             Minecraft.getSystemTime() - lastClickedTime < 250L;
                     if (elementClicked(mouseOverElement, doubleClick, mX, y % slotHeight)) {

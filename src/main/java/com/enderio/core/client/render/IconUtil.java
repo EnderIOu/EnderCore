@@ -16,9 +16,9 @@ import org.jetbrains.annotations.NotNull;
 
 public class IconUtil {
 
-    public static interface IIconProvider {
+    public interface IIconProvider {
 
-        public void registerIcons(@NotNull TextureMap register);
+        void registerIcons(@NotNull TextureMap register);
     }
 
     public static @NotNull IconUtil instance = new IconUtil();
@@ -44,14 +44,10 @@ public class IconUtil {
         }
         doneInit = true;
         MinecraftForge.EVENT_BUS.register(this);
-        addIconProvider(new IIconProvider() {
-
-            @Override
-            public void registerIcons(@NotNull TextureMap register) {
-                whiteTexture = register.registerSprite(new ResourceLocation(EnderCore.MODID, "white"));
-                errorTexture = register.registerSprite(new ResourceLocation(EnderCore.MODID, "error"));
-                blankTexture = register.registerSprite(new ResourceLocation(EnderCore.MODID, "blank"));
-            }
+        addIconProvider(register -> {
+            whiteTexture = register.registerSprite(new ResourceLocation(EnderCore.MODID, "white"));
+            errorTexture = register.registerSprite(new ResourceLocation(EnderCore.MODID, "error"));
+            blankTexture = register.registerSprite(new ResourceLocation(EnderCore.MODID, "blank"));
         });
     }
 

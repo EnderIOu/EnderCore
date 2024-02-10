@@ -48,7 +48,7 @@ class StringThing implements IThing {
         if (ident.contains(":")) {
             allowOreDict = false;
             String[] split = ident.split(":", 3);
-            if (split != null && split.length >= 2) {
+            if (split.length >= 2) {
                 if (split[0] != null && !split[0].trim().isEmpty()) {
                     mod = NullHelper.notnullJ(split[0], "variable lost its value from one moment to the next");
                 }
@@ -143,17 +143,17 @@ class StringThing implements IThing {
 
     @Override
     public @NotNull NNList<Item> getItems() {
-        return NNList.<Item>emptyList();
+        return NNList.emptyList();
     }
 
     @Override
     public @NotNull NNList<ItemStack> getItemStacks() {
-        return NNList.<ItemStack>emptyList();
+        return NNList.emptyList();
     }
 
     @Override
     public @NotNull NNList<Block> getBlocks() {
-        return NNList.<Block>emptyList();
+        return NNList.emptyList();
     }
 
     @Override

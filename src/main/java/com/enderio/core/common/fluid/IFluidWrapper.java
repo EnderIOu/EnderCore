@@ -24,7 +24,7 @@ public interface IFluidWrapper {
     @NotNull
     List<ITankInfoWrapper> getTankInfoWrappers();
 
-    public static interface ITankInfoWrapper {
+    interface ITankInfoWrapper {
 
         IFluidTankProperties getIFluidTankProperties();
 

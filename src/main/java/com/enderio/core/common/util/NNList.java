@@ -86,8 +86,7 @@ public class NNList<E> extends NonNullList<E> {
     }
 
     public static @NotNull <X extends Enum<?>> NNList<X> of(Class<X> e) {
-        NNList<X> list = new NNList<X>(e.getEnumConstants());
-        return list;
+        return new NNList<>(e.getEnumConstants());
     }
 
     public static <X extends Enum<?>> void addAllEnum(NNList<? super X> list, Class<X> e) {
@@ -153,7 +152,7 @@ public class NNList<E> extends NonNullList<E> {
     }
 
     @FunctionalInterface
-    public static interface Callback<E> {
+    public interface Callback<E> {
 
         void apply(@NotNull E e);
     }
@@ -171,7 +170,7 @@ public class NNList<E> extends NonNullList<E> {
     }
 
     @FunctionalInterface
-    public static interface ShortCallback<E> {
+    public interface ShortCallback<E> {
 
         boolean apply(@NotNull E e);
 
@@ -196,7 +195,7 @@ public class NNList<E> extends NonNullList<E> {
         return new FastItrImpl();
     }
 
-    public static interface NNIterator<E> extends Iterator<E> {
+    public interface NNIterator<E> extends Iterator<E> {
 
         @Override
         @NotNull
@@ -291,11 +290,7 @@ public class NNList<E> extends NonNullList<E> {
     }
 
     public NNList<E> removeAllByClass(Class<? extends E> clazz) {
-        for (Iterator<E> iterator = delegate.iterator(); iterator.hasNext();) {
-            if (clazz.isAssignableFrom(iterator.next().getClass())) {
-                iterator.remove();
-            }
-        }
+        delegate.removeIf(e -> clazz.isAssignableFrom(e.getClass()));
         return this;
     }
 
@@ -336,9 +331,7 @@ public class NNList<E> extends NonNullList<E> {
         if (defaultElement == null) {
             removeRange(0, delegate.size());
         } else {
-            for (int i = 0; i < delegate.size(); ++i) {
-                delegate.set(i, defaultElement);
-            }
+            Collections.fill(delegate, defaultElement);
         }
     }
 }

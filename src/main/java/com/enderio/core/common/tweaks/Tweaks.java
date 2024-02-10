@@ -21,7 +21,6 @@ public class Tweaks {
     private static final Set<Tweak> lateTweaks = new HashSet<Tweak>();
 
     static {
-    // @formatter:off
 
     // Tweaks that can be turned on/off at will
     ingameTweaks.add(new Tweak("changeBoatStackSize", "Makes boats stack to 16", RestartReqs.NONE) {
@@ -75,8 +74,6 @@ public class Tweaks {
         ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(null, new ItemStack(Items.PAPER, 3), Items.REEDS, Items.REEDS, Items.REEDS).setRegistryName("shapeless_paper")); 
       }
     });
-
-// @formatter:on
     }
 
     public static void loadIngameTweaks() {

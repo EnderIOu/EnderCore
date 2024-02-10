@@ -28,7 +28,7 @@ interface IThing {
     @NotNull
     NNList<Block> getBlocks();
 
-    public static interface Zwieback extends IThing {
+    interface Zwieback extends IThing {
 
         @Nullable
         IThing rebake();

@@ -34,21 +34,6 @@ public class FluidUtil {
     @CapabilityInject(IFluidHandlerItem.class)
     private static final Capability<IFluidHandlerItem> FLUID_ITEM_HANDLER = null;
 
-    // TODO: Mod BC see if this is still needed once BC updates. Might work with
-    // caps.
-    // public static final List<IFluidReceptor> fluidReceptors = new ArrayList<IFluidReceptor>();
-    //
-    // static {
-    // try {
-    // Class.forName("crazypants.util.BuildcraftUtil");
-    // } catch (Exception e) {
-    // if (Loader.isModLoaded("BuildCraft|Transport")) {
-    // Log.warn("ItemUtil: Could not register Build Craft pipe handler. Fluid conduits will show connections to all
-    // Build Craft pipes.");
-    // } //Don't log if BC isn't installed, but we still check in case another mod is using their API
-    // }
-    // }
-
     public static @NotNull Capability<IFluidHandler> getFluidCapability() {
         return NullHelper.notnullF(FLUID_HANDLER, "IFluidHandler capability is missing");
     }
@@ -74,15 +59,11 @@ public class FluidUtil {
 
     public static EnumMap<EnumFacing, IFluidHandler> getNeighbouringFluidHandlers(@NotNull final World worldObj,
                                                                                   @NotNull final BlockPos location) {
-        final EnumMap<EnumFacing, IFluidHandler> res = new EnumMap<EnumFacing, IFluidHandler>(EnumFacing.class);
-        NNList.FACING.apply(new Callback<EnumFacing>() {
-
-            @Override
-            public void apply(@NotNull EnumFacing dir) {
-                IFluidHandler fh = getFluidHandler(worldObj, location.offset(dir), dir.getOpposite());
-                if (fh != null) {
-                    res.put(dir, fh);
-                }
+        final EnumMap<EnumFacing, IFluidHandler> res = new EnumMap<>(EnumFacing.class);
+        NNList.FACING.apply(dir -> {
+            IFluidHandler fh = getFluidHandler(worldObj, location.offset(dir), dir.getOpposite());
+            if (fh != null) {
+                res.put(dir, fh);
             }
         });
         return res;
@@ -255,12 +236,7 @@ public class FluidUtil {
      * <li>If the player has space in his inventory, it is put there.
      * <li>Otherwise it will be dropped on the ground between the position given as parameter and the player's position.
      * </ul>
-     *
-     * @param world
-     * @param pos
-     * @param entityPlayer
-     * @param hand
-     * @param tank
+
      * @return true if a container was filled, false otherwise
      */
     public static boolean fillPlayerHandItemFromInternalTank(@NotNull World world, @NotNull BlockPos pos,

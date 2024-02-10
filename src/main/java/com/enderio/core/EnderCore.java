@@ -122,7 +122,8 @@ public class EnderCore implements IEnderMod {
             try {
                 FileUtils.copyFile(event.getSuggestedConfigurationFile(), ConfigHandler.configFile);
             } catch (IOException e) {
-                Throwables.propagate(e);
+                Throwables.throwIfUnchecked(e);
+                throw new RuntimeException(e);
             }
             EnderFileUtils.safeDelete(event.getSuggestedConfigurationFile());
         }
@@ -174,13 +175,13 @@ public class EnderCore implements IEnderMod {
         Things.init(event);
 
         ThreadPoolExecutor fixedChunkExecutor = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
-                new LinkedBlockingQueue<Runnable>(),
+                new LinkedBlockingQueue<>(),
                 new ThreadFactory() {
 
-                    private AtomicInteger count = new AtomicInteger(1);
+                    private final AtomicInteger count = new AtomicInteger(1);
 
                     @Override
-                    public Thread newThread(Runnable r) {
+                    public Thread newThread(@NotNull Runnable r) {
                         Thread thread = new Thread(r, "Chunk I/O Executor Thread-" + count.getAndIncrement());
                         thread.setDaemon(true);
                         return thread;

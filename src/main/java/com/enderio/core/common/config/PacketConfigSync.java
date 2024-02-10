@@ -52,7 +52,8 @@ public class PacketConfigSync implements IMessage {
             objStream.writeObject(configValues);
             objStream.close();
         } catch (IOException e) {
-            Throwables.propagate(e);
+            Throwables.throwIfUnchecked(e);
+            throw new RuntimeException(e);
         }
 
         buf.writeShort(obj.size());
@@ -80,7 +81,8 @@ public class PacketConfigSync implements IMessage {
             configValues = (Map<String, Object>) obj.readObject();
             obj.close();
         } catch (Exception e) {
-            Throwables.propagate(e);
+            Throwables.throwIfUnchecked(e);
+            throw new RuntimeException(e);
         }
 
         modid = ByteBufUtils.readUTF8String(buf);

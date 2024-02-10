@@ -14,7 +14,7 @@ public interface IEnderModel {
      * @param size
      *             - Size of the model (usually 0.0625f)
      */
-    public void render(float size);
+    void render(float size);
 
     /**
      * Rotates the model part in the given directions
@@ -25,5 +25,5 @@ public interface IEnderModel {
      * @param y
      * @param z
      */
-    public void setRotation(ModelRenderer model, float x, float y, float z);
+    void setRotation(ModelRenderer model, float x, float y, float z);
 }

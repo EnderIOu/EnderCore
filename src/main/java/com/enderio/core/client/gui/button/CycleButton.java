@@ -51,10 +51,10 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
     private @Nullable T mode;
 
     private boolean isOpened = true;
-    private PickerOverlay overlay;
+    private final PickerOverlay overlay;
 
     public CycleButton(@NotNull IGuiScreen gui, int id, int x, int y, @NotNull Class<T> enumClass) {
-        super(gui, id, x, y, (IWidgetIcon) null);
+        super(gui, id, x, y, null);
         this.modes = NNList.of(enumClass);
         overlay = new PickerOverlay(this);
         ((GuiContainerBase) gui).addOverlay(overlay);
@@ -64,7 +64,7 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
     public void onGuiInit() {
         super.onGuiInit();
         if (this.mode == null) {
-            this.setMode((T) this.modes.get(0));
+            this.setMode(this.modes.get(0));
             this.setIcon(this.getMode().getIcon());
         }
     }
@@ -82,7 +82,7 @@ public class CycleButton<T extends Enum<T> & ICycleEnum> extends IconButton {
         if (this.mode != newMode) {
             this.mode = newMode;
             List<String> tooltip = newMode.getTooltipLines();
-            this.setToolTip(tooltip.toArray(new String[tooltip.size()]));
+            this.setToolTip(tooltip.toArray(new String[0]));
             this.icon = newMode.getIcon();
         }
     }

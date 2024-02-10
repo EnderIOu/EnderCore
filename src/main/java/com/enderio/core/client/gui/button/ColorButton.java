@@ -100,8 +100,8 @@ public class ColorButton extends IconButton {
 
             tes.pos(xAdj, yAdj + height - 4, zLevel).color(c.x, c.y, c.z, 1).endVertex();
             tes.pos(xAdj + width - 4, yAdj + height - 4, zLevel).color(c.x, c.y, c.z, 1).endVertex();
-            tes.pos(xAdj + width - 4, yAdj + 0, zLevel).color(c.x, c.y, c.z, 1).endVertex();
-            tes.pos(xAdj, yAdj + 0, zLevel).color(c.x, c.y, c.z, 1).endVertex();
+            tes.pos(xAdj + width - 4, yAdj, zLevel).color(c.x, c.y, c.z, 1).endVertex();
+            tes.pos(xAdj, yAdj, zLevel).color(c.x, c.y, c.z, 1).endVertex();
 
             Tessellator.getInstance().draw();
             GlStateManager.enableTexture2D();

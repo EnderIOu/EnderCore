@@ -29,11 +29,11 @@ public class ConfigHandler extends AbstractConfigHandler implements ITweakConfig
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(value = ElementType.FIELD)
-    private static @interface InvisibleInt {}
+    private @interface InvisibleInt {}
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(value = ElementType.FIELD)
-    private static @interface InvisIgnore {}
+    private @interface InvisIgnore {}
 
     private static final String sectionGeneral = Configuration.CATEGORY_GENERAL;
     private static final String sectionEnchants = "enchants";
@@ -98,15 +98,6 @@ public class ConfigHandler extends AbstractConfigHandler implements ITweakConfig
     @Comment("Allow the Auto Smelt enchant to be registered.")
     @RestartReq(RestartReqs.REQUIRES_MC_RESTART)
     public static boolean allowAutoSmelt = true;
-
-    // @Config("test")
-    // public static List<Integer> test1 = Lists.newArrayList(1, 2, 3);
-    // @Config("test")
-    // public static List<Double> test2 = Lists.newArrayList(0.1, 0.2, 0.3);
-    // @Config("test")
-    // public static List<Boolean> test3 = Lists.newArrayList(true, false, true);
-    // @Config("test")
-    // public static List<String> test4 = Lists.newArrayList("test1", "test2", "test3");
 
     private static ConfigHandler INSTANCE;
 

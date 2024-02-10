@@ -238,8 +238,8 @@ public class ContainerEnder<T extends IInventory> extends Container implements G
 
     private boolean isSlotEnabled(Slot slot) {
         return slot != null &&
-                (!(slot instanceof ContainerEnder.BaseSlot) || ((ContainerEnder.BaseSlot) slot).isEnabled()) &&
-                (!(slot instanceof BaseSlotItemHandler) || ((BaseSlotItemHandler) slot).isEnabled());
+                (!(slot instanceof ContainerEnder.BaseSlot) || slot.isEnabled()) &&
+                (!(slot instanceof BaseSlotItemHandler) || slot.isEnabled());
     }
 
     public static abstract class BaseSlot extends Slot {

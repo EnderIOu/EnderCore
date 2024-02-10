@@ -1,6 +1,7 @@
 package com.enderio.core.common.fluid;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.minecraft.util.EnumFacing;
@@ -62,12 +63,10 @@ public abstract class SmartTankFluidHandler {
             for (IFluidHandler smartTank : tanks) {
                 IFluidTankProperties[] tankProperties = smartTank.getTankProperties();
                 if (tankProperties != null) {
-                    for (IFluidTankProperties tankProperty : tankProperties) {
-                        result.add(tankProperty);
-                    }
+                    Collections.addAll(result, tankProperties);
                 }
             }
-            return result.toArray(new IFluidTankProperties[result.size()]);
+            return result.toArray(new IFluidTankProperties[0]);
         }
 
         @Override

@@ -31,7 +31,7 @@ public class EnderStringUtils {
 
         switch (Long.toString(amnt).length()) {
             case 7:
-                return prefix + Long.toString(amnt).substring(0, 1) +
+                return prefix + Long.toString(amnt).charAt(0) +
                         (useDecimals ? "." + Long.toString(amnt).substring(1, 3) : "") + "M" + suffix;
             case 8:
                 return prefix + Long.toString(amnt).substring(0, 2) +
@@ -40,7 +40,7 @@ public class EnderStringUtils {
                 return prefix + Long.toString(amnt).substring(0, 3) +
                         (useDecimals ? "." + Long.toString(amnt).substring(3, 5) : "") + "M" + suffix;
             case 10:
-                return prefix + Long.toString(amnt).substring(0, 1) +
+                return prefix + Long.toString(amnt).charAt(0) +
                         (useDecimals ? "." + Long.toString(amnt).substring(1, 3) : "") + "B" + suffix;
             case 11:
                 return prefix + Long.toString(amnt).substring(0, 2) +
@@ -49,10 +49,10 @@ public class EnderStringUtils {
                 return prefix + Long.toString(amnt).substring(0, 3) +
                         (useDecimals ? "." + Long.toString(amnt).substring(3, 5) : "") + "B" + suffix;
             case 13:
-                return prefix + Long.toString(amnt).substring(0, 1) +
+                return prefix + Long.toString(amnt).charAt(0) +
                         (useDecimals ? "." + Long.toString(amnt).substring(1, 5) : "") + "T" + suffix;
             default:
-                return prefix + "" + amnt + suffix;
+                return prefix + amnt + suffix;
         }
     }
 
@@ -76,7 +76,7 @@ public class EnderStringUtils {
     private static @NotNull String formatSmallerNumber(String prefix, String suffix, long amnt, boolean useDecimals) {
         switch (Long.toString(amnt).length()) {
             case 4:
-                return prefix + Long.toString(amnt).substring(0, 1) +
+                return prefix + Long.toString(amnt).charAt(0) +
                         (useDecimals ? "." + Long.toString(amnt).substring(1, 3) : "") + "K" + suffix;
             case 5:
                 return prefix + Long.toString(amnt).substring(0, 2) +

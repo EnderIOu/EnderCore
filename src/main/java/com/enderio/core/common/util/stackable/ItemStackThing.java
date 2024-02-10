@@ -43,18 +43,18 @@ class ItemStackThing implements IThing {
 
     @Override
     public @NotNull NNList<Item> getItems() {
-        return new NNList<Item>(thing.getItem());
+        return new NNList<>(thing.getItem());
     }
 
     @Override
     public @NotNull NNList<ItemStack> getItemStacks() {
-        return new NNList<ItemStack>(thing);
+        return new NNList<>(thing);
     }
 
     @Override
     public @NotNull NNList<Block> getBlocks() {
         Block block = Block.getBlockFromItem(thing.getItem());
-        return block != Blocks.AIR ? new NNList<Block>(block) : NNList.<Block>emptyList();
+        return block != Blocks.AIR ? new NNList<>(block) : NNList.emptyList();
     }
 
     @Override

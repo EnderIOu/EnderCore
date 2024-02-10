@@ -4,5 +4,5 @@ import com.enderio.core.common.tweaks.Tweak;
 
 public interface ITweakConfigHandler {
 
-    public boolean addBooleanFor(Tweak tweak);
+    boolean addBooleanFor(Tweak tweak);
 }
