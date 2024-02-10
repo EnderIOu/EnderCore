@@ -15,12 +15,13 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.api.common.util.IProgressTile;
 import com.enderio.core.common.config.ConfigHandler;
 import com.enderio.core.common.network.EnderPacketHandler;
 import com.enderio.core.common.network.PacketProgress;
 import com.enderio.core.common.util.NullHelper;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class TileEntityBase extends TileEntity implements ITickable {
 
@@ -61,9 +62,9 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
             float progress = ((IProgressTile) this).getProgress();
             boolean send = progress < lastProgressSent // always send progress if it goes down, e.g. machine goes
                                                        // inactive or new task starts
-                            || (lastProgressSent <= 0 && progress > 0) // always send progress if machine goes active
-                            || (lastUpdate - lastProgressUpdate) > 60 * 20; // also update every 60 seconds to avoid
-                                                                            // stale client status
+                    || (lastProgressSent <= 0 && progress > 0) // always send progress if machine goes active
+                    || (lastUpdate - lastProgressUpdate) > 60 * 20; // also update every 60 seconds to avoid
+                                                                    // stale client status
 
             if (send) {
                 EnderPacketHandler.INSTANCE.sendToAllAround(((IProgressTile) this).getProgressPacket(), this);
@@ -225,9 +226,9 @@ public abstract class TileEntityBase extends TileEntity implements ITickable {
      * storing the given stack.
      *
      * @param slot
-     *                 The slot number that was given to the ghost slot
+     *              The slot number that was given to the ghost slot
      * @param stack
-     *                 The stack that should be placed, null to clear
+     *              The stack that should be placed, null to clear
      */
     public void setGhostSlotContents(int slot, @NotNull ItemStack stack, int realsize) {}
 

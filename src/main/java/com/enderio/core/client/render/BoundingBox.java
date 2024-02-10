@@ -9,13 +9,14 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.api.client.render.VertexTransform;
 import com.enderio.core.common.util.NNList;
 import com.enderio.core.common.vecmath.Vector2f;
 import com.enderio.core.common.vecmath.Vector3d;
 import com.enderio.core.common.vecmath.Vector3f;
 import com.enderio.core.common.vecmath.Vertex;
-import org.jetbrains.annotations.NotNull;
 
 public final class BoundingBox extends AxisAlignedBB {
 

@@ -4,9 +4,10 @@ import java.util.List;
 
 import net.minecraft.util.text.translation.I18n;
 
-import com.google.common.collect.Lists;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.google.common.collect.Lists;
 
 @SuppressWarnings("deprecation")
 public class Lang {

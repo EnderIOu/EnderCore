@@ -11,8 +11,9 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import com.enderio.core.EnderCore;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.EnderCore;
 
 public class IconUtil {
 

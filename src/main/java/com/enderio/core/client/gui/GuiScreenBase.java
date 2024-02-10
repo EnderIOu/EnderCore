@@ -10,10 +10,11 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.client.gui.ToolTipManager.ToolTipRenderer;
 import com.enderio.core.client.gui.widget.GuiToolTip;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class GuiScreenBase extends GuiScreen implements ToolTipRenderer, IGuiScreen {
 

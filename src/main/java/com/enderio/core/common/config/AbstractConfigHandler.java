@@ -17,6 +17,8 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.api.common.config.IConfigHandler;
 import com.enderio.core.common.Lang;
@@ -24,7 +26,6 @@ import com.enderio.core.common.event.ConfigFileChangedEvent;
 import com.enderio.core.common.util.Bound;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.ImmutableList;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class AbstractConfigHandler implements IConfigHandler {
 

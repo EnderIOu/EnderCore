@@ -1,7 +1,8 @@
 package com.enderio.core.client.gui;
 
-import com.enderio.core.client.gui.widget.GuiToolTip;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.client.gui.widget.GuiToolTip;
 
 public interface IDrawingElement {
 

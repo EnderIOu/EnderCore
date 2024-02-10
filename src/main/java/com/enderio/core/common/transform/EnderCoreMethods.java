@@ -19,9 +19,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.common.event.ItemGUIRenderEvent;
 import com.enderio.core.common.interfaces.INotDestroyedInItemFrames;
-import org.jetbrains.annotations.NotNull;
 
 public class EnderCoreMethods {
 

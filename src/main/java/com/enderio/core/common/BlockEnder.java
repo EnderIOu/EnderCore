@@ -23,10 +23,11 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.Chunk.EnumCreateEntityType;
 
-import com.enderio.core.api.common.util.ITankAccess;
-import com.enderio.core.common.util.FluidUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.api.common.util.ITankAccess;
+import com.enderio.core.common.util.FluidUtil;
 
 @SuppressWarnings("deprecation")
 public abstract class BlockEnder<T extends TileEntityBase> extends Block {

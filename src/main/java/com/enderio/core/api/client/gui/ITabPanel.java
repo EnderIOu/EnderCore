@@ -3,8 +3,9 @@ package com.enderio.core.api.client.gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 
-import com.enderio.core.api.client.render.IWidgetIcon;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.api.client.render.IWidgetIcon;
 
 public interface ITabPanel {
 

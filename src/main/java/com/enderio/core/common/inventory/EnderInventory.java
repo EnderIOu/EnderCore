@@ -12,10 +12,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 
-import com.enderio.core.common.util.NNList;
-import com.enderio.core.common.util.NullHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NNList;
+import com.enderio.core.common.util.NullHelper;
 
 public class EnderInventory implements IItemHandler {
 

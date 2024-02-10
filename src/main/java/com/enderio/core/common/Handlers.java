@@ -7,7 +7,6 @@ import static com.enderio.core.common.Handlers.Handler.Inst.FIELD;
 import static com.enderio.core.common.Handlers.Handler.Inst.METHOD;
 import static com.enderio.core.common.Handlers.Handler.Inst.SCALA_OBJECT;
 
-import java.lang.annotation.Annotation;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;

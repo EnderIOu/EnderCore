@@ -8,12 +8,12 @@ import net.minecraftforge.common.config.Property;
 import net.minecraftforge.common.config.Property.Type;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
 
 import com.enderio.core.common.config.ConfigProcessor.ITypeAdapter;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
-import org.jetbrains.annotations.NotNull;
 
 public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTUAL, BASE> {
 

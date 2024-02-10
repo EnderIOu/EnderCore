@@ -35,6 +35,7 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import com.enderio.core.api.common.config.IConfigHandler;
 import com.enderio.core.common.CommonProxy;
@@ -57,7 +58,6 @@ import com.google.common.base.Throwables;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.jetbrains.annotations.NotNull;
 
 @Mod(modid = EnderCore.MODID,
      name = EnderCore.NAME,

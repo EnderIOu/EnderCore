@@ -21,9 +21,10 @@ import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.FMLLaunchHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.common.util.Log;
 import com.google.common.base.Throwables;
-import org.jetbrains.annotations.NotNull;
 
 public class ThreadedNetworkWrapper {
 

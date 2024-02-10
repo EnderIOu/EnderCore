@@ -2,12 +2,13 @@ package com.enderio.core.client.gui.widget;
 
 import net.minecraft.item.ItemStack;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.client.gui.GuiContainerBase;
 import com.enderio.core.common.TileEntityBase;
 import com.enderio.core.common.network.EnderPacketHandler;
 import com.enderio.core.common.network.PacketGhostSlot;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class GhostSlot {
 

@@ -1,8 +1,8 @@
 package com.enderio.core.common.util;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.EnumMap;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * An EnumMap that defaults to a specified value instead of <code>null</code>.

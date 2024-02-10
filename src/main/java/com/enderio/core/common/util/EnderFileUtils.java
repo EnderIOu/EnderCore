@@ -7,7 +7,6 @@ import java.io.BufferedWriter;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -29,10 +28,10 @@ import java.util.zip.ZipOutputStream;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.jetbrains.annotations.NotNull;
 
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.config.ConfigHandler;
-import org.jetbrains.annotations.NotNull;
 
 public class EnderFileUtils {
 

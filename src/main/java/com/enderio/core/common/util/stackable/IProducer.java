@@ -3,9 +3,10 @@ package com.enderio.core.common.util.stackable;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
-import com.enderio.core.common.util.NullHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NullHelper;
 
 public interface IProducer {
 

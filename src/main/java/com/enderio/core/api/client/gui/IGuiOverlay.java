@@ -1,8 +1,8 @@
 package com.enderio.core.api.client.gui;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.awt.Rectangle;
+
+import org.jetbrains.annotations.NotNull;
 
 public interface IGuiOverlay extends IHideable {
 

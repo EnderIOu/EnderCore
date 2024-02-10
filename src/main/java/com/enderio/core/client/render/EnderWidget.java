@@ -2,11 +2,12 @@ package com.enderio.core.client.render;
 
 import net.minecraft.util.ResourceLocation;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.api.client.render.IWidgetIcon;
 import com.enderio.core.api.client.render.IWidgetMap;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public enum EnderWidget implements IWidgetIcon {
 

@@ -5,10 +5,11 @@ import java.util.List;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 
-import com.enderio.core.api.common.util.ITankAccess;
-import com.enderio.core.common.util.NNList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.api.common.util.ITankAccess;
+import com.enderio.core.common.util.NNList;
 
 public class TankAccessFluidWrapper implements IFluidWrapper {
 

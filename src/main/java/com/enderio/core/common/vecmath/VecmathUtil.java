@@ -1,8 +1,8 @@
 package com.enderio.core.common.vecmath;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.awt.Rectangle;
+
+import org.jetbrains.annotations.NotNull;
 
 public class VecmathUtil {
 

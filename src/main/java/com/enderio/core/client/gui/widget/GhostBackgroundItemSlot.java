@@ -10,15 +10,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 
-import com.enderio.core.common.util.NNList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NNList;
 
 public class GhostBackgroundItemSlot extends GhostSlot {
 
     private @NotNull ItemStack stack;
-    private @Nullable
-    final NNList<ItemStack> stacks;
+    private @Nullable final NNList<ItemStack> stacks;
     private int idx = 999;
     private final @Nullable Slot parent;
     private long lastSwitch = 0;

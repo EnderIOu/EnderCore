@@ -26,12 +26,13 @@ import net.minecraftforge.fml.relauncher.ReflectionHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.Handlers.Handler;
 import com.enderio.core.common.Handlers.Handler.HandlerSide;
 import com.enderio.core.common.fluid.BlockFluidEnder;
 import com.enderio.core.common.util.NullHelper;
-import org.jetbrains.annotations.NotNull;
 
 @Handler(side = HandlerSide.CLIENT)
 @SideOnly(Side.CLIENT)

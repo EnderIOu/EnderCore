@@ -4,9 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import com.enderio.core.common.util.NNList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NNList;
 
 class ProducerThing implements IThing {
 

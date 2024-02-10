@@ -3,8 +3,9 @@ package com.enderio.core.client.gui.button;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 
-import com.enderio.core.api.client.gui.IHideable;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.api.client.gui.IHideable;
 
 public class GuiButtonHideable extends GuiButton implements IHideable {
 

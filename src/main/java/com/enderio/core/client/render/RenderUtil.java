@@ -69,7 +69,6 @@ import org.lwjgl.opengl.GL11;
 import com.enderio.core.api.client.render.VertexTransform;
 import com.enderio.core.client.handlers.ClientHandler;
 import com.enderio.core.common.util.NNList;
-import com.enderio.core.common.util.NNList.Callback;
 import com.enderio.core.common.vecmath.Matrix4d;
 import com.enderio.core.common.vecmath.VecmathUtil;
 import com.enderio.core.common.vecmath.Vector2f;

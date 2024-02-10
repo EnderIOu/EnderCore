@@ -5,11 +5,12 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.api.common.util.IProgressTile;
 
 import io.netty.buffer.ByteBuf;
-import org.jetbrains.annotations.NotNull;
 
 public class PacketProgress extends MessageTileEntity<TileEntity> {
 

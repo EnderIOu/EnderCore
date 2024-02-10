@@ -1,9 +1,9 @@
 package com.enderio.core.common.util;
 
+import java.util.function.Supplier;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.util.function.Supplier;
 
 public final class NullHelper {
 

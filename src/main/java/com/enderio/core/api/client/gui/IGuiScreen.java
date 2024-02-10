@@ -4,9 +4,10 @@ import java.io.IOException;
 
 import net.minecraft.client.gui.GuiButton;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.client.gui.GhostSlotHandler;
 import com.enderio.core.client.gui.widget.GuiToolTip;
-import org.jetbrains.annotations.NotNull;
 
 public interface IGuiScreen {
 

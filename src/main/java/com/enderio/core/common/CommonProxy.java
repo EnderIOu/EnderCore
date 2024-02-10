@@ -3,8 +3,9 @@ package com.enderio.core.common;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
-import com.enderio.core.common.util.Scheduler;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.util.Scheduler;
 
 public class CommonProxy {
 

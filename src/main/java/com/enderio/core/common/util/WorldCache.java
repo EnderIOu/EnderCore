@@ -17,6 +17,7 @@ import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 import org.apache.commons.lang3.ArrayUtils;
+import org.jetbrains.annotations.NotNull;
 
 import com.google.common.base.Throwables;
 import com.google.common.collect.BiMap;
@@ -25,7 +26,6 @@ import com.google.common.collect.Sets;
 
 import gnu.trove.map.TIntObjectMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Untested way to save arbitrary to a game save. The name to ID map will be hot-swapped when a new save is loaded.

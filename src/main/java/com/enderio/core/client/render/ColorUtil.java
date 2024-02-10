@@ -4,10 +4,11 @@ import java.awt.Color;
 
 import net.minecraft.client.renderer.GlStateManager;
 
-import com.enderio.core.common.vecmath.Vector3f;
-import com.enderio.core.common.vecmath.Vector4f;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.vecmath.Vector3f;
+import com.enderio.core.common.vecmath.Vector4f;
 
 public final class ColorUtil {
 

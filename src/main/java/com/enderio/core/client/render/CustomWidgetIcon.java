@@ -1,9 +1,10 @@
 package com.enderio.core.client.render;
 
-import com.enderio.core.api.client.render.IWidgetIcon;
-import com.enderio.core.api.client.render.IWidgetMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.api.client.render.IWidgetIcon;
+import com.enderio.core.api.client.render.IWidgetMap;
 
 public class CustomWidgetIcon implements IWidgetIcon {
 

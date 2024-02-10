@@ -1,5 +1,7 @@
 package com.enderio.core.common.util;
 
+import java.util.Arrays;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -7,8 +9,6 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TextComponentString;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Arrays;
 
 public class ArrayInventory implements IInventory {
 

@@ -23,12 +23,13 @@ import net.minecraftforge.event.world.BlockEvent.BreakEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.common.Handlers.Handler;
 import com.enderio.core.common.enchant.EnchantXPBoost;
 import com.enderio.core.common.util.NullHelper;
 import com.enderio.core.common.util.Scheduler;
 import com.google.common.base.Throwables;
-import org.jetbrains.annotations.NotNull;
 
 @Handler
 public class XPBoostHandler {

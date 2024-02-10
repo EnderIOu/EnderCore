@@ -7,9 +7,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.NonNullList;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.enderio.core.common.util.NNList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NNList;
 
 class OreThing implements IThing.Zwieback {
 

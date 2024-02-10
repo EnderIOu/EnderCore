@@ -1,7 +1,8 @@
 package com.enderio.core.api.client.gui;
 
-import com.enderio.core.client.gui.widget.GuiScrollableList;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.client.gui.widget.GuiScrollableList;
 
 public interface ListSelectionListener<T> {
 

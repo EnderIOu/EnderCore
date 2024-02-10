@@ -21,11 +21,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.SlotItemHandler;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.client.gui.widget.GhostSlot;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Maps;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class ContainerEnderCap<T extends IItemHandler, S extends TileEntity> extends Container
                                        implements GhostSlot.IGhostSlotAware {

@@ -8,9 +8,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.vecmath.Vector3f;
-import org.jetbrains.annotations.NotNull;
 
 public class ItemUtil {
 

@@ -8,8 +8,9 @@ import java.lang.annotation.Target;
 
 import net.minecraftforge.common.config.Configuration;
 
-import com.enderio.core.common.config.ConfigProcessor;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.config.ConfigProcessor;
 
 /**
  * Used to mark a {@code static} field as a config option. Has no effect if the class is not processed with a

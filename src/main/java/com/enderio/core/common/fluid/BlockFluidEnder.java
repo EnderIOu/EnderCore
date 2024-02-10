@@ -17,9 +17,10 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-import com.enderio.core.common.util.NullHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NullHelper;
 
 public abstract class BlockFluidEnder extends BlockFluidClassic {
 

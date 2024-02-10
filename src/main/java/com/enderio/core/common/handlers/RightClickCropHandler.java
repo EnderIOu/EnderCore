@@ -18,12 +18,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.OreDictionary;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.common.Handlers.Handler;
 import com.enderio.core.common.config.ConfigHandler;
 import com.enderio.core.common.util.NullHelper;
 import com.enderio.core.common.util.stackable.Things;
 import com.google.common.collect.Lists;
-import org.jetbrains.annotations.NotNull;
 
 @Handler
 public class RightClickCropHandler {

@@ -22,58 +22,74 @@ public class Tweaks {
 
     static {
 
-    // Tweaks that can be turned on/off at will
-    ingameTweaks.add(new Tweak("changeBoatStackSize", "Makes boats stack to 16", RestartReqs.NONE) {
-      @Override
-      public void load() { Items.BOAT.setMaxStackSize(16); }
+        // Tweaks that can be turned on/off at will
+        ingameTweaks.add(new Tweak("changeBoatStackSize", "Makes boats stack to 16", RestartReqs.NONE) {
 
-      @Override
-      public void unload() { Items.BOAT.setMaxStackSize(1); }
-    });
+            @Override
+            public void load() {
+                Items.BOAT.setMaxStackSize(16);
+            }
 
-    ingameTweaks.add(new Tweak("fixPackedIceTool", "Allows packed ice to be mined with a pickaxe", RestartReqs.NONE) {
-      @Override
-      public void load() { Blocks.PACKED_ICE.setHarvestLevel("pickaxe", 0); }
+            @Override
+            public void unload() {
+                Items.BOAT.setMaxStackSize(1);
+            }
+        });
 
-      @Override
-      @SuppressWarnings("null")
-      public void unload() { Blocks.PACKED_ICE.setHarvestLevel(null, -1); }
-    });
+        ingameTweaks
+                .add(new Tweak("fixPackedIceTool", "Allows packed ice to be mined with a pickaxe", RestartReqs.NONE) {
 
-    ingameTweaks.add(new Tweak("fluidContainerBottles", "Makes water bottles normal fluid containers") {
-      @Override
-      public void load() { 
-        MinecraftForge.EVENT_BUS.register(BottleFluidCapability.class); 
-      }
+                    @Override
+                    public void load() {
+                        Blocks.PACKED_ICE.setHarvestLevel("pickaxe", 0);
+                    }
 
-      @Override
-      protected void unload() {
-        MinecraftForge.EVENT_BUS.unregister(BottleFluidCapability.class);
-      }
-    });
+                    @Override
+                    @SuppressWarnings("null")
+                    public void unload() {
+                        Blocks.PACKED_ICE.setHarvestLevel(null, -1);
+                    }
+                });
 
-    ingameTweaks.add(new InfiniBow());
+        ingameTweaks.add(new Tweak("fluidContainerBottles", "Makes water bottles normal fluid containers") {
 
-    // Tweaks that require a reboot to be toggled and need to be loaded late
-    lateTweaks.add(new SlabRecipesAutomatic());
+            @Override
+            public void load() {
+                MinecraftForge.EVENT_BUS.register(BottleFluidCapability.class);
+            }
 
-    // Tweaks that require a reboot to be toggled
-    permanentTweaks.add(new SlabRecipes());
-    permanentTweaks.add(new BottleFluidCapability.BottleTweak());
+            @Override
+            protected void unload() {
+                MinecraftForge.EVENT_BUS.unregister(BottleFluidCapability.class);
+            }
+        });
 
-    permanentTweaks.add(new Tweak("bookToPaperRecipe", "Adds shapeless recipe from 1 book to 2 paper") {
-      @Override
-      public void load() { 
-        ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(null, new ItemStack(Items.PAPER, 2), Items.BOOK).setRegistryName("book_to_paper")); 
-      }
-    });
+        ingameTweaks.add(new InfiniBow());
 
-    permanentTweaks.add(new Tweak("shapelessPaperRecipe", "Adds a shapeless recipe for paper") {
-      @Override
-      public void load() { 
-        ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(null, new ItemStack(Items.PAPER, 3), Items.REEDS, Items.REEDS, Items.REEDS).setRegistryName("shapeless_paper")); 
-      }
-    });
+        // Tweaks that require a reboot to be toggled and need to be loaded late
+        lateTweaks.add(new SlabRecipesAutomatic());
+
+        // Tweaks that require a reboot to be toggled
+        permanentTweaks.add(new SlabRecipes());
+        permanentTweaks.add(new BottleFluidCapability.BottleTweak());
+
+        permanentTweaks.add(new Tweak("bookToPaperRecipe", "Adds shapeless recipe from 1 book to 2 paper") {
+
+            @Override
+            public void load() {
+                ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(null, new ItemStack(Items.PAPER, 2), Items.BOOK)
+                        .setRegistryName("book_to_paper"));
+            }
+        });
+
+        permanentTweaks.add(new Tweak("shapelessPaperRecipe", "Adds a shapeless recipe for paper") {
+
+            @Override
+            public void load() {
+                ForgeRegistries.RECIPES.register(new ShapelessOreRecipe(null, new ItemStack(Items.PAPER, 3),
+                        Items.REEDS, Items.REEDS, Items.REEDS).setRegistryName("shapeless_paper"));
+            }
+        });
     }
 
     public static void loadIngameTweaks() {

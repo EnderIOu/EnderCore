@@ -4,8 +4,9 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.Phase;
 
-import com.enderio.core.common.Handlers.Handler;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.Handlers.Handler;
 
 @Handler
 public class ClientHandler {

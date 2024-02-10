@@ -3,8 +3,9 @@ package com.enderio.core.client.render;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumFacing.Axis;
 
-import com.enderio.core.common.vecmath.Vector3d;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.vecmath.Vector3d;
 
 public class VertexRotationFacing extends VertexRotation {
 

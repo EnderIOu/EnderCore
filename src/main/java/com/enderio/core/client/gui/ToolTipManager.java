@@ -5,10 +5,11 @@ import java.util.Set;
 
 import net.minecraft.client.gui.FontRenderer;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.client.gui.widget.GuiToolTip;
 import com.enderio.core.common.util.NNList;
 import com.google.common.collect.Sets;
-import org.jetbrains.annotations.NotNull;
 
 public class ToolTipManager {
 

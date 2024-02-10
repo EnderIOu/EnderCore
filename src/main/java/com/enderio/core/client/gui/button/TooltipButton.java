@@ -4,10 +4,11 @@ import java.awt.Rectangle;
 
 import net.minecraft.client.Minecraft;
 
-import com.enderio.core.api.client.gui.IGuiScreen;
-import com.enderio.core.client.gui.widget.GuiToolTip;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.api.client.gui.IGuiScreen;
+import com.enderio.core.client.gui.widget.GuiToolTip;
 
 public class TooltipButton extends GuiButtonHideable {
 

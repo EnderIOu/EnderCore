@@ -2,8 +2,9 @@ package com.enderio.core.common.util.blockiterators;
 
 import net.minecraft.util.math.BlockPos;
 
-import com.enderio.core.client.render.BoundingBox;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.client.render.BoundingBox;
 
 public class CubicBlockIterator extends AbstractBlockIterator {
 

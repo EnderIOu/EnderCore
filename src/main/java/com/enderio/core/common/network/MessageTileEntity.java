@@ -10,12 +10,13 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import net.minecraftforge.fml.relauncher.Side;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.EnderCore;
 import com.google.common.reflect.TypeToken;
 
 import io.netty.buffer.ByteBuf;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public abstract class MessageTileEntity<T extends TileEntity> implements IMessage {
 
@@ -90,7 +91,7 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
     }
 
     public interface IMessageTileEntityHandler<T extends TileEntity, I extends IMessage>
-                                                     extends IMessageHandler<MessageTileEntity<T>, I> {
+                                              extends IMessageHandler<MessageTileEntity<T>, I> {
 
         @Override
         default @Nullable I onMessage(MessageTileEntity<T> message, MessageContext ctx) {

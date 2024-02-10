@@ -2,8 +2,9 @@ package com.enderio.core.client.gui.button;
 
 import net.minecraft.client.Minecraft;
 
-import com.enderio.core.api.client.gui.IGuiScreen;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.api.client.gui.IGuiScreen;
 
 public class InvisibleButton extends TooltipButton {
 

@@ -2,7 +2,6 @@ package com.enderio.core.common.compat;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.annotation.Generated;

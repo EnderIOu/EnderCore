@@ -15,9 +15,10 @@ import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-import com.enderio.core.api.common.util.ITankAccess;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.api.common.util.ITankAccess;
 
 public class FluidWrapper {
 

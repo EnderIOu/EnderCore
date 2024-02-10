@@ -8,8 +8,9 @@ import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
-import io.netty.buffer.ByteBuf;
 import org.jetbrains.annotations.NotNull;
+
+import io.netty.buffer.ByteBuf;
 
 /**
  * Created by CrazyPants on 27/02/14.

@@ -22,9 +22,10 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.vecmath.Vector3d;
-import org.jetbrains.annotations.NotNull;
 
 public class EntityUtil {
 

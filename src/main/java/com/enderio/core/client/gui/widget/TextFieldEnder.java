@@ -6,11 +6,12 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.api.client.gui.IHideable;
 import com.google.common.base.Strings;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class TextFieldEnder extends GuiTextField implements IHideable {
 
@@ -19,13 +20,13 @@ public class TextFieldEnder extends GuiTextField implements IHideable {
         boolean passesFilter(@NotNull TextFieldEnder tf, char c);
     }
 
-    public static final ICharFilter FILTER_NUMERIC = (tf, c) ->
-            Character.isDigit(c) || c == '-' && Strings.isNullOrEmpty(tf.getText());
+    public static final ICharFilter FILTER_NUMERIC = (tf, c) -> Character.isDigit(c) ||
+            c == '-' && Strings.isNullOrEmpty(tf.getText());
 
     public static ICharFilter FILTER_ALPHABETICAL = (tf, c) -> Character.isLetter(c);
 
-    public static ICharFilter FILTER_ALPHANUMERIC = (tf, c) ->
-            FILTER_NUMERIC.passesFilter(tf, c) || FILTER_ALPHABETICAL.passesFilter(tf, c);
+    public static ICharFilter FILTER_ALPHANUMERIC = (tf, c) -> FILTER_NUMERIC.passesFilter(tf, c) ||
+            FILTER_ALPHABETICAL.passesFilter(tf, c);
 
     private int xOrigin;
     private int yOrigin;

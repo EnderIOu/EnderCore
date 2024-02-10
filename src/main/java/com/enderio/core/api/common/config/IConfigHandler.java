@@ -7,8 +7,9 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 
-import com.enderio.core.common.config.AbstractConfigHandler.Section;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.config.AbstractConfigHandler.Section;
 
 public interface IConfigHandler {
 

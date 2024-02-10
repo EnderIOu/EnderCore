@@ -3,8 +3,9 @@ package com.enderio.core.common.util;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.text.TextFormatting;
 
-import com.enderio.core.EnderCore;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.EnderCore;
 
 public class EnderStringUtils {
 

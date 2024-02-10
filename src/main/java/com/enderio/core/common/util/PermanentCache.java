@@ -6,9 +6,10 @@ import java.util.List;
 
 import net.minecraftforge.fml.common.FMLCommonHandler;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.google.common.base.Throwables;
 import com.google.common.collect.Lists;
-import org.jetbrains.annotations.NotNull;
 
 public class PermanentCache<I> extends WorldCache<I> {
 

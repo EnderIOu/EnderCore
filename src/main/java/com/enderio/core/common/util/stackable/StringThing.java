@@ -6,10 +6,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.enderio.core.common.util.NNList;
-import com.enderio.core.common.util.NullHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.NNList;
+import com.enderio.core.common.util.NullHelper;
 
 class StringThing implements IThing {
 

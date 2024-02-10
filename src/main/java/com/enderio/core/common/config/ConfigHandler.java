@@ -11,6 +11,8 @@ import net.minecraftforge.common.config.ConfigCategory;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fluids.Fluid;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.config.ConfigProcessor.IReloadCallback;
 import com.enderio.core.common.config.JsonConfigReader.ModToken;
@@ -23,7 +25,6 @@ import com.enderio.core.common.handlers.RightClickCropHandler;
 import com.enderio.core.common.handlers.RightClickCropHandler.LegacyPlantInfo;
 import com.enderio.core.common.tweaks.Tweak;
 import com.enderio.core.common.tweaks.Tweaks;
-import org.jetbrains.annotations.NotNull;
 
 public class ConfigHandler extends AbstractConfigHandler implements ITweakConfigHandler, IReloadCallback {
 

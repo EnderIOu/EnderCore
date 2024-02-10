@@ -6,10 +6,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
 
-import com.enderio.core.common.util.ItemUtil;
-import com.google.common.base.Predicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.common.util.ItemUtil;
+import com.google.common.base.Predicate;
 
 public class InventorySlot implements IItemHandler {
 
@@ -243,7 +244,8 @@ public class InventorySlot implements IItemHandler {
         this.owner = owner;
     }
 
-    @Nullable TileEntity getOwner() {
+    @Nullable
+    TileEntity getOwner() {
         return owner;
     }
 

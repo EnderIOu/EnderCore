@@ -4,10 +4,11 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.client.render.IconUtil;
 import com.enderio.core.common.CommonProxy;
 import com.enderio.core.common.util.Scheduler;
-import org.jetbrains.annotations.NotNull;
 
 public class ClientProxy extends CommonProxy {
 

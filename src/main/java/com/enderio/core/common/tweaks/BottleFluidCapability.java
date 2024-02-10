@@ -17,11 +17,12 @@ import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.common.config.AbstractConfigHandler.RestartReqs;
 import com.enderio.core.common.config.ConfigHandler;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class BottleFluidCapability implements IFluidHandlerItem, ICapabilityProvider {
 

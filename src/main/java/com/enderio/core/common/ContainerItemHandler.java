@@ -13,10 +13,11 @@ import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
-import com.enderio.core.client.gui.widget.GhostSlot;
-import com.google.common.collect.Maps;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.client.gui.widget.GhostSlot;
+import com.google.common.collect.Maps;
 
 @Deprecated // not used by anyone, so probably should be used without good reason?
 public abstract class ContainerItemHandler<T extends ICapabilityProvider> extends Container

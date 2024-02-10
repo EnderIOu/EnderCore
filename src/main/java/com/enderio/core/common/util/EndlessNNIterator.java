@@ -2,8 +2,9 @@ package com.enderio.core.common.util;
 
 import java.util.Iterator;
 
-import com.enderio.core.common.util.NNList.NNIterator;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.util.NNList.NNIterator;
 
 public class EndlessNNIterator<T> implements Iterable<T>, NNIterator<T> {
 

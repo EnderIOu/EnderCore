@@ -5,10 +5,11 @@ import java.util.UUID;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.UsernameCache;
 
-import com.google.common.base.Charsets;
-import com.mojang.authlib.GameProfile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.google.common.base.Charsets;
+import com.mojang.authlib.GameProfile;
 
 public class UserIdent {
 

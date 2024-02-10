@@ -6,8 +6,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.text.TextFormatting;
 
-import com.google.common.base.Strings;
 import org.jetbrains.annotations.NotNull;
+
+import com.google.common.base.Strings;
 
 public class BlockCoord {
 

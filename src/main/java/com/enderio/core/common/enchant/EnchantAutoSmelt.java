@@ -16,13 +16,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import com.enderio.core.EnderCore;
 import com.enderio.core.api.common.enchant.IAdvancedEnchant;
 import com.enderio.core.common.config.ConfigHandler;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.base.Predicate;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @EventBusSubscriber(modid = EnderCore.MODID)
 public class EnchantAutoSmelt extends Enchantment implements IAdvancedEnchant {

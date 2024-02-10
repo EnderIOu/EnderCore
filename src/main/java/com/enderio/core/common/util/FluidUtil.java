@@ -21,10 +21,10 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandlerItem;
 import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
-import com.enderio.core.api.common.util.ITankAccess;
-import com.enderio.core.common.util.NNList.Callback;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.api.common.util.ITankAccess;
 
 public class FluidUtil {
 
@@ -236,7 +236,7 @@ public class FluidUtil {
      * <li>If the player has space in his inventory, it is put there.
      * <li>Otherwise it will be dropped on the ground between the position given as parameter and the player's position.
      * </ul>
-
+     * 
      * @return true if a container was filled, false otherwise
      */
     public static boolean fillPlayerHandItemFromInternalTank(@NotNull World world, @NotNull BlockPos pos,

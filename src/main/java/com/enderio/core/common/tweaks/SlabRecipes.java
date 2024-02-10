@@ -6,8 +6,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import com.enderio.core.common.util.NullHelper;
 import org.jetbrains.annotations.NotNull;
+
+import com.enderio.core.common.util.NullHelper;
 
 public class SlabRecipes extends Tweak {
 

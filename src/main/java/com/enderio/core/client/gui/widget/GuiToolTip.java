@@ -1,12 +1,12 @@
 package com.enderio.core.client.gui.widget;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class GuiToolTip implements com.enderio.core.api.client.gui.IHideable {
 

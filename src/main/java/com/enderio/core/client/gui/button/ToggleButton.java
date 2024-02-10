@@ -6,11 +6,12 @@ import java.util.List;
 
 import net.minecraft.client.Minecraft;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.api.client.render.IWidgetIcon;
 import com.enderio.core.client.gui.widget.GuiToolTip;
 import com.enderio.core.client.render.EnderWidget;
-import org.jetbrains.annotations.NotNull;
 
 public class ToggleButton extends IconButton {
 

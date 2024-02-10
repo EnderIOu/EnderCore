@@ -6,10 +6,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 
-import com.enderio.core.EnderCore;
-import com.google.common.base.Predicate;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.enderio.core.EnderCore;
+import com.google.common.base.Predicate;
 
 /**
  * Allows your enchants to have some flavor or description text underneath them

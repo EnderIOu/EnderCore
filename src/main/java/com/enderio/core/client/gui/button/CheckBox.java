@@ -1,8 +1,9 @@
 package com.enderio.core.client.gui.button;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.api.client.gui.IGuiScreen;
 import com.enderio.core.client.render.EnderWidget;
-import org.jetbrains.annotations.NotNull;
 
 public class CheckBox extends ToggleButton {
 

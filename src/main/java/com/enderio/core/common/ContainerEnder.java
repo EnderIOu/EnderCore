@@ -13,11 +13,12 @@ import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 
+import org.jetbrains.annotations.NotNull;
+
 import com.enderio.core.client.gui.widget.GhostSlot;
 import com.enderio.core.common.ContainerEnderCap.BaseSlotItemHandler;
 import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Maps;
-import org.jetbrains.annotations.NotNull;
 
 @Deprecated
 public class ContainerEnder<T extends IInventory> extends Container implements GhostSlot.IGhostSlotAware {
