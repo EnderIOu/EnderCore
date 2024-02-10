@@ -36,7 +36,7 @@ public class SlabRecipesAutomatic extends Tweak {
       final ItemStack outputItem = recipe.getRecipeOutput();
       final ResourceLocation outputItemName = outputItem.getItem().getRegistryName();
       if ((outputItem.getItem() instanceof ItemSlab || Block.getBlockFromItem(outputItem.getItem()) instanceof BlockSlab) && outputItemName != null
-          && !"minecraft".equals(outputItemName.getResourceDomain())) {
+          && !"minecraft".equals(outputItemName.getNamespace())) {
         if (outputItem.getCount() != 6) {
           Log.info("Rejected anti-slab recipe for " + outputItem.copy() + " because output size is not 6");
           continue;
@@ -64,8 +64,8 @@ public class SlabRecipesAutomatic extends Tweak {
           Ingredient ingredient = Ingredient.fromStacks(outputItem.copy().splitStack(1));
           final ResourceLocation inputItemName = input.getItem().getRegistryName();
           ForgeRegistries.RECIPES
-              .register(new ShapelessRecipes("", input, new NNList<>(ingredient, ingredient)).setRegistryName(outputItemName.getResourcePath() + "_"
-                  + outputItem.getItemDamage() + "_to_" + (inputItemName != null ? inputItemName.getResourcePath() : "no_idea")));
+              .register(new ShapelessRecipes("", input, new NNList<>(ingredient, ingredient)).setRegistryName(outputItemName.getPath() + "_"
+                  + outputItem.getItemDamage() + "_to_" + (inputItemName != null ? inputItemName.getPath() : "no_idea")));
           Log.info("Added anti-slab recipe for " + outputItem + " back to " + input);
         } else if (input != null) {
           Log.info("Rejected anti-slab recipe for " + outputItem + " back to " + input + " because count is " + count);

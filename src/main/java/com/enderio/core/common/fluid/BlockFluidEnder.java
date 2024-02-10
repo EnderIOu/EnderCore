@@ -52,7 +52,7 @@ public abstract class BlockFluidEnder extends BlockFluidClassic {
   }
 
   protected void setNames(Fluid fluid) {
-    setUnlocalizedName(NullHelper.notnullF(fluid.getUnlocalizedName(), "encountered fluid without a name"));
+    setTranslationKey(NullHelper.notnullF(fluid.getUnlocalizedName(), "encountered fluid without a name"));
     setRegistryName("block_fluid_" + fluid.getName().toLowerCase(Locale.ENGLISH));
   }
 
@@ -83,7 +83,7 @@ public abstract class BlockFluidEnder extends BlockFluidClassic {
   @Override
   public Boolean isEntityInsideMaterial(@Nonnull IBlockAccess world, @Nonnull BlockPos blockpos, @Nonnull IBlockState iblockstate, @Nonnull Entity entity,
       double yToTest, @Nonnull Material materialIn, boolean testingHead) {
-    if (materialIn == material || materialIn == this.blockMaterial) {
+    if (materialIn == material || materialIn == this.material) {
       return Boolean.TRUE;
     }
     return super.isEntityInsideMaterial(world, blockpos, iblockstate, entity, yToTest, materialIn, testingHead);

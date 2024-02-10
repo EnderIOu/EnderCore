@@ -56,10 +56,10 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
   }
 
   @Override
-  public @Nonnull EnumPushReaction getMobilityFlag(@Nonnull IBlockState state) {
+  public @Nonnull EnumPushReaction getPushReaction(@Nonnull IBlockState state) {
     // Some mods coremod vanilla to ignore this condition, so let's try to enforce it.
     // If this doesn't work, we need code to blow up the block when it detects it was moved...
-    return teClass != null ? EnumPushReaction.BLOCK : super.getMobilityFlag(state);
+    return teClass != null ? EnumPushReaction.BLOCK : super.getPushReaction(state);
   }
 
   @Override
