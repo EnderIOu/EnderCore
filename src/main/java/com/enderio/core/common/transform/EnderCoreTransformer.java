@@ -113,13 +113,8 @@ public class EnderCoreTransformer implements IClassTransformer {
             ClassNode classNode = new ClassNode();
             ClassReader classReader = new ClassReader(basicClass);
             classReader.accept(classNode, 0);
-            Iterator<MethodNode> methods = classNode.methods.iterator();
-            while (methods.hasNext()) {
-                MethodNode methodNode = methods.next();
-                if (methodNode.name.equals("getClientGuiElement") && methodNode.desc.contains("GuiScreen")) {
-                    methods.remove();
-                }
-            }
+            classNode.methods.removeIf(methodNode -> methodNode.name.equals("getClientGuiElement") &&
+                    methodNode.desc.contains("GuiScreen"));
             ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
             classNode.accept(cw);
             basicClass = cw.toByteArray();
@@ -386,8 +381,8 @@ public class EnderCoreTransformer implements IClassTransformer {
         return basicClass;
     }
 
-    protected final static byte[] transform(byte[] classBytes, String className, ObfSafeName methodName,
-                                            Transform transformer) {
+    protected static byte[] transform(byte[] classBytes, String className, ObfSafeName methodName,
+                                      Transform transformer) {
         mainLogger.info("Transforming Class [" + className + "], Method [" + methodName.getName() + "]");
 
         ClassNode classNode = new ClassNode();

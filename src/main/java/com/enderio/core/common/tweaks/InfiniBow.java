@@ -36,7 +36,7 @@ public class InfiniBow extends Tweak {
         if (EnchantmentHelper.getEnchantmentLevel(Enchantments.INFINITY, stack) > 0) {
             event.getEntityPlayer()
                     .setActiveHand(NullHelper.notnullF(event.getHand(), "null hand in ArrowNockEvent event"));
-            event.setAction(new ActionResult<ItemStack>(EnumActionResult.SUCCESS, stack));
+            event.setAction(new ActionResult<>(EnumActionResult.SUCCESS, stack));
         }
     }
 }

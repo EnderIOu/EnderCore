@@ -41,7 +41,7 @@ public class SimpleMixinPatcher implements IClassTransformer {
     @Override
     public byte[] transform(String name, String transformedName, byte[] targetClass) {
         if (targetClass == null) {
-            return targetClass;
+            return null;
         }
         List<MixinData> patches = new ArrayList<>();
         for (MixinData d : plugin.mixins) {
@@ -144,7 +144,7 @@ public class SimpleMixinPatcher implements IClassTransformer {
                             .filter(m -> !m.name.equals("<init>"))
                             .filter(m -> (m.access & ACC_ABSTRACT) == 0)
                             .filter(m -> targetNode.methods.stream()
-                                    .filter(m2 -> m2.name.equals(m.name) && m2.desc.equals(m.desc)).count() == 0)
+                                    .noneMatch(m2 -> m2.name.equals(m.name) && m2.desc.equals(m.desc)))
                             .collect(Collectors.toList());
 
                     if (!newMethods.isEmpty()) {

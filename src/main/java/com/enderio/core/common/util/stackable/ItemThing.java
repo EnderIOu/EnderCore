@@ -41,12 +41,12 @@ class ItemThing implements IThing {
 
     @Override
     public @NotNull NNList<Item> getItems() {
-        return new NNList<Item>(thing);
+        return new NNList<>(thing);
     }
 
     @Override
     public @NotNull NNList<ItemStack> getItemStacks() {
-        return new NNList<ItemStack>(new ItemStack(thing));
+        return new NNList<>(new ItemStack(thing));
     }
 
     @Override
@@ -55,7 +55,7 @@ class ItemThing implements IThing {
         if (block == Blocks.AIR && thing instanceof ItemBlockSpecial) {
             block = ((ItemBlockSpecial) thing).getBlock();
         }
-        return block != Blocks.AIR ? new NNList<Block>(block) : NNList.<Block>emptyList();
+        return block != Blocks.AIR ? new NNList<>(block) : NNList.emptyList();
     }
 
     @Override

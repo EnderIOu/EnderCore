@@ -10,15 +10,11 @@ import org.jetbrains.annotations.Nullable;
 
 public class Filters {
 
-    public static final @NotNull Callback<ItemStack> NO_CALLBACK = new Callback<ItemStack>() {
+    public static final @NotNull Callback<ItemStack> NO_CALLBACK = (oldStack, newStack) -> {};
 
-        @Override
-        public final void onChange(@NotNull ItemStack oldStack, @NotNull ItemStack newStack) {}
-    };
+    public static final @NotNull Predicate<ItemStack> ALWAYS_TRUE = Predicates.alwaysTrue();
 
-    public static final @NotNull Predicate<ItemStack> ALWAYS_TRUE = Predicates.<ItemStack>alwaysTrue();
-
-    public static final @NotNull Predicate<ItemStack> ALWAYS_FALSE = Predicates.<ItemStack>alwaysFalse();
+    public static final @NotNull Predicate<ItemStack> ALWAYS_FALSE = Predicates.alwaysFalse();
 
     public static final @NotNull Predicate<ItemStack> ONLY_STACKABLE = new PredicateItemStack() {
 

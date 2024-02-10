@@ -264,12 +264,10 @@ public class ConfigProcessor {
                 case DOUBLE:
                     if (defVal.getClass().isArray()) {
                         prop = configFile.get(section, f.getName(), (double[]) defVal, comment);
-                        res = AbstractConfigHandler.boundDoubleArr(prop,
-                                Bound.of(bound.min.doubleValue(), bound.max.doubleValue()));
+                        res = AbstractConfigHandler.boundDoubleArr(prop, Bound.of(bound.min, bound.max));
                     } else {
                         prop = configFile.get(section, f.getName(), (Double) defVal, comment);
-                        res = AbstractConfigHandler.boundValue(prop,
-                                Bound.of(bound.min.doubleValue(), bound.max.doubleValue()), (Double) defVal);
+                        res = AbstractConfigHandler.boundValue(prop, Bound.of(bound.min, bound.max), (Double) defVal);
                     }
                     break;
                 case INTEGER:

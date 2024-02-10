@@ -17,6 +17,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.Enumeration;
@@ -99,7 +100,7 @@ public class EnderFileUtils {
                     BufferedInputStream bis = new BufferedInputStream(zipFile.getInputStream(entry));
 
                     int b;
-                    byte buffer[] = new byte[1024];
+                    byte[] buffer = new byte[1024];
 
                     FileOutputStream fos = new FileOutputStream(destinationPath);
 
@@ -138,10 +139,9 @@ public class EnderFileUtils {
      *                  The zip file to output to.
      * @throws IOException
      */
-    @SuppressWarnings("resource")
     public static void zipFolderContents(File directory, File zipfile) throws IOException {
         URI base = directory.toURI();
-        Deque<File> queue = new LinkedList<File>();
+        Deque<File> queue = new LinkedList<>();
         queue.push(directory);
         OutputStream out = new FileOutputStream(zipfile);
         Closeable res = out;
@@ -182,11 +182,8 @@ public class EnderFileUtils {
 
     /** @see #zipFolderContents(File, File) */
     private static void copy(File file, OutputStream out) throws IOException {
-        InputStream in = new FileInputStream(file);
-        try {
+        try (InputStream in = Files.newInputStream(file.toPath())) {
             copy(in, out);
-        } finally {
-            in.close();
         }
     }
 
@@ -311,7 +308,7 @@ public class EnderFileUtils {
 
             if (s.contains(key)) {
                 scan.close();
-                return s.substring(s.indexOf("=") + 1, s.length());
+                return s.substring(s.indexOf("=") + 1);
             }
         }
 

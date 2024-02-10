@@ -15,7 +15,6 @@ import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
 import org.jetbrains.annotations.NotNull;
 
-@SuppressWarnings({ "serial", "unchecked" })
 public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTUAL, BASE> {
 
     private final TypeToken<ACTUAL> actualType;
@@ -69,14 +68,14 @@ public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTU
     }
 
   // @formatter:off
-    public static final TypeAdapterSame<Integer> INTEGER = new TypeAdapterSame<Integer>(TypeToken.of(Integer.class), Type.INTEGER, int.class);
-    public static final TypeAdapterSame<int[]> INTEGER_ARR = new TypeAdapterSame<int[]>(TypeToken.of(int[].class), Type.INTEGER);
-    public static final TypeAdapterSame<Double> DOUBLE = new TypeAdapterSame<Double>(TypeToken.of(Double.class), Type.DOUBLE, double.class);
-    public static final TypeAdapterSame<double[]> DOUBLE_ARR = new TypeAdapterSame<double[]>(TypeToken.of(double[].class), Type.DOUBLE);
-    public static final TypeAdapterSame<Boolean> BOOLEAN = new TypeAdapterSame<Boolean>(TypeToken.of(Boolean.class), Type.BOOLEAN, boolean.class);
-    public static final TypeAdapterSame<boolean[]> BOOLEAN_ARR = new TypeAdapterSame<boolean[]>(TypeToken.of(boolean[].class), Type.BOOLEAN);
-    public static final TypeAdapterSame<String> STRING = new TypeAdapterSame<String>(TypeToken.of(String.class), Type.STRING);
-    public static final TypeAdapterSame<String[]> STRING_ARR = new TypeAdapterSame<String[]>(TypeToken.of(String[].class), Type.STRING);
+    public static final TypeAdapterSame<Integer> INTEGER = new TypeAdapterSame<>(TypeToken.of(Integer.class), Type.INTEGER, int.class);
+    public static final TypeAdapterSame<int[]> INTEGER_ARR = new TypeAdapterSame<>(TypeToken.of(int[].class), Type.INTEGER);
+    public static final TypeAdapterSame<Double> DOUBLE = new TypeAdapterSame<>(TypeToken.of(Double.class), Type.DOUBLE, double.class);
+    public static final TypeAdapterSame<double[]> DOUBLE_ARR = new TypeAdapterSame<>(TypeToken.of(double[].class), Type.DOUBLE);
+    public static final TypeAdapterSame<Boolean> BOOLEAN = new TypeAdapterSame<>(TypeToken.of(Boolean.class), Type.BOOLEAN, boolean.class);
+    public static final TypeAdapterSame<boolean[]> BOOLEAN_ARR = new TypeAdapterSame<>(TypeToken.of(boolean[].class), Type.BOOLEAN);
+    public static final TypeAdapterSame<String> STRING = new TypeAdapterSame<>(TypeToken.of(String.class), Type.STRING);
+    public static final TypeAdapterSame<String[]> STRING_ARR = new TypeAdapterSame<>(TypeToken.of(String[].class), Type.STRING);
 
     static DecimalFormat Floatfmt = new DecimalFormat();
     static

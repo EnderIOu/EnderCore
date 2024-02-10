@@ -27,7 +27,7 @@ public class Scheduler {
      * A task to be executed later.
      *
      */
-    public static interface ITask {
+    public interface ITask {
 
         /**
          * This method will be called at the next post tick event. It can return a new task (or itself) to be enqueued
@@ -41,7 +41,7 @@ public class Scheduler {
     private static final class Task implements ITask {
 
         private int delay;
-        private Runnable toRun;
+        private final Runnable toRun;
 
         Task(int delay, Runnable toRun) {
             this.delay = delay;
@@ -61,7 +61,7 @@ public class Scheduler {
     }
 
     private final Queue<ITask> clientQueue;
-    private final Queue<ITask> serverQueue = new ConcurrentLinkedQueue<ITask>();
+    private final Queue<ITask> serverQueue = new ConcurrentLinkedQueue<>();
 
     /**
      * Please use the single instance available from instance().
@@ -70,7 +70,7 @@ public class Scheduler {
         if (isServer) {
             clientQueue = null;
         } else {
-            clientQueue = new ConcurrentLinkedQueue<ITask>();
+            clientQueue = new ConcurrentLinkedQueue<>();
         }
     }
 
@@ -163,7 +163,7 @@ public class Scheduler {
 
     private static void runTasks(Queue<ITask> queue) {
         if (!queue.isEmpty()) {
-            List<ITask> newtasks = new ArrayList<ITask>(queue.size());
+            List<ITask> newtasks = new ArrayList<>(queue.size());
             while (!queue.isEmpty()) {
                 ITask task = queue.poll();
                 if (task != null) {
@@ -173,9 +173,7 @@ public class Scheduler {
                     }
                 }
             }
-            for (ITask task : newtasks) {
-                queue.add(task);
-            }
+            queue.addAll(newtasks);
         }
     }
 }

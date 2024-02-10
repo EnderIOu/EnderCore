@@ -46,9 +46,9 @@ import org.jetbrains.annotations.Nullable;
  */
 public class Things extends Ingredient {
 
-    static final @NotNull Map<String, IThing> aliases = new HashMap<String, IThing>();
+    static final @NotNull Map<String, IThing> aliases = new HashMap<>();
 
-    private static final @NotNull List<Things> values = new ArrayList<Things>();
+    private static final @NotNull List<Things> values = new ArrayList<>();
 
     public Things(String... names) {
         init(names);
@@ -86,7 +86,7 @@ public class Things extends Ingredient {
         values.clear();
     }
 
-    private final @NotNull List<IThing> things = new ArrayList<IThing>();
+    private final @NotNull List<IThing> things = new ArrayList<>();
     private NBTTagCompound nbt = null;
     private int size = 1;
 
@@ -214,9 +214,7 @@ public class Things extends Ingredient {
     private void add(@Nullable IThing thing) {
         if (thing != null) {
             if (!inPreInit) {
-                for (IThing baked : thing.bake()) {
-                    things.add(baked);
-                }
+                things.addAll(thing.bake());
             } else {
                 things.add(thing);
             }
@@ -235,9 +233,7 @@ public class Things extends Ingredient {
     private void bake() {
         NNList<IThing> temp = new NNList<>();
         for (IThing thing : things) {
-            for (IThing baked : thing.bake()) {
-                temp.add(baked);
-            }
+            temp.addAll(thing.bake());
         }
         things.clear();
         things.addAll(temp);

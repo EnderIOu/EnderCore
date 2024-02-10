@@ -28,6 +28,7 @@ import com.enderio.core.common.util.FluidUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+@SuppressWarnings("deprecation")
 public abstract class BlockEnder<T extends TileEntityBase> extends Block {
 
     protected final @Nullable Class<? extends T> teClass;
@@ -344,7 +345,7 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
 
     private IShape<T> shape = null;
 
-    public static interface IShape<T> {
+    public interface IShape<T> {
 
         @NotNull
         BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
@@ -358,52 +359,19 @@ public abstract class BlockEnder<T extends TileEntityBase> extends Block {
     }
 
     protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape allFaces) {
-        return new IShape<T>() {
-
-            @Override
-            @NotNull
-            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
-                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
-                return allFaces;
-            }
-        };
+        return (worldIn, state, pos, face) -> allFaces;
     }
 
     protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape upDown, @NotNull BlockFaceShape allSides) {
-        return new IShape<T>() {
-
-            @Override
-            @NotNull
-            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
-                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
-                return face == EnumFacing.UP || face == EnumFacing.DOWN ? upDown : allSides;
-            }
-        };
+        return (worldIn, state, pos, face) -> face == EnumFacing.UP || face == EnumFacing.DOWN ? upDown : allSides;
     }
 
     protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape down, @NotNull BlockFaceShape up,
                                          @NotNull BlockFaceShape allSides) {
-        return new IShape<T>() {
-
-            @Override
-            @NotNull
-            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
-                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
-                return face == EnumFacing.UP ? up : face == EnumFacing.DOWN ? down : allSides;
-            }
-        };
+        return (worldIn, state, pos, face) -> face == EnumFacing.UP ? up : face == EnumFacing.DOWN ? down : allSides;
     }
 
     protected @NotNull IShape<T> mkShape(@NotNull BlockFaceShape... faces) {
-        return new IShape<T>() {
-
-            @SuppressWarnings("null")
-            @Override
-            @NotNull
-            public BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, @NotNull IBlockState state,
-                                                    @NotNull BlockPos pos, @NotNull EnumFacing face) {
-                return faces[face.ordinal()];
-            }
-        };
+        return (worldIn, state, pos, face) -> faces[face.ordinal()];
     }
 }

@@ -49,17 +49,17 @@ class ResourceThing implements IThing {
 
     @Override
     public @NotNull NNList<Item> getItems() {
-        return NNList.<Item>emptyList();
+        return NNList.emptyList();
     }
 
     @Override
     public @NotNull NNList<ItemStack> getItemStacks() {
-        return NNList.<ItemStack>emptyList();
+        return NNList.emptyList();
     }
 
     @Override
     public @NotNull NNList<Block> getBlocks() {
-        return NNList.<Block>emptyList();
+        return NNList.emptyList();
     }
 
     @Override

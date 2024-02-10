@@ -64,9 +64,7 @@ public class EntityUtil {
         fireworkTag.setByte("Flight", (byte) 1);
         firework.setTagInfo("Fireworks", fireworkTag);
 
-        EntityFireworkRocket e = new EntityFireworkRocket(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
-                firework);
-        return e;
+        return new EntityFireworkRocket(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, firework);
     }
 
     public static void spawnFirework(@NotNull BlockPos block, int dimID) {
@@ -104,7 +102,7 @@ public class EntityUtil {
     }
 
     public static @NotNull NNList<ResourceLocation> getAllRegisteredMobNames() {
-        NNList<ResourceLocation> result = new NNList<ResourceLocation>();
+        NNList<ResourceLocation> result = new NNList<>();
         for (ResourceLocation entityName : EntityList.getEntityNameList()) {
             final Class<? extends Entity> clazz = EntityList
                     .getClass(NullHelper.notnullF(entityName, "EntityList.getEntityNameList()"));
@@ -131,7 +129,7 @@ public class EntityUtil {
 
     public static List<AxisAlignedBB> getCollidingBlockGeometry(@NotNull World world, @NotNull Entity entity) {
         AxisAlignedBB entityBounds = entity.getEntityBoundingBox();
-        ArrayList<AxisAlignedBB> collidingBoundingBoxes = new ArrayList<AxisAlignedBB>();
+        ArrayList<AxisAlignedBB> collidingBoundingBoxes = new ArrayList<>();
         int minX = MathHelper.floor(entityBounds.minX);
         int minY = MathHelper.floor(entityBounds.minY);
         int minZ = MathHelper.floor(entityBounds.minZ);

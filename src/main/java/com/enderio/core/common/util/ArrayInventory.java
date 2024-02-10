@@ -8,6 +8,8 @@ import net.minecraft.util.text.TextComponentString;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+
 public class ArrayInventory implements IInventory {
 
     protected final @NotNull ItemStack[] items;
@@ -103,15 +105,13 @@ public class ArrayInventory implements IInventory {
 
     @Override
     public void clear() {
-        for (int i = 0; i < items.length; i++) {
-            items[i] = ItemStack.EMPTY;
-        }
+        Arrays.fill(items, ItemStack.EMPTY);
     }
 
     @Override
     public boolean isEmpty() {
         for (ItemStack itemstack : items) {
-            if (itemstack != null && !itemstack.isEmpty()) {
+            if (!itemstack.isEmpty()) {
                 return false;
             }
         }

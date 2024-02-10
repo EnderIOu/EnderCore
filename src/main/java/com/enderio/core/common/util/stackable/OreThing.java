@@ -14,7 +14,7 @@ import org.jetbrains.annotations.Nullable;
 class OreThing implements IThing.Zwieback {
 
     private final @NotNull String name;
-    private @NotNull NonNullList<ItemStack> ores = new NNList<ItemStack>();
+    private @NotNull NonNullList<ItemStack> ores = new NNList<>();
 
     OreThing(@NotNull String name) {
         this.name = name;
@@ -67,7 +67,7 @@ class OreThing implements IThing.Zwieback {
 
     @Override
     public @NotNull NNList<Item> getItems() {
-        NNList<Item> result = new NNList<Item>();
+        NNList<Item> result = new NNList<>();
         for (ItemStack oreStack : ores) {
             if (!oreStack.isEmpty() && !result.contains(oreStack.getItem())) {
                 result.add(oreStack.getItem());
@@ -83,7 +83,7 @@ class OreThing implements IThing.Zwieback {
 
     @Override
     public @NotNull NNList<Block> getBlocks() {
-        NNList<Block> result = new NNList<Block>();
+        NNList<Block> result = new NNList<>();
         for (ItemStack oreStack : ores) {
             if (!oreStack.isEmpty()) {
                 Block block = Block.getBlockFromItem(oreStack.getItem());

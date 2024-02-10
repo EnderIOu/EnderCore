@@ -29,7 +29,7 @@ public class PlanarBlockIterator extends CubicBlockIterator {
         }
     }
 
-    private @NotNull Orientation orientation;
+    private final @NotNull Orientation orientation;
 
     public PlanarBlockIterator(@NotNull BlockPos base, @NotNull Orientation orientation, int radius) {
         super(base, radius);

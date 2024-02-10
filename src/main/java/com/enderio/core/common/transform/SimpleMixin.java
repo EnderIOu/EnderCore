@@ -39,7 +39,7 @@ public @interface SimpleMixin {
     @Retention(RetentionPolicy.RUNTIME)
     @Documented
     @Deprecated
-    public @interface SimpleMixinList {
+    @interface SimpleMixinList {
 
         SimpleMixin[] value();
     }

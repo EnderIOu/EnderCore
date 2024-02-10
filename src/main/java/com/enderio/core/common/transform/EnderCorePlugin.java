@@ -105,7 +105,7 @@ public class EnderCorePlugin implements IFMLLoadingPlugin {
 
     public void loadMixinSources(String packageFilter) {
         List<MixinData> fromAnnotations = findAnnotationMixins(packageFilter);
-        fromAnnotations.forEach(mixins::add);
+        mixins.addAll(fromAnnotations);
         fromAnnotations.forEach(m -> m.initialize(m.source));
         fromAnnotations.forEach(m -> m.initialize(m.target));
     }

@@ -15,7 +15,7 @@ public final class Bound<T extends Number & Comparable<T>> {
     public static final @NotNull Bound<Double> MAX_BOUND = Bound.of(Double.MIN_VALUE, Double.MAX_VALUE);
 
     public static @NotNull <T extends Number & Comparable<T>> Bound<T> of(@NotNull T min, @NotNull T max) {
-        return new Bound<T>(min, max);
+        return new Bound<>(min, max);
     }
 
     public final @NotNull T min;
@@ -51,9 +51,7 @@ public final class Bound<T extends Number & Comparable<T>> {
             return false;
         final java.lang.Object this$max = this.getMax();
         final java.lang.Object other$max = other.getMax();
-        if (!this$max.equals(other$max))
-            return false;
-        return true;
+        return this$max.equals(other$max);
     }
 
     @Override
@@ -73,10 +71,10 @@ public final class Bound<T extends Number & Comparable<T>> {
     }
 
     public @NotNull Bound<T> withMin(final @NotNull T newMin) {
-        return this.min == newMin ? this : new Bound<T>(newMin, this.max);
+        return this.min == newMin ? this : new Bound<>(newMin, this.max);
     }
 
     public @NotNull Bound<T> withMax(final @NotNull T newMax) {
-        return this.max == newMax ? this : new Bound<T>(this.min, newMax);
+        return this.max == newMax ? this : new Bound<>(this.min, newMax);
     }
 }

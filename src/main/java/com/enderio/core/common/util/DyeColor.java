@@ -89,7 +89,7 @@ public enum DyeColor implements ICycleEnum {
                 DyeColor.BLACK);
     }
 
-    private DyeColor() {}
+    DyeColor() {}
 
     public int getColor() {
         return ItemDye.DYE_COLORS[ordinal()];

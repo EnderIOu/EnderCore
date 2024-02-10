@@ -6,5 +6,5 @@ import org.jetbrains.annotations.NotNull;
 
 public interface IOverlayRenderAware {
 
-    public void renderItemOverlayIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition);
+    void renderItemOverlayIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition);
 }

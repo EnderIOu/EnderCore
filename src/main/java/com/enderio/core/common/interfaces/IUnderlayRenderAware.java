@@ -6,5 +6,5 @@ import org.jetbrains.annotations.NotNull;
 
 public interface IUnderlayRenderAware {
 
-    public void renderItemAndEffectIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition);
+    void renderItemAndEffectIntoGUI(@NotNull ItemStack stack, int xPosition, int yPosition);
 }

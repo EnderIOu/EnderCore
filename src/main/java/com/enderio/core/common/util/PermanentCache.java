@@ -19,7 +19,8 @@ public class PermanentCache<I> extends WorldCache<I> {
         try {
             loadData(getSaveFile());
         } catch (IOException e) {
-            Throwables.propagate(e);
+            Throwables.throwIfUnchecked(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -56,7 +57,8 @@ public class PermanentCache<I> extends WorldCache<I> {
             try {
                 c.saveData(c.getSaveFile());
             } catch (IOException e) {
-                Throwables.propagate(e);
+                Throwables.throwIfUnchecked(e);
+                throw new RuntimeException(e);
             }
         }
     }

@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 @Handler
 public class RightClickCropHandler {
 
-    public static interface IPlantInfo {
+    public interface IPlantInfo {
 
         @NotNull
         ItemStack getSeed();

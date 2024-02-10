@@ -43,8 +43,8 @@ public class JsonConfigReader<T> implements Iterable<T> {
      */
     public static class ModToken {
 
-        private Class<?> mainClass;
-        private String assetPath;
+        private final Class<?> mainClass;
+        private final String assetPath;
 
         public ModToken(Class<?> mainClass, String assetPath) {
             this.mainClass = mainClass;

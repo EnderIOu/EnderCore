@@ -11,9 +11,9 @@ public enum RegisterTime {
     INIT(FMLInitializationEvent.class),
     POSTINIT(FMLPostInitializationEvent.class);
 
-    private Class<? extends FMLStateEvent> clazz;
+    private final Class<? extends FMLStateEvent> clazz;
 
-    private RegisterTime(Class<? extends FMLStateEvent> clazz) {
+    RegisterTime(Class<? extends FMLStateEvent> clazz) {
         this.clazz = clazz;
     }
 

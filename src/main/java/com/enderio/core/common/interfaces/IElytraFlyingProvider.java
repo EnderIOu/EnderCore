@@ -7,5 +7,5 @@ import org.jetbrains.annotations.NotNull;
 
 public interface IElytraFlyingProvider {
 
-    public boolean isElytraFlying(@NotNull EntityLivingBase entity, @NotNull ItemStack itemstack, boolean shouldStop);
+    boolean isElytraFlying(@NotNull EntityLivingBase entity, @NotNull ItemStack itemstack, boolean shouldStop);
 }

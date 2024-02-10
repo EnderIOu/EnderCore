@@ -50,7 +50,7 @@ public class EnderSlot extends SlotItemHandler {
     public static List<EnderSlot> create(@NotNull EnderInventory enderInventory, @NotNull EnderInventory.Type type,
                                          int xPosition, int yPosition, int xOffset,
                                          int yOffset, int cols, int rows) {
-        List<EnderSlot> result = new ArrayList<EnderSlot>();
+        List<EnderSlot> result = new ArrayList<>();
         int x = 0, y = 0;
         EnderInventory.View view = enderInventory.getView(type);
         for (int i = 0; i < view.getSlots(); i++) {
@@ -107,6 +107,6 @@ public class EnderSlot extends SlotItemHandler {
     }
 
     public static boolean is(@Nullable Slot slot, @NotNull EnderInventory.Type typeIn) {
-        return slot != null && slot instanceof EnderSlot && ((EnderSlot) slot).is(typeIn);
+        return slot instanceof EnderSlot && ((EnderSlot) slot).is(typeIn);
     }
 }

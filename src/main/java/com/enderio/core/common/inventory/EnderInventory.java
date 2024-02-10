@@ -21,7 +21,7 @@ public class EnderInventory implements IItemHandler {
 
     static final @NotNull ItemStack CAKE = new ItemStack(Blocks.LIME_SHULKER_BOX, 0);
 
-    public static enum Type {
+    public enum Type {
         ALL,
         INPUT,
         OUTPUT,
@@ -30,9 +30,8 @@ public class EnderInventory implements IItemHandler {
         INTERNAL,
     }
 
-    private final @NotNull Map<String, InventorySlot> idents = new HashMap<String, InventorySlot>();
-    final @NotNull EnumMap<EnderInventory.Type, NNList<InventorySlot>> slots = new EnumMap<EnderInventory.Type, NNList<InventorySlot>>(
-            EnderInventory.Type.class);
+    private final @NotNull Map<String, InventorySlot> idents = new HashMap<>();
+    final @NotNull EnumMap<EnderInventory.Type, NNList<InventorySlot>> slots = new EnumMap<>(EnderInventory.Type.class);
     private final @NotNull View allSlots = new View(EnderInventory.Type.ALL);
     private @Nullable TileEntity owner = null;
     public static final @NotNull IItemHandler OFF = new IItemHandler() {
@@ -65,7 +64,7 @@ public class EnderInventory implements IItemHandler {
 
     public EnderInventory() {
         for (EnderInventory.Type type : EnderInventory.Type.values()) {
-            slots.put(type, new NNList<InventorySlot>());
+            slots.put(type, new NNList<>());
         }
     }
 
@@ -240,11 +239,6 @@ public class EnderInventory implements IItemHandler {
                 @Override
                 public InventorySlot next() {
                     return getSlot(i++);
-                }
-
-                @Override
-                public void remove() {
-                    throw new UnsupportedOperationException("remove");
                 }
             };
         }

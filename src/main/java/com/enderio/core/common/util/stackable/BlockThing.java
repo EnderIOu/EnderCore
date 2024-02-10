@@ -60,17 +60,17 @@ class BlockThing implements IThing {
 
     @Override
     public @NotNull NNList<Item> getItems() {
-        return blockItem != null ? new NNList<Item>(blockItem) : NNList.<Item>emptyList();
+        return blockItem != null ? new NNList<>(blockItem) : NNList.emptyList();
     }
 
     @Override
     public @NotNull NNList<ItemStack> getItemStacks() {
-        return blockItem != null ? new NNList<ItemStack>(new ItemStack(blockItem)) : NNList.<ItemStack>emptyList();
+        return blockItem != null ? new NNList<>(new ItemStack(blockItem)) : NNList.emptyList();
     }
 
     @Override
     public @NotNull NNList<Block> getBlocks() {
-        return new NNList<Block>(thing);
+        return new NNList<>(thing);
     }
 
     @Override

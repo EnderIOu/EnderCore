@@ -61,7 +61,8 @@ public class WorldCache<I> {
             try {
                 saveData(getSaveFile());
             } catch (IOException e) {
-                Throwables.propagate(e);
+                Throwables.throwIfUnchecked(e);
+                throw new RuntimeException(e);
             }
         }
     }
@@ -72,7 +73,8 @@ public class WorldCache<I> {
             try {
                 loadData(getSaveFile());
             } catch (IOException e) {
-                Throwables.propagate(e);
+                Throwables.throwIfUnchecked(e);
+                throw new RuntimeException(e);
             }
         }
         locked = true;
@@ -95,7 +97,7 @@ public class WorldCache<I> {
                     int id = dataTag.getInteger("V");
                     String name = dataTag.getString("K");
                     nameToID.put(name, id);
-                    if (objToName.values().contains(name)) {
+                    if (objToName.containsValue(name)) {
                         usedIDs.set(id, true);
                     }
                 }
@@ -140,12 +142,7 @@ public class WorldCache<I> {
                 blockedIDs.add(nameToID.get(s));
             }
         }
-        Iterator<String> iter = nameToID.keySet().iterator();
-        while (iter.hasNext()) {
-            if (blockedIDs.contains(nameToID.get(iter.next()))) {
-                iter.remove();
-            }
-        }
+        nameToID.keySet().removeIf(s -> blockedIDs.contains(nameToID.get(s)));
     }
 
     protected void mergeNewIDs() {
@@ -172,7 +169,7 @@ public class WorldCache<I> {
         } else {
             nextID = usedIDs.nextClearBit(0);
         }
-        while (blockedIDs.contains(nextID) || nameToID.values().contains(nextID)) {
+        while (blockedIDs.contains(nextID) || nameToID.containsValue(nextID)) {
             usedIDs.nextClearBit(nextID++);
         }
         return nextID;

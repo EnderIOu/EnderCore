@@ -153,7 +153,8 @@ public class ThreadedNetworkWrapper {
             return handler.newInstance();
         } catch (Throwable e) {
             Log.error("Failed to instanciate " + handler);
-            throw Throwables.propagate(e);
+            Throwables.throwIfUnchecked(e);
+            throw new RuntimeException(e);
         }
     }
 

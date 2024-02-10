@@ -89,7 +89,7 @@ public abstract class MessageTileEntity<T extends TileEntity> implements IMessag
         }
     }
 
-    public static interface IMessageTileEntityHandler<T extends TileEntity, I extends IMessage>
+    public interface IMessageTileEntityHandler<T extends TileEntity, I extends IMessage>
                                                      extends IMessageHandler<MessageTileEntity<T>, I> {
 
         @Override
