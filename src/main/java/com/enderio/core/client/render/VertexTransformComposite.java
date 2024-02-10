@@ -11,40 +11,39 @@ import com.enderio.core.common.vecmath.Vertex;
 
 public class VertexTransformComposite implements VertexTransform {
 
-  public final @Nonnull VertexTransform[] xforms;
+    public final @Nonnull VertexTransform[] xforms;
 
-  public VertexTransformComposite(@Nonnull VertexTransform... xforms) {
-    this.xforms = xforms;
-  }
-
-  VertexTransformComposite(@Nonnull Collection<VertexTransform> xformsIn) {
-    xforms = new VertexTransform[xformsIn.size()];
-    int i = 0;
-    for (VertexTransform xform : xformsIn) {
-      xforms[i] = xform;
-      i++;
+    public VertexTransformComposite(@Nonnull VertexTransform... xforms) {
+        this.xforms = xforms;
     }
-  }
 
-  @Override
-  public void apply(@Nonnull Vertex vertex) {
-    for (VertexTransform xform : xforms) {
-      xform.apply(vertex);
+    VertexTransformComposite(@Nonnull Collection<VertexTransform> xformsIn) {
+        xforms = new VertexTransform[xformsIn.size()];
+        int i = 0;
+        for (VertexTransform xform : xformsIn) {
+            xforms[i] = xform;
+            i++;
+        }
     }
-  }
 
-  @Override
-  public void apply(@Nonnull Vector3d vec) {
-    for (VertexTransform xform : xforms) {
-      xform.apply(vec);
+    @Override
+    public void apply(@Nonnull Vertex vertex) {
+        for (VertexTransform xform : xforms) {
+            xform.apply(vertex);
+        }
     }
-  }
 
-  @Override
-  public void applyToNormal(@Nonnull Vector3f vec) {
-    for (VertexTransform xform : xforms) {
-      xform.applyToNormal(vec);
+    @Override
+    public void apply(@Nonnull Vector3d vec) {
+        for (VertexTransform xform : xforms) {
+            xform.apply(vec);
+        }
     }
-  }
 
+    @Override
+    public void applyToNormal(@Nonnull Vector3f vec) {
+        for (VertexTransform xform : xforms) {
+            xform.applyToNormal(vec);
+        }
+    }
 }

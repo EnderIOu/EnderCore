@@ -5,5 +5,6 @@ package com.enderio.core.common.compat;
  * the name of the constant contained within this interface
  */
 public interface ICompat {
-  public static final String METHOD_NAME = "load";
+
+    public static final String METHOD_NAME = "load";
 }

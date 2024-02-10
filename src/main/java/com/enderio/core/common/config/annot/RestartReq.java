@@ -17,12 +17,13 @@ import com.enderio.core.common.config.AbstractConfigHandler.RestartReqs;
 @Target(ElementType.FIELD)
 @Documented
 public @interface RestartReq {
-  /**
-   * What requirements this config has for restarting the game.
-   * 
-   * @see RestartReqs#NONE
-   * @see RestartReqs#REQUIRES_WORLD_RESTART
-   * @see RestartReqs#REQUIRES_MC_RESTART
-   */
-  RestartReqs value() default RestartReqs.NONE;
+
+    /**
+     * What requirements this config has for restarting the game.
+     * 
+     * @see RestartReqs#NONE
+     * @see RestartReqs#REQUIRES_WORLD_RESTART
+     * @see RestartReqs#REQUIRES_MC_RESTART
+     */
+    RestartReqs value() default RestartReqs.NONE;
 }

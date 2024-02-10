@@ -17,23 +17,23 @@ import java.lang.annotation.Target;
 @Documented
 public @interface Range {
 
-  /**
-   * The min value of the config.
-   * <p>
-   * For non-numeric values, or if there is no min value, this should remain
-   * unset.
-   * 
-   * @return A double minimum value for the config.
-   */
-  double min() default Double.MIN_VALUE;
+    /**
+     * The min value of the config.
+     * <p>
+     * For non-numeric values, or if there is no min value, this should remain
+     * unset.
+     * 
+     * @return A double minimum value for the config.
+     */
+    double min() default Double.MIN_VALUE;
 
-  /**
-   * The max value of the config.
-   * <p>
-   * For non-numeric values, or if there is no max value, this should remain
-   * unset.
-   * 
-   * @return A double maximum value for the config.
-   */
-  double max() default Double.MAX_VALUE;
+    /**
+     * The max value of the config.
+     * <p>
+     * For non-numeric values, or if there is no max value, this should remain
+     * unset.
+     * 
+     * @return A double maximum value for the config.
+     */
+    double max() default Double.MAX_VALUE;
 }

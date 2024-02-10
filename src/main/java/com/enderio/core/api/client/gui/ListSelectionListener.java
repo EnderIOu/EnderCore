@@ -6,6 +6,5 @@ import com.enderio.core.client.gui.widget.GuiScrollableList;
 
 public interface ListSelectionListener<T> {
 
-  void selectionChanged(@Nonnull GuiScrollableList<T> list, int selectedIndex);
-
+    void selectionChanged(@Nonnull GuiScrollableList<T> list, int selectedIndex);
 }

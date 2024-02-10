@@ -11,23 +11,23 @@ import net.minecraftforge.fluids.capability.IFluidTankProperties;
 
 public interface IFluidWrapper {
 
-  int offer(FluidStack resource);
+    int offer(FluidStack resource);
 
-  int fill(FluidStack resource);
+    int fill(FluidStack resource);
 
-  @Nullable
-  FluidStack drain(FluidStack resource);
+    @Nullable
+    FluidStack drain(FluidStack resource);
 
-  @Nullable
-  FluidStack getAvailableFluid();
+    @Nullable
+    FluidStack getAvailableFluid();
 
-  @Nonnull
-  List<ITankInfoWrapper> getTankInfoWrappers();
+    @Nonnull
+    List<ITankInfoWrapper> getTankInfoWrappers();
 
-  public static interface ITankInfoWrapper {
+    public static interface ITankInfoWrapper {
 
-    IFluidTankProperties getIFluidTankProperties();
+        IFluidTankProperties getIFluidTankProperties();
 
-    FluidTankInfo getFluidTankInfo();
-  }
+        FluidTankInfo getFluidTankInfo();
+    }
 }

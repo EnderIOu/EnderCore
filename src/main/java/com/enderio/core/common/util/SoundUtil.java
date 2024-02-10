@@ -12,11 +12,11 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class SoundUtil {
 
-  @SideOnly(Side.CLIENT)
-  public static void playClientSoundFX(@Nonnull SoundEvent name, @Nonnull TileEntity te) {
-    World world = Minecraft.getMinecraft().world;
-    world.playSound(te.getPos().getX() + 0.5, te.getPos().getY() + 0.5, te.getPos().getZ() + 0.5, name, SoundCategory.BLOCKS, 0.1F,
-        0.5F * ((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.8F), true);
-  }
-
+    @SideOnly(Side.CLIENT)
+    public static void playClientSoundFX(@Nonnull SoundEvent name, @Nonnull TileEntity te) {
+        World world = Minecraft.getMinecraft().world;
+        world.playSound(te.getPos().getX() + 0.5, te.getPos().getY() + 0.5, te.getPos().getZ() + 0.5, name,
+                SoundCategory.BLOCKS, 0.1F,
+                0.5F * ((world.rand.nextFloat() - world.rand.nextFloat()) * 0.7F + 1.8F), true);
+    }
 }

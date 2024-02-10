@@ -8,24 +8,26 @@ import java.lang.annotation.Target;
 
 import javax.annotation.Nonnull;
 
-import com.enderio.core.common.config.ConfigProcessor;
-
 import net.minecraftforge.common.config.Configuration;
 
+import com.enderio.core.common.config.ConfigProcessor;
+
 /**
- * Used to mark a {@code static} field as a config option. Has no effect if the class is not processed with a {@link ConfigProcessor}
+ * Used to mark a {@code static} field as a config option. Has no effect if the class is not processed with a
+ * {@link ConfigProcessor}
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 @Documented
 public @interface Config {
-  /**
-   * The section of the config option.
-   *
-   * (AKA Category)
-   *
-   * @return A string section name.
-   */
-  @Nonnull
-  String value() default Configuration.CATEGORY_GENERAL;
+
+    /**
+     * The section of the config option.
+     *
+     * (AKA Category)
+     *
+     * @return A string section name.
+     */
+    @Nonnull
+    String value() default Configuration.CATEGORY_GENERAL;
 }

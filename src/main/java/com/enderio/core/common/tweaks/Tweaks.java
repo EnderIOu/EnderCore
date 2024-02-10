@@ -4,9 +4,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.enderio.core.common.config.AbstractConfigHandler.RestartReqs;
-import com.enderio.core.common.config.ConfigHandler;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -14,13 +11,16 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import com.enderio.core.common.config.AbstractConfigHandler.RestartReqs;
+import com.enderio.core.common.config.ConfigHandler;
+
 public class Tweaks {
 
-  private static final Set<Tweak> ingameTweaks = new HashSet<Tweak>();
-  private static final Set<Tweak> permanentTweaks = new HashSet<Tweak>();
-  private static final Set<Tweak> lateTweaks = new HashSet<Tweak>();
+    private static final Set<Tweak> ingameTweaks = new HashSet<Tweak>();
+    private static final Set<Tweak> permanentTweaks = new HashSet<Tweak>();
+    private static final Set<Tweak> lateTweaks = new HashSet<Tweak>();
 
-  static {
+    static {
     // @formatter:off
 
     // Tweaks that can be turned on/off at will
@@ -77,32 +77,32 @@ public class Tweaks {
     });
 
 // @formatter:on
-  }
-
-  public static void loadIngameTweaks() {
-    load(ingameTweaks);
-  }
-
-  public static void loadNonIngameTweaks() {
-    load(permanentTweaks);
-    for (Tweak tweak : lateTweaks) {
-      // need to put that in earlier than loadLateTweaks()
-      ConfigHandler.instance().addBooleanFor(tweak);
     }
-  }
 
-  // this needs to run after all other mods had the chance to add their recipes
-  public static void loadLateTweaks() {
-    load(lateTweaks);
-  }
-
-  private static void load(Collection<Tweak> tweaks) {
-    for (Tweak tweak : tweaks) {
-      if (ConfigHandler.instance().addBooleanFor(tweak)) {
-        tweak.enable();
-      } else {
-        tweak.disable();
-      }
+    public static void loadIngameTweaks() {
+        load(ingameTweaks);
     }
-  }
+
+    public static void loadNonIngameTweaks() {
+        load(permanentTweaks);
+        for (Tweak tweak : lateTweaks) {
+            // need to put that in earlier than loadLateTweaks()
+            ConfigHandler.instance().addBooleanFor(tweak);
+        }
+    }
+
+    // this needs to run after all other mods had the chance to add their recipes
+    public static void loadLateTweaks() {
+        load(lateTweaks);
+    }
+
+    private static void load(Collection<Tweak> tweaks) {
+        for (Tweak tweak : tweaks) {
+            if (ConfigHandler.instance().addBooleanFor(tweak)) {
+                tweak.enable();
+            } else {
+                tweak.disable();
+            }
+        }
+    }
 }

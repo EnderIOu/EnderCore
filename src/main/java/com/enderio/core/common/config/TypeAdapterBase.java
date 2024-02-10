@@ -6,6 +6,9 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import net.minecraftforge.common.config.Property;
+import net.minecraftforge.common.config.Property.Type;
+
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.enderio.core.common.config.ConfigProcessor.ITypeAdapter;
@@ -13,59 +16,58 @@ import com.enderio.core.common.util.NullHelper;
 import com.google.common.collect.Lists;
 import com.google.common.reflect.TypeToken;
 
-import net.minecraftforge.common.config.Property;
-import net.minecraftforge.common.config.Property.Type;
-
 @SuppressWarnings({ "serial", "unchecked" })
 public abstract class TypeAdapterBase<ACTUAL, BASE> implements ITypeAdapter<ACTUAL, BASE> {
-  private final TypeToken<ACTUAL> actualType;
-  private final Property.Type type;
-  private final Class<?> primitiveType;
 
-  public TypeAdapterBase(TypeToken<ACTUAL> actualType, Property.Type type, Class<?> primitiveType) {
-    this.actualType = actualType;
-    this.type = type;
-    this.primitiveType = primitiveType;
-  }
+    private final TypeToken<ACTUAL> actualType;
+    private final Property.Type type;
+    private final Class<?> primitiveType;
 
-  public TypeAdapterBase(TypeToken<ACTUAL> actualType, Property.Type baseType) {
-    this(actualType, baseType, null);
-  }
-
-  @Override
-  public TypeToken<ACTUAL> getActualType() {
-    return actualType;
-  }
-
-  @Override
-  public Property.Type getType() {
-    return type;
-  }
-
-  @Override
-  public Class<?> getPrimitiveType() {
-    return primitiveType;
-  }
-
-  public static final class TypeAdapterSame<TYPE> extends TypeAdapterBase<TYPE, TYPE> {
-    public TypeAdapterSame(TypeToken<TYPE> actual, Property.Type base) {
-      super(actual, base);
+    public TypeAdapterBase(TypeToken<ACTUAL> actualType, Property.Type type, Class<?> primitiveType) {
+        this.actualType = actualType;
+        this.type = type;
+        this.primitiveType = primitiveType;
     }
 
-    public TypeAdapterSame(TypeToken<TYPE> actual, Property.Type base, Class<?> primitiveType) {
-      super(actual, base, primitiveType);
+    public TypeAdapterBase(TypeToken<ACTUAL> actualType, Property.Type baseType) {
+        this(actualType, baseType, null);
     }
 
     @Override
-    public TYPE createActualType(TYPE base) {
-      return base;
+    public TypeToken<ACTUAL> getActualType() {
+        return actualType;
     }
 
     @Override
-    public @Nonnull TYPE createBaseType(@Nonnull TYPE actual) {
-      return actual;
+    public Property.Type getType() {
+        return type;
     }
-  }
+
+    @Override
+    public Class<?> getPrimitiveType() {
+        return primitiveType;
+    }
+
+    public static final class TypeAdapterSame<TYPE> extends TypeAdapterBase<TYPE, TYPE> {
+
+        public TypeAdapterSame(TypeToken<TYPE> actual, Property.Type base) {
+            super(actual, base);
+        }
+
+        public TypeAdapterSame(TypeToken<TYPE> actual, Property.Type base, Class<?> primitiveType) {
+            super(actual, base, primitiveType);
+        }
+
+        @Override
+        public TYPE createActualType(TYPE base) {
+            return base;
+        }
+
+        @Override
+        public @Nonnull TYPE createBaseType(@Nonnull TYPE actual) {
+            return actual;
+        }
+    }
 
   // @formatter:off
     public static final TypeAdapterSame<Integer> INTEGER = new TypeAdapterSame<Integer>(TypeToken.of(Integer.class), Type.INTEGER, int.class);

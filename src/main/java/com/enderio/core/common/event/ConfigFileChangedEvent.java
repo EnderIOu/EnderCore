@@ -19,17 +19,18 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
  * considered a failure!</b>
  */
 public class ConfigFileChangedEvent extends ConfigChangedEvent {
-  private boolean successful;
 
-  public ConfigFileChangedEvent(String modID) {
-    super(modID, "null", true, false);
-  }
-  
-  public boolean isSuccessful() {
-    return this.successful;
-  }
+    private boolean successful;
 
-  public void setSuccessful() {
-    this.successful = true;
-  }
+    public ConfigFileChangedEvent(String modID) {
+        super(modID, "null", true, false);
+    }
+
+    public boolean isSuccessful() {
+        return this.successful;
+    }
+
+    public void setSuccessful() {
+        this.successful = true;
+    }
 }

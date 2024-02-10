@@ -7,9 +7,10 @@ package com.enderio.core;
  * It also provides convenience functions for later use.
  */
 public interface IEnderMod {
-  String modid();
 
-  String name();
+    String modid();
 
-  String version();
+    String name();
+
+    String version();
 }

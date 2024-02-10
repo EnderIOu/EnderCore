@@ -6,9 +6,8 @@ import com.enderio.core.client.gui.widget.GuiToolTip;
 
 public interface IDrawingElement {
 
-  @Nullable
-  GuiToolTip getTooltip();
+    @Nullable
+    GuiToolTip getTooltip();
 
-  void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);
-
+    void drawGuiContainerBackgroundLayer(float partialTicks, int mouseX, int mouseY);
 }

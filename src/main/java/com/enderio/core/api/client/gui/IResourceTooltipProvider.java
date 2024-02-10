@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 
 public interface IResourceTooltipProvider {
 
-  @Nonnull
-  String getUnlocalizedNameForTooltip(@Nonnull ItemStack itemStack);
-
+    @Nonnull
+    String getUnlocalizedNameForTooltip(@Nonnull ItemStack itemStack);
 }

@@ -4,6 +4,5 @@ import javax.annotation.Nonnull;
 
 public interface Callback<T> {
 
-  void onChange(@Nonnull T oldStack, @Nonnull T newStack);
-
+    void onChange(@Nonnull T oldStack, @Nonnull T newStack);
 }

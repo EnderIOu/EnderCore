@@ -8,20 +8,19 @@ import net.minecraft.util.math.BlockPos;
 
 public abstract class AbstractBlockIterator implements Iterable<BlockPos>, Iterator<BlockPos> {
 
-  protected final @Nonnull BlockPos base;
+    protected final @Nonnull BlockPos base;
 
-  protected AbstractBlockIterator(@Nonnull BlockPos base) {
-    this.base = base;
-  }
+    protected AbstractBlockIterator(@Nonnull BlockPos base) {
+        this.base = base;
+    }
 
-  @Override
-  public void remove() {
-    throw new UnsupportedOperationException("You can't remove blocks silly!");
-  }
+    @Override
+    public void remove() {
+        throw new UnsupportedOperationException("You can't remove blocks silly!");
+    }
 
-  @Override
-  public @Nonnull Iterator<BlockPos> iterator() {
-    return this;
-  }
-
+    @Override
+    public @Nonnull Iterator<BlockPos> iterator() {
+        return this;
+    }
 }

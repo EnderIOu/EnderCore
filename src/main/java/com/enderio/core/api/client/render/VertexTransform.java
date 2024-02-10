@@ -8,10 +8,9 @@ import com.enderio.core.common.vecmath.Vertex;
 
 public interface VertexTransform {
 
-  void apply(@Nonnull Vertex vertex);
+    void apply(@Nonnull Vertex vertex);
 
-  void apply(@Nonnull Vector3d vec);
+    void apply(@Nonnull Vector3d vec);
 
-  void applyToNormal(@Nonnull Vector3f vec);
-
+    void applyToNormal(@Nonnull Vector3f vec);
 }

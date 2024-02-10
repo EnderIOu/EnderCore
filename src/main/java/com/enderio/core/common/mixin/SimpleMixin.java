@@ -30,18 +30,16 @@ import com.enderio.core.common.mixin.SimpleMixin.SimpleMixinList;
 @Repeatable(SimpleMixinList.class)
 @Documented
 public @interface SimpleMixin {
-  
-  Class<?> value();
-  
-  String[] dependencies() default {};
-  
-  @Target(ElementType.TYPE)
-  @Retention(RetentionPolicy.RUNTIME)
-  @Documented
-  public @interface SimpleMixinList {
-    
-    SimpleMixin[] value();
-    
-  }
 
+    Class<?> value();
+
+    String[] dependencies() default {};
+
+    @Target(ElementType.TYPE)
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    public @interface SimpleMixinList {
+
+        SimpleMixin[] value();
+    }
 }

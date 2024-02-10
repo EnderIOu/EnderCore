@@ -8,7 +8,8 @@ public interface IGuiOverlay extends IHideable {
 
     void init(@Nonnull IGuiScreen screen);
 
-    @Nonnull Rectangle getBounds();
+    @Nonnull
+    Rectangle getBounds();
 
     void draw(int mouseX, int mouseY, float partialTick);
 
@@ -22,7 +23,6 @@ public interface IGuiOverlay extends IHideable {
     boolean handleMouseInput(int x, int y, int b);
 
     boolean isMouseInBounds(int mouseX, int mouseY);
-    
-    void guiClosed();
 
+    void guiClosed();
 }
