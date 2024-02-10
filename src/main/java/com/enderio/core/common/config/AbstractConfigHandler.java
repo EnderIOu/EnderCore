@@ -531,14 +531,15 @@ public abstract class AbstractConfigHandler implements IConfigHandler {
     @SuppressWarnings("unchecked")
     static <T extends Number & Comparable<T>> T boundValue(Property prop, Bound<T> bound,
                                                            T defVal) throws IllegalArgumentException {
+        Object b = bound;
         if (defVal instanceof Integer) {
-            return (T) boundInt(prop, (Bound<Integer>) bound);
+            return (T) boundInt(prop, (Bound<Integer>) b);
         }
         if (defVal instanceof Double) {
-            return (T) boundDouble(prop, (Bound<Double>) bound);
+            return (T) boundDouble(prop, (Bound<Double>) b);
         }
         if (defVal instanceof Float) {
-            return (T) boundFloat(prop, (Bound<Float>) bound);
+            return (T) boundFloat(prop, (Bound<Float>) b);
         }
         throw new IllegalArgumentException(bound.min.getClass().getName() + " is not a valid config type.");
     }
